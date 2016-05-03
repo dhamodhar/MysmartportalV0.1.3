@@ -160,12 +160,20 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                                   
 <img class="img-circle size-30x30" alt="" src="http://lowrysmartportal.com/assets/images/peter-avatar.jpg">
                               
-                                <span>Your Lowry Team<i class="fa fa-angle-down"></i></span>
+                                <span>Contact Lowry<i class="fa fa-angle-down"></i></span>
                             </a>
 
-                            <ul role="menu" class="dropdown-menu animated littleFadeInRight cn-lowry" id="sales">
+                            <ul role="menu" class="dropdown-menu animated littleFadeInRight cn-lowry">
 
-                              
+                               <li><strong>Sales Rep</strong></li>
+            <li> <strong>Name:</strong> NICOLE CRADDOCK </li>
+            <li> <strong>E-mail:</strong> nicole.craddock@lowry.com</li>
+            <li> <strong>Phone:</strong> 734-595-5899</li>
+            <li class="divider"></li>
+            <li><strong>Customer Service Rep</strong></li>
+            <li> <strong>Name:</strong> CARLA BRONNER</li>
+            <li> <strong>E-mail:</strong> carla.bronner@lowry.com </li>
+            <li> <strong>Phone:</strong> 559-713-3404</li>
 
                             </ul>
 
@@ -398,9 +406,8 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 
 
                                         <!-- ===================================================
-                                        ================= NAVIGATION Content ===================
-                                        ==================================================== -->
-                                        <ul id="navigation">
+                                        ================= NAVIGATION Content ===================-->
+                                    <ul id="navigation">
 										
 										     <?php 
 										
@@ -417,23 +424,37 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 		
 										 };
 										?>
-										  <li <?php if($this->uri->segment(2) == url_title('technical_support', TRUE)){?> class="active"<?php }?>><a href="<?php echo $url;?>" class="support <?php if($this->uri->segment(2) == url_title('technical_support', TRUE)){?> report-active<?php }?>"> <span>Technical Support</span></a></li>
-										  
+										   <li <?php if($this->uri->segment(2) == url_title('technical_support', TRUE)){?> class="active"<?php }?>><a href="<?php echo $url;?>" class="support <?php if($this->uri->segment(2) == url_title('technical_support', TRUE)){?> tech-active<?php }?>"> <span>Technical Support</span></a></li>
+										
+										
 										<?php }else if($menu[$i]['id']==2)
 										  {
-											  
-											   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = base_url()."index.php/welcome/dashboard";
-										 
-										 }else{
-										 $url = base_url()."index.php/welcome/accessdenied";
-		
-										 };
-										 
-										
-										?>
-										<li <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> class="active"<?php }?>> <a href="<?php echo $url;?>" class="reports  <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>" > <span>Dashboard & Analytics</span></a></li>
-                                         
+                                           if(in_array($menu[$i]['id'], $id) == 1){
+                                           $url = base_url()."index.php/welcome/service_desk_tickets";
+                                           $url2 = base_url()."index.php/welcome/service_contracts_analytics";
+                                           $url1 = base_url()."index.php/welcome/labels_supplies";
+                                           }else{
+                                            $url = base_url()."index.php/welcome/accessdenied";
+                                            $url1 = base_url()."index.php/welcome/accessdenied";
+                                            $url2 = base_url()."index.php/welcome/accessdenied";
+};
+?>
+<li <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or $this->uri->segment(2) == url_title('labels_supplies', TRUE) or 
+$this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or 
+$this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> class="active open"<?php }?>>
+<a role="button" tabindex="0" class="contracts contracts-active <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or 
+$this->uri->segment(2) == url_title('labels_supplies', TRUE) or 
+$this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> service-active<?php }?>"><span >Dashboard & Analytics</span></a>
+<ul <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or 
+$this->uri->segment(2) == url_title('labels_supplies', TRUE) or 
+$this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> style="display:block;" <?php } ?>>
+ <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Tickets</a></li>
+													 
+<li> <a href="<?php echo $url2?>" <?php if($this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Contracts</a></li>
+													
+<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Labels & Supplies</a></li>
+													
+</ul>                                       
 										
 										<?php }else if($menu[$i]['id']==3)
 										  {
@@ -448,9 +469,9 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 										 };
 										?>
 										
-                                         <li <?php if($this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('orders', TRUE) or  $this->uri->segment(2) == url_title('open_invoices', TRUE)){?> class="active"<?php }?>>
-                                                <a role="button" tabindex="0" class="pa <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span >Orders & Invoices</span></a>
-                                                <ul>
+                                         <li <?php if($this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('order_view', TRUE) or $this->uri->segment(2) == url_title('invoice_view', TRUE) or $this->uri->segment(2) == url_title('open_invoices', TRUE)){?> class="active open"<?php }?>>
+                                                <a role="button" tabindex="0" class="pa <?php if($this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_invoices', TRUE) or $this->uri->segment(2) == url_title('invoice_view', TRUE) or $this->uri->segment(2) == url_title('order_view', TRUE)){?> pa-active<?php }?>"> <span >Orders & Invoices</span></a>
+                                                <ul <?php if($this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_invoices', TRUE) or $this->uri->segment(2) == url_title('order_view', TRUE))   {?> style="display:block"<?php }?>>
                                                     <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('orders', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Orders & invoices</a></li>
 													 <li><a href="<?php echo $url1; ?>" <?php if($this->uri->segment(2) == url_title('open_orders', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i>Open Orders</a></li>
                                                     <li><a href="<?php echo $url2; ?>" <?php if($this->uri->segment(2) == url_title('open_invoices', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i>Invoices</a></li>
@@ -468,37 +489,55 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 		
 										 };
 										?>
-										<li><a href="<?php echo $url;?>" target="_blank" class="catalog <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span >My Catalog</span></a></li>
+										<li>
+										<a href="<?php echo $url;?>" target="_blank" class="catalog <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> catalog-active<?php }?>"> <span >My Catalog</span></a></li>
                                          
 										<?php } else if($menu[$i]['id']==5)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = base_url()."index.php/welcome/servicecontracts";
-										 
+										 $url = base_url()."index.php/welcome/active_service_contracts";
+										  $url2 = base_url()."index.php/welcome/expired_service_contracts";
+										 $url1 = base_url()."index.php/welcome/renew_service_contracts";
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
-		
+		                                 $url1 = base_url()."index.php/welcome/accessdenied";
+										  $url2 = base_url()."index.php/welcome/accessdenied";
 										 };
 										?>
-										    <li><a href="<?php echo $url;?>" class="contracts <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span >Service Contracts</span></a></li>
-                                        
+										    <li <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('renew_service_contracts', TRUE) or $this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> class="active open"<?php }?>>
+											<a role="button" tabindex="0" class="contracts contracts-active <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('renew_service_contracts', TRUE) or $this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> service-active<?php }?>"><span >Service Contracts</span></a>
+                                         <ul <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('renew_service_contracts', TRUE) or $this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> style="display:block;" <?php } ?>>
+                                                    <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Active Contracts</a></li>
+													 
+													 <li> <a href="<?php echo $url2?>" <?php if($this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Expired Contracts</a></li>
+													
+													<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('renew_service_contracts', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Upcoming for renewal</a></li>
+													
+                                                </ul>
 										      
-									
+									</li>
 										 
 										<?php } else if($menu[$i]['id']==6)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = "#";
-										 
+										 $url = base_url()."index.php/welcome/assets";
+										 $url1 = base_url()."index.php/welcome/assets_under_contracts";
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
-		
+		                                   $url1 = base_url()."index.php/welcome/accessdenied";
 										 };
 										?>
-										     <li><a href="<?php echo $url;?>" class="asset <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span>Asset Inventory</span></a></li>
-                                        
+										     <li <?php if($this->uri->segment(2) == url_title('assets', TRUE) or $this->uri->segment(2) == url_title('assets_under_contracts', TRUE) or $this->uri->segment(2) == url_title('assets', TRUE) or $this->uri->segment(2) == url_title('assets', TRUE)){?> class="active open"<?php }?>><a role="button" href="<?php echo $url?>" tabindex="0" class="asset  <?php if($this->uri->segment(2) == url_title('assets', TRUE)){?> asset-active <?php }?>"> <span>Asset Inventory</span></a>
+                                         <ul <?php if($this->uri->segment(2) == url_title('assets_under_contracts', TRUE) or $this->uri->segment(2) == url_title('assets', TRUE)){?> style="display:block;" <?php } ?>>
+                                                    <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('assets', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Assets</a></li>
+													 <li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('assets_under_contracts', TRUE)){?> class="orders-active"  <?php } ?>><i class="fa fa-caret-right"></i> Under Contract</a></li>
+													 <li> <a href="#" <?php if($this->uri->segment(2) == url_title('orders', TRUE)){?>  <?php } ?>><i class="fa fa-caret-right"></i> No Contract</a></li>
+													 <li> <a href="#" <?php if($this->uri->segment(2) == url_title('orders', TRUE)){?>  <?php } ?>><i class="fa fa-caret-right"></i> Under Warranty</a></li>
+													 <li> <a href="#" <?php if($this->uri->segment(2) == url_title('orders', TRUE)){?>  <?php } ?>><i class="fa fa-caret-right"></i> End of Life Assets</a></li>
+													
+                                                </ul>
 										
-									   
+									   </li>
 										
 										<?php } else if($menu[$i]['id']==7)
 										  {
@@ -511,7 +550,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 										 };
 										?>
 										
-										    <li><a href="<?php echo $url ?>" target="_blank" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span>Managed Devices</span></a></li>
+										    <li><a href="<?php echo $url ?>" target="_blank" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>Managed Devices</span></a></li>
                                   
 										
 										<?php } else if($menu[$i]['id']==8)
@@ -524,7 +563,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 		
 										 };
 										?>
-										 <li><a href="<?php echo $url ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span >My Projects</span></a></li>
+										 <li><a href="<?php echo $url ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >My Projects</span></a></li>
                                          
 										 
 										
@@ -539,7 +578,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 		
 										 };
 										?>
-										 <li><a href="<?php echo $url ?>" class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span>Printer Management</span></a></li>
+										 <li><a href="<?php echo $url ?>" class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> print-active<?php }?>"> <span>Printer Management</span></a></li>
      
 										<?php } else if($menu[$i]['id']==10)
 										  {
@@ -552,7 +591,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 										 };
 										?>
 											
-									  <li><a href="<?php echo $url ?>" class="socialmedia <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span>Mobility Social Media</span></a></li>
+									  <li><a href="<?php echo $url ?>" class="socialmedia <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> social-active<?php }?>"> <span>Mobility Social Media</span></a></li>
                                           
 										
 									
@@ -562,7 +601,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 										?>
 									   
 										
-									  <li><a href="javascript:$zopim.livechat.window.show()" class="chat <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>"> <span>Chat Now</span></a></li>
+									  <li><a href="javascript:$zopim.livechat.window.show()" class="chat <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> chat-active<?php }?>"> <span>Chat Now</span></a></li>
                                            
                                         
 										
@@ -577,7 +616,13 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                                         
                                             </ul>
                                           
+                                          
                                         
+                                        <!--/ NAVIGATION Content -->
+
+
+                                    </div>
+ <!-- tile -->
                                         <!--/ NAVIGATION Content -->
 
 
@@ -1033,861 +1078,3 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
             <!--/ CONTROLS Content -->
 
 
-
-
-            <!-- ====================================================
-            ================= CONTENT ===============================
-            ===================================================== -->
-            <section id="content">
-<div class="page-core-dashboard">
-
-                <div class="page page-dashboard">
-
-                    <div class="pageheader">
-                           <h2>Dashboard & Analytics</h2>
-                        <!--<h2 style="color:green;margin-left:45%" color="green" align="center">Hello, <?php echo $this->session->userdata('firstname');?></h2>-->
-
-                     <div class="page-bar">
-
-                            <ul class="page-breadcrumb">
-                                <li>
-                                    <a href="<?php echo base_url();?>index.php/welcome/technical_support"><i class="fa fa-home"></i> Lowry Solutions</a>
-                                </li>
-                                <li>
-                                    <a href=" " class="sub-active">Dashboard & Analytics</a>
-                                </li>
-                            
-                            </ul>
-                            
-                        </div>  
-
-                    </div>
-
-                   
-                    <!-- row -->
-                    <div class="row">
-                   <div class="side-icons db-reports">
-
-                    
-
-                      
-                    
-                      
-                     
-                     <div class="col-md-3  col-xs-6 col-sm-3">
-                      <div class="col-centered">
-                     <a href="#"> <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                  <i class="glyphicon glyphicon-stats"></i> <span> Check Status </span>
-                    </div></a>
-</div>
-                    
-                    
-                 
-                        <div class="col-centered">
-
-                   <a href="#">  <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                  <i class="glyphicon glyphicon-envelope"></i> <span>  E-mail </span>
-                    </div></a>
-</div>
-                    
-                    
-                   
-                     <div class="col-centered">
-<a href="tel:+1-800-733-0010"> <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                  <i class="glyphicon glyphicon-phone"></i> <span>Call Us</span>
-                    </div></a> 
-
-                   </div>
-                    
-                    
-                    
-                      <div class="col-centered">
-                    <a href="javascript:$zopim.livechat.window.show()"> <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                   <i class="glyphicon glyphicon-comment"></i> <span>  Chat </span>
-                    </div></a>
-</div>
-                    
-                                      
-                    
-                      </div>
-                              </div>
-                                      
-
-
-
-                        <!-- col -->
-                        <div class="col-md-12 db-reports">
-                            
-                            <!-- tile -->
-                            <section class="tile">   
-                            
-
-                                <!-- tile header -->
-                                <div class="tile-header bg-greensea dvd dvd-btm">
-                                    <h1 class="custom-font"><strong>Open Tickets</strong></h1>
-                                    <ul class="controls">
-                                        <li>
-                                            <a role="button" tabindex="0" class="pickDate">
-                                                <span></span>&nbsp;&nbsp;<i class="fa fa-angle-down"></i>
-                                            </a>
-                                        </li>
-                                        <li class="dropdown">
-
-                                            <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                                <i class="fa fa-cog"></i>
-                                                <i class="fa fa-spinner fa-spin"></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-toggle">
-                                                        <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                                        <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-refresh">
-                                                        <i class="fa fa-refresh"></i> Refresh
-                                                    </a>
-                                                </li>
-                                               
-                                            </ul>
-
-                                        </li>
-                                        
-                                    </ul>
-                                </div>
-                                <!-- /tile header -->
-
-                                <!-- tile widget -->
-                                <div class="tile-widget bg-greensea">
-                                    <div id="statistics-chart" style="height: 250px;"></div>
-                                </div>
-                                <!-- /tile widget -->
-
-                               
-
-                            </section>
-							   <section class="tile">
-
-                                <!-- tile header -->
-                                <div class="tile-header dvd dvd-btm">
-                                    <h1 class="custom-font"><strong>Order & Invoices </strong>Charts</h1>
-                                    <ul class="controls">
-                                        <li class="dropdown">
-
-                                            <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                                <i class="fa fa-cog"></i>
-                                                <i class="fa fa-spinner fa-spin"></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-toggle">
-                                                        <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                                        <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-refresh">
-                                                        <i class="fa fa-refresh"></i> Refresh
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-fullscreen">
-                                                        <i class="fa fa-expand"></i> Fullscreen
-                                                    </a>
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="remove"><a role="button" tabindex="0" class="tile-close"><i class="fa fa-times"></i></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /tile header -->
-
-                                <!-- tile body -->
-                                <div class="tile-body">
-
-                                    <div class="row">
-
-                                        <div class="col-md-4">
-
-                                            <h4 class="custom-font"><strong>Open Orders</strong> chart</h4>
-                                            <span id="sparkline01"></span>
-
-                                        </div>
-
-                                        <div class="col-md-4">
-
-                                            <h4 class="custom-font"><strong>Open Invoices</strong> chart</h4>
-                                            <span id="sparkline02" data-values="5,6,7,2,1,-4,-2,4,6,8" data-type="bar" data-height="250px"></span>
-
-                                        </div>
-
-                                        <div class="col-md-4 text-center">
-
-                                            <h4 class="custom-font text-left"><strong>All Orders & Invoices</strong> chart</h4>
-                                            <span id="sparkline03"></span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <!-- /tile body -->
-
-                            </section>
-                            <!-- /tile -->
-
-                            <!-- /tile -->
-
-                        </div>
-                        <!-- /col -->
-
-
-
-                        
-
-
-                    </div>
-                    <!-- /row -->
-
-
-
-
-
-
-
-
-
-
-                   
-
-
-
-
-                  
-
-
-
-
-
-                </div>
-				                    <div class="col-md-4">
-
-                            <!-- tile -->
-                            <section class="tile" fullscreen="isFullscreen02">
-
-                                <!-- tile header -->
-                                <div class="tile-header dvd dvd-btm">
-                                    <h1 class="custom-font"><strong>Orders & Invoices </strong></h1>
-                                    <ul class="controls">
-                                        <li class="dropdown">
-
-                                            <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                                <i class="fa fa-cog"></i>
-                                                <i class="fa fa-spinner fa-spin"></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-toggle">
-                                                        <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                                        <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-refresh">
-                                                        <i class="fa fa-refresh"></i> Refresh
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a role="button" tabindex="0" class="tile-fullscreen">
-                                                        <i class="fa fa-expand"></i> Fullscreen
-                                                    </a>
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="remove"><a role="button" tabindex="0" class="tile-close"><i class="fa fa-times"></i></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /tile header -->
-
-                                <!-- tile widget -->
-                                <div class="tile-widget">
-                                    <div id="browser-usage" style="height: 250px"></div>
-                                </div>
-                                <!-- /tile widget -->
-
-                                <!-- tile body -->
-                                <div class="tile-body p-0">
-
-                                    <div class="panel-group icon-plus" id="accordion" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default panel-transparent">
-                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        <span><i class="fa fa-minus text-sm mr-5"></i> This Month</span>
-                                                        <span class="badge pull-right bg-lightred">3</span>
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body">
-                                                    <table class="table table-no-border m-0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Total Orders</td>
-                                                            <td>6985</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Pending Orders</td>
-                                                            <td>2697</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Total Invoices</td>
-                                                            <td>3597</td>
-                                                            <td><i class="fa fa-caret-down text-danger"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Pending Invoices</td>
-                                                            <td>2145</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                  
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default panel-transparent">
-                                            <div class="panel-heading" role="tab" id="headingTwo">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                        <span><i class="fa fa-minus text-sm mr-5"></i> Last Month</span>
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                <div class="panel-body">
-                                                    <table class="table table-no-border m-0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Total Orders</td>
-                                                            <td>6985</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Pending Orders</td>
-                                                            <td>2697</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Total Invoices</td>
-                                                            <td>3597</td>
-                                                            <td><i class="fa fa-caret-down text-danger"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Pending Invoices</td>
-                                                            <td>2145</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                  
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default panel-transparent">
-                                            <div class="panel-heading" role="tab" id="headingThree">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        <span><i class="fa fa-minus text-sm mr-5"></i> This Year</span>
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                <div class="panel-body">
-                                                    <table class="table table-no-border m-0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Total Orders</td>
-                                                            <td>6985</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Pending Orders</td>
-                                                            <td>2697</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Total Invoices</td>
-                                                            <td>3597</td>
-                                                            <td><i class="fa fa-caret-down text-danger"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Pending Invoices</td>
-                                                            <td>2145</td>
-                                                            <td><i class="fa fa-caret-up text-success"></i></td>
-                                                        </tr>
-                                                  
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- /tile body -->
-
-                            </section>
-                            <!-- /tile -->
-
-                        </div>
-                        <!-- /col -->
-
-
-
-                </div>
-            </section>
-            <!--/ CONTENT -->
-
-
-
-
-
-
-        </div>
-        <!--/ Application Content -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- ============================================
-        ============== Vendor JavaScripts ===============
-        ============================================= -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo base_url()?>assets/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')</script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/bootstrap/bootstrap.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/jRespond/jRespond.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/d3/d3.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/d3/d3.layout.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/rickshaw/rickshaw.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/sparkline/jquery.sparkline.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/slimscroll/jquery.slimscroll.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/moment.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/daterangepicker.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/screenfull/screenfull.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/flot-spline/jquery.flot.spline.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/raphael/raphael-min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/owl-carousel/owl.carousel.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/dataTables.bootstrap.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/chosen/chosen.jquery.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/summernote/summernote.min.js"></script>
-
-        <script src="<?php echo base_url()?>assets/js/vendor/coolclock/coolclock.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/coolclock/excanvas.js"></script>
-        <!--/ vendor javascripts -->
-
-
-
-
-        <!-- ============================================
-        ============== Custom JavaScripts ===============
-        ============================================= -->
-        <script src="<?php echo base_url()?>assets/js/main.js"></script>
-        <!--/ custom javascripts -->
-
-
-
-
-
-
-
-
-
-        <!-- ===============================================
-        ============== Page Specific Scripts ===============
-        ================================================ -->
-        <script>
-            $(window).load(function(){
-			  // Sparkline Line Chart
-                $('#sparkline01').sparkline([15,16,18,17,16,18,25,26,23], {
-                    type: 'line',
-                    width: '100%',
-                    height:'250px',
-                    fillColor: 'rgba(34, 190, 239, .3)',
-                    lineColor: 'rgba(34, 190, 239, .5)',
-                    lineWidth: 2,
-                    spotRadius: 5,
-                    valueSpots:[5,6,8,7,6,8,5,4,7],
-                    minSpotColor: '#eaf9fe',
-                    maxSpotColor: '#00a3d8',
-                    highlightSpotColor: '#00a3d8',
-                    highlightLineColor: '#bec6ca',
-                    normalRangeMin: 0
-                });
-                $('#sparkline01').sparkline([1,2,1,3,1,2,4,1,3], {
-                    type: 'line',
-                    composite: true,
-                    width: '100%',
-                    height:'250px',
-                    fillColor: 'rgba(255, 74, 67, .6)',
-                    lineColor: 'rgba(255, 74, 67, .8)',
-                    lineWidth: 2,
-                    minSpotColor: '#ffeced',
-                    maxSpotColor: '#d90200',
-                    highlightSpotColor: '#d90200',
-                    highlightLineColor: '#bec6ca',
-                    spotRadius: 5,
-                    valueSpots:[2,3,4,3,1,2,4,1,3],
-                    normalRangeMin: 0
-                });
-
-                // Sparkline Bar Chart
-
-                var $el = $('#sparkline02');
-
-                var values = $el.data('values').split(',').map(parseFloat);
-                var type = $el.data('type') || 'line' ;
-                var height = $el.data('height') || 'auto';
-
-                var parentWidth = $el.parent().width();
-                var valueCount = values.length;
-                var barSpacing = 5;
-
-                var barWidth = Math.round((parentWidth - ( valueCount - 1 ) * barSpacing ) / valueCount);
-
-                $el.sparkline(values, {
-                    width:'100%',
-                    type: type,
-                    height: height,
-                    barWidth: barWidth,
-                    barSpacing: barSpacing,
-                    barColor: '#16a085',
-                    negBarColor: '#FF0066'
-                });
-
-                // Sparkline Pie Chart
-
-                $('#sparkline03').sparkline([5,10,20,15 ], {
-                    type: 'pie',
-                    width: 'auto',
-                    height: '250px',
-                    sliceColors: ['#22beef','#a2d200','#ffc100','#ff4a43']
-                });
-
-                // Initialize Statistics chart
-                var data = [{
-                    data: [[1,15],[2,40],[3,35],[4,39],[5,42],[6,50],[7,46],[8,49],[9,59],[10,60],[11,58],[12,74]],
-                    label: 'Unique Visits',
-                    points: {
-                        show: true,
-                        radius: 4
-                    },
-                    splines: {
-                        show: true,
-                        tension: 0.45,
-                        lineWidth: 4,
-                        fill: 0
-                    }
-                }, {
-                    data: [[1,50],[2,80],[3,90],[4,85],[5,99],[6,125],[7,114],[8,96],[9,130],[10,145],[11,139],[12,160]],
-                    label: 'Page Views',
-                    bars: {
-                        show: true,
-                        barWidth: 0.6,
-                        lineWidth: 0,
-                        fillColor: { colors: [{ opacity: 0.3 }, { opacity: 0.8}] }
-                    }
-                }];
-
-                var options = {
-                    colors: ['#e05d6f','#61c8b8'],
-                    series: {
-                        shadowSize: 0
-                    },
-                    legend: {
-                        backgroundOpacity: 0,
-                        margin: -7,
-                        position: 'ne',
-                        noColumns: 2
-                    },
-                    xaxis: {
-                        tickLength: 0,
-                        font: {
-                            color: '#fff'
-                        },
-                        position: 'bottom',
-                        ticks: [
-                            [ 1, 'JAN' ], [ 2, 'FEB' ], [ 3, 'MAR' ], [ 4, 'APR' ], [ 5, 'MAY' ], [ 6, 'JUN' ], [ 7, 'JUL' ], [ 8, 'AUG' ], [ 9, 'SEP' ], [ 10, 'OCT' ], [ 11, 'NOV' ], [ 12, 'DEC' ]
-                        ]
-                    },
-                    yaxis: {
-                        tickLength: 0,
-                        font: {
-                            color: '#fff'
-                        }
-                    },
-                    grid: {
-                        borderWidth: {
-                            top: 0,
-                            right: 0,
-                            bottom: 1,
-                            left: 1
-                        },
-                        borderColor: 'rgba(255,255,255,.3)',
-                        margin:0,
-                        minBorderMargin:0,
-                        labelMargin:20,
-                        hoverable: true,
-                        clickable: true,
-                        mouseActiveRadius:6
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        content: '%s: %y',
-                        defaultTheme: false,
-                        shifts: {
-                            x: 0,
-                            y: 20
-                        }
-                    }
-                };
-
-                var plot = $.plot($("#statistics-chart"), data, options);
-
-                $(window).resize(function() {
-                    // redraw the graph in the correctly sized div
-                    plot.resize();
-                    plot.setupGrid();
-                    plot.draw();
-                });
-                // * Initialize Statistics chart
-
-                //Initialize morris chart
-                Morris.Donut({
-                    element: 'browser-usage',
-                    data: [
-                        {label: 'Total Orders', value: 25, color: '#00a3d8'},
-                        {label: 'Pending Orders', value: 20, color: '#2fbbe8'},
-                        {label: 'Total Invoices', value: 15, color: '#72cae7'},
-                        {label: 'Pending Invoices', value: 5, color: '#d9544f'}
-                       
-                    ],
-                    resize: true
-                });
-                //*Initialize morris chart
-
-
-                // Initialize owl carousels
-                $('#todo-carousel, #feed-carousel, #notes-carousel').owlCarousel({
-                    autoPlay: 5000,
-                    stopOnHover: true,
-                    slideSpeed : 300,
-                    paginationSpeed : 400,
-                    singleItem : true,
-                    responsive: true
-                });
-
-                $('#appointments-carousel').owlCarousel({
-                    autoPlay: 5000,
-                    stopOnHover: true,
-                    slideSpeed : 300,
-                    paginationSpeed : 400,
-                    navigation: true,
-                    navigationText : ['<i class=\'fa fa-chevron-left\'></i>','<i class=\'fa fa-chevron-right\'></i>'],
-                    singleItem : true
-                });
-                //* Initialize owl carousels
-
-
-                // Initialize rickshaw chart
-                var graph;
-
-                var seriesData = [ [], []];
-                var random = new Rickshaw.Fixtures.RandomData(50);
-
-                for (var i = 0; i < 50; i++) {
-                    random.addData(seriesData);
-                }
-
-                graph = new Rickshaw.Graph( {
-                    element: document.querySelector("#realtime-rickshaw"),
-                    renderer: 'area',
-                    height: 133,
-                    series: [{
-                        name: 'Series 1',
-                        color: 'steelblue',
-                        data: seriesData[0]
-                    }, {
-                        name: 'Series 2',
-                        color: 'lightblue',
-                        data: seriesData[1]
-                    }]
-                });
-
-                var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-                    graph: graph,
-                });
-
-                graph.render();
-
-                setInterval( function() {
-                    random.removeData(seriesData);
-                    random.addData(seriesData);
-                    graph.update();
-
-                },1000);
-                //* Initialize rickshaw chart
-
-                //Initialize mini calendar datepicker
-                $('#mini-calendar').datetimepicker({
-                    inline: true
-                });
-                //*Initialize mini calendar datepicker
-
-
-                //todo's
-                $('.widget-todo .todo-list li .checkbox').on('change', function() {
-                    var todo = $(this).parents('li');
-
-                    if (todo.hasClass('completed')) {
-                        todo.removeClass('completed');
-                    } else {
-                        todo.addClass('completed');
-                    }
-                });
-                //* todo's
-
-
-                //initialize datatable
-                $('#project-progress').DataTable({
-                    "aoColumnDefs": [
-                      { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-                    ],
-                });
-                //*initialize datatable
-
-                //load wysiwyg editor
-                $('#summernote').summernote({
-                    toolbar: [
-                        //['style', ['style']], // no style button
-                        ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['fontsize', ['fontsize']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                        //['insert', ['picture', 'link']], // no insert buttons
-                        //['table', ['table']], // no table button
-                        //['help', ['help']] //no help button
-                    ],
-                    height: 143   //set editable area's height
-                });
-                //*load wysiwyg editor
-            });
-        </script>
-        <!--/ Page Specific Scripts -->
-
-<script>
-
- $(document).ready(function(){
-   //initialize datatable
-            
-	  var test1 = "";
-	  $(document).ajaxStart(function(){
-    $("#wait").css("display", "block");
-     });
-	 
-	 $(document).ajaxComplete(function(){
-    $("#wait").css("display", "none");
-     });
-        $.ajax({
-            type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/SalesPersonDetails",
-            dataType: "text",
-            success: function(xml){
-			
-			$(xml).find('salesrep').each(function(){
-			          var repid= $(this).find('repid').text();
-						var repname = $(this).find('repname').text();
-						var repphone= $(this).find('repphone').text();
-						var repemail= $(this).find('repemail').text();
-						var repfax= $(this).find('repfax').text();
-						var region_desc= $(this).find('region_desc').text();
-                        var branch_desc= $(this).find('branch_desc').text();
-						var csr_fname= $(this).find('csr_fname').text();
-						var csr_lname= $(this).find('csr_lname').text();
-						var csr_email= $(this).find('csr_email').text();
-						var csr_phone= $(this).find('csr_phone').text();
-						//alert(repid);
-						$("#sales").html("<li><strong>Sales Rep Id- </strong>"+repid+"</li><li><strong>Name: </strong>"+repname+"</li><li><strong>Email: </strong>"+repemail+"</li><li><strong>Phone: </strong>"+repphone+"</li><li class='divider'></li><li><strong>Customer Service Rep </strong></li><li><strong>Name: </strong>"+csr_fname+" "+csr_lname+"</li><li><strong>Email: </strong>"+csr_email+"</li><li><strong>Phone: </strong>"+csr_phone+"</li>");
-			   });
-		     
-            },
-            error: function() {
-            alert("An error occurred while processing XML file.");
-            }
-        });
-    });    
-
-           
-        </script>
-
-
-
-
-
-    </body>
-</html>

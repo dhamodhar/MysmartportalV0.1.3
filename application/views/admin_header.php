@@ -23,6 +23,7 @@
         ============================================= -->
         <!-- vendor css files -->
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/bootstrap.min.css">
+ <link rel="stylesheet" href="<?php echo base_url()?>assets/css/upload123.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/animate.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/animsition/css/animsition.min.css">
@@ -101,7 +102,7 @@
 
                     <!-- Branding -->
                     <div class="branding">
-                        <a  href="index.html">
+                        <a  href="#">
                             <img src="<?php echo base_url()?>assets/images/logo.png" class="img-responsive">
                         </a>
                         <a role="button" tabindex="0" class="offcanvas-toggle visible-xs-inline"><i class="fa fa-bars"></i></a>
@@ -125,141 +126,68 @@
                     <!-- Right-side navigation -->
                     <ul class="nav-right pull-right list-inline">
                       
-
+                                <?php
+								$count = 0;
+                                foreach($user_notifications as $user_notificationsdatafinal)
+								{	
+								if($user_notificationsdatafinal->read_status == 0)
+								{
+								$count++;
+								
+								}
+								
+                                }								
+								?>
                         <li class="dropdown messages">
 
-                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" onClick="test();">
                                 <i class="fa fa-envelope"></i>
-                                <span class="badge bg-lightred">4</span>
+                                <span class="badge bg-lightred" id="num_un_read"><?php echo $count; ?></span>
                             </a>
+<?php 
+//echo "<pre>"; print_r($user_notifications); echo "</pre>";
 
+?>
                             <div class="dropdown-menu pull-right with-arrow panel panel-default animated littleFadeInDown" role="menu">
 
                                 <div class="panel-heading">
-                                    You have <strong>4</strong> messages
+                                    You have <strong id="num_un_read_inside"><?php echo $count; ?></strong> messages
                                 </div>
 
                                 <ul class="list-group">
-
+								
+								<?php
+                                foreach($user_notifications as $user_notificationsdata){
+                                if($user_notificationsdata->read_status == 0){								
+								?>
+  
                                     <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
+                                        <a href="<?php echo base_url()?>index.php/welcome/view_admin_message/<?php echo $user_notificationsdata->id;?>" role="button" tabindex="0" class="media">
                                             <span class="pull-left media-object thumb thumb-sm">
                                                 <img src="<?php echo base_url()?>assets/images/ici-avatar.jpg" alt="" class="img-circle">
                                             </span>
                                             <div class="media-body">
-                                                <span class="block">Imrich sent you a message</span>
-                                                <small class="text-muted">12 minutes ago</small>
+                                                <span class="block"><?php echo $user_notificationsdata->msg_subject; ?></span>
+                                                <small class="text-muted"><?php echo $user_notificationsdata->created_date; ?> </small>
                                             </div>
                                         </a>
                                     </li>
+									
+									<?php }} ?>
 
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object  thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/peter-avatar.jpg" alt="" class="img-circle">
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">Peter sent you a message</span>
-                                                <small class="text-muted">46 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object  thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/random-avatar1.jpg" alt="" class="img-circle">
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">Bill sent you a message</span>
-                                                <small class="text-muted">1 hour ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object  thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/random-avatar3.jpg" alt="" class="img-circle">
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">Ken sent you a message</span>
-                                                <small class="text-muted">3 hours ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    
 
                                 </ul>
 
                                 <div class="panel-footer">
-                                    <a role="button" tabindex="0">Show all messages <i class="pull-right fa fa-angle-right"></i></a>
+                                    <a href="<?php echo base_url()?>index.php/welcome/admin_messages" role="button" tabindex="0">Show all messages <i class="pull-right fa fa-angle-right"></i></a>
                                 </div>
 
                             </div>
 
                         </li>
 
-                        <li class="dropdown notifications">
-
-                            <a href class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell"></i>
-                                <span class="badge bg-lightred">3</span>
-                            </a>
-
-                            <div class="dropdown-menu pull-right with-arrow panel panel-default animated littleFadeInLeft">
-
-                                <div class="panel-heading">
-                                    You have <strong>3</strong> notifications
-                                </div>
-
-                                <ul class="list-group">
-
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object media-icon bg-danger">
-                                                <i class="fa fa-ban"></i>
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">User Imrich cancelled account</span>
-                                                <small class="text-muted">6 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object media-icon bg-primary">
-                                                <i class="fa fa-bolt"></i>
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">New user registered</span>
-                                                <small class="text-muted">12 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object media-icon bg-greensea">
-                                                <i class="fa fa-lock"></i>
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">User Robert locked account</span>
-                                                <small class="text-muted">18 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <div class="panel-footer">
-                                    <a role="button" tabindex="0">Show all notifications <i class="fa fa-angle-right pull-right"></i></a>
-                                </div>
-
-                            </div>
-
-                        </li>
-
+                      
                         <li class="dropdown nav-profile">
 
                             <a href class="dropdown-toggle" data-toggle="dropdown">
@@ -346,7 +274,7 @@
                                         ================= NAVIGATION Content ===================
                                         ==================================================== -->
                                         <ul id="navigation">
-                                            <li><a href="<?php echo base_url()?>index.php/welcome/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                                            <li><a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                                             <li class="active">
                                                 <a role="button" tabindex="0">
                                              <i class="glyphicon glyphicon-user"></i><span>User Management</span></a>

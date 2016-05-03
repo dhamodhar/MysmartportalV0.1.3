@@ -69,7 +69,7 @@
                                         <div class="form-group">
                                             <label for="input01"  control-label">First Name</label>
                                             <div>
-                                                <input type="text" class="form-control" name="first_name" id="first_name" value="<?php echo $edituserdata->first_name?>" required>
+                                                <input type="text" class="form-control" name="first_name" id="first_name" value="<?php echo $edituserdata->first_name?>" readonly >
                                             </div>
                                         </div></div>
 
@@ -80,115 +80,54 @@
 	                                    <div class="form-group">
                                             <label for="input01" control-label">Last Name</label>
                                             <div >
-                                                <input type="text" class="form-control" name="last_name" id="last_name" value="<?php echo $edituserdata->last_name?>" required>
+                                                <input type="text" class="form-control" name="last_name" id="last_name" value="<?php echo $edituserdata->last_name?>" readonly>
                                             </div>
                                         </div></div>
 
-                                     <input type="hidden" class="form-control" name="uid" id="uid" value="<?php echo $edituserdata->id?>">
+                                   <input type="hidden" class="form-control" name="uid" id="uid" value="<?php echo $edituserdata->id?>">
                                
 
                                      
 						 <div class="col-md-6">				
                                              <div class="form-group">
-                                            <label for="input01" class="control-label">Email</label>
+                                            <label for="input01" class="control-label">Email / Username </label>
                                             <div >
-                                                <input type="email" class="form-control" name="email" id="email" value="<?php echo $edituserdata->email_id?>" required>
+                                                <input type="email" class="form-control" name="email" id="email" value="<?php echo $edituserdata->email_id?>" readonly >
+                                            </div>
+                                        </div></div>
+										
+										
+						<div class="col-md-6">				  <div class="form-group">
+                                            <label for="input01"  control-label">CUST-CODE </label>
+                                            <div>
+                                                <input type="text" class="form-control" name="cust_code" id="cust_code" value="<?php echo $edituserdata->cus_code?>" readonly >
+                                                <input type="hidden" name="cust_code1" id="cust_code1" value="<?php echo ($edituserdata->cus_code);?>" >
                                             </div>
                                         </div></div>
 											
 										
 						 <div class="col-md-6">
 <div class="form-group">
-                                            <label for="input01" class=" control-label">Password</label>
+                                            <label for="input01" class=" control-label">Password </label>
                                             <div>
                                                <!-- <input type="password" style="color:#000000" class="form-control" name="password" id="password" value="<?php echo $edituserdata->password?>" required>-->
 											   <input type="button" name="reset_pass" id="reset_pass" value="Reset" onclick="resetpassword('<?php echo $edituserdata->email_id?>')" style="display:block">
 											   <span id="succ" style="color:green;display:none;">Rest Password Link Send To email</span>
                                             </div></div>
                                         </div>
-										
-										
-										 <div class="col-md-6">  <div class="form-group">
-                                            <label for="input01" class="control-label">Phone Number</label>
-                                            <div>
-                                                <input type="phonenumber" class="form-control" name="phone1" id="phone1" value="<?php echo $edituserdata->phone_number?>" required>
-                                            </div>
-                                        </div></div>
-										
-	                        
 
-                                      
-										
-										 <div class="col-md-6">  <div class="form-group">
-                                            <label for="input01" class="control-label">CUST-CODE</label>
-                                            <div>
-                                                <input type="text" class="form-control" name="cust_code" id="cust_code" value="<?php echo $edituserdata->cus_code?>" required>
+                                            <div class="col-md-6">	  
+<div class="form-group">
+                                            <label for="input01" class=" control-label">Company Name </label>
+                                            <div >
+                                                <input type="text" class="form-control" name="bus_name" id="bus_name" value="<?php echo $edituserdata->company_name?>"  readonly>
                                             </div>
                                         </div></div>
-										
-										
+						
 									 <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">Company Name</label>
+                                            <label for="input01" class=" control-label">Role <span style="color:red">*</span></label>
                                             <div >
-                                                <input type="text" class="form-control" name="bus_name" id="bus_name" value="<?php echo $edituserdata->company_name?>" required>
-                                            </div>
-                                        </div></div>
-
-                                                                          <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">Address Line 1</label>
-                                            <div >
-                                                <input type="text" class="form-control" name="address1" id="address1" value="<?php echo $edituserdata->address1?>" >
-                                            </div>
-                                        </div></div>
-
-                                                                          <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">Address Line 2</label>
-                                            <div >
-                                                <input type="text" class="form-control" name="address2" id="address2" value="<?php echo $edituserdata->address2?>" >
-                                            </div>
-                                        </div></div>
-
-                                                                            <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">Address Line 3</label>
-                                            <div >
-                                                <input type="text" class="form-control" name="address3" id="address3" value="<?php echo $edituserdata->address3?>" >
-                                            </div>
-                                        </div></div>
-
-                                                                           <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">City</label>
-                                            <div >
-                                                <input type="text" class="form-control" name="city" id="city" value="<?php echo $edituserdata->city?>" required>
-                                            </div>
-                                        </div></div>
-
-                                                                           <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">State</label>
-                                            <div >
-                                                <input type="text" class="form-control" name="state" id="state" value="<?php echo $edituserdata->state?>" required>
-                                            </div>
-                                        </div></div>
-
-                                                                           <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">Zip</label>
-                                            <div >
-                                                <input type="text" class="form-control" name="zip" id="zip" value="<?php echo $edituserdata->zip?>" required>
-                                            </div>
-                                        </div></div>
-
-                                                                           <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">Country</label>
-                                            <div >
-                                                <input type="text" class="form-control" name="country" id="country" value="<?php echo $edituserdata->country?>" >
-                                            </div>
-                                        </div></div>  
-                                        
-                                        
-										
-									 <div class="col-md-6">	  <div class="form-group">
-                                            <label for="input01" class=" control-label">Role</label>
-                                            <div >
-                                                <select class="form-control" name="role" id="role" required>
+                                                <select class="form-control" name="role" id="role" required onchange="get_select_menu()">
 												<?php
 												$role = "";
 												if($edituserdata->role==1)
@@ -197,6 +136,10 @@
 												}else if($edituserdata->role==2)
 												{
 												$role = "Normal User";
+												
+												}else if($edituserdata->role==4)
+												{
+												$role = "Executive User";
 												
 												}else
 												{
@@ -210,12 +153,19 @@
 												{
 												?>
 												<option value="3">Power User</option>
-												
+												<option value="4">Executive User</option>
 												<?php } ?>
 												<?php if($edituserdata->role==3)
 												{
 												?>
 												<option value="2">Normal User</option>
+												<option value="4">Executive User</option>
+												<?php } ?>
+												<?php if($edituserdata->role==4)
+												{
+												?>
+												<option value="2">Normal User</option>
+												<option value="3">Power User</option>
 												<?php } ?>
 												
 												</select>
@@ -224,7 +174,7 @@
                              
 										
 									 <div class="col-md-12">	 <div class="form-group">
-                                            <label for="input01" class=" control-label">Status</label>
+                                            <label for="input01" class=" control-label">Status <span style="color:red">*</span></label>
                                              
                                           
 			<div class="col-md-12 no-padding ">
@@ -236,15 +186,13 @@
 													
                                                
 					</div></div>						
-											
-											
-                                           
+				   
                                         </div>
                                 
 
                                       
                                         <div class="tile-header dvd dvd-btm float-left top-41">
-                                    <h1 class="custom-font">Module Management</h1>
+                                    <h1 class="custom-font">Module Management <span style="color:red">*</span></h1>
                                    
                                     </div>
                                     <div class="col-sm-2"></div>
@@ -262,67 +210,23 @@
                                        
                                                
                                                 <?php 
-												
-												//echo "<pre>"; print_r($menu); echo "</pre>";
-												foreach($allmenu as $assinedid_data){
-												
+												foreach($allmenu as $assinedid_data){											
 												$ids = explode(",",$assinedid);
 												$mat = "";
 												for($i=0;$i<sizeof($ids);$i++)
 												{
 												if($ids[$i]==$assinedid_data->id)
 												{
-												$mat = $assinedid_data->id;
-												
+												$mat = $assinedid_data->id;												
 												}
-												
 												}
 												?>
 												
                                                <label class="checkbox checkbox-custom-alt  col-sm-3 ">
-                                                   <input type="checkbox" class="checkbox1"  name="check[]" id="check[]" <?php if($assinedid_data->id == 1){?> READONLY checked <?php } ?>  value="<?php echo $assinedid_data->id;?>" <?php if($assinedid_data->id==$mat){?> checked  <?php } ?>><i></i> <?php echo $assinedid_data->menu_name; ?>
+                                                   <input type="checkbox" class="checkbox1"  name="check[]" id="check[]" <?php if($assinedid_data->id == 1){?>disabled="disabled" checked required <?php } ?>  value="<?php echo $assinedid_data->id;?>" <?php if($assinedid_data->id==$mat){?> checked  <?php } ?>><i></i> <?php echo $assinedid_data->menu_name; ?>
                                                </label>
                                                <?php }?>
-                                               <!-- <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]" value="3"><i></i> Technical Support
-                                                </label>
-                                                
-                                                  <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]" value="4"><i></i> Purchasing & Accounting
-                                                </label>
-                                                
-                                                 <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i> Mobile Device Mangement
-                                                </label>
-                                                
-                                                  <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i> Printer Management
-                                                </label>
-                                                
-                                                 <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i> Asset Inventory
-                                                </label>
-                                                
-                                                <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i> Catalog
-                                                </label>
-                                                
-                                                 <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i> Contracts
-                                                </label>
-                                                
-                                                <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i> Projects
-                                                </label>
-                                                
-                                                <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i> Mobility Social Media
-                                                </label>
-                                                
-                                                <label class="checkbox checkbox-custom-alt col-sm-3">
-                                                    <input type="checkbox" class="checkbox1" name="check[]"><i></i>Chat
-                                                </label>-->
-                                                
+                                            
                                                   </div>
                                                 
                                                 
@@ -340,7 +244,49 @@
                                     </form>
 
                                 </div></div>
-                                <!-- /tile body -->
+
+<div class="col-md-12 pt-20 pb-20" style="background:#fff;">
+ <button class="btn btn-primary  center-block" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-11" onclick="loadlocations(<?php echo (string)$edituserdata->cus_code;?>)">Load Locations</button>
+
+
+</div>
+<div class="col-md-12 pt-20 pb-20" style="background:#fff;">
+      <table id="orders-list1">
+                                                <thead>
+                                                <tr>
+
+                                                    <th style="width:180px;">ShipToCode</th>
+                                                    <th style="width:200px;" class="active">CustomerCode</th>
+                                                    <th style="width:150px;">ShiptoBusName</th>
+                                                    <th style="width:150px;">Address2</th>
+                                                    <th style="width:150px;">City</th>
+                                                    <th style="width:150px;">State</th>
+                                                    <th style="width:100px;">Zip</th> 
+													<th style="width:100px;">Actions</th> 
+                                                </tr>
+                                                </thead>
+												<tbody>
+												
+												<?php 
+												foreach($userlocations as $userlocationsdata){
+												?>
+												 <tr>
+											    <td> <?php echo $userlocationsdata->ship_to_code?></td>
+											    <td> <?php echo $userlocationsdata->custum_code?></td>
+											    <td> <?php echo $userlocationsdata->ship_to_busname?></td>
+											    <td> <?php echo $userlocationsdata->address_1?></td>
+											
+											    <td> <?php echo $userlocationsdata->city?></td>
+											    <td> <?php echo $userlocationsdata->state?></td>
+											    <td> <?php echo $userlocationsdata->zip?></td>
+												 <td> <a href="javascript:void(0)" onclick="deletelocation(<?php echo $userlocationsdata->id?>)" >Delete </a></td>
+												 	</tr>
+												 <?php } ?>
+												 
+												</tbody>
+												</table>
+												</div>
+                               
 
                             </section>
                             <!-- /tile -->
@@ -366,4 +312,14 @@
 
 
         </div>
+		
+		
+	
+		
+		
+		 
+
+                             
+
+                          
         <!--/ Application Content -->

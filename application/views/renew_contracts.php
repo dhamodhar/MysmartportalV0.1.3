@@ -1,0 +1,119 @@
+            <!-- ====================================================
+            ================= CONTENT ===============================
+            ===================================================== -->
+            <section id="content"    class="header-bg small-header-bg">
+
+                <div class="page page-shop-orders">
+
+                    <div class="pageheader">
+
+                        
+
+                        <div class="page-bar col-md-8 col-xs-12 xs-mb-10">
+
+                            <ul class="page-breadcrumb">
+                                <li>
+                                    <a href="<?php echo base_url();?>index.php/welcome/technical_support"><i class="fa fa-home"></i> Lowry Solutions</a>
+                                </li>
+                               
+                                <li>
+                                    <a href=" " class="sub-active">Upcoming for renewal</a>
+                                </li>
+                            
+                            </ul>
+                            
+                        </div>
+<div class="col-md-4 cps"> <div id="tableTools"></div>
+
+                    </div>
+
+                    <!-- page content -->
+                    <div class="pagecontent">
+
+                        
+                        <!-- row -->
+                        <div class="row">
+                            <!-- col -->
+                            <div class="col-md-12 xs-nopadding">
+
+
+
+
+                                <!-- tile -->
+                                <section class="tile padding-top-5">
+
+
+                                     
+                                        
+          
+                                    <div class="tile-body">
+
+                                      <div class="table-responsive">
+                                         <table class="table table-striped table-hover table-custom" id="contracts-list">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width:100px;">Contract Number</th>	
+                                                    <th style="width:100px;">Start Date</th> 
+													<th style="width:100px;">End Date</th> 
+													<th style="width:100px;">Description</th> 
+													
+													<th style="width:100px;">Service Level</th> 
+													<th style="width:100px;">Location</th> 
+												    <th style="width:100px;">Contract Status</th>						
+                                                </tr>
+                                                </thead>
+												<tbody>
+												
+												</tbody>
+                                            </table>
+											
+											
+
+											
+											
+											
+											
+                                        </div> 
+<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button> </div>
+
+                                    </div>
+									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>
+                                    <!-- /tile body -->
+<!--<a href="<?php echo base_url()?>index.php/welcome/all_servicecontracts_to_csv" style="margin-left:15px;" class="btn btn-primary btn-sm mb-10">Export To CSV</a>-->
+									
+  
+                                </section>
+                                <!-- /tile -->
+
+                            </div>
+                            <!-- /col -->
+                        </div>
+                        <!-- /row -->
+
+
+<input type="hidden" name="count1" id="count1" value="25">
+
+                    </div>
+                    <!-- /page content -->
+
+                </div>
+                
+            </section>
+            <!--/ CONTENT -->
+
+
+
+
+
+
+        </div>
+        <!--/ Application Content -->
+
+
+
+
+
+
+
+
+

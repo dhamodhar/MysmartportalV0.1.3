@@ -1,0 +1,1660 @@
+<style media="screen" type="text/css">
+
+@-webkit-keyframes myanimation {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 50%;
+  }
+}
+h1 {
+  text-align: center;
+  font-family: 'PT Sans Caption', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  padding: 20px 0;
+  color: #777;
+}
+
+.checkout-wrap {
+  color: #444;
+  font-family: 'PT Sans Caption', sans-serif;
+  margin: 40px auto;
+  max-width: 1200px;
+  position: relative;
+}
+
+ul.checkout-bar li {
+  color: #ccc;
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 20px 14px 80px;
+  position: relative;
+}
+ul.checkout-bar li:before {
+  -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  background: #ddd;
+  border: 2px solid #FFF;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  left: 20px;
+  line-height: 37px;
+  height: 35px;
+  position: absolute;
+  text-align: center;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  top: 4px;
+  width: 35px;
+  z-index: 999;
+}
+ul.checkout-bar li.active {
+  color: #8bc53f;
+  font-weight: bold;
+}
+ul.checkout-bar li.active:before {
+  background: #8bc53f;
+  z-index: 99999;
+}
+ul.checkout-bar li.visited {
+  background: #ECECEC;
+  color: #57aed1;
+  z-index: 99999;
+}
+ul.checkout-bar li.visited:before {
+  background: #57aed1;
+  z-index: 99999;
+}
+ul.checkout-bar li:nth-child(1):before {
+  content: "1";
+}
+ul.checkout-bar li:nth-child(2):before {
+  content: "2";
+}
+ul.checkout-bar li:nth-child(3):before {
+  content: "3";
+}
+ul.checkout-bar li:nth-child(4):before {
+  content: "4";
+}
+ul.checkout-bar li:nth-child(5):before {
+  content: "5";
+}
+ul.checkout-bar li:nth-child(6):before {
+  content: "6";
+}
+ul.checkout-bar a {
+  color: #57aed1;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media all and (min-width: 800px) {
+  .checkout-bar li.active:after {
+    -webkit-animation: myanimation 3s 0;
+    background-size: 35px 35px;
+    background-color: #8bc53f;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 15px;
+    width: 100%;
+    left: 50%;
+    position: absolute;
+    top: -50px;
+    z-index: 0;
+	border-radius:15px;
+  }
+
+  .checkout-wrap {
+    margin: 80px auto;
+  }
+
+  ul.checkout-bar {
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    background-size: 35px 35px;
+    background-color: #EcEcEc;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    border-radius: 15px;
+    height: 15px;
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+  }
+  ul.checkout-bar:before {
+    background-size: 35px 35px;
+    background-color: #57aed1;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    content: " ";
+    height: 15px;
+    left: 0;
+    position: absolute;
+    width: 10%;
+  }
+  ul.checkout-bar li {
+    display: inline-block;
+    margin: 50px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 19%;
+  }
+  ul.checkout-bar li:before {
+    height: 45px;
+    left: 40%;
+    line-height: 45px;
+    position: absolute;
+    top: -65px;
+    width: 45px;
+    z-index: 99;
+  }
+  ul.checkout-bar li.visited {
+    background: none;
+  }
+  ul.checkout-bar li.visited:after {
+    background-size: 35px 35px;
+    background-color: #57aed1;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 15px;
+    left: 50%;
+    position: absolute;
+    top: -50px;
+    width: 100%;
+    z-index: 99;
+  }
+}
+</style>
+
+<script type="text/javascript">
+function newservice()
+{
+document.getElementById("new_service_ticket").style.display='block';
+
+
+
+
+}
+</script> 
+<script type="text/javascript">
+function getallfields()
+{
+
+var tick_number = document.getElementById("serial_number").value;
+if(tick_number == ""){
+
+alert("please enter Serial Number");
+}else{
+document.getElementById("full_info_ticket").style.display='block';
+}
+
+}   
+
+</script> 
+
+<script type="text/javascript">
+function cancel()
+{
+document.getElementById("new_service_ticket").style.display='none';
+document.getElementById("service_btns").style.display='block';
+
+
+
+}   
+
+</script> 
+	 <!-- ====================================================
+        ================= Application Content ===================
+        ===================================================== -->
+        <div id="wrap" class="animsition">
+
+
+
+
+
+
+            <!-- ===============================================
+            ================= HEADER Content ===================
+            ================================================ -->
+            <section id="header">
+                <header class="clearfix">
+
+                    <!-- Branding -->
+                    <div class="branding">
+                       <a href="<?php echo base_url()?>index.php/welcome/dashboard">
+                            <img src="<?php echo base_url()?>assets/images/logo.png" class="img-responsive">
+                        </a>
+                        <a role="button" tabindex="0" class="offcanvas-toggle visible-xs-inline"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <!-- Branding end -->
+
+                      <h3 class="sub-title">MySmart Portal</h3>
+                
+
+
+                      <ul class="nav-left pull-left list-unstyled list-inline">
+                        <li class="sidebar-collapse divided-right">
+                            <a role="button" tabindex="0" class="collapse-sidebar">
+                                <i class="fa fa-outdent"></i>
+                            </a>
+                        </li>
+                        
+                    </ul>
+
+                          	
+					
+           
+
+
+                   
+
+
+
+                    <!-- Right-side navigation -->
+                    <ul class="nav-right pull-right list-inline">
+ <li class="dropdown nav-profile">
+
+                             <a data-toggle="dropdown" class="dropdown-toggle" href="">
+                                  <i class="fa fa-headphones"></i>
+                              
+                                <span>Contact Lowry<i class="fa fa-angle-down"></i></span>
+                            </a>
+
+                            
+
+                        </li> 
+                     
+
+                        <li class="dropdown messages">
+
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <span class="badge bg-lightred">4</span>
+                            </a>
+
+                            <div class="dropdown-menu pull-right with-arrow panel panel-default animated littleFadeInDown" role="menu">
+
+                                <div class="panel-heading">
+                                    You have <strong>4</strong> messages
+                                </div>
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object thumb thumb-sm">
+                                                <img src="<?php echo base_url()?>assets/images/ici-avatar.jpg" alt="" class="img-circle">
+                                            </span>
+                                            <div class="media-body">
+                                                <span class="block">Imrich sent you a message</span>
+                                                <small class="text-muted">12 minutes ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object  thumb thumb-sm">
+                                                <img src="<?php echo base_url()?>assets/images/peter-avatar.jpg" alt="" class="img-circle">
+                                            </span>
+                                            <div class="media-body">
+                                                <span class="block">Peter sent you a message</span>
+                                                <small class="text-muted">46 minutes ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object  thumb thumb-sm">
+                                                <img src="<?php echo base_url()?>assets/images/random-avatar1.jpg" alt="" class="img-circle">
+                                            </span>
+                                            <div class="media-body">
+                                                <span class="block">Bill sent you a message</span>
+                                                <small class="text-muted">1 hour ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object  thumb thumb-sm">
+                                                <img src="<?php echo base_url()?>assets/images/random-avatar3.jpg" alt="" class="img-circle">
+                                            </span>
+                                            <div class="media-body">
+                                                <span class="block">Ken sent you a message</span>
+                                                <small class="text-muted">3 hours ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <div class="panel-footer">
+                                    <a role="button" tabindex="0">Show all messages <i class="pull-right fa fa-angle-right"></i></a>
+                                </div>
+
+                            </div>
+
+                        </li>
+
+                        <li class="dropdown notifications">
+
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell"></i>
+                                <span class="badge bg-lightred">3</span>
+                            </a>
+
+                            <div class="dropdown-menu pull-right with-arrow panel panel-default animated littleFadeInLeft">
+
+                                <div class="panel-heading">
+                                    You have <strong>3</strong> notifications
+                                </div>
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object media-icon bg-danger">
+                                                <i class="fa fa-ban"></i>
+                                            </span>
+                                            <div class="media-body">
+                                                <span class="block">User Imrich cancelled account</span>
+                                                <small class="text-muted">6 minutes ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object media-icon bg-primary">
+                                                <i class="fa fa-bolt"></i>
+                                            </span>
+                                            <div class="media-body">
+                                                <span class="block">New user registered</span>
+                                                <small class="text-muted">12 minutes ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object media-icon bg-greensea">
+                                                <i class="fa fa-lock"></i>
+                                            </span>
+                                            <div class="media-body">
+                                                <span class="block">User Robert locked account</span>
+                                                <small class="text-muted">18 minutes ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <div class="panel-footer">
+                                    <a role="button" tabindex="0">Show all notifications <i class="fa fa-angle-right pull-right"></i></a>
+                                </div>
+
+                            </div>
+
+                        </li>
+
+                            
+
+
+
+  <li class="dropdown nav-profile">
+
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="<?php echo base_url()?>assets/images/profile-photo.jpg" alt="" class="img-circle size-30x30">
+                                <span><?php echo ucfirst($this->session->userdata('firstname'))?> <?php echo ucfirst($this->session->userdata('lastname'))?><i class="fa fa-angle-down"></i></span>
+                            </a>
+
+                            <ul class="dropdown-menu animated littleFadeInRight" role="menu">
+
+                                <li>
+                                    <a role="button" tabindex="0" href="">
+                                        <span class="badge bg-greensea pull-right">86%</span>
+                                        <i class="fa fa-user"></i>Profile
+                                    </a>
+                                </li>
+                         
+                                <li>
+                                    <a role="button" tabindex="0">
+                                        <i class="fa fa-cog"></i>Settings
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a role="button" tabindex="0">
+                                        <i class="fa fa-lock"></i>Lock
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url();?>index.php/welcome/logout" role="button" tabindex="0">
+                                        <i class="fa fa-sign-out"></i>Logout
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+
+
+
+
+
+                        <li class="toggle-right-sidebar">
+                            <a role="button" tabindex="0">
+                               
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Right-side navigation end -->
+
+
+
+                </header>
+
+            </section>
+            <!--/ HEADER Content  -->
+
+
+
+
+
+            <!-- =================================================
+            ================= CONTROLS Content ===================
+            ================================================== -->
+            <div id="controls">
+
+
+
+
+
+                <!-- ================================================
+                ================= SIDEBAR Content ===================
+                ================================================= -->
+                <aside id="sidebar">
+
+
+                    <div id="sidebar-wrap">
+
+                        <div class="panel-group slim-scroll" role="tablist">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <!--<h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#sidebarNav">
+                                            Navigation <i class="fa fa-angle-up"></i>
+                                        </a>
+                                    </h4>-->
+                                </div>
+                                <div id="sidebarNav" class="panel-collapse collapse in" role="tabpanel">
+                                    <div class="panel-body">
+
+
+                                        <!-- ===================================================
+                                        ================= NAVIGATION Content ===================
+                                        ==================================================== -->
+                                        <ul id="navigation">
+										
+										      <?php 
+										
+										//$id = explode(",",$ids);
+										for($i=0;$i<sizeof($menu);$i++){ 
+										if($menu[$i]['id']==1)
+										{
+										?>
+										<li > <a href="<?php echo base_url()?>index.php/welcome/dashboard" class="reports"> <span>Dashboard & Analytics</span></a></li>
+                                             
+										<?php }else if($menu[$i]['id']==2)
+										  {
+										?>
+										<li><a href="#" class="support"> <span>Technical Support</span></a></li>
+										
+										
+										<?php }else if($menu[$i]['id']==3)
+										  {
+										?>
+										
+                                         <li>
+                                                <a role="button" tabindex="0" class="pa"> <span >Purchasing & Accounting</span></a>
+                                                <ul>
+                                                    <li> <a href="<?php echo base_url()?>index.php/welcome/orders">
+<i class="fa fa-caret-right"></i> Orders & invoices</a></li>
+													 <li><a href="<?php echo base_url()?>index.php/welcome/open_orders"><i class="fa fa-caret-right"></i>Open Orders</a></li>
+                                                    <li><a href="<?php echo base_url()?>index.php/welcome/open_invoices"><i class="fa fa-caret-right"></i>Open Invoices</a></li>
+                                                   
+                                                </ul>
+                                            </li>
+										
+										<?php }else if($menu[$i]['id']==4)
+										  {
+										?>
+										<li><a href="#" class="catalog"> <span >My Catalog</span></a></li>
+                                         
+										<?php } else if($menu[$i]['id']==5)
+										  {
+										?>
+										    <li><a href="#" class="contracts"> <span >Service Contracts</span></a></li>
+                                        
+										      
+									
+										 
+										<?php } else if($menu[$i]['id']==6)
+										  {
+										?>
+										     <li><a href="#"><i class="fa fa-cubes"></i> <span>Asset Inventory</span></a></li>
+                                        
+										
+									   
+										
+										<?php } else if($menu[$i]['id']==7)
+										  {
+										?>
+										
+										    <li><a href="#" class="devices"> <span>Managed Devices</span></a></li>
+                                  
+										
+										<?php } else if($menu[$i]['id']==8)
+										  {
+										?>
+										 <li><a href="#" class="projects"> <span >My Projects</span></a></li>
+                                         
+										 
+										
+										
+										<?php } else if($menu[$i]['id']==9)
+										  {
+										?>
+										 <li><a href="#"><i class="fa fa-print"></i> <span>Printer Management</span></a></li>
+     
+										<?php } else if($menu[$i]['id']==10)
+										  {
+										?>
+											
+									  <li><a href="#"><i class="fa fa-users"></i> <span>Mobility Social Media</span></a></li>
+                                          
+										
+									
+										
+										<?php } else if($menu[$i]['id']==11)
+										  {
+										?>
+									   
+										
+									  <li><a href="javascript:$zopim.livechat.window.show()"><i class="glyphicon glyphicon-comment"></i></i> <span>Chat Now</span></a></li>
+                                           
+                                        
+										
+										<?php } ?>
+										
+										<?php
+										} 
+										?>
+                                            
+                                            
+                                        
+                                            </ul>
+                                          
+                                        
+                                        <!--/ NAVIGATION Content -->
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                           
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </aside>
+                <!--/ SIDEBAR Content -->
+
+
+
+
+
+                <!-- =================================================
+                ================= RIGHTBAR Content ===================
+                ================================================== -->
+                <aside id="rightbar">
+
+                    <div role="tabpanel">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+                            <li role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+                            <li role="presentation"><a href="#friends" aria-controls="friends" role="tab" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+                            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-cog"></i></a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="users">
+                                <h6><strong>Online</strong> Users</h6>
+
+                                <ul>
+
+                                    <li class="online">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/ici-avatar.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Ing. Imrich <strong>Kamarel</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Ulaanbaatar, Mongolia</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="online">
+                                        <div class="media">
+
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/arnold-avatar.jpg" alt>
+                                            </a>
+                                            <span class="badge bg-lightred unread">3</span>
+
+                                            <div class="media-body">
+                                                <span class="media-heading">Arnold <strong>Karlsberg</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Bratislava, Slovakia</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="online">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/peter-avatar.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Peter <strong>Kay</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Kosice, Slovakia</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="online">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/george-avatar.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">George <strong>McCain</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Prague, Czech Republic</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="busy">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar1.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Lucius <strong>Cashmere</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Wien, Austria</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="busy">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar2.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Jesse <strong>Phoenix</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Berlin, Germany</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+
+                                <h6><strong>Offline</strong> Users</h6>
+
+                                <ul>
+
+                                    <li class="offline">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar4.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Dell <strong>MacApple</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Paris, France</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="offline">
+                                        <div class="media">
+
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar5.jpg" alt>
+                                            </a>
+
+                                            <div class="media-body">
+                                                <span class="media-heading">Roger <strong>Flopple</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Rome, Italia</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="offline">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar6.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Nico <strong>Vulture</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Kyjev, Ukraine</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="offline">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar7.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Bobby <strong>Socks</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Moscow, Russia</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="offline">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar8.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Anna <strong>Opichia</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Budapest, Hungary</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="history">
+                                <h6><strong>Chat</strong> History</h6>
+
+                                <ul>
+
+                                    <li class="online">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/ici-avatar.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Ing. Imrich <strong>Kamarel</strong></span>
+                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="busy">
+                                        <div class="media">
+
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/arnold-avatar.jpg" alt>
+                                            </a>
+                                            <span class="badge bg-lightred unread">3</span>
+
+                                            <div class="media-body">
+                                                <span class="media-heading">Arnold <strong>Karlsberg</strong></span>
+                                                <small>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="offline">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/peter-avatar.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Peter <strong>Kay</strong></span>
+                                                <small>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit </small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="friends">
+                                <h6><strong>Friends</strong> List</h6>
+                                <ul>
+
+                                    <li class="online">
+                                        <div class="media">
+
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/arnold-avatar.jpg" alt>
+                                            </a>
+                                            <span class="badge bg-lightred unread">3</span>
+
+                                            <div class="media-body">
+                                                <span class="media-heading">Arnold <strong>Karlsberg</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Bratislava, Slovakia</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="offline">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar8.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Anna <strong>Opichia</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Budapest, Hungary</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="busy">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/random-avatar1.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Lucius <strong>Cashmere</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Wien, Austria</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="online">
+                                        <div class="media">
+                                            <a class="pull-left thumb thumb-sm" role="button" tabindex="0">
+                                                <img class="media-object img-circle" src="<?php echo base_url()?>assets/images/ici-avatar.jpg" alt>
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="media-heading">Ing. Imrich <strong>Kamarel</strong></span>
+                                                <small><i class="fa fa-map-marker"></i> Ulaanbaatar, Mongolia</small>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="settings">
+                                <h6><strong>Chat</strong> Settings</h6>
+
+                                <ul class="settings">
+
+                                    <li>
+                                        <div class="form-group">
+                                            <label class="col-xs-8 control-label">Show Offline Users</label>
+                                            <div class="col-xs-4 control-label">
+                                                <div class="onoffswitch greensea">
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show-offline" checked="">
+                                                    <label class="onoffswitch-label" for="show-offline">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="form-group">
+                                            <label class="col-xs-8 control-label">Show Fullname</label>
+                                            <div class="col-xs-4 control-label">
+                                                <div class="onoffswitch greensea">
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show-fullname">
+                                                    <label class="onoffswitch-label" for="show-fullname">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="form-group">
+                                            <label class="col-xs-8 control-label">History Enable</label>
+                                            <div class="col-xs-4 control-label">
+                                                <div class="onoffswitch greensea">
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show-history" checked="">
+                                                    <label class="onoffswitch-label" for="show-history">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="form-group">
+                                            <label class="col-xs-8 control-label">Show Locations</label>
+                                            <div class="col-xs-4 control-label">
+                                                <div class="onoffswitch greensea">
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show-location" checked="">
+                                                    <label class="onoffswitch-label" for="show-location">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="form-group">
+                                            <label class="col-xs-8 control-label">Notifications</label>
+                                            <div class="col-xs-4 control-label">
+                                                <div class="onoffswitch greensea">
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show-notifications">
+                                                    <label class="onoffswitch-label" for="show-notifications">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="form-group">
+                                            <label class="col-xs-8 control-label">Show Undread Count</label>
+                                            <div class="col-xs-4 control-label">
+                                                <div class="onoffswitch greensea">
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show-unread" checked="">
+                                                    <label class="onoffswitch-label" for="show-unread">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </aside>
+                <!--/ RIGHTBAR Content -->
+
+
+
+
+            </div>
+            <!--/ CONTROLS Content -->
+
+
+
+
+            <!-- ====================================================
+            ================= CONTENT ===============================
+            ===================================================== -->
+            <section id="content">
+<div class="page-core-dashboard">
+
+                <div class="page page-dashboard">
+
+                    <div class="pageheader">
+
+                       
+                        <h2 style="color:green;" color="green" align="left">Hello, <?php echo $this->session->userdata('firstname');?>&nbsp;-&nbsp;<?php $hour = date('H');
+$dayTerm = ($hour > 17) ? "Evening" : ($hour > 12) ? "Afternoon" : "Morning";
+echo "Good " . $dayTerm;?>&nbsp;:)</h2>
+
+                   </div>
+
+
+  <div class="row">
+
+                        <!-- col -->
+                        <div class="margin-left-2 card-container col-lg-2 col-sm-6 col-sm-12">
+                           
+                               <a href="<?php echo base_url()?>index.php/welcome/open_orders"> <div class="front bg-greensea2">
+
+                                    <!-- row -->
+                                    <div class="row vcenter">
+                                        <!-- col -->
+                                        <div class="col-xs-4 ">
+<p class="text-elg text-strong mb-0"><?php if(isset($openorders)) {echo $openorders;}else{echo "-";}?></p>
+                                            <i class="fa fa-folder-open fa-4x "></i>
+ 
+                                        </div>
+                                        <!-- /col -->
+                                        <!-- col -->
+                                        <div class="col-xs-8 ">
+                                           
+                                            <span>Open Orders</span>
+                                        </div>
+                                        <!-- /col -->
+                                    </div>
+                                    <!-- /row -->
+
+                                </div></a>
+                                
+                            
+                        </div>
+                        <!-- /col -->
+
+                        <!-- col -->
+                        <div class="card-container col-lg-2 col-sm-6 col-sm-12 ">
+                           
+                                 <a href="#"> <div class="front bg-blue2">
+
+                                    <!-- row -->
+                                    <div class="row vcenter">
+                                        <!-- col -->
+                                        <div class="col-xs-4">
+<p class="text-elg text-strong mb-0"><?php if(isset($shippedorders)) {echo $shippedorders;}else{echo "-";}?></p>
+                                            <i class="fa fa-truck fa-4x"></i>
+ 
+                                        </div>
+                                        <!-- /col -->
+                                        <!-- col -->
+                                        <div class="col-xs-8 ">
+                                           
+                                            <span>Shipped Orders</span>
+                                        </div>
+                                        <!-- /col -->
+                                    </div>
+                                    <!-- /row -->
+
+                                </div></a>
+                                
+                           
+                        </div>
+                        <!-- /col -->
+
+                        <!-- col -->
+<div class="card-container col-lg-2 col-sm-6 col-sm-12 ">
+                           
+                                 <a href="<?php echo base_url()?>index.php/welcome/renew_service_contracts"> <div class="front bg-lightred2">
+
+                                    <!-- row -->
+                                    <div class="row vcenter">
+                                        <!-- col -->
+                                        <div class="col-xs-4">
+  <p class="text-elg text-strong mb-0" id="ren_count"></p>
+                                         <i class="fa fa-file-text fa-4x"></i>
+                                        
+                                        </div>
+                                        <!-- /col -->
+                                        <!-- col -->
+                                        <div class="col-xs-8  ">
+                                            
+                                            <span>Upcoming Service Renewal Contracts</span>
+                                        </div>
+                                        <!-- /col -->
+                                    </div>
+                                    <!-- /row -->
+
+                                </div></a>
+                                
+                           
+                        </div>                        
+
+                        <!-- /col -->
+
+                        <!-- col -->
+                        <div class="card-container col-lg-2 col-sm-6 col-sm-12 ">
+                         
+                               <a href="#"> <div class="front bg-slategray2">
+
+                                    <!-- row -->
+                                    <div class="row vcenter">
+                                        <!-- col -->
+                                        <div class="col-xs-4">
+<p class="text-elg text-strong mb-0"><?php if (isset($opencase)) {echo $opencases;}else{echo "0";}?></p>
+                                            <i class="fa fa-eye fa-4x"></i>
+ 
+                                        </div>
+                                        <!-- /col -->
+                                        <!-- col -->
+                                        <div class="col-xs-8 ">
+                                           
+                                            <span>Open Tickets</span>
+                                        </div>
+                                        <!-- /col -->
+                                    </div>
+                                    <!-- /row -->
+
+                                
+                               
+                            </div></a>
+                        </div>
+                        <!-- /col -->
+
+ <!-- col -->
+                        
+<div class="card-container col-lg-2 col-sm-6 col-sm-12 ">
+                            
+                               <a href="#"> <div class="front bg-blue2">
+
+                                    <!-- row -->
+                                    <div class="row vcenter">
+                                        <!-- col -->
+                                        <div class="col-xs-4">
+ <p class="text-elg text-strong mb-0"><?php echo "23";?></p>
+                                            <i class="fa fa-mobile fa-44x"></i>
+
+                                        </div>
+                                        <!-- /col -->
+                                        <!-- col -->
+                                        <div class="col-xs-8 ">
+                                           
+                                            <span>End of Service Devices</span>
+                                        </div>
+                                        <!-- /col -->
+                                    </div>
+                                    <!-- /row -->
+
+                                
+                               
+                            </div></a>
+                        <!-- /col -->
+
+
+
+
+
+                    </div>
+                    <!-- /row -->
+
+
+
+
+</div>
+<div class="row" style="text-align: center; margin-top:30px;">
+<h1><b>At your service</b></h1>
+<p style="margin-left:20px"><h4 align="center">Our in-house experts are standing by 24/7 to not only solve technical issues, but to give you the advice and guidance you need to succeed online.</h4></p>
+</div>
+
+<!--<img src="/assets/service-lookup-2.jpg" alt="Service Lookup" style="width:100%; height:100%;">-->
+
+<div class="row" style="margin-top:30px;">
+
+<div class="col-md-12"><button onclick="newservice()" class="btn btn-warning btn-lg mb-10" type="button" id="service_btns">New Service Request</button></div>
+
+
+<div id="new_service_ticket" style="display:none;" class="col-md-12 ">
+<div id="device-number" class="form-group col-md-2 no-padding">
+ <input type="test" name="serial_number" id="serial_number" class="form-control" placeholder="Device Serial Number*"> </div>
+
+
+<div class="col-md-6 no-padding"><input type="button" name="getdetails" id="getdetails" class="btn btn-success mb-10 mr-10 float-left" value="Next" onclick="getallfields()"> <input type="button" name="getdetails" id="getdetails" class="btn btn-default mb-10 float-left" value="Cancel" onclick="cancel()" ></div>
+  
+</div>
+
+
+
+</div>
+
+
+<div class="row ">
+<div class="col-md-12">
+
+
+<div class="service_bg" id="last_req" style="display:none">
+ <div id="wait_device"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>
+<form name="new_service_req" action="<?php echo base_url()?>index.php/welcome/save_new_service_req" method="post">
+
+
+  <div id="error_id" style="display:none; color:red">No Response - cannot process the data.</div>
+ 
+
+
+<div id="full_info_ticket" style="display:none;">
+<div class="col-md-12 service-request-heading">Device Information</div>
+
+                                            <div class="form-group col-md-4">
+                                                <label for="serial">Serial #* </label>
+                                                <input type="text" required="" class="form-control" id="serial_no" name="serial_no" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+                                            
+                                            
+                                               <div class="form-group col-md-4">
+                                                <label for="serial">Type</label>
+                                                <input type="text"  class="form-control" id="device_type" name="device_type" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+
+<div class="form-group col-md-4">
+                                                <label for="serial">Description</label>
+                                                <input type="text"  class="form-control" id="descr" name="descr" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+
+<div class="col-md-12"><hr class="line-dashed-ser"></div>
+
+
+          <div class="col-md-12 service-request-heading">Contract Information</div>
+                                  
+                                             <div class="form-group col-md-4">
+                                                <label for="serial">Contract #</label>
+                                                <input type="text"  class="form-control" id="contract_id" name="contract_id" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+                                            
+                                             <div class="form-group col-md-4">
+                                                <label for="serial">Expires</label>
+                                                <input type="text"  class="form-control" id="contract_expiry_date" name="contract_expiry_date" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+                                            
+                                             <div class="form-group col-md-4">
+                                                <label for="serial">Status</label>
+                                                <input type="text"  class="form-control" id="contract_status" name="contract_status" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+
+<div class="col-md-12"><hr class="line-dashed-ser"></div>
+
+<div class="col-md-12 service-request-heading">Contact Information</div>
+                                            
+                                            <div class="form-group col-md-4">
+                                                <label for="serial">Email*</label>
+                                                <input type="text"  class="form-control" id="email" name="email" data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+                                            
+                                             <div class="form-group col-md-4">
+                                                <label for="serial">Full Name*</label>
+                                                <input type="text"  class="form-control" id="full_name" name="full_name" data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+                                            
+                                            <div class="form-group col-md-4">
+                                                <label for="serial">Phone*</label>
+                                                <input type="text"  class="form-control" id="phonenumber" name="phonenumber" data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+
+<div class="col-md-12"><hr class="line-dashed-ser"></div>
+
+<div class="col-md-12 service-request-heading">Device Location</div>
+                                            
+                                             <div class="form-group col-md-4">
+                                                <label for="serial">Company</label>
+                                                <input type="text"  class="form-control" id="company_name" name="company_name" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                                            </div>
+                                            
+                                            <div class="form-group col-md-4">
+                                                <label for="serial">Address</label>
+ <input type="text" placeholder="Street Address"  class="form-control" id="address_1" name="address_1" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+ <input type="text" placeholder="Address Line 2"  class="form-control" id="address_2" name="address_2" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+
+<div class="form-inline">
+<div class="form-group" style="float:left; width:54%">
+ <input type="text" placeholder="City"  class="form-control" id="city" name="city" readonly data-parsley-id="8466"><ul class="parsley-errors-list" id="parsley-id-8466"></ul></div>
+<div class="form-group" style="float:right; width:46%">
+ <select tabindex="3"  name="state11" class="form-control" id="state11" data-parsley-id="8466" style="width:100%">
+                                                     <option value="" >select</option>
+                                                     <option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option><option value="Armed Forces Americas">Armed Forces Americas</option><option value="Armed Forces Europe">Armed Forces Europe</option><option value="Armed Forces Pacific">Armed Forces Pacific</option>
+     </select><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+                             
+</div>
+
+<div class="form-group">
+ <input type="text" placeholder="ZIP Code"  class="form-control" id="zip" name="zip" data-parsley-id="8466" readonly style="width: 100%;"><ul class="parsley-errors-list" id="parsley-id-8466"></ul></div>
+
+<div class="form-group col-md-4">
+<label for="serial">Verify*</label>
+                                                <label class="checkbox checkbox-custom">
+                                                    <input type="radio" name="customRadio" onclick="get_addt_info(1)"><i></i> I confirm that the above device location address is correct
+                                                </label>
+
+<label class="checkbox checkbox-custom">
+                                                    <input type="radio" name="customRadio" onclick="get_addt_info(2)"><i></i> Select this option to update the device location address
+                                                </label></div>
+
+                                       </div></div>
+                                            
+                <div class="col-md-12"><hr class="line-dashed-ser"></div>
+                           
+<div id="addt_info" style="display:none">
+<div class="col-md-12 service-request-heading">Incident Information</div>
+<div class="col-md-12 ">Incident Type</div>
+
+                                                
+                                                   
+
+<div class="col-md-4">
+<label class="checkbox checkbox-custom"><input type="radio" name="printer1" id="printer1"  value="printer" onclick="open_printer_list()"><i></i> Printer</label> 
+<label class="checkbox checkbox-custom"><input type="radio" name="printer1" id="printer1" value="scanner" onclick="open_scanner_list()"><i></i> Scanner / Mobile Computer</label>
+<label class="checkbox checkbox-custom"><input type="radio" name="printer1" id="printer1" value="Software" onclick="others()"><i></i> Software</label>
+<label class="checkbox checkbox-custom"><input type="radio" name="printer1" id="printer1" value="Other" onclick="others()"><i></i> Other</label>
+</div>
+
+
+
+<div class="form-group col-md-3 " id="printer" style="display:none"> 
+<label for="serial">Specify Printer Incident Type</label>
+ <select  class="chosen-select" name="printer_type" id="printer_type"   style="width: 204px;" >
+<option value="Paper Feed">Paper Feed</option>
+<option value="Error Message">Error Message</option>
+<option value="Poor Print Quality">Poor Print Quality</option>
+<option value="Ribbon Is Tearing">Ribbon Is Tearing</option>
+<option value="Calibration Error">Calibration Error</option>
+<option value="Maintenance">Maintenance</option>
+<option value="Other">Other</option>
+</select><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+</div>
+
+<div class="form-group col-md-3 " id="scanner" style="display:none"> 
+<label for="serial">Specify Scanner / Mobile Computer Incident Type</label>
+ <select  class="chosen-select" name="scaner_type" id="scaner_type" style="width: 204px;" >
+
+<option value="Damaged">Damaged</option><option value="Keyboard Issue">Keyboard Issue</option><option value="No Power">No Power</option><option value="Communicate">Communicate</option><option value="Recharge Issue">Recharge Issue</option><option value="Other">Other</option>
+</select><ul class="parsley-errors-list" id="parsley-id-8466"></ul>
+</div>
+
+<div class="col-md-6 "> </div>
+
+<div class="form-group col-md-5 "> 
+                                            <label for="message">Please Describe the Problem </label>
+                                            <textarea required="" placeholder="Type your message" id="message" name="message" rows="6" class="form-control" data-parsley-id="2031"></textarea><ul class="parsley-errors-list" id="parsley-id-2031"></ul>
+</div>
+                                        
+</div>
+
+<div class="form-group col-md-12">  <button class="btn btn-warning mb-10 center-block" type="submit"  value="Submit"> Submit </button></div>
+                                          
+</div>
+                                        </div>
+										
+  
+<div class="tile-body example">
+ <div class="row">
+ <div class="col-md-12"  style="display:none">
+<div class="row" id="ticket_info">
+
+<div class="col-md-6">Opned: Dec 16, 2015</div>
+ <div class="col-md-6">Opned: Dec 16, 2015</div>
+<div class="col-md-6">Opned: Dec 16, 2015</div>
+ <div class="col-md-6">Opned: Dec 16, 2015</div>
+<div class="col-md-6">Opned: Dec 16, 2015</div>
+ <div class="col-md-6">Opned: Dec 16, 2015</div>
+<div class="col-md-6">Opned: Dec 16, 2015</div>
+ <div class="col-md-6">Opned: Dec 16, 2015</div>
+<div class="col-md-6">Opned: Dec 16, 2015</div>
+ <div class="col-md-6">Opned: Dec 16, 2015</div>
+                                                   
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+  
+
+
+<!--<iframe src="http://service.lowrysolutions.com/service-request-status-lookup/" width=100% height=400; border=0></iframe>-->
+
+
+
+<div style="display:none" id="ticket1_info">
+
+<div class="tile-body col-md-12 no-padding">
+
+<div class=" col-md-12 no-padding ">
+<?php 
+$ticket = explode(",",$ticket_info);
+if(sizeOf($ticket)>1){
+ ?>
+<div  class="scroll_tabs_theme_light tabs2">
+<?php 
+for($i=0;$i<sizeOf($ticket);$i++){
+
+?>
+    <span><a data-toggle='tab' name="<?php echo $ticket[$i];?>" class="ticket_numbers"><?php echo $ticket[$i]; ?> </a></span>    
+		
+   <?php } ?>   
+
+</div>
+
+<?php }else{ ?>
+
+No Service Tickets Found
+<?php } ?>
+</div>
+
+
+
+
+    
+
+
+    
+    
+    
+
+
+<div class="tab-content" id="all_ticket_info1">
+  <div id="home" class="tab-pane fade in active">
+
+<div style="width: 100%; border-top: 3px solid rgb(255, 117, 0); height: 0px; margin: 50px 0px;" class="aligncenter"></div>
+
+
+<div id="tab1" class="service_request_information">
+                <div style=" padding: 0px 0;word-wrap: break-word;">
+                    <h4>
+                        Service Request Search Results for: 
+                        <span style="padding-top:5px;color:#57aed1">  </span> 
+                    </h4>
+                </div>
+                    <ul style="padding-top:30px; text-align:left !important;" id="all_ticket_info">
+                    <li><strong>Service Request Number:</strong> SV765364-1                             </li>
+                    <li><strong>Device Serial Number:</strong> </li>
+                    <li><strong>Depot/On-site:</strong> Depot</li>
+                    <li><strong>Device Model:</strong> </li>
+                    <li><strong>Device Location:</strong> 						                                            </li>
+                    <li><strong>Current Status:</strong> Device Shipped for Repair</li>
+                </ul>
+                				
+								
+				
+                 <div class="checkout-wrap" id="transit">
+                    <ul class="checkout-bar">
+                    <li class="previous visited">Request Created</li>
+                    <li class="previous visited">Warranty Validation</li>
+                    <li class="active">Device in Transit</li>
+                    <li class="next">Repair in Progress</li>
+                    <li class="">Request Complete</li>
+                    </ul>
+                    </div>
+                                    <div style="border: medium none; width: auto; font-family: &quot;PT Sans Caption&quot;,sans-serif; font-weight: 400; font-size: 16px; color: rgb(102, 102, 102); word-wrap: break-word; display: block; padding-top: 100px; text-align: center; background: transparent none repeat scroll 0px 0px;">
+                    <p style="text-align:center;"><b>Additional Information:</b></p>
+                    <p></p>
+                    <p><strong> Last Activity Date: </strong>
+                    January 14, 2016 10:20:26 AM                    </p>
+                    </div>
+              </div>
+
+    
+  </div>
+
+
+
+
+  <div id="menu1" class="tab-pane fade">
+    <h3>Menu 1</h3>
+    <p>Some content in menu 1.</p>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <p>Some content in menu 2.</p>
+  </div>
+</div>
+
+
+</div>
+
+
+
+                   
+<div >
+<!--<li id="field_7_1" class="gfield gfield_contains_required field_sublabel_below field_description_below"><label class="gfield_label" for="input_7_1">Service Request Number<span class="gfield_required">*</span></label><div class="ginput_container">
+                            <input name="ticket_number" id="ticket_number" type="text" value="" class="medium" tabindex="1"><input type="button" name="search" id="search" value="Search" onclick="getstatus()">
+                        </div></li>-->
+						
+						</div>
+						
+						<div id="ticket_info"></div>
+
+
+                  
+
+
+
+
+                </div>
+				
+			
+	</form>
+                </div> </div> </div>
+			
+            </section>
+            <!--/ CONTENT -->
+
+
+
+
+
+
+        </div>
+        <!--/ Application Content -->
+
+<!-- Splash Modal -->
+        <div class="modal splash fade" id="splash" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                   
+                    <div class="modal-body">
+ <div class="form-group col-md-12">
+                                            <label for="exampleInputEmail2" class="sr-only">Search</label>
+                                            <input type="email" placeholder="Enter Device Serial Number" name="ticket_number" id="ticket_number" class="form-control">
+                                        </div>
+                                       
+                                        
+                                        
+
+
+                                </div>                       
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn  btn-success" onclick="getstatus()">Search</button>
+                        <button class="btn  btn-danger" name="cancel" id="cancel" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+function get_addt_info(disable_type)
+{
+if(disable_type==2)
+{
+document.getElementById("company_name").readOnly = false;
+document.getElementById("address_1").readOnly = false;
+document.getElementById("address_2").readOnly = false;
+document.getElementById("city").readOnly = false;
+//document.getElementById("state").disabled = false;
+ $('#state11').prop('disabled',false);
+document.getElementById("zip").readOnly = false;
+}else
+{
+document.getElementById("company_name").readOnly = true;
+document.getElementById("address_1").readOnly = true;
+document.getElementById("address_2").readOnly = true;
+document.getElementById("city").readOnly = true;
+//document.getElementById("state").disabled = true;
+ $('#state11').prop('disabled',true);
+
+document.getElementById("zip").readOnly = true;
+
+}
+document.getElementById("addt_info").style.display = "block";
+
+}
+</script>
+
+<script type="text/javascript">
+function open_printer_list()
+{
+document.getElementById("scanner").style.display = "none";
+document.getElementById("printer").style.display = "block";
+
+
+
+}
+</script>
+
+<script type="text/javascript">
+function open_scanner_list()
+{
+document.getElementById("printer").style.display = "none";
+document.getElementById("scanner").style.display = "block";
+
+
+}
+</script>
+<script type="text/javascript">
+function others()
+{
+document.getElementById("printer").style.display = "none";
+document.getElementById("scanner").style.display = "none";
+
+
+}
+</script>
+

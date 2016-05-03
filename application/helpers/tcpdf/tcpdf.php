@@ -3493,9 +3493,9 @@ class TCPDF {
 		}
 		$w_page = isset($this->l['w_page']) ? $this->l['w_page'].' ' : '';
 		if (empty($this->pagegroups)) {
-			$pagenumtxt = $w_page.$this->getAliasNumPage().' / '.$this->getAliasNbPages();
+			$pagenumtxt = 'Page '.$w_page.$this->getAliasNumPage().' of '.$this->getAliasNbPages();
 		} else {
-			$pagenumtxt = $w_page.$this->getPageNumGroupAlias().' / '.$this->getPageGroupAlias();
+			$pagenumtxt = 'Page '.$w_page.$this->getPageNumGroupAlias().' of '.$this->getPageGroupAlias();
 		}
 		$this->SetY($cur_y);
 		//Print page number

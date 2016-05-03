@@ -22,14 +22,18 @@
         ================= Stylesheets ===================
         ============================================= -->
         <!-- vendor css files -->
-         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/responsive.css">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+       
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/animate.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/animsition/css/animsition.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/login-menu.css">
 
         <!-- project main css files -->
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/main.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/responsive.css">
         <!--/ stylesheets -->
 
 
@@ -101,7 +105,7 @@ var email = document.getElementById("username-login").value;
 
 
 
-            <div class="page page-core page-login">
+            <div class="page page-core page-login col-md-12">
             
            
 
@@ -109,13 +113,82 @@ var email = document.getElementById("username-login").value;
                                  
                 
                
-                   <div class="login-bg-img col-md-7 mt-40 col-xs-push-0 col-sm-push-1 col-md-push-0 col-lg-push-1"><img src="<?php echo base_url()?>assets/images/login-bg.png" class="img-responsive" ></div>   
+                   <div class="col-md-9 mt-40">
 
-                <div class="  col-md-3 text-center bg-white mt-45">
+  <div class="menu col-md-6 icons-wheel" >
+  <div class="btn trigger bg-logo" id="menulogo">
+
+  </div>
+  <div class="icons">
+    <div class="rotater">
+      <div class="btn btn-icon">
+   <div class="textbox" ><p style="position:relative;left:-80px">Technical Support</p></div>
+       <img src="http://lowrysmartportal.com/assets/images/tech-support.png" class="img-responsive" style="margin-top:26px;"/>
+     
+      </div>
+    </div>
+    <div class="rotater">
+
+      <div class="btn btn-icon"> 
+<div class="textbox" ><p>Dashoard & Analytics</p></div>
+     <img src="http://lowrysmartportal.com/assets/images/dashboard.png" class="img-responsive" style="margin-top:26px;"/>
+
+      </div>
+    </div>
+    <div class="rotater">
+      <div class="btn btn-icon">
+<div class="textbox" ><p>Orders & Invoices</p></div>
+       <img src="http://lowrysmartportal.com/assets/images/folder.png" class="img-responsive" style="margin-top:26px; margin-left: 4px;"/>
+      </div>
+    </div>
+    <div class="rotater">
+
+      <div class="btn btn-icon">
+<div class="textbox" ><p> My Catalog</p></div>
+     <img src="http://lowrysmartportal.com/assets/images/catalog.png" class="img-responsive" style="margin-top:26px;margin-left:4px;"/>
+      </div>
+    </div>
+    <div class="rotater">
+      <div class="btn btn-icon">
+
+<div class="textbox" ><p>Contracts</p></div>
+        <img src="http://lowrysmartportal.com/assets/images/contracts.png" class="img-responsive" style="margin-top:23px;"/>
+      </div>
+    </div>
+    <div class="rotater">
+      <div class="btn btn-icon">
+<div class="textbox" ><p style="position:relative;left:-20px">Asset Inventory</p></div>
+       <img src="http://lowrysmartportal.com/assets/images/inventory.png" class="img-responsive" style="margin-top:23px;"/>
+      </div>
+    </div>
+    <div class="rotater">
+      <div class="btn btn-icon">
+<div class="textbox" ><p> Managed Devices</p></div>
+       <img src="http://lowrysmartportal.com/assets/images/app.png" class="img-responsive" style="  margin-left: 5px; margin-top: 25px;"/>
+      </div>
+    </div>
+    <div class="rotater">
+      <div class="btn btn-icon">
+<div class="textbox" ><p>My Projects</p></div>
+        <img src="http://lowrysmartportal.com/assets/images/invoices.png" class="img-responsive" style="  margin-left: 5px; margin-top: 25px;"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>   
+
+                <div class="  col-md-3 text-center bg-white mt-95">
 
 
                     <h2 class="text-light text-greensea">Log In</h2>
-
+<h5 class="text-light text-greensea"><?php echo $msg;?></h5>
                     <form name="form" action="<?php echo base_url();?>index.php/welcome/logincheck" method="post" class="form-validation mt-20" novalidate="">
 
 
@@ -151,39 +224,16 @@ var email = document.getElementById("username-login").value;
                         <div class="form-group text-left mt-20">
                             
                            <input type="submit" name="login" id="login" class="btn btn-greensea b-0 br-2 mr-5" value="Login">
-                            <a href="#" class="pull-right mt-10 fogot">Forgot Password?</a>
+                            <a href="<?php echo base_url()?>index.php/welcome/forgetpassword" class="pull-right mt-10 fogot">Forgot Password?</a>
                         </div>
 
                     </form>
 
-                    <hr class="b-3x">
+                   
 
-                    <div class="social-login text-left">
+                   
 
-                        <ul class="pull-right list-unstyled list-inline">
-                            <li class="p-0">
-                                <a class="btn btn-sm btn-primary b-0 btn-rounded-20" href="javascript:;"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li class="p-0">
-                                <a class="btn btn-sm btn-info b-0 btn-rounded-20" href="javascript:;"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li class="p-0">
-                                <a class="btn btn-sm btn-lightred b-0 btn-rounded-20" href="javascript:;"><i class="fa fa-google-plus"></i></a>
-                            </li>
-                            <li class="p-0">
-                                <a class="btn btn-sm btn-primary b-0 btn-rounded-20" href="javascript:;"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-
-                        <h5 class="or">Or login with</h5>
-
-                    </div>
-
-                   <div class="bg-slategray lt wrap-reset mt-40">
-                        <p class="m-0">
-                            <a href="#" class="text-uppercase"></a>
-                        </p>
-                    </div>
+                  
 
                 </div>
                 
@@ -225,6 +275,7 @@ var email = document.getElementById("username-login").value;
         <script src="<?php echo base_url()?>assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
 
         <script src="<?php echo base_url()?>assets/js/vendor/screenfull/screenfull.min.js"></script>
+<script src="<?php echo base_url()?>assets/js/index.js"></script>
         <!--/ vendor javascripts -->
 
 
@@ -246,7 +297,10 @@ var email = document.getElementById("username-login").value;
         ================================================ -->
         <script>
             $(window).load(function(){
+$( "#menulogo" ).on( "click", function() {
 
+});
+$( "#menulogo" ).trigger( "click" );
 
             });
         </script>

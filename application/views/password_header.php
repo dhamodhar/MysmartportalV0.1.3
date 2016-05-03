@@ -36,6 +36,8 @@
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datatables/datatables.bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/chosen/chosen.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/summernote/summernote.css">
+        <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/acc.css">
+        <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/accordion.css">
 
         <!-- project main css files -->
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/main.css">
@@ -101,7 +103,7 @@
 
                     <!-- Branding -->
                     <div class="branding">
-                        <a  href="index.html">
+                        <a  href="<?php echo base_url()?>index.php/welcome/index">
                             <img src="<?php echo base_url()?>assets/images/logo.png" class="img-responsive">
                         </a>
                         <a role="button" tabindex="0" class="offcanvas-toggle visible-xs-inline"><i class="fa fa-bars"></i></a>

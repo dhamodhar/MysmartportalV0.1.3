@@ -15,30 +15,48 @@ window.location="<?php echo base_url()?>index.php/welcome/deleteuser/"+id+"/"+ac
 
                     <div class="pageheader">
 
-                        <h2>Users List</h2>
+                        <h2>Users List </h2>
 						  <?php
 						  
 						  if($msg == "extension"){
 						  ?>
 						   <div class="alert alert-big alert-lightred alert-dismissable fade in">
-									   <b>Wrong Formate file </b>
+									   <b>Wrong file format, Please use .csv or .xlsx format</b>
 									    </div>
 						  
+						 <?php }?>
+						 
+						  <?php
+						  
+						  if($msg == "nullvalues"){
+						  ?>
+						   <div class="alert alert-big alert-lightred alert-dismissable fade in">
+									   <b>No records found to import. </b>
+									    </div>
+						  
+						 <?php }
+						 
+						 if($msg=="error"){  ?>
+						  <div class="alert alert-big alert-lightred alert-dismissable fade in">
+									   User already exists.
+									    </div>
+						 
+						 
 						 <?php }
 
                           $dupli = explode("_",$count);
 						  if($msg=="inserted"){
 									   ?>
 									   <div class="alert alert-success">
-									   Successfully Created
+									   User successfully created.
 									     </div>
 									    <?php
 									   }else if($dupli[0]=="duplicated"){
 									   ?>
 									    <div class="alert alert-big alert-lightred alert-dismissable fade in">
-									   <b>Duplicate record "<?php echo str_replace("ZZ","@",$dupli[1]); ?>"
+									   <b>Duplicate record or Validation errors at "<?php echo str_replace("ZZ","@",$dupli[1]); ?>"
 									
-									   - Please correct the Errors and upload again. </b>
+									   - Please correct the validation errors and upload again. </b>
 									    </div>
 									   
 
@@ -49,9 +67,13 @@ window.location="<?php echo base_url()?>index.php/welcome/deleteuser/"+id+"/"+ac
 									    </div>
 									   
 									   <?php }else if($dupli[0]!="duplicated"){ ?>
-									  	   <!--<?php echo $count." Records Imported Successfully";?>-->
+									  	   <!--<?php echo $count."User records imported successfully";?>-->
 									   
 									    <?php } ?>
+										
+										
+										
+										
                         <div class="page-bar">
 
                             <ul class="page-breadcrumb">
@@ -89,15 +111,18 @@ window.location="<?php echo base_url()?>index.php/welcome/deleteuser/"+id+"/"+ac
                                     <div class="tile-body">
 <!--<a href="<?php echo base_url()?>index.php/welcome/adduser"><button type="button" class="btn btn-primary mb-10">Add User</button></a>-->
                                         <div class="table-responsive">
+										<a href="<?php echo base_url()?>index.php/welcome/exportallusers_to_excel" style="margin-left:0px;" class="btn btn-primary btn-sm mb-10">Export To CSV</a>
+		<a href="<?php echo base_url()?>index.php/welcome/bulkmessage" style="margin-left:0px;" class="btn btn-primary btn-sm mb-10">Bulk Message</a>
+
                                             <table id="example" class="table table-striped table-hover table-custom" >
                                                 <thead>
                                                 <tr>
                                                     
                                                     <th style="width:180px;">Name</th>
-                                                    <th style="width:200px;">Email</th>
-                                                    <th style="width:150px;">Phone Number</th>
+                                                    <th style="width:200px;">Username/Email</th>
+                                                    <!--<th style="width:150px;">Phone Number</th>-->
                                                     <th style="width:150px;">CUST-CODE</th>
-													<th style="width:150px;">Company Name</th>
+						    <th style="width:150px;">Company Name</th>
                                                     <th style="width:150px;">Role</th>
                                                     <th style="width:150px;">Status</th>
                                                     <th style="width:150px;">Actions</th>
@@ -112,17 +137,21 @@ window.location="<?php echo base_url()?>index.php/welcome/deleteuser/"+id+"/"+ac
 												<tr>
 												    <td style="width:180px;"><?php echo $alluserslist->first_name.' '.$alluserslist->last_name; ?></td>
                                                     <td style="width:200px;"><?php echo $alluserslist->email_id ?></td>
-                                                    <td style="width:150px;"><?php echo $alluserslist->phone_number ?></td>
+                                                   <!-- <td style="width:150px;"><?php echo $alluserslist->phone_number ?></td>-->
                                                     <td style="width:150px;"><?php echo $alluserslist->cus_code ?></td>
-										            <td style="width:150px;"><?php echo $alluserslist->company_name ?></td>
+						   <td style="width:150px;"><?php echo $alluserslist->company_name ?></td>
 													
                                                     <td style="width:150px;"><?php if($alluserslist->role=="2")
 													{
 													echo "Normal User";
 													
-													}else
+													}else if($alluserslist->role=="4")
 													{
-														echo "Power User";
+														echo "Executive User";
+													
+													}else{
+													
+													echo "Power User";
 													
 													} ?></td>
                                                     <td style="width:150px;"><?php if($alluserslist->status=="0"){ echo "Inactive";}else{ echo "Active";} ?></td>

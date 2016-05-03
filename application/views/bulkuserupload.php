@@ -54,17 +54,22 @@
                                     <form action="<?php echo base_url()?>index.php/welcome/upload_attendance" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
 
                                         <div class="form-group">
-                                         
-                                            <div class="col-md-6 col-sm-offset-2">
-                                                  <label for="input01" class=" control-label">Import Users</label>
-                                             <span class="btn btn-success fileinput-button">
-                                                  <i class="glyphicon glyphicon-plus"></i>
-                                                  <span>Add files...</span>
-                                                  <input type="file"  name="exc1]" id="exc1" required>
-                                              </span>
+ <div class="col-md-6 col-sm-offset-3 no-padding">
+                                          <div class="fileupload fileupload-new" data-provides="fileupload"><h5>Bulk User Import:</h5>
+    <span class="btn btn-success btn-file "><span class="fileupload-new">Select File to Import</span>
+    <span class="fileupload-exists">Change</span>         <input type="file" name="exc1" id="exc1" required /></span>
+    <span class="fileupload-preview"></span>
+    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+  </div>
 
-                                            </div>
-<div class="col-md-4 pull-right ">NOTE: Download Sample Template <a href="<?php echo base_url();?>assets/Bulk_User_Import_Template.xlsx" target="_blank">Here</a>.</div>
+<!--<div class="progress progress-striped active col-md-6 no-padding">
+                                        <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-red">
+                                            <!--<span class="sr-only">20% Complete</span>-->
+                                        <!--</div>
+                                    </div>-->
+                                           
+
+
                                         </div>
 
                                      
@@ -75,18 +80,20 @@
 
 
                                         <div class="form-group">
-                                            <div class="col-md-4 col-sm-offset-3">
+                                            <div class="col-md-2 col-sm-offset-3">
 
                                                <a href="<?php echo base_url()?>index.php/welcome/allusers"><button type="button" class="btn btn-lightred">Cancel</button></a>
-                                                <button type="submit" class="btn btn-default">Save</button>
-                                            </div>
+                                                <button type="submit" class="btn btn-default">Save</button></div>
+
+<div class="col-md-7 pull-right">NOTE: Download Sample<br/> Template <a href="<?php echo base_url();?>assets/Bulk_User_Import_Template.xlsx" target="_blank">Here</a>.</div>
+                                            
                                             
                    	
- <div class="col-md-6 pull-right">
+ <div class="col-md-9 pull-right">
 <h3>Bulk Users</h3>
 <h4>Import Instructions Video & Limitations Document <a href="<?php echo base_url()?>assets/Bulk_User_Import_Document.pdf">Here<a></h4>
    <video width="400" controls>
-  <source src="<?php echo base_url()?>assets/bulk_video.mp4" type="video/mp4"> Your browser does not support HTML5 video.</video>  
+  <source src="<?php echo base_url()?>assets/bulk_video-3.mp4" type="video/mp4"> Your browser does not support HTML5 video.</video>  
   
  
   </div>

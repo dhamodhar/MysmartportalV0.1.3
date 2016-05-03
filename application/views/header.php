@@ -26,21 +26,31 @@
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/animate.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="<?php echo base_url()?>assets/css/scrolltabs.css">
+
+      
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/animsition/css/animsition.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/morris/morris.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/owl-carousel/owl.carousel.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/owl-carousel/owl.theme.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/rickshaw/rickshaw.min.css">
-        <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
+      
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datatables/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datatables/datatables.bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/chosen/chosen.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/summernote/summernote.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
+ 
+ 
 
         <!-- project main css files -->
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/main.css">
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/simpletextrotator.css">
+ <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/acc.css">
+        <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/accordion.css">
+      <link rel="stylesheet" href="<?php echo base_url()?>assets/css/map.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/responsive-in.css">
         <!--/ stylesheets -->
 
 
@@ -78,6 +88,12 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
     });
 </script>
 
+
+
+ 
+
+
+
     </head>
 
 
@@ -85,76 +101,6 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 
 
     <body id="minovate" class="appWrapper">
-
-
- <div class="side-icons">
-                     
-                  
-                      <div class="col-centered">
-                     <a href="#"> <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                  <i class="glyphicon glyphicon-stats"></i> <span> Check Status </span>
-                    </div></a>
-</div>
-                    
-                    
-                     
-                        <div class="col-centered">
-
-                   <a href="#">  <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                  <i class="glyphicon glyphicon-envelope"></i> <span>  E-mail </span>
-                    </div></a>
-</div>
-                    
-                    
-                    
-                     <div class="col-centered">
-<a href="tel:+1-800-733-0010"> <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                  <i class="glyphicon glyphicon-phone"></i> <span>Call Us</span>
-                    </div></a> 
-
-                   </div>
-                    
-                    
-                     
-                      <div class="col-centered">
-                    <a href="javascript:$zopim.livechat.window.show()"> <div class="myIcon icon-default transparent icon-ef-1 icon-ef-1a ">
-                   <i class="glyphicon glyphicon-comment"></i> <span>  Chat </span>
-                    </div></a>
-</div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-
-
-
-
-
-
-
-
-
-
 
         <!-- ====================================================
         ================= Application Content ===================
@@ -208,7 +154,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 <li class="dropdown nav-profile">
 
                              <a data-toggle="dropdown" class="dropdown-toggle" href="">
-                                 <img class="img-circle size-30x30" alt="" src="http://lowrysmartportal.com/assets/images/peter-avatar.jpg">
+                                 <img class="img-circle size-30x30" alt="" src="http://lowrysmartportal.com/assets/images/logo.png">
                               
                                 <span>Your Lowry Team<i class="fa fa-angle-down"></i></span>
                             </a>
@@ -216,88 +162,77 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                    
                         <ul role="menu" class="dropdown-menu animated littleFadeInRight cn-lowry" id="sales">
             <li><strong>Sales Rep</strong></li>
-            <li> <strong id="RepName">Name:</strong> Nicole Craddock</li>
-            <li> <strong>E-mail:</strong> nicole.craddock@lowry.com</li>
-            <li> <strong>Phone:</strong> 734-595-5899</li>
+            <li> <strong id="RepName">Name:</strong><?php echo $this->session->userdata('repname')?></li>
+            <li> <strong>E-mail:</strong><a href="mailto:<?php echo $this->session->userdata('repemail')?>" ><?php echo $this->session->userdata('repemail')?></a></li>
+            <li> <strong>Phone:</strong><a href="tel:<?php echo $this->session->userdata('repphone')?>" ><?php echo $this->session->userdata('repphone')?></a></li>
             <li class="divider"></li>
             <li><strong>Customer Service Rep</strong></li>
-            <li> <strong>Name:</strong> CARLA BRONNER</li>
-            <li> <strong>E-mail:</strong> carla.bronner@lowry.com </li>
-            <li> <strong>Phone:</strong> 559-713-3404</li></ul>
+            <li> <strong>Name:</strong><?php echo $this->session->userdata('csr_fname')?></li>
+            <li> <strong>E-mail:</strong><a href="mailto:<?php echo $this->session->userdata('csr_email')?>" ><?php echo $this->session->userdata('csr_email')?></a></li>
+            <li> <strong>Phone:</strong><a href="tel:<?php echo $this->session->userdata('csr_phone')?>" ><?php echo $this->session->userdata('csr_phone')?></a></li></ul>
                           
 
                         </li> 
 
 
-                       
+                         <?php
+								$count = 0;
+                                foreach($user_notifications as $user_notificationsdatafinal)
+								{	
+								if($user_notificationsdatafinal->from_user_id != $this->session->userdata('userid')){
+								if($user_notificationsdatafinal->read_status == 0)
+								{
+								$count++;
+								
+								}
+								}
+								
+                                }								
+								?>
 
                         <li class="dropdown messages">
 
-                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" onClick="test();">
                                 <i class="fa fa-envelope"></i>
-                                <span class="badge bg-lightred">4</span>
+                                <span class="badge bg-lightred" id="num_un_read"><?php echo $count;?></span>
                             </a>
 
                             <div class="dropdown-menu pull-right with-arrow panel panel-default animated littleFadeInDown" role="menu">
 
                                 <div class="panel-heading">
-                                    You have <strong>4</strong> messages
+                                    You have <strong><?php echo $count;?></strong> new messages.
                                 </div>
 
-                                <ul class="list-group">
+                                <ul class="list-group" style="overflow-y:scroll; height:375px;">
 
+                              	<?php
+                                foreach($user_notifications as $user_notificationsdata){
+									if($user_notificationsdata->from_user_id != $this->session->userdata('userid')){
+                                if($user_notificationsdata->read_status == 0){	
+								
+								?>
+  
                                     <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
+                                        <a href="<?php echo base_url()?>index.php/welcome/viewmessage/<?php echo $user_notificationsdata->id;?>" role="button" tabindex="0" class="media">
                                             <span class="pull-left media-object thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/ici-avatar.jpg" alt="" class="img-circle">
+                                                <img src="<?php echo base_url()?>assets/images/logo.png" alt="" class="img-circle">
                                             </span>
                                             <div class="media-body">
-                                                <span class="block">Imrich sent you a message</span>
-                                                <small class="text-muted">12 minutes ago</small>
+                                                <span class="block"><?php echo $user_notificationsdata->msg_subject; ?></span>
+                                                <small class="text-muted"><?php echo $user_notificationsdata->created_date; ?> </small>
                                             </div>
                                         </a>
                                     </li>
+									
+									<?php }}} ?>
 
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object  thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/peter-avatar.jpg" alt="" class="img-circle">
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">Peter sent you a message</span>
-                                                <small class="text-muted">46 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
+                                  
 
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object  thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/random-avatar1.jpg" alt="" class="img-circle">
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">Bill sent you a message</span>
-                                                <small class="text-muted">1 hour ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li class="list-group-item">
-                                        <a role="button" tabindex="0" class="media">
-                                            <span class="pull-left media-object  thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/random-avatar3.jpg" alt="" class="img-circle">
-                                            </span>
-                                            <div class="media-body">
-                                                <span class="block">Ken sent you a message</span>
-                                                <small class="text-muted">3 hours ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
 
                                 </ul>
 
-                                <div class="panel-footer">
-                                    <a role="button" tabindex="0">Show all messages <i class="pull-right fa fa-angle-right"></i></a>
+                                <div class="panel-footer" style="background-color:#1e7b3e;">
+                                    <a href="<?php echo base_url();?>index.php/welcome/usermessages" role="button" style="color:#ffffff;" tabindex="0">SHOW ALL MESSAGES <i class="pull-right fa fa-angle-right"></i></a>
                                 </div>
 
                             </div>
@@ -308,13 +243,13 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                         <li class="dropdown nav-profile">
 
                             <a href class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?php echo base_url()?>assets/images/profile-photo.jpg" alt="" class="img-circle size-30x30">
+                                <img src="<?php echo base_url()?>assets/images/logo.png" alt="" class="img-circle size-30x30">
                                 <span><?php echo ucfirst($this->session->userdata('firstname'))?> <?php echo ucfirst($this->session->userdata('lastname'))?> <i class="fa fa-angle-down"></i></span>
                             </a>
 
                             <ul class="dropdown-menu animated littleFadeInRight" role="menu">
 
-                                <li>
+                                <!--<li>
                                     <a role="button" tabindex="0" href="#">
                                         <span class="badge bg-greensea pull-right">86%</span>
                                         <i class="fa fa-user"></i>Profile
@@ -325,9 +260,18 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                                     <a role="button" tabindex="0">
                                         <i class="fa fa-cog"></i>Settings
                                     </a>
+                                </li>-->
+                                 <li>
+                                    <a href="<?php echo base_url();?>index.php/welcome/user_profile" role="button" tabindex="0">
+                                        <i class="fa fa-user"></i></i>Profile
+                                    </a>
                                 </li>
-                                <li class="divider"></li>
-                              
+                                <li>
+                                    <a href="<?php echo base_url();?>index.php/welcome/help" role="button" tabindex="0">
+                                        <i class="fa fa-question"></i></i>Help
+                                    </a>
+                                </li>
+                              <li class="divider"></li>
                                 <li>
                                     <a href="<?php echo base_url();?>index.php/welcome/logout" role="button" tabindex="0">
                                         <i class="fa fa-sign-out"></i>Logout
@@ -338,11 +282,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 
                         </li>
 
-                        <li class="toggle-right-sidebar">
-                            <a role="button" tabindex="0">
-                                
-                            </a>
-                        </li>
+                      
                     </ul>
                     <!-- Right-side navigation end -->
 
@@ -412,37 +352,58 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 										
 										<?php }else if($menu[$i]['id']==2)
 										  {
-											   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = base_url()."index.php/welcome/dashboard";
-										 
-										 }else{
-										 $url = base_url()."index.php/welcome/accessdenied";
-		
-										 };
-										
-										?>
-										<li <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> class="active"<?php }?>> <a href="<?php echo $url;?>" class="reports  <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> report-active<?php }?>" > <span>Dashboard & Analytics</span></a></li>
-                                          
+                                           if(in_array($menu[$i]['id'], $id) == 1){
+                                           $url = base_url()."index.php/welcome/service_desk_tickets";
+                                           $url2 = base_url()."index.php/welcome/service_contracts_analytics";
+                                           $url1 = base_url()."index.php/welcome/labels_supplies";
+                                           }else{
+                                            $url = base_url()."index.php/welcome/accessdenied";
+                                            $url1 = base_url()."index.php/welcome/accessdenied";
+                                            $url2 = base_url()."index.php/welcome/accessdenied";
+};
+?>
+<li <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or $this->uri->segment(2) == url_title('labels_supplies', TRUE) or 
+$this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or 
+$this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> class="active open"<?php }?>>
+<a role="button" tabindex="0" class="contracts contracts-active <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or 
+$this->uri->segment(2) == url_title('labels_supplies', TRUE) or 
+$this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> service-active<?php }?>"><span >Dashboard & Analytics</span></a>
+<ul <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or 
+$this->uri->segment(2) == url_title('labels_supplies', TRUE) or 
+$this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> style="display:block;" <?php } ?>>
+ <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Tickets</a></li>
+													 
+<li> <a href="<?php echo $url2?>" <?php if($this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Contracts</a></li>
+													
+<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Labels & Supplies</a></li>
+													
+</ul>                                       
 										
 										<?php }else if($menu[$i]['id']==3)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
+										   echo "<input type='hidden' name='passdueacess' id='passdueacess' value='1'>";
 										 $url = base_url()."index.php/welcome/orders";
 										 $url1 = base_url()."index.php/welcome/open_orders";
 										 $url2 = base_url()."index.php/welcome/open_invoices";
+										 $past_due_invoices = base_url()."index.php/welcome/past_due_invoices";
 										 }else{
+										 echo "<input type='hidden' name='passdueacess' id='passdueacess' value='0'>";
+										
 										 $url = base_url()."index.php/welcome/accessdenied";
 		                                  $url1 = base_url()."index.php/welcome/accessdenied";
 										   $url2 = base_url()."index.php/welcome/accessdenied";
+										   $past_due_invoices = base_url()."index.php/welcome/accessdenied";
 										 };
 										?>
 										
-                                         <li <?php if($this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_invoices', TRUE)){?> class="active"<?php }?>>
-                                                <a role="button" tabindex="0" class="pa <?php if($this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('orders', TRUE)){?> pa-active<?php }?>"> <span >Orders & Invoices</span></a>
-                                                <ul>
-                                                    <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('orders', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Orders & invoices</a></li>
-													 <li><a href="<?php echo $url1; ?>" <?php if($this->uri->segment(2) == url_title('open_orders', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i>Open Orders</a></li>
+                                         <li <?php if($this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('order_view', TRUE) or $this->uri->segment(2) == url_title('invoice_view', TRUE) or $this->uri->segment(2) == url_title('open_invoices', TRUE) or $this->uri->segment(2) == url_title('past_due_invoices', TRUE)){?> class="active open"<?php }?>>
+                                                <a role="button" tabindex="0" class="pa <?php if($this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_invoices', TRUE) or $this->uri->segment(2) == url_title('invoice_view', TRUE) or $this->uri->segment(2) == url_title('order_view', TRUE) or $this->uri->segment(2) == url_title('past_due_invoices', TRUE)){?> pa-active<?php }?>"> <span >Orders & Invoices</span></a>
+                                                <ul <?php if($this->uri->segment(2) == url_title('open_orders', TRUE) or $this->uri->segment(2) == url_title('orders', TRUE) or $this->uri->segment(2) == url_title('open_invoices', TRUE) or $this->uri->segment(2) == url_title('order_view', TRUE) or $this->uri->segment(2) == url_title('past_due_invoices', TRUE))   {?> style="display:block"<?php }?>>
+                                                   <!-- <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('orders', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Orders & Invoices</a></li>-->
+													 <li class="top-41"><a href="<?php echo $url1; ?>" <?php if($this->uri->segment(2) == url_title('open_orders', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i>Open Orders</a></li>
                                                     <li><a href="<?php echo $url2; ?>" <?php if($this->uri->segment(2) == url_title('open_invoices', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i>Invoices</a></li>
+                                                    <li><a href="<?php echo $past_due_invoices; ?>" <?php if($this->uri->segment(2) == url_title('past_due_invoices', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i>Past Due Invoices</a></li>
                                                    
                                                 </ul>
                                             </li>
@@ -450,44 +411,69 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 										<?php }else if($menu[$i]['id']==4)
 										  {
 										  if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = "https://b2b.lowrysolutions.com/";
+										 $url =  base_url()."index.php/welcome/varstreetLoginAthenticationTest";
 										 
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
 		
 										 };
 										?>
-										<li><a href="<?php echo $url;?>" target="_blank" class="catalog <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> catalog-active<?php }?>"> <span >My Catalog</span></a></li>
+										<li>
+										<a href="<?php echo $url;?>" target="_blank" class="catalog <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> catalog-active<?php }?>"> <span >My Catalog</span></a></li>
                                          
 										<?php } else if($menu[$i]['id']==5)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = base_url()."index.php/welcome/servicecontracts";
-										 
+										 $url = base_url()."index.php/welcome/active_service_contracts";
+										  $url2 = base_url()."index.php/welcome/expired_service_contracts";
+										 $url1 = base_url()."index.php/welcome/renew_service_contracts";
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
-		
+		                                 $url1 = base_url()."index.php/welcome/accessdenied";
+										  $url2 = base_url()."index.php/welcome/accessdenied";
 										 };
 										?>
-										    <li><a href="<?php echo $url;?>" class="contracts <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> service-active<?php }?>"> <span >Service Contracts</span></a></li>
-                                        
+										    <li <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('renew_service_contracts', TRUE) or $this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> class="active open"<?php }?>>
+											<a role="button" tabindex="0" class="contracts contracts-active <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('renew_service_contracts', TRUE) or $this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> service-active<?php }?>"><span >Service Contracts</span></a>
+                                         <ul <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE) or $this->uri->segment(2) == url_title('renew_service_contracts', TRUE) or $this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> style="display:block;" <?php } ?>>
+                                                    <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('active_service_contracts', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Active Contracts</a></li>
+													 
+													 <li> <a href="<?php echo $url2?>" <?php if($this->uri->segment(2) == url_title('expired_service_contracts', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Expired Contracts</a></li>
+													
+													<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('renew_service_contracts', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Upcoming for renewal</a></li>
+													
+                                                </ul>
 										      
-									
+									</li>
 										 
 										<?php } else if($menu[$i]['id']==6)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = "#";
-										 
+										 $url = base_url()."index.php/welcome/assets";
+										 $url1 = base_url()."index.php/welcome/assets_under_contracts";
+										 $url2 = base_url()."index.php/welcome/assetsendoflife";
+										 $url_no_contarcts = base_url()."index.php/welcome/assets_no_contracts";
+										 $assets_under_warranty = base_url()."index.php/welcome/assets_under_warranty";
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
-		
+		                                   $url1 = base_url()."index.php/welcome/accessdenied";
+										   $url2 = base_url()."index.php/welcome/accessdenied";
+										   $url_no_contarcts = "#";
+										   $assets_under_warranty = "#";
 										 };
 										?>
-										     <li><a href="<?php echo $url;?>" class="asset <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> asset-active<?php }?>"> <span>Asset Inventory</span></a></li>
-                                        
+										     <li <?php if($this->uri->segment(2) == url_title('assets', TRUE) or $this->uri->segment(2) == url_title('assets_under_contracts', TRUE) or $this->uri->segment(2) == url_title('assets_no_contracts', TRUE) or $this->uri->segment(2) == url_title('assets_under_warranty', TRUE) or $this->uri->segment(2) == url_title('assetsendoflife', TRUE)){?> class="active open"<?php }?>><a role="button" href="<?php echo $url?>" tabindex="0" class="asset  <?php if($this->uri->segment(2) == url_title('assets', TRUE)){?> asset-active <?php }?>"> <span>Asset Inventory</span></a>
+                                         <ul <?php if($this->uri->segment(2) == url_title('assets_under_contracts', TRUE) or $this->uri->segment(2) == url_title('assets', TRUE) or $this->uri->segment(2) == url_title('assetsendoflife', TRUE) or $this->uri->segment(2) == url_title('assets_no_contracts', TRUE) or $this->uri->segment(2) == url_title('assets_under_warranty', TRUE)){?> style="display:block;" <?php } ?>>
+                                                    
+													 <li class="top-41"> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('assets_under_contracts', TRUE)){?> class="orders-active"  <?php } ?>><i class="fa fa-caret-right"></i> Under Contract</a></li>
+													 <li> <a href="<?php echo $url_no_contarcts;?>" <?php if($this->uri->segment(2) == url_title('assets_no_contracts', TRUE)){?> class="orders-active"  <?php } ?>><i class="fa fa-caret-right"></i> No Contract</a></li>
+													 <li> <a href="<?php echo $assets_under_warranty;?>" <?php if($this->uri->segment(2) == url_title('assets_under_warranty', TRUE)){?> class="orders-active"  <?php } ?>><i class="fa fa-caret-right"></i> Under Warranty</a></li>
+													 <li> <a href="<?php echo $url2;?>" <?php if($this->uri->segment(2) == url_title('assetsendoflife', TRUE)){?> class="orders-active"  <?php } ?>><i class="fa fa-caret-right"></i> End of Life Assets</a></li>
+                                                     <li> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('assets', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i>All Assets</a></li>
+													
+                                                </ul>
 										
-									   
+									   </li>
 										
 										<?php } else if($menu[$i]['id']==7)
 										  {
@@ -573,33 +559,10 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 
                                     </div>
  <!-- tile -->
-                            <section class="products-cat">
-
-
-                                <!-- tile body -->
-                                <!--<div class="tile-body">
-  <h3 class="white" style="font-weight:bold;padding-left:10px;">Lowry Total Solution</h3>
-
-                                    <div id="feed-carousel">
-                                
-                                   <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Barcode Printers</h4> <a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank"> <img src="http://lowrysmartportal.com/assets/images/side-img-01.jpg"/ class="product-img"> </a></div>
-                                   <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Barcode Scanner</h4> <a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank"> <img src="http://lowrysmartportal.com/assets/images/side-img-02.jpg" class="product-img"/></a> </div>   
-                                   <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Home Mobile</h4> <a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank"> <img src="http://lowrysmartportal.com/assets/images/side-img-03.jpg" class="product-img"/></a> </div>   
-                                   <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Home RFID</h4>  <a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank"><img src="http://lowrysmartportal.com/assets/images/side-img-04.jpg" class="product-img"/> </a></div> 
-                                  <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Home Software</h4> <a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank"> <img src="http://lowrysmartportal.com/assets/images/side-img-05.jpg" class="product-img"/> </a></div>  
-                                  <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Home Wireless</h4><a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank">  <img src="http://lowrysmartportal.com/assets/images/side-img-06.jpg" class="product-img"/> </a></div>   
-                                  <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Rugged Tablets</h4> <a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank"> <img src="http://lowrysmartportal.com/assets/images/side-img-07.jpg" class="product-img"/></a> </div>
-                                 <div class="media-body"> <h4 class="white" style="padding-left:10px;margin-top:0px;">Zebra Desktop</h4> <a href="http://lowrysmartportal.com/assets/Lowry-Support_Services_Ebook.pdf" target="_blank"> <img src="http://lowrysmartportal.com/assets/images/side-img-08.jpg" class="product-img"/></a> </div>  
-                                                                      
-                                  
-
-                                    </div>-->
-
+                           <!-- <section class="products-cat">
 
                                     <div id="pie-chart" style="height: 250px"></div>
-
-                                
-
+									</section>-->
 
                                 </div>
                             </div>

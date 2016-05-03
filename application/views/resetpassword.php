@@ -1,4 +1,23 @@
-            <!-- ====================================================
+     
+<script type="text/javascript">
+function savepassword()
+{
+var pass = document.getElementById("password").value;
+var cpass = document.getElementById("cpassword").value;
+
+if(pass == cpass)
+{
+document.getElementById("sa").submit();
+
+}else
+{
+alert("Password and confirm password does not match");
+
+}
+
+}
+</script>
+	 <!-- ====================================================
             ================= CONTENT ===============================
             ===================================================== -->
             <section id="content">
@@ -49,27 +68,28 @@
                                     
                                     <!-- tile body -->
                                     <div class="tile-body">
+									<?php if($linkstatus < 1){ ?>
 
                                         <div class="table-responsive">
-                                           <form name="sa" id="sa" action="<?php echo base_url()?>index.php/welcome/saveresetpassword" >
+                                           <form name="sa" id="sa" action="<?php echo base_url()?>index.php/welcome/saveresetpassword" method="post" >
 										   
 										   <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="input01" control-label"="">New Password</label>
                                             <div>
-                                                <input type="text" class="form-control" name="password" id="password" required="">
+                                                <input type="password" class="form-control" name="password" id="password" style="color:#000000" required="">
                                             </div>
                                         </div></div>
 										 <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="input01" control-label"="">Conform New Password</label>
+                                            <label for="input01" control-label"="">Confirm New Password</label>
                                             <div>
-                                                <input type="text" class="form-control" name="cpassword" id="cpassword" required="">
+                                                <input type="password" class="form-control" name="cpassword" id="cpassword" style="color:#000000" required="">
                                             </div>
                                         </div></div>
                                            
                                            <input type="hidden" name="veryfy" id="veryfy" value="<?php echo $veryfycode ;?>" >
-                                           <input type="submit" class="btn btn-default" name="save" id="save" >
+                                           <input type="button" class="btn btn-default" name="save" id="save" onclick="savepassword()" value="Save">
                                            </form>
 											
 											
@@ -77,7 +97,13 @@
 											
 											
                                         </div>
-
+                                        <?php }else{ ?>
+										 <div class="table-responsive">
+										 <div class="table-responsive">
+										 <label for="input01" control-label"="">Reset Password Link Expired</label>
+										 </div></div>
+										
+										<?php } ?>
                                     </div>
 								
   

@@ -1,15 +1,15 @@
             <!-- ====================================================
             ================= CONTENT ===============================
             ===================================================== -->
-            <section id="content">
+            <section id="content" class="header-bg">
 
                 <div class="page page-shop-orders">
 
                     <div class="pageheader">
 
-                        <h2>Invoices</h2>
+                        
 
-                        <div class="page-bar">
+                        <div class="page-bar col-md-8 col-xs-12 xs-mb-10">
 
                             <ul class="page-breadcrumb">
                                 <li>
@@ -23,6 +23,8 @@
                             
                         </div>
 
+<div class="col-md-4 cps"> <div id="tableTools"></div>
+
                     </div>
 
                     <!-- page content -->
@@ -32,13 +34,14 @@
                         <!-- row -->
                         <div class="row">
                             <!-- col -->
-                            <div class="col-md-12">
+                            <div class="col-md-12 xs-nopadding">
 
 
 
 
                                 <!-- tile -->
                                 <section class="tile padding-top-20">
+<div class="col-md-12 no-padding ">
 
   <div class="col-md-3">
 <div class="form-group">
@@ -50,43 +53,59 @@
                                      
                                         
                                         <!-- col -->
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
 
                                              
-                                            <div class="input-group form-group" id="datetimepicker1">
+                                           <div class="input-group datepicker form-group" data-format="L">
                                                 <input type="text" name="from"  id="from" class="form-control " placeholder="From">
+<span class="input-group-addon">
+                                                        <span class="fa fa-calendar"></span>
+                                                    </span>
+
+
                                                 
                                                
                                             </div>
                                         </div>
                                         <!-- /col -->
                                          <!-- col -->
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             
-                                            <div class="input-group form-group" id="datetimepicker2"  >
+                                              <div class="input-group datepicker form-group" data-format="L">
                                                 <input type="text" name="to" id="to"  class="form-control " placeholder="To">
+<span class="input-group-addon">
+                                                        <span class="fa fa-calendar"></span>
+                                                    </span>
                                               
                                             </div>
                                         </div>
                                         <!-- /col -->
-                                         <button class="btn" onclick="searchbydates()"><i class="fa fa-search" onclick="searchbydates()"></i></button>
+                                         <div class="col-md-2"><button class="btn btn-blue" onclick="searchbydates()"><i class="fa fa-search"></i></button></div>
+                                         </div>
+
 
                                     <!-- tile body -->
-                                    <div class="tile-body">
-<a href="<?php echo base_url()?>index.php/welcome/all_invoices_tocsv" style="margin-left:0px;" class="btn btn-primary btn-sm mb-10">Export To CSV</a>
+                                    <div class="tile-body clear">
+
 									
   
                                         <div class="table-responsive">
+										  <div class="row">
+                                        
+                                        <div class="col-md-6"><div id="colVis"></div></div>
+                                    </div>
                                             <table class="table table-striped table-hover table-custom" id="orders-list">
                                                 <thead>
                                                 <tr>
                                                     
                                                     <th style="width:100px;">Invoice&nbsp;Number</th>
                                                    
-													<th style="width:100px;" class="no-sort">Invoice Date</th> 
+													<th style="width:100px;" class="active">Invoice Date</th> 
 													<th style="width:100px;">Amount</th> 
 													<th style="width:100px;">Due Date</th> 
 													<th style="width:100px;">Tracking Number</th> 
+													<th style="width:100px;">Carrier</th> 
+													<th style="width:100px;">Carrier Status</th> 
                                                                                                         <th style="width:100px;">Customer PO</th>
 													 
 												
@@ -101,14 +120,16 @@
 											
 											
 											
+
 											
 											
                                         </div>
-
+<input type="hidden" name="count" id="count" value="25">
+<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
                                     </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>
                                     <!-- /tile body -->
-<a href="<?php echo base_url()?>index.php/welcome/all_invoices_tocsv" style="margin-left:15px;" class="btn btn-primary btn-sm mb-10">Export To CSV</a>
+<!--<a href="<?php echo base_url()?>index.php/welcome/all_invoices_tocsv" style="margin-left:15px;" class="btn btn-primary btn-sm mb-10">Export To CSV</a>-->
 									
   
                                 </section>

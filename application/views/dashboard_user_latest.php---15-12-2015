@@ -1199,7 +1199,13 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
         <script src="<?php echo base_url()?>assets/js/vendor/chosen/chosen.jquery.min.js"></script>
 
         <script src="<?php echo base_url()?>assets/js/vendor/summernote/summernote.min.js"></script>
-
+        <script src="<?php echo base_url()?>assets/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.min.js"></script>
+	<script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
+	 <script src="<?php echo base_url()?>assets/vendor/flot/jquery.flot.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.pie.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/coolclock/coolclock.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/coolclock/excanvas.js"></script>
         <!--/ vendor javascripts -->
@@ -1434,6 +1440,59 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                     height: 143   //set editable area's height
                 });
                 //*load wysiwyg editor
+            });
+        </script>
+
+<script>
+            $(window).load(function(){
+
+
+                // Initialize Pie Chart
+                var data6 = [
+                    { label: 'Handheld Printer', data: 16.6 },
+                    { label: 'RFID', data: 16.6 },
+                    { label: 'Services', data: 16.6 },
+                    { label: 'Wireless', data: 16.6 },
+                    { label: 'Labels', data: 16.6},
+                    { label: 'Software', data: 16.6}
+                ];
+
+                var options6 = {
+                    series: {
+                        pie: {
+                            show: true,
+                            innerRadius: 0,
+                            stroke: {
+                                width: 0
+                            },
+                            label: {
+                                show: true,
+                                threshold: 0.15
+                            }
+                        }
+                    },
+
+                    colors: ['#428bca','#5cb85c','#f0ad4e','#d9534f','#5bc0de','#616f77'],
+                    grid: {
+                        hoverable: true,
+                        clickable: true,
+                        borderWidth: 0,
+                        color: '#ccc'
+                    },
+                    tooltip: false,
+                    tooltipOpts: { content: '%s: %p.0%' }
+                };
+
+                var plot6 = $.plot($("#pie-chart"), data6, options6);
+
+                $(window).resize(function() {
+                    // redraw the graph in the correctly sized div
+                    plot6.resize();
+                    plot6.setupGrid();
+                    plot6.draw();
+                });
+                // * Initialize Pie Chart
+             
             });
         </script>
         <!--/ Page Specific Scripts -->
