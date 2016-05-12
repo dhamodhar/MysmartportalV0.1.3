@@ -63,14 +63,14 @@
      });
 	  $.ajax({
             type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/invoiceview_header_data/<?php echo $invoicenumber; ?>",
+            url: "<?php echo base_url()?>index.php/welcome/invoiceview_header_data/<?php echo $invoicenumber;?>",
             dataType: "text",
             success: function(xml_order_header_details){
 			
 			$(xml_order_header_details).find('InvoiceHeader').each(function(){
 			var rel_number = $(this).find('rel_numb').text();
 			user_rel_number = rel_number;
-		           
+		          // var invoicenumber = '<?php echo $invoicenumber;?>';
 						var shipcity= $(this).find('shipcity').text();
 						var shipname= $(this).find('shipname').text();
 						
@@ -110,8 +110,8 @@
 						$("#shipping").html("No Response - Cannot process the data.");
 						}else{
 						$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipcity+"</li><li>"+shipst+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");
-						$("#order_details").html("<p class='text-uppercase text-strong mb-10 custom-font'>Invoice Number(s)</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Customer PO : </strong> "+cust_po.trim()+"</li><li><strong>Order Number : </strong>"+order_numb+"</li><li><strong>Invoice Number : </strong>"+invoice_numb+"</li><li><strong>Order Date : </strong> "+order_date+"</li><li><strong>Shipped Date : </strong> "+ship_date+"</li></ul>");
-						$("#order_details1").html("<p class='text-uppercase text-strong mb-10 custom-font'>Invoice Number(s)</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Post Date : </strong> "+post_date+"</li><li><strong>Tax Amount : </strong> $ "+total_tax+"</li><li><strong>Shipping Charges : </strong>$ "+shipping_charge+"</li><li><strong>Total Invoice : </strong> $ "+Number(amount).toLocaleString()+"</li><li><strong>Carrier : </strong> "+carrier+"</li><li><strong>Payment Type : </strong>"+pay_type+"</li></ul>");
+						$("#order_details").html("<p class='text-uppercase text-strong mb-10 custom-font'>Invoice Number(s)</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Customer PO: </strong> "+cust_po.trim()+"</li><li><strong>Order Number: </strong>"+order_numb+"</li><li><strong>Invoice Number: </strong>"+invoice_numb+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Shipped Date: </strong> "+ship_date+"</li></ul>");
+						$("#order_details1").html("<p class='text-uppercase text-strong mb-10 custom-font'>Invoice Number(s)</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Post Date: </strong> "+post_date+"</li><li><strong>Tax Amount: </strong> $ "+total_tax+"</li><li><strong>Shipping Charges: </strong>$"+shipping_charge+"</li><li><strong>Total Invoice: </strong>$"+Number(amount).toLocaleString()+"</li><li><strong>Carrier: </strong> "+carrier+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li></ul>");
 						
 						$("#billing").html("<p class='text-uppercase text-strong mb-10 custom-font'>BILLING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+billname+"</li><li>"+billadd1+"</li><li>"+billadd2+"</li><li>"+billadd3+"</li><li>"+billcity+"</li><li>"+billst+" - "+billzip+"</li><li>"+billcountry+"</li></ul>");
                         $("#order_number").html(invoice_numb);
@@ -119,8 +119,8 @@
 							 
 					    var full_order_number = order_numb.trim()+"-"+rel_number.trim();
 						var download = 5;
-						$("#pdf_id").html("<a href='javascript:void(0)' onclick='send_email_pdf("+order_numb.trim()+","+rel_number+",1)'   class='btn btn-primary mt-10 mb-10'>Email PDF</a>");
-						$("#export_to_pdf").html("<a href='<?php echo base_url()?>index.php/welcome/pdf/"+full_order_number+"/"+rel_number+"/"+download+"'  class='btn btn-primary mt-10 mb-10'>Export to PDF</a>");
+						$("#pdf_id").html("<a href='javascript:void(0)' onclick='send_email_pdf("+invoice_numb.trim()+","+rel_number+",1)'   class='btn btn-primary mt-10 mb-10'>Email PDF</a>");
+						$("#export_to_pdf").html("<a href='<?php echo base_url()?>index.php/welcome/pdf/"+invoice_numb.trim()+"/"+rel_number+"/"+download+"'  class='btn btn-primary mt-10 mb-10'>Export to PDF</a>");
 						
 						});
 						var rel_number1 = $(this).find('rel_numb').text();
@@ -169,7 +169,7 @@ var tt = order_number_final.trim()+"-"+rel_number;
  
 			   $("#count").html("1");
 			  
-			   $('#orders-list tbody').append("<tr><td>"+item_no+"</td><td>"+part_desc+"</td><td>"+part_code+"</td><td>"+qty+"</td><td >"+uom+"</td><td >$ "+Number(item_price).toLocaleString()+"</td><td>$ "+Number(extended_price).toLocaleString()+"</td><td>"+act_ship_date+"</td></tr>");
+			   $('#orders-list tbody').append("<tr><td>"+item_no+"</td><td>"+part_desc+"</td><td>"+part_code+"</td><td>"+qty+"</td><td >"+uom+"</td><td >$ "+Number(item_price).toLocaleString(2)+"</td><td>$ "+Number(extended_price).toLocaleString(2)+"</td><td>"+act_ship_date+"</td></tr>");
      
 		   });
 		   
@@ -190,6 +190,8 @@ var tt = order_number_final.trim()+"-"+rel_number;
                    
                 //*initialize datatable
 				});
+				$('.inline-controls').css('display','none');
+				    $('.dataTables_filter').css('display','none');
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -233,7 +235,7 @@ function sendfinalemail(ordersnumber,relnumber)
 var email = document.getElementById("email").value;
 var finalemail = email.replace(/@/g,'ZZZ');
 //alert(finalemail);
-location.href='<?php echo base_url();?>index.php/welcome/pdf/'+ordersnumber+'-00'+relnumber+'/'+finalemail+'/3';
+location.href='<?php echo base_url();?>index.php/welcome/pdf/'+ordersnumber+'/'+finalemail+'/3';
 
 document.getElementById("sendemail").style.display = 'none';
 

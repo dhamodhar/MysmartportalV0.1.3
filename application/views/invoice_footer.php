@@ -94,19 +94,35 @@ speed: 3000
                                 var tracker_no= $(this).find('tracker_no').text();
 				var error =  $(this).find('error').text();
                 var traking_link = "";
+				var tracklinkfinal = "";
+				
+				if(status == "Printed and Posted")
+				{
+				status = "Delivered";
+				
+				}
+				
+				
+				
 			   if(error!="Error"){
 			   
 			   if(carr_code == "FEDX")
 			   {
+			   
 			   traking_link = "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracker_no.trim()+"&cntry_code=us";
+			   tracklinkfinal ="<a href='"+traking_link+"' target='_blank'>"+tracker_no+"</a>";
 			   }else
 			   {
 			   traking_link = "#";
-			   
+			     tracklinkfinal ="<a href='#'>"+tracker_no+"</a>";
+				 status = "";
+				 
 			   }
 			   
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'><a href='"+traking_link+"' target='_blank'>"+tracker_no+"</a></td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
-                                 }				 
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+                                
+
+								}				 
 		                     });
 		   
 		   
@@ -204,6 +220,8 @@ var fromdate = document.getElementById("from").value;
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
      });
+	 
+	
         $.ajax({
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/invoice_search/"+from+"/"+to+"/"+invoicenumber,
@@ -223,7 +241,7 @@ var fromdate = document.getElementById("from").value;
 				var status= $(this).find('entry_type').text();
 			    var cust_po= $(this).find('cust_po').text();
                 var tracker_no= $(this).find('tracker_no').text();
-	 //alert(due.getMonth());
+	            var tracklinkfinal = "";
 var duedate_month = "";	 
 				
 				var d= new Date(inv_date);
@@ -240,8 +258,35 @@ var duedate_month = "";
 				duedate_month = due.getMonth();
 				}
                 var due_date_final = duedate_month+"-"+due.getDate()+"-"+due.getFullYear();	
+				
+				   if(carr_code == "FEDX")
+				   {
+				   
+				   traking_link = "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracker_no.trim()+"&cntry_code=us";
+				   tracklinkfinal ="<a href='"+traking_link+"' target='_blank'>"+tracker_no+"</a>";
+				   }else
+				   {
+				   traking_link = "#";
+					 tracklinkfinal ="<a href='#'>"+tracker_no+"</a>";
+					 status = "";
+					 
+				   }
+				   if(status == "Printed and Posted")
+					{
+					status = "Delivered";
+					
+					}
+					
+					 if(status == "Open")
+					{
+					status = "Delivered";
+					
+					}
+				   
+				  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+               
 
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date +"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+			  // $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date +"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
       
 		   });
 			   var table4 = $('#orders-list').DataTable({
@@ -342,11 +387,32 @@ document.getElementById("count").value = total_count;
 										var cust_po= $(this).find('cust_po').text();
 										var tracker_no= $(this).find('tracker_no').text();
 										var error =  $(this).find('error').text();
+										
+										if(status == "Printed and Posted")
+				{
+				status = "Delivered";
+				
+				}
 
 											 if(error!="Error")
-											 {					   
-												  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
-											 }				 
+											 {	
+
+
+		   if(carr_code == "FEDX")
+			   {
+			   
+			   traking_link = "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracker_no.trim()+"&cntry_code=us";
+			   tracklinkfinal ="<a href='"+traking_link+"' target='_blank'>"+tracker_no+"</a>";
+			   }else
+			   {
+			   traking_link = "#";
+			     tracklinkfinal ="<a href='#'>"+tracker_no+"</a>";
+				 status = "";
+				 
+			   }
+			   
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+  }				 
 									 });
 				   
 				   
@@ -481,7 +547,13 @@ document.getElementById("count").value = total_count;
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+        $(document).on("click", ".popover .close" , function(){
+        $(this).parents(".popover").popover('hide');
+    });
+});
+</script>
 
     </body>
 </html>

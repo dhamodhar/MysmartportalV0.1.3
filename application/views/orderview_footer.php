@@ -268,7 +268,7 @@ function send_email_pdf(ordersnumber,relnumber)
 
 document.getElementById("sendemail").style.display = 'block';
 
-$("#sendemail").html("<div class='col-md-8 no-padding'> <input type='email' placeholder='Email' name ='email' id='email' class='form-control'> </div><div class='col-md-3 no-padding'><button class='btn btn-primary  mb-10' onclick='sendfinalemail("+ordersnumber+","+relnumber+")' type='button'>Send</button> </div>");
+$("#sendemail").html("<div class='col-md-8 no-padding'> <input type='email' placeholder='Email' name ='email' id='email' class='form-control'> </div><div class='col-md-3 no-padding ml-10'><button class='btn btn-primary btn-sm  mb-10' onclick='sendfinalemail("+ordersnumber+","+relnumber+")' type='button'>Send</button> </div>");
 						
 //alert(ordersnumber);
 //alert(relnumber);

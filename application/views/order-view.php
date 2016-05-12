@@ -10,15 +10,13 @@
 
                         
 
-                        <div class="page-bar">
+                        <div class="page-bar col-md-7 col-xs-12 xs-mb-10">
 
                             <ul class="page-breadcrumb">
                                 <li>
                                     <a href="<?php echo base_url();?>index.php/welcome/technical_support"><i class="fa fa-home"></i> Lowry Solutions</a>
                                 </li>
-                                <li>
-                                    <a href="<?php echo base_url();?>index.php/welcome/orders">Orders & Invoices</a>
-                                </li>
+                            
                                 <li>
                                     <a href=" " class="sub-active">Order View</a>
                                 </li>
@@ -32,15 +30,14 @@
 
 
                         <div class="add-nav">
-                        <div class="col-md-5"> 
-                         </div>
+                       
 
-<div class="col-md-6">
+<div class="col-md-5">
 <div>
 <div class="float-left mr-10" id="export_to_pdf"><button type="button" class="btn btn-primary  mb-10">Export to PDF</button></div>
 <div class="float-left mr-10" id="pdf_id"></div>
 
-<div class="float-left">
+<div class="float-right">
 <div id="sendemail" style="display:none">
 
 
@@ -103,7 +100,7 @@
 <div class="col-md-6">
 <div id="sendemail" style="display:none">
 <div class="col-md-4 no-padding"> <input type="email" placeholder="Email" name="email" id="email" class="form-control"> </div>
-<div class="col-md-3 no-padding"><button class="btn btn-primary  mb-10" type="button">Send</button> </div>
+<div class="col-md-3 no-padding"><button class="btn btn-primary  mb-10 " type="button">Send</button> </div>
 
 <div> </div>
  </div> </div>

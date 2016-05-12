@@ -96,13 +96,25 @@ speed: 3000
 				var ship_state= $(this).find('ship_state').text();
 				var order_status= $(this).find('order_status').text();
 				var tracker_no = $(this).find('tracker_no').text();
+				var act_ship_date = $(this).find('act_ship_date').text();
 				var error = $(this).find('error').text();
 				
+				
+				if(order_status == "Printed and Posted")
+				{
+				order_status = "Delivered";
+				
+				}
                 //var sPublisher = $(this).find('Publisher').text();
                //alert(sTitle);
 			   if(error!="Error"){
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+orderNumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+order_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'>? </a></td></tr>"); }
-                 //datatables();           
+			   if(orderNumber!="")
+			   {
+			      $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+orderNumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'>? </a></td></tr>"); }
+               
+			   
+			   }
+			  //datatables();           
 		   });
 		   
 		    var table4 = $('#orders-list').DataTable({
@@ -171,52 +183,50 @@ speed: 3000
        <script type="text/javascript">
 function searchbydates()
 {
-var data = $('#orders-list').dataTable();
-data.fnDestroy();
 
- var test1 = "";
- var fromdate = document.getElementById("from").value;
- var todate =document.getElementById("to").value;
- var order_id = document.getElementById("order_id").value;
- var invoicenumber = " ";
- if(order_id==""){
- //alert("t");
- order_id = "%20";
+		$.fn.dataTable.ext.errMode = 'none';
+		var data = $('#orders-list').dataTable();
+		data.fnDestroy();
+		$('#orders-list tbody').html("");
+
+
+		 var test1 = "";
+		 var fromdate = document.getElementById("from").value;
+		 var todate =document.getElementById("to").value;
+		 var order_id = document.getElementById("order_id").value;
+		 var invoicenumber = " ";
+		 
+			 if(order_id=="")
+			 {
+			 order_id = "%20";
+			 }
  
- }
- 
+			  var d = new Date(fromdate);
+			  var t = new Date(todate);
+			  var from = d.getMonth()+"-"+d.getDate()+"-"+d.getFullYear();
+			  var to = t.getMonth()+"-"+t.getDate()+"-"+t.getFullYear();
   
- //alert(order_id+" "+todate+" "+fromdate);
- var d = new Date(fromdate);
- var t = new Date(todate);
- var from = d.getMonth()+"-"+d.getDate()+"-"+d.getFullYear();
-  var to = t.getMonth()+"-"+t.getDate()+"-"+t.getFullYear();
-  
-  if(from=="NaN-NaN-NaN")
-  {
-   
-  from = "%20";
-  
-  }
-  if(to=="NaN-NaN-NaN")
-  {
-  to = "%20";
-  
-  }
-   $(document).ajaxStart(function(){
-    $("#wait").css("display", "block");
-     });
-	 
-	 $(document).ajaxComplete(function(){
-    $("#wait").css("display", "none");
-     });
+			  if(from=="NaN-NaN-NaN")
+			  {
+				  from = "%20";
+			  }
+			  if(to=="NaN-NaN-NaN")
+			  {
+			  to = "%20";
+			  }
+			    $(document).ajaxStart(function(){
+				$("#wait").css("display", "block");
+				 });
+				 
+				 $(document).ajaxComplete(function(){
+				$("#wait").css("display", "none");
+				 });
         $.ajax({
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/orders_search_by_dates/"+from+"/"+to+"/"+order_id+"/"+invoicenumber+"/1",
             dataType: "text",
             success: function(xml){
-			//alert(xml);
-			//$('#orders-list tbody').append(xml);
+			
 			$('#orders-list tbody').html("");
                 $(xml).find('order').each(function(){
 				
@@ -229,55 +239,53 @@ data.fnDestroy();
 				var ship_state= $(this).find('ship_state').text();
 				var order_status= $(this).find('order_status').text();
 				var tracker_no = $(this).find('tracker_no').text();
-				
-				
-                //var sPublisher = $(this).find('Publisher').text();
-               //alert(sTitle);
-			 
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+orderNumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+order_date+"</td><td style='widtd:100px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td> <td style='widtd:150px;'> ? </td></tr>"); 
-                 //datatables();           
+				var act_ship_date = $(this).find('act_ship_date').text();
+
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+orderNumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'>? </a></td></tr>");
+         
 		   });
-		  // $(".inline-controls").css("display","none");
-		    //$(".dataTables_paginate").css("display","none");
-			// $(".dataTables_info").css("display","none");
+
 		   
-		   var table4 = $('#orders-list').DataTable({
-                "language": {"emptyTable": "No Data Found."},	
-                    "aoColumnDefs": [
-                      { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-                    ]
-                });
+							   
+									var table4 = $('#orders-list').DataTable({
+									"language": {"emptyTable": "No Data Found."},	
+										"aoColumnDefs": [
+										  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
+										]
+									});
 
-                var colvis = new $.fn.dataTable.ColVis(table4);
+									var colvis = new $.fn.dataTable.ColVis(table4);
 
-                $(colvis.button()).insertAfter('#colVis');
-                $(colvis.button()).find('button').addClass('btn btn-default').removeClass('ColVis_Button');
+									$(colvis.button()).insertAfter('#colVis');
+									$(colvis.button()).find('button').addClass('btn btn-default').removeClass('ColVis_Button');
 
-                var tt = new $.fn.dataTable.TableTools(table4, {
-                    sRowSelect: 'single',
-                    "aButtons": [
-                        'copy',
-                        'print', {
-                            'sExtends': 'collection',
-                            'sButtonText': 'Save',
-                            'aButtons': [{
-               'sExtends': 'csv',
-               'sTitle': 'Open Orders'
-           },
-{
-               'sExtends': 'xls',
-               'sTitle': 'Open Orders'
-           }, {
-               'sExtends': 'pdf',
-               'sTitle': 'Open Orders'
-           }]
-                        }
-                    ],
-                    "sSwfPath": "<?php echo base_url()?>assets/js/vendor/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-                });
+									var tt = new $.fn.dataTable.TableTools(table4, {
+										sRowSelect: 'single',
+										"aButtons": [
+											'copy',
+											'print', {
+												'sExtends': 'collection',
+												'sButtonText': 'Save',
+												'aButtons': [{
+								   'sExtends': 'csv',
+								   'sTitle': 'Open Orders'
+							   },
+					{
+								   'sExtends': 'xls',
+								   'sTitle': 'Open Orders'
+							   }, {
+								   'sExtends': 'pdf',
+								   'sTitle': 'Open Orders'
+							   }]
+											}
+										],
+										"sSwfPath": "<?php echo base_url()?>assets/js/vendor/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+									});
 
-                $(tt.fnContainer()).insertAfter('#tableTools');
-		     
+									$(tt.fnContainer()).insertAfter('#tableTools');
+				
+				
+		   
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -486,6 +494,9 @@ document.getElementById("count").value = total_count;
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
+
+
+
 
 
     </body>

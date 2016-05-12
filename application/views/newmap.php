@@ -43,16 +43,24 @@
                                 <!-- tile body -->
                                 <div class="tile-body">
 
-                                    <div id="markers-map" style="height: 500px;"></div>
+                                    <div id="markers-map" style="height: 800px;"></div>
 
                                 </div>
-<div style="text-align:center"><a href="<?php echo base_url();?>index.php/welcome/assets" class="btn btn-primary mb-10" >Return to Assets</a></div>
+<div style="text-align:center"><a href="<?php echo base_url();?>index.php/welcome/assets" class="btn btn-primary mb-10" >Return to Assets </a></div>
                                 <!-- /tile body -->
 
                             </section>
                             <!-- /tile -->
 
-                        
+                        <?php 
+						if($typedata=="undercontracts"){
+						
+						?>
+						<input type="hidden" name="type" id="type" value="1">
+						<?php }else{ ?>
+						
+								<input type="hidden" name="type" id="type" value="0">
+						<?php } ?>
                         
                         </div>
                         <!-- /col -->
@@ -140,24 +148,37 @@
                     lng: -85.6024
                 });
 				var cnumber = '<?php echo $contractnumber ?>';
+				var type = document.getElementById("type").value;
+				
+				if(cnumber == "")
+				{
+				cnumber = 0;
+				
+				}
+				//alert(cnumber);
+				//alert(type);
+				
 				$.ajax({
 							type: "GET",
-							url: "http://lowrysmartportal.com/index.php/welcome/all_assets/"+cnumber+"/500",
+							url: "http://lowrysmartportal.com/index.php/welcome/all_assets/"+cnumber+"/500/"+type,
 							dataType: "text",
 							success: function(xml){
+							 //alert(xml);
 							var lastlocation = "";
 							var newdata = [];
 							var partdescriptiondata = [];
 		                    var temp = "";
 							var partdescriptionvarible = "";
 									 $(xml).find('assetspage').each(function(){
+									
 														 //geocoder = new google.maps.Geocoder();
-														 var assetaddress= $(this).find('assetaddress').text();								 
+														 var assetaddress= $(this).find('assetaddress').text();	
+//alert(assetaddress);														 
 														 var assetdesc= $(this).find('part_description').text();
-														 var item_qty = $(this).find('assetitemdetails').text();
+														 //var item_qty = $(this).find('assetitemdetails').text();
 														 var SerialNumber = $(this).find('SerialNumber').text();
-														 var part_number = $(this).find('part_number').text();
-														 var totalitem = $(this).find('totalrec').text();
+														 //var part_number = $(this).find('part_number').text();
+														 //var totalitem = $(this).find('totalrec').text();
 														 
 														 
 														  temp = newdata[assetaddress];
@@ -217,7 +238,7 @@
 		  tabledata = tabledata+"<tr><td>"+res[i]+"</td></tr>";
 		}
 		
-		var infodata = "<table><tr><td><b>Part Description: </b>"+partdescription+"</td></tr><tr><td><b>Address: </b>"+assetaddress+"</td></tr><tr><td><b>Serial Numbers</b></td></tr>"+tabledata+"</table>";
+		var infodata = "<table><tr><td><b>Part Description: </b>"+partdescription+"</td></tr><tr><td>&nbsp;</td></tr><tr><td><b>Address: </b>"+assetaddress+"</td></tr><tr><td>&nbsp;</td></tr><tr><td><b>Serial Numbers: </b></td></tr>"+tabledata+"</table>";
 		
 		
 			 geocoder.geocode( { 'address': assetaddress}, function(results, status) {

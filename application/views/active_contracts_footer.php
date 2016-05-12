@@ -45,6 +45,27 @@
         ============== Custom JavaScripts ===============
         ============================================= -->
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
+		
+		  <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />
+    <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#user_status').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) {
+			//getuser_by_company(1);
+                
+            }
+			
+            });
+			  
+            
+        });
+    </script>
         <!--/ custom javascripts -->
 
 
@@ -212,7 +233,7 @@ $('#contracts-list tbody').html(" ");
 					 $(document).ajaxComplete(function(){
 					$("#wait").css("display", "none");
 					 });
-					// alert(from);
+					//alert("<?php echo base_url()?>index.php/welcome/all_servicecontracts_search/null/"+from+"/"+to+"/"+contract_number);
 						$.ajax({
 							type: "GET",
 							url: "<?php echo base_url()?>index.php/welcome/all_servicecontracts_search/null/"+from+"/"+to+"/"+contract_number,
@@ -683,6 +704,13 @@ aaSorting: [[1, 'desc']]
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+        $(document).on("click", ".popover .close" , function(){
+        $(this).parents(".popover").popover('hide');
+    });
+});
+</script>
 
     </body>
 </html>

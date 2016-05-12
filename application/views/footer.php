@@ -54,6 +54,8 @@
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>
 
+ <script src="<?php echo base_url()?>assets/js/feedback.min.js"></script>
+
 <script src="<?php echo base_url()?>assets/js/upload.js"></script>
         <!--/ vendor javascripts -->
 
@@ -306,12 +308,15 @@ div_class = "intro"
 
 }
 
+
+
+
 if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Shipped for Repair")
 			{
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class=''>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 		
-			}else if(currentstatus == "Renotify Technician" || currentstatus == "Technician has been Notified")
+			}else if(currentstatus == "1 Renotify Technician" || currentstatus == "Technician has been Notified")
 			{
 			
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
@@ -344,37 +349,37 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			}else if(currentstatus == "Customer Delay" || currentstatus == "Waiting on Customer Response")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}else if(currentstatus == "Customer Delay PO" || currentstatus == "Waiting on Customer Response")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}else if(currentstatus == "Dispatch Complete" || currentstatus == "Technician has been Dispatched")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}else if(currentstatus == "Dispatch Delay" || currentstatus == "Service Contract Validation")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}else if(currentstatus == "Dispatched" || currentstatus == "Technician has been Dispatched")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}else if(currentstatus == "Entitlement Delay" || currentstatus == "Service Contract Validation")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}else if(currentstatus == "Parts Delay1" || currentstatus == "Parts in Transit")
@@ -389,7 +394,7 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
-			}else if(currentstatus == "Parts Recomended" || currentstatus == "Parts in Transit")
+			}else if(currentstatus == "Parts Recommended" || currentstatus == "Parts in Transit")
 			{
 			
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
@@ -413,7 +418,19 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
+			}else if(currentstatus == "RMA Requested" || currentstatus == "Service Contract Validation")
+			{
+			
+			var status_by_image = "<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
+			
+			
 			}else if(currentstatus == "Support Delay 2")
+			{
+			
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
+			
+			
+			}else if(currentstatus == "Support Delay")
 			{
 			
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
@@ -425,22 +442,29 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
+			}
+			else if(currentstatus == "Tech Support Requested" || currentstatus == "Technical has been Dispatched")
+			{
+			
+			var status_by_image = "<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
+			
+			
 			}else if(currentstatus == "Triage Completed" || currentstatus == "Triage Requested")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}else if(currentstatus == "Triage Requested" || currentstatus == "Triage Requested")
 			{
 			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
+			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
 			}
 			else
 			{
-				var status_by_image ="<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class=''>Device in Transit</li><li class=''>Repair in Progress</li><li class=''>Request Complete</li></ul>";
+				var status_by_image ="<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			}
 			
 			
@@ -449,7 +473,7 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			if(currentstatus == "Cust sent direct to Manuf")
 			{
 				var status = "Device Shipped for Repair";
-			}else if(currentstatus == "Renotify Technician")
+			}else if(currentstatus == "1 Renotify Technician")
 			{
 				var status="Technician has been Notified";
 			}else if(currentstatus == "Accepted awaiting sub invoice")
@@ -491,7 +515,7 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			}else if(currentstatus == "Parts Ordered")
 			{
 				var status="Parts in Transit";
-			}else if(currentstatus == "Parts Recomended")
+			}else if(currentstatus == "Parts Recommended")
 			{
 				var status="Parts in Transit";
 			}else if(currentstatus == "Parts Requested")
@@ -508,7 +532,11 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 				var status="Service Contract Validation";
 			}else if(currentstatus == "Support Delay 2")
 			{
-				var status=" ";
+				var status="Support Delay 2";
+			}
+			else if(currentstatus == "Support Delay")
+			{
+				var status="Support Delay";
 			}else if(currentstatus == "Tech Support Complete")
 			{
 				var status="Technician Support Complete";
@@ -518,7 +546,7 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			}else if(currentstatus == "Triage Completed")
 			{
 				var status="Triage Requested";
-			}else
+			}else if(currentstatus == "Triage Requested")
 			{
 				var status="Triage Requested";
 			}
@@ -1418,10 +1446,21 @@ $( document ).ready(function() {
 });
 </script>
 
-<!--<script>
-(function blink() { 
-    $('.blink_me').fadeOut(7000).fadeIn(500, blink); 
-})();
-</script>-->
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+        $(document).on("click", ".popover .close" , function(){
+        $(this).parents(".popover").popover('hide');
+    });
+});
+</script>
+
+
+
+
+
+
+
     </body>
 </html>

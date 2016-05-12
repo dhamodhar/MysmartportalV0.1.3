@@ -54,7 +54,28 @@ $c_number == " ";
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
         <!--/ custom javascripts -->
 
-
+		
+		  <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />
+    <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#user_status').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) {
+			//getuser_by_company(1);
+                
+            }
+			
+            });
+			  
+            
+        });
+    </script>
+		
 <script>
 $(document).ready(function(){
   
@@ -450,7 +471,7 @@ var test1 = "";
 <script>
 function getdetails_by_location(location)
 {
-alert(location);
+
 
 //alert(location);
 $.fn.dataTable.ext.errMode = 'none';
@@ -606,6 +627,12 @@ $.fn.dataTable.ext.errMode = 'none';
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
 
-
+<script type="text/javascript">
+$(document).ready(function(){
+        $(document).on("click", ".popover .close" , function(){
+        $(this).parents(".popover").popover('hide');
+    });
+});
+</script>
     </body>
 </html>

@@ -51,7 +51,7 @@
                                 <div class="col-md-12 mb-10 no-padding"><h4>Browse</h4> </div>
                                   
   <div class="col-md-12 mb-10 no-padding">                                 
- <button class="btn btn-primary"><i class="fa fa-video-camera"></i> Vidoes</button>
+ <button class="btn btn-primary"><i class="fa fa-video-camera"></i> Videos</button>
 <button class="btn btn-primary" onclick="javascript:document.location='<?php echo base_url();?>index.php/welcome/browse_documentation'"><i class="fa fa-file-text"></i> Documentation</button>
 <button class="btn btn-primary"><i class="fa  fa-question-circle"></i> FAQ</button></div>
                                 </div>

@@ -1,7 +1,7 @@
 <?php
 if($type == 3 or $type == 5)
 {
-$title1 = 'Invoice';
+$title1 = 'Invoice Copy';
 $order_title = '<td align="left">Invoice#:</td><td>'.$invoice_numb.'</td>';
 $ordertext = '<td width="72%" align="left" style="border:1px solid #000; background-color:#f7f7f7;">
 	<strong>
@@ -11,7 +11,7 @@ $ordertext = '<td width="72%" align="left" style="border:1px solid #000; backgro
      <span style="font-weight:bold; text-decoration:underline;"> Please email the requested information above to skye@lowrysolutions.com and reference the invoice. FOR QUESTIONS REGARDING THIS INVOICE CONTACT SKYE GARDNER AT (810) 534-1661</span></td>';
 
 }else{
-$title1 = 'Order';
+$title1 = 'Order Copy';
 $order_title = '<td align="left">Order#:</td><td>'.$order_numb.'</td>';
 $ordertext = '<td width="72%" align="left" style="border:1px solid #000; background-color:#f7f7f7;">
 	<p style="font-size:8px">All sales of goods by Lowry are subject exclusively to Lowry’s then-current Terms and Conditions of Sale, available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SalesTermsGoods.pdf. All equipment maintenance services are subject exclusively to Lowry’s then-current Equipment Maintenance Terms and Conditions, available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/EquipmentMaintenance.pdf All professional services other than equipment maintenance services and software maintenance or support are subject exclusively to Lowry’s then-current Professional Services Agreement Terms and Conditions available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/ProfessionalServices.pdf If Lowry software is provided and it is not otherwise subject to a particular Lowry license agreement, the Software License Agreement at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareLicense.pdf will apply to such software. Any software maintenance or support will be governed by Lowry’s then-current Software Maintenance and Support Agreement available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareMaintenance.pdf. If any of the above terms are first tendered to the customer before the customer tenders a purchase order or similar document to Lowry, the above terms are in lieu of any terms later submitted by the customer and Lowry rejects all additional or different terms and conditions of the customer, whether confirmatory or otherwise. If Lowry tenders these terms after the tender by the customer of other terms, whether as part of a purchase order or otherwise, then Lowry’s acceptance of any offer by the customer associated with the customer’s terms is expressly conditioned upon customer’s acceptance of the above terms exclusively and to the exclusion of any proffered customer terms or conditions, regardless of whether the above terms contain any terms additional to, or different from, any terms proffered by the customer</p><br />
@@ -65,7 +65,7 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
       <tr>'.$order_title.'</tr>
       <tr>
         <td align="left">Date:</td>
-        <td>'.$ship_date.'</td>
+        <td>'.$order_date.'</td>
       </tr>
       <tr>
         <td align="left">Page</td>
@@ -82,11 +82,10 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
     <td align="left">Ship To:</td>
   </tr>
   <tr>
-    <td align="left" valign="top" style="border:1px solid #000;padding:10px;">'.$billadd1.'<br />'.$billname.'<br />'.$billcity.' , '.$billst.' ,'.$billzip.'<br />ADA, Ml 49355
-    
+    <td align="left" valign="top" style="border:1px solid #000;padding:10px;">'.$billadd1.'<br />'.$billname.'<br />'.trim($billcity, " ").', '.trim($billst," ").', '.$billzip.'<br />
       <br /></td>
       <td>&nbsp;</td>
-    <td align="left" valign="top" style="border:1px solid #000;padding:10px;">'.$shipadd1.'<br />'.$shipname.'<br />'.$shipcity.' , '.$shipst.' ,'.$shipzip.'<br /><br /></td>
+    <td align="left" valign="top" style="border:1px solid #000;padding:10px;">'.$shipadd1.'<br />'.@$shipadd2.'<br>'.$shipname.'<br />'.trim($shipcity," ").', '.trim($shipst," ").', '.$shipzip.'<br /><br /></td>
   </tr>
 </table> <br />
 
@@ -95,7 +94,7 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
 <table width="100%" border="0" cellspacing="0" cellpadding="5" style="border:1px solid #000;">
   <tr >
     <td align="left" valign="top" style="border-bottom:1px solid #000;border-right:1px solid #000;">Customer#<br />
-      11920-000 </td>
+      '.$this->session->userdata("cust_code").' </td>
     <td align="left" valign="top" style="border-bottom:1px solid #000;border-right:1px solid #000;">Order#<br />
       '.$order_numb.'-'.$rel_numb.'</td>
     <td align="left" valign="top" style="border-bottom:1px solid #000;border-right:1px solid #000;">Order Date<br />
@@ -131,17 +130,19 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
     <td align="center" style="border-right:1px solid #000;">UNIT PRICE</td>
     <td align="center" style="border-right:1px solid #000;">NET PRICE</td>
   </tr>';
- 
+ $m=1;
   foreach($params as $paramsdata){
+  $total_val = $paramsdata['item_price']*$paramsdata['qty'];
  $content .='<tr>
-    <td align="center" style="border-right:1px solid #000; border-top:1px solid #000;">'.$paramsdata['item_no'].'</td>
-    <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">'.$paramsdata['part_desc'].'</td>
+    <td align="center" style="border-right:1px solid #000; border-top:1px solid #000;">'.$m.'</td>
+    <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">'.$paramsdata['part_desc'].','.$paramsdata['part_code'].'</td>
     <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">'.$paramsdata['uom'].'</td>
     <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;"></td>
     <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">'.$paramsdata['qty'].'</td>
-    <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">$ '.$paramsdata['item_price'].'</td>
-    <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">$ '.$paramsdata['item_price']*$paramsdata['qty'].'</td>
+    <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">$ '.number_format((float)$paramsdata['item_price'], 2, '.', '').'</td>
+    <td align="center" style="border-right:1px solid #000;border-top:1px solid #000;">$ '.number_format((float)$total_val, 2, '.', '').'</td>
   </tr>';
+  $m++;
   }
   
 $content .='</table>
@@ -151,19 +152,16 @@ $content .='</table>
 	<td width="28%" rowspan="2" align="right" valign="top"><table width="90%" border="0" cellspacing="5" cellpadding="5">
        <tr>
         <td align="left"><strong>Sub Total:</strong></td>
-        <td align="left">$ '.($item_price*$qty).'</td>
+        <td align="left">$ '.number_format((float)($item_price*$qty), 2, '.', '').'</td>
       </tr>
-      <tr>
-        <td align="left">&nbsp;</td>
-        <td align="left">$ 0.00</td>
-      </tr>
+   
       <tr>
         <td align="left">Freight:</td>
-        <td align="left">$ '.$shipping_charge.'</td>
+        <td align="left">$ '.number_format((float)$shipping_charge, 2, '.', '').'</td>
       </tr>
       <tr>
         <td align="left">Sales Tax:</td>
-        <td align="left">$ '.$total_tax.'</td>
+        <td align="left">$ '.$totaltax.'</td>
       </tr>
       <tr>
         <td align="left"><strong>TOTAL USD:</strong></td>

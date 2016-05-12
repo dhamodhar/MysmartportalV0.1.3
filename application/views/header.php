@@ -1,7 +1,7 @@
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 lt-ie10" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 
 
@@ -41,6 +41,7 @@
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/chosen/chosen.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/summernote/summernote.css">
   <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/feedback.css">
  
  
 
@@ -478,7 +479,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										<?php } else if($menu[$i]['id']==7)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = "https://mdm-trial.lowrysolutions.com/mobicontrol/";
+										 $url = "#";
 										 
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
@@ -486,7 +487,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										 };
 										?>
 										
-										    <li><a href="<?php echo $url ?>" target="_blank" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>Managed Devices</span></a></li>
+										    <li><a href="#" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>My Projects</span></a></li>
                                   
 										
 										<?php } else if($menu[$i]['id']==8)
@@ -499,7 +500,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 		
 										 };
 										?>
-										 <li><a href="<?php echo $url ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >My Projects</span></a></li>
+										 <li><a href="<?php echo $url ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >Managed Devices</span></a></li>
                                          
 										 
 										
@@ -507,14 +508,14 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										<?php } else if($menu[$i]['id']==9)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = "#";
+										 $url = "https://mdm-trial.lowrysolutions.com/mobicontrol/";
 										 
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
 		
 										 };
 										?>
-										 <li><a href="<?php echo $url ?>" class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> print-active<?php }?>"> <span>Printer Management</span></a></li>
+										 <li><a href="<?php echo $url ?>" target="_blank" class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> print-active<?php }?>"> <span>Printer Management</span></a></li>
      
 										<?php } else if($menu[$i]['id']==10)
 										  {
@@ -557,12 +558,15 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
                                         <!--/ NAVIGATION Content -->
 
 
+
+
                                     </div>
  <!-- tile -->
-                           <!-- <section class="products-cat">
+                          
 
-                                    <div id="pie-chart" style="height: 250px"></div>
-									</section>-->
+
+
+
 
                                 </div>
                             </div>
@@ -571,6 +575,8 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
                             </div>
                             
                         </div>
+
+
 
                     </div>
 

@@ -252,7 +252,8 @@ OR company_name IS NULL , 1, 0 ) , company_name ASC");
 	
 	public function getalllocationsbycuscode($cuscode)
 	{
-	$query = $this->db->query("select * from User_locations where custum_code='".$cuscode."'");
+	  $userId = $this->session->userdata("userid");
+	  $query = $this->db->query("select * from User_locations where custum_code='".$cuscode."' AND user_id='".$userId."'");
 	  return $query->result();
 	
 	
@@ -322,6 +323,30 @@ OR company_name IS NULL , 1, 0 ) , company_name ASC");
 	{
 			$query = $this->db->query("update user_notifications set read_status =0 where id='".$id."'");
 			return true;
+	}
+	
+	public function updatelogintime($params,$uid)
+	{
+	
+	$quesry = $this->db->query("select * from login_information where uid='".$uid."' AND is_login =1");
+	 if($quesry->num_rows() > 0)
+			{
+				return 1;
+			}
+			else{
+				$this->db->insert("login_information",$params);
+			}	
+	
+	
+	}
+	
+	public function updatelogouttime($uid)
+	{
+	$logouttime=date("y-m-d h:m:s");
+	$query = $this->db->query("update login_information set is_login=0, logout_time='".$logouttime."' where uid='".$uid."'");
+	
+	
+	
 	}
 	
 	

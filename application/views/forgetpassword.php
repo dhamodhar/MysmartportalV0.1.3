@@ -37,6 +37,37 @@ alert("Password and confirm password does not match");
                                 <li>
                                     <a href="#">Forgot  Password</a>
                                 </li>
+
+<li class="information-btn">
+<div  rel="tooltip" data-placement="left" class="btn btn-default  bg-none  btn-xs  pull-right  ml-10 col-md-1"    data-toggle="popover"    data-html="true"   data-title="<a href='#' class='close' data-dismiss='alert'>×</a>
+
+
+<div class='line-hieght-22'>You may search by order id / invoice number. You may search between order dates. You may use both.<br/> <br/><span class='red'>Note:</span> You may search orders & invoices using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
+<div data-toggle='collapse' data-target='#demo1' class='accordion-toggle float-right'><button onclick='showDetails1()' class='btn btn-primary btn-xs'>More</button></div>
+<div class='hiddenRow'>
+ <div class='level3 accordian-body collapse' id='demo1'>
+                     <ul>
+<li><strong>Forgot Password</strong></li>
+
+<li class='blue-bold'>How to Navigate</li>
+<li>Please navigate to Lowry Smart Portal link and click on forgot password link at the bottom of user login box.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User will be redirected to forgot password page, where user can provide the registered email id and a password reset mail will be generated and sent to the registered mail id.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/forgot-img.jpg'/></li>
+<li>The password reset mail will be valid only for a period of one hour after which user has to redo the entire process to receive another password reset mail.</li>
+<li>Once the user clicks on the password reset link, user will be prompted to enter new password twice and click on 'Save', the password will be saved and the user will be redirected to login page where user can login with the new password.</li>
+
+</ul>
+
+
+ 
+
+                        
+                    </div>
+">
+<i class="fa fa-info-circle"></i>
+</div> </div>
+</li>
                             
                             </ul>
                             
@@ -84,7 +115,7 @@ alert("Password and confirm password does not match");
 										</div>
 									
                                           
-                                           <input type="submit" class="btn btn-default" name="save" id="save" value="Send">
+                                           <input type="submit" class="btn btn-greensea" name="save" id="save" value="Send">
                                            </form>
 											
 											

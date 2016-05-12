@@ -20,18 +20,14 @@
                                 <li>
                                     <a href=""  class="sub-active">Open Orders</a>
                                 </li>
-                            </ul>
-                            
-                        </div>
 
-<div class="col-md-4 cps "> 
-<div id="tableTools">
+<li class="information-btn">
+<div  rel="tooltip" data-placement="left" class="btn btn-default  bg-none  btn-xs  pull-right  ml-10 col-md-1"    data-toggle="popover"    data-html="true"   data-title="<a href='#' class='close' data-dismiss='alert'>×</a>
 
-<div  rel="tooltip" data-placement="left" class="btn btn-default  bg-none  btn-xs  pull-right mt-10 ml-10 col-md-1"    data-toggle="popover"    data-html="true"   data-title="
 
 <div class='line-hieght-22'>You may search by order id / invoice number. You may search between order dates. You may use both.<br/> <br/><span class='red'>Note:</span> You may search orders & invoices using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
 <div data-toggle='collapse' data-target='#demo1' class='accordion-toggle float-right'><button onclick='showDetails1()' class='btn btn-primary btn-xs'>More</button></div>
-<div class='iddenRow'>
+<div class='hiddenRow'>
  <div class='level3 accordian-body collapse' id='demo1'>
                      <ul>
 <li><strong>Orders & Invoices</strong></li>
@@ -74,20 +70,18 @@
                         
                     </div>
 ">
-<i class="fa fa-question-circle" style="font-size:15px;"></i>
+<i class="fa fa-info-circle"></i>
 </div> </div>
+</li>
 
 
+                            </ul>
+                            
+                        </div>
 
-
-
- 
-                                     </div>
-
-
-
-
- </div>
+<div class="col-md-4 cps "> 
+<div id="tableTools"> </div>
+</div>
 
                     </div>
 
@@ -145,7 +139,7 @@
                                             </div>
                                         </div>
                                         <!-- /col -->
-                                    <div class="col-md-2">     <button class="btn btn-blue" onclick="searchbydates()"><i class="fa fa-search" onclick="searchbydates()"></i></button></div>
+                                    <div class="col-md-2">     <button class="btn btn-blue" onclick="searchbydates()"><i class="fa fa-search"></i></button></div>
 </div>
 
                                                                         
@@ -168,7 +162,7 @@
                                                     <th style="width:150px;">Customer PO</th>                                                    
                                                    <!-- <th style="width:150px;">Tracking Number</th>-->
                                                      
-                                                    <th style="width:150px;">Arrival Date</th>
+                                                    <th style="width:150px;">Delivery Date</th>
                                                    <!-- <th style="width:150px;">Order Amount</th>-->
                                                     <th style="width:150px;">Shipping City / State</th>
                                                     <th style="width:150px;">Status</th>

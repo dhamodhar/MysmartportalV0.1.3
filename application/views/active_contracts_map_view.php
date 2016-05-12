@@ -191,6 +191,15 @@
         });
 		
 		function loadMaps(geocoder, prop,val,partdescription){
+		
+			var links = "";
+						var data = val.split(",");
+						for(var i=0;i<data.length;i++)
+						{
+						links = links+',<a href="http://lowrysmartportal.com/index.php/welcome/assets/'+data[i]+'">'+data[i]+'</a>';
+						
+						}
+		
 			geocoder.geocode( { 'address': prop}, function(results, status) {
 				  if (status == google.maps.GeocoderStatus.OK) {
 				  var lng_final = results[0].geometry.location.lng();
@@ -200,7 +209,9 @@
 						lng: lng_final,
 						title: prop,
 						infoWindow: {
-							content: '<p><b>Contract Number</b>: '+val+'</p><br><p><b>Part Description:</b> '+partdescription+'</p>'
+					
+						
+							content: '<p><b>Contract Number</b>: '+links+'</p><br><p><b>Part Description:</b> '+partdescription+'</p>'
 						}
 					});
 				   } else {

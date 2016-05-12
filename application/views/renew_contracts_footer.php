@@ -613,7 +613,13 @@ aaSorting: [[2, 'asc']]
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+        $(document).on("click", ".popover .close" , function(){
+        $(this).parents(".popover").popover('hide');
+    });
+});
+</script>
 
     </body>
 </html>

@@ -357,17 +357,151 @@ document.getElementById("service_btns").style.display='block';
 
                 <div class="page page-dashboard">
 
-                    <div class="pageheader">
+                    <div class="pageheader technical-i information-btn">
 
                        
-                        <h2 style="color:green;" color="green" align="left"><?php $hour = date('H');
-$dayTerm = ($hour > 17) ? "Evening" : ($hour > 12) ? "Afternoon" : "Morning";
+                        <h2 style="color:green;text-align-left;" color="green" align="left">
+						
+						<?php 
+					
+					
+					if($country == "India"){
+					@date_default_timezone_set("Asia/Kolkata");
+					}else{
+					@date_default_timezone_set("us/eastern");
+					
+					}
+						
+						
+						$hour = date('H');
+							//echo $hour;
+							$dayTerm = "";
+							if($hour < 12)
+							{
+							$dayTerm = "Morning";
+							
+							}else if($hour < 16)
+							{
+								$dayTerm = "Afternoon";
+							
+							}else if($hour < 23)
+							{
+							$dayTerm = "Evening";
+							
+							}else
+							{
+							$dayTerm = "Day";
+							
+							}
+//$dayTerm = ($hour > 21) ? "Night" :($hour > 16) ? "Evening" : ($hour > 12) ? "Afternoon" : "Morning";
 echo "Good " . $dayTerm;?>,&nbsp; <?php echo $this->session->userdata('firstname');?></h2>
+
+<div  rel="tooltip"  data-placement="left" class="btn btn-default bg-none "    data-toggle="popover"    data-html="true"   data-title="<a href='#' class='close' data-dismiss='alert'>×</a>
+
+
+<div class='line-hieght-22'>You may search by order id / invoice number. You may search between order dates. You may use both.<br/> <br/><span class='red'>Note:</span> You may search orders & invoices using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
+<div data-toggle='collapse' data-target='#demo1' class='accordion-toggle float-right'><button onclick='showDetails1()' class='btn btn-primary btn-xs'>More</button></div>
+<div class='hiddenRow'>
+ <div class='level3 accordian-body collapse' id='demo1'>
+                     <ul>
+<li><strong>Technical Support</strong></li>
+<li>The technical support page provides a snapshot of various services like,
+<ul class='sub-he'>
+<li>Open orders</li>
+<li>Past due invoices</li>
+<li>Upcoming service renewal contracts</li>
+<li>Open tickets</li>
+<li>End of service devices</li> </ul> </li>
+<li>User can directly navigate to the above mentioned pages by clicking on the respective card to view the records.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/technical-img.jpg'></li>
+<li>Other functionalities which User can perform from this page are,
+<ul class='sub-he'>
+<li>Create a New Service Request</li>
+<li>View all service tickets status</li>
+</ul>
+</li>
+<li class='blue-bold'>How to navigate</li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find Technical Support tab as the first option.</li>
+<li>Click on 'Technical Support' menu button to navigate to the page.</li>
+<li class='blue-bold'>Functionality</li>
+<li class='blue-bold'>Snapshot / Quick navigation Cards </li>
+<li class='blue-bold'>Open orders</li>
+<li>If User have any open orders, the application will display a count of open orders on the card.
+User can click on the card to view Your open orders.</li>
+
+<li>How to check: Once User are in the Technical Support page, click on the 'Open Orders' card.
+The application will navigate User to open orders page where User can find the list of open orders if there are any.
+</li>
+<li class='blue-bold'>Shipped orders</li>
+<li>If User have any Shipped orders, the application will display a count of Shipped orders on the card.
+Currently the application does not support the display of shipped orders.
+</li>
+<li class='blue-bold'>Past due invoices</li>
+<li>If User have any past due invoices, the application will display a count of past due invoices on the card.</li>
+<li>User can click on the card to view Your past due invoices.</li>
+<li>How to check: Once User are in the Technical Support page, click on the 'Past due Invoices' card.</li>
+<li>The application will navigate User to past due invoices page where User can find the list of past due invoices  if there are any.</li>
+
+<li class='blue-bold'>Upcoming Service Renewal Contracts</li>
+<li>If User have any service contracts about to expire in a span of 3 months, the application will display a count of those service contracts on the card.</li>
+<li>User can click on the card to view Your count service contracts about to expire in a span of 3 months.</li>
+<li>How to check: Once User are in the Technical Support page, click on the 'Upcoming Service Renewal Contracts' card.</li>
+<li>The application will navigate User to upcoming service renewal contracts page where User can find the list of list of service contracts about to expire in a span of 3 months if there are any.</li>
+
+<li class='blue-bold'>Open Tickets</li>
+<li>If User have any open tickets, the application will display a count of the open tickets on the card.
+Currently the application does not support the display of open tickets.
+</li>
+
+<li class='blue-bold'>End of  Service devices</li>
+<li>If User have any devices that may be reaching 'End of Service', the application will display a count of those devices on the card.</li>
+<li>Currently the application does not support the display of End of Service Devices. </li>
+
+<li class='blue-bold'>New Service Request</li>
+<li>User can create a new service request for Your device right from the Technical Support page.</li>
+<li>Click on the 'New Service Request' button and User will be prompted to enter device serial number.</li>
+<li>Please provide the device serial number and click on 'Next'.</li>
+<li>The application will fetch the device details and displays it in a form.</li>
+<li>User can verify the device information and provide incident information along with User contact information and submit the form.</li>
+<li>User will receive a mail notification with the details submitted. The Lowry team will validate the information and perform further operations. </li>
+
+<li class='blue-bold'>Service Tickets</li>
+<li> Currently the application displays the list of all open service tickets in the Technical Support page under 'New Service Request' button</li>
+<li>How to check: Once User are in the Technical Support page and if User have any open service tickets, the application will display the list of all open service tickets with specific details like,
+<ul class='sub-he'>
+<li>Service Request Number</li>
+<li>Device Serial Number</li>
+<li>Depot/On-site</li>
+<li>Device Model</li>
+<li>Device Location</li>
+<li>Current status</li>
+<li>Additional information</li>
+<li>Last Activity Date</li>
+</ul
+</li>
+
+<li>User can navigate by selecting a service ticket number by clicking on it and their respective details will be displayed. </li>
+<li class='blue-bold'>How to view User profile information</li>
+<li><img src='http://lowrysmartportal.com/assets/images/profile-img.jpg'></li>
+<li>Please navigate to Lowry Smart Portal link and login with your user credentials.</li>
+<li>On the right hand side top corner where your username is displayed, please click on the dropdown to view Your profile.</li>
+
+</ul>
+
+                        
+                    </div>
+">
+<i class='fa fa-info-circle'></i>
+</div> </div>
+
+
+
 
                    </div>
 
 
-  <div class="row mt-10" style="margin-top:10%">
+  <div class="col-md-12 mt-10" style="margin-top:10%">
 
                         <!-- col -->
                         <div class=" card-container col-lg-2 col-sm-6 col-sm-12">
@@ -468,7 +602,7 @@ echo "Good " . $dayTerm;?>,&nbsp; <?php echo $this->session->userdata('firstname
                                     <div class="row">
                                         <!-- col -->
                                         <div class="col-xs-12">
-<i class="fa fa-file-text fa-4x pl-10 mt-5 p-5"></i>  <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding" id="ren_count"> 0 </div>
+<img src="http://lowrysmartportal.com/assets/images/icons/contracts-icon-th.png"/>  <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding" id="ren_count"> 0 </div>
                                          
                                         
                                         </div>
@@ -498,7 +632,7 @@ echo "Good " . $dayTerm;?>,&nbsp; <?php echo $this->session->userdata('firstname
                                     <div class="row ">
                                         <!-- col -->
                                         <div class="col-xs-12">
- <img src="http://lowrysmartportal.com/assets/images/open-tick.png"> <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding"><?php echo $opencases;?></div>
+ <img src="http://lowrysmartportal.com/assets/images/open-tick.png"> <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding"><?php echo @$opencases;?></div>
                                            
  
                                         </div>
@@ -563,7 +697,7 @@ echo "Good " . $dayTerm;?>,&nbsp; <?php echo $this->session->userdata('firstname
 
 
 </div>
-<div class="row" style="text-align: center; margin-top:30px; margin-left:5px; margin-right:5px;">
+<div class="col-md-12" style="text-align: center; margin-top:30px; margin-left:5px; margin-right:5px;">
 <h1 style="text-transform: uppercase;"><b>At your service</b></h1>
 <h4 class="blink_me" >Our in-house experts are standing by 24/7 to not only solve technical issues, but to give you the advice and guidance you need to succeed online.</h4>
 
@@ -575,13 +709,13 @@ echo "Good " . $dayTerm;?>,&nbsp; <?php echo $this->session->userdata('firstname
 
 <!--<img src="/assets/service-lookup-2.jpg" alt="Service Lookup" style="width:100%; height:100%;">-->
 
-<div class="row" style="margin-top:30px;">
+<div class="col-md-12" style="margin-top:30px;">
 
 <div class="col-md-3"><button onclick="newservice()" class="btn btn-primary mb-10" type="button" id="service_btns">New Service Request</button></div>
 
 
-<div id="new_service_ticket" style="display:none;" class="col-md-12 ">
-<div id="device-number" class="form-group col-md-2 col-sm-2 no-padding">
+<div id="new_service_ticket" style="display:none;" class="col-md-12  ">
+<div id="device-number" class="form-group col-md-2 col-sm-2 no-padding mr-10">
  <input type="test" name="serial_number" id="serial_number" class="form-control" placeholder="Device Serial Number*"> </div>
 
 
@@ -794,9 +928,9 @@ if($msg != ""){
 
 <div style="display:none" id="ticket1_info">
 
-<div class="tile-body col-md-12 no-padding">
+<div class="tile-body col-md-12">
 
-<div class=" col-md-12 no-padding ">
+<div class=" col-md-12">
 <?php 
 $ticket = explode(",",$ticket_info);
 if(sizeOf($ticket)>1){
@@ -913,6 +1047,33 @@ No Service Tickets Found
 				
 			
 	</form>
+
+
+<div style="margin-top: -243.5px; top: 50%; display: block; height: 487px; right: -462px;" id="mrova-feedback">
+		<div id="mrova-contact-thankyou" style="display: none;">
+			Thank you.  We'hv received your feedback.
+		</div>
+		<div id="mrova-form">
+			<form id="mrova-contactform" action="#" method="post">
+				<ul>
+					<li>
+						<label for="mrova-name">Your Name*</label> <input name="mrova-name" class="required" id="mrova-name" type="text">
+					</li>
+					<li>
+						<label for="mrova-email">Email*</label> <input name="mrova-email" class="required" id="mrova-email" type="text">
+					</li>
+					<li>
+						<label for="mrova-message">Message*</label>
+						<textarea class="required" id="mrova-message" name="mrova-message" rows="8" cols="30"></textarea>
+					</li>
+				</ul>
+				<input value="Send" id="mrova-sendbutton" name="mrova-sendbutton" type="submit">
+			</form>
+		</div>
+		<div style="margin-top: -84px; top: 50%;" id="mrova-img-control"></div>
+	</div>
+
+
                 </div> </div> </div>
 			
             </section>

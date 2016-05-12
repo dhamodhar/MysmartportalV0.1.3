@@ -132,6 +132,19 @@ class Welcome extends CI_Controller {
 											'cust_code' => $user[0]->cus_code,
 											'is_logged_in' => 1
 												  );
+												  
+												 $ip = $this->input->ip_address();
+												 $addr = $_SERVER['REMOTE_ADDR'];
+                                                $params = 	array("uid"=>$user[0]->id,
+												                  "login_time"=>date("Y-m-d h:m:s"),
+																  "is_login"=>1,
+																  "ip_address"=>$ip
+																  );
+																  
+												  $updatedata = $this->mysmartportal_model->updatelogintime($params,$user[0]->id);
+												  
+												  
+												  
 										  $this->session->set_userdata($sessionvals);
 										  if($this->session->userdata('role')==1)
 											{
@@ -156,6 +169,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function logout()
 	{
+	$this->load->model('mysmartportal_model');
+	 $updatedata = $this->mysmartportal_model->updatelogouttime($this->session->userdata('userid'));
 			   $sessionvals=array(
 					            'userid' => '',
 								'username' => '',
@@ -600,7 +615,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
                     }
 					
 					$rss = new DOMDocument(); 
-					$rss->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/%20/".$invoiceid."/".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
+					
+					$rss->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/ /".$invoiceid."/".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
 					echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''><InvoiceHeader>";
 											   foreach ($rss->getElementsByTagName('InvoiceHeader') as $node)
 											   {	
@@ -709,7 +725,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 													  if($email == 1)
 													  {
 															  if($node->getElementsByTagName('order_status')->item(0)->nodeValue!="Invoiced" AND $node->getElementsByTagName('order_status')->item(0)->nodeValue!="Cancelled"){
-																   echo "<Order diffgr:id='Order1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><order_number>".$node->getElementsByTagName('order_number')->item(0)->nodeValue."</order_number><order_date>".$node->getElementsByTagName('order_date')->item(0)->nodeValue."</order_date><po_number>".$node->getElementsByTagName('po_number')->item(0)->nodeValue."</po_number><invoice_number>".$node->getElementsByTagName('invoice_number')->item(0)->nodeValue."</invoice_number><invoice_amount>".$node->getElementsByTagName('invoice_amount')->item(0)->nodeValue."</invoice_amount><ship_city>".$node->getElementsByTagName('ship_city')->item(0)->nodeValue."</ship_city><ship_state>".$node->getElementsByTagName('ship_state')->item(0)->nodeValue."</ship_state><order_status>".$node->getElementsByTagName('order_status')->item(0)->nodeValue."</order_status><tracker_no>".$node->getElementsByTagName('tracker_no')->item(0)->nodeValue."</tracker_no></Order>";
+																   echo "<Order diffgr:id='Order1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><order_number>".$node->getElementsByTagName('order_number')->item(0)->nodeValue."</order_number><order_date>".$node->getElementsByTagName('order_date')->item(0)->nodeValue."</order_date><po_number>".$node->getElementsByTagName('po_number')->item(0)->nodeValue."</po_number><invoice_number>".$node->getElementsByTagName('invoice_number')->item(0)->nodeValue."</invoice_number><invoice_amount>".$node->getElementsByTagName('invoice_amount')->item(0)->nodeValue."</invoice_amount><ship_city>".$node->getElementsByTagName('ship_city')->item(0)->nodeValue."</ship_city><ship_state>".$node->getElementsByTagName('ship_state')->item(0)->nodeValue."</ship_state><order_status>".$node->getElementsByTagName('order_status')->item(0)->nodeValue."</order_status><tracker_no>".$node->getElementsByTagName('tracker_no')->item(0)->nodeValue."</tracker_no><act_ship_date>".$node->getElementsByTagName('act_ship_date')->item(0)->nodeValue."</act_ship_date></Order>";
 															   }
 																
 															   }else{
@@ -826,6 +842,27 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	public function orders_search_by_dates($from,$to,$order_id,$invoicenumber,$page)
 	{
 	
+	
+	if($from == "%20")
+	{
+	$from = " ";
+	
+	}
+	
+	if($to == "%20")
+	{
+	$to = " ";
+	
+	}
+	
+	if($order_id == "%20")
+	{
+	$order_id = " ";
+	
+	}
+	
+	
+	
 	      if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
 		  {
 		   redirect(base_url()."index.php/welcome/index");
@@ -852,10 +889,11 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			
 				if($page == 1)
 					{
-					$urlArray = array(array('name' => 'api', 'url' =>'http://216.234.105.194:8088/Alpha.svc/E21GetOpenOrders/'.$cust_code.'/'.$email1.'/UserType/PermLevel/25/1/'.$order_id.'/'.$from.'/'.$to.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/order_number/asc'),
+					$urlArray = array(array('name' => 'api', 'url' =>'http://216.234.105.194:8088/Alpha.svc/E21GetOpenOrders/'.$cust_code.'/'.$ship_to_code.'/'.$email1.'/UserType/PermLevel/25/1/'.$order_id.'/'.$from.'/'.$to.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/order_number/asc'),
 										  );
 					
 					}else{
+					//echo 'http://216.234.105.194:8088/Alpha.svc/E21GetOrderList_DateSearch/'.$cust_code.'/'.$ship_to_code.'/'.$email1.'/'.$from.'/'.$to.'/'.$order_id.'/'.$invoicenumber.'/UserType/PermLevel/25/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/order_date/asc';
 			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetOrderList_DateSearch/'.$cust_code.'/'.$ship_to_code.'/'.$email1.'/'.$from.'/'.$to.'/'.$order_id.'/'.$invoicenumber.'/UserType/PermLevel/25/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/order_date/asc'),
 								  );
 								  }
@@ -883,9 +921,10 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
                                                    }									     
 										 }
 									   }
-									      echo "</DocumentElement></diffgr:diffgram></DataTable>";
+									  
 									   
 						  }
+						      echo "</DocumentElement></diffgr:diffgram></DataTable>";
 						  
 				}
 
@@ -1096,6 +1135,43 @@ Thank you for registering with Lowrysmartportal.</p>
 					}
 			
 	}
+	
+	
+		/**
+	 *  All User Page Loading.	 
+	 */
+	public function onlineusers($msg=null,$count=null)
+	{
+			if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+				{
+				   redirect(base_url()."index.php/welcome/logout");
+				
+				}else if($this->session->userdata('role') != 1)
+				{
+				   redirect(base_url()."index.php/welcome/logout");
+				
+				
+				}else{
+			
+					$data['msg']=$msg;
+					$data['count']=$count;
+					$this->load->model('Mysmartportal_model');
+					$data['allusers'] = $this->Mysmartportal_model->getallusers();
+
+						$user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));
+					
+						$data['user_notifications'] = $user_notification;
+					$this->load->view('admin_header',$data);
+					$this->load->view('onlineusers',$data);
+					$this->load->view('footer_users'); 
+					
+					}
+			
+	}
+		/**
+	 *  All User Page Loading.	 
+	 */
+
 	/**
 	 *  Edit User Page Loading with All data.
      *  @params
@@ -1527,13 +1603,23 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/CheckServiceTicket_Email/'.$email1.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'));							  
 							  foreach ($urlArray as $url) 
 							  {
-										   $rss->load($url['url']);
+										   @$rss->load($url['url']);
 										  foreach ($rss->getElementsByTagName('CheckServiceTicket') as $node)
 										   {				   
 											$ticket_info = $ticket_info.",".$node->getElementsByTagName('SerialNumber')->item(0)->nodeValue;									   
 										   }                          					    
 											
 							   }	
+							   
+							   
+							   
+							    $user_ip = getenv('REMOTE_ADDR');
+								$geo = unserialize(@file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
+								//print_r($geo);
+								$country = $geo["geoplugin_countryName"];
+								$city = $geo["geoplugin_city"];
+								
+							$data["country"] = $country;
 
 							$data['ticket_info']= $ticket_info;	   
 							$data['msg'] = $msg;
@@ -2170,7 +2256,41 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			$rss = new DOMDocument(); 
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetInvoiceList_Search/'.$cust_code.'/'.$email1.'/'.$from.'/'.$to.'/'.$invoice_number.'/UserType/PermLevel/25/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/invoice_numb/desc'),
+
+			//getting Locations 
+			$this->load->model('Mysmartportal_model');
+					$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+				
+					$ship_to_code = "";
+					foreach($locations as $locationsdata)
+					{
+							if($ship_to_code == ""){
+									$ship_to_code = $locationsdata->ship_to_code;
+							}else{
+									$ship_to_code = $ship_to_code."|".$locationsdata->ship_to_code;
+							}
+                    }
+					
+					if($from == "%20")
+					{
+					$from = " ";
+					
+					}
+					
+					if($to == "%20")
+					{
+					$to = " ";
+					
+					}
+					if($invoice_number == "%20")
+					{
+					$invoice_number = " ";
+					
+					}
+			
+			
+			
+			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetInvoiceList_Search/'.$cust_code.'/'.$ship_to_code.'/'.$email1.'/'.$from.'/'.$to.'/'.$invoice_number.'/UserType/PermLevel/25/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/invoice_numb/desc'),
 								  );
 								  
 						  foreach ($urlArray as $url) 
@@ -2252,16 +2372,20 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					}
                                         }
 				
+				//echo "http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/ /".$order_id."/".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
 				$rss = new DOMDocument(); 
-			    @$rss->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/".$order_id."/ /".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
+			    @$rss->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/ /".$order_id."/".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
 					
 					
-			    	
+			    	$ordernumber = "";
 									   foreach (@$rss->getElementsByTagName('InvoiceHeader') as $node)
-										   {		
+										   {								   
                                            $data['invoice_numb'] = $node->getElementsByTagName('invoice_numb')->item(0)->nodeValue;
                                            $data['order_numb'] = $node->getElementsByTagName('order_numb')->item(0)->nodeValue;
 										   $data['rel_numb'] = $node->getElementsByTagName('rel_numb')->item(0)->nodeValue;
+										   $ordernumber  = trim($data['order_numb']," ")."-".trim($data['rel_numb']," ");
+										   
+										   
 										   $data['order_date'] = $node->getElementsByTagName('order_date')->item(0)->nodeValue;
 										   $data['post_date'] = $node->getElementsByTagName('post_date')->item(0)->nodeValue;
 										   $data['ship_date'] = $node->getElementsByTagName('ship_date')->item(0)->nodeValue;
@@ -2285,7 +2409,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $data['shipzip'] = $node->getElementsByTagName('shipzip')->item(0)->nodeValue;
 										   $data['shipcountry'] = $node->getElementsByTagName('shipcountry')->item(0)->nodeValue;
 										   $data['cust_po'] = $node->getElementsByTagName('cust_po')->item(0)->nodeValue;
-										   $data['totalamount'] = $node->getElementsByTagName('total_tax')->item(0)->nodeValue;
+										   $data['totaltax'] = $node->getElementsByTagName('total_tax')->item(0)->nodeValue;
 										   $data['totalamount'] = $node->getElementsByTagName('totalamount')->item(0)->nodeValue;
 										   $data['shipping_charge'] = $node->getElementsByTagName('shipping_charge')->item(0)->nodeValue;
 										   $data['ship_charge'] = $node->getElementsByTagName('ship_charge')->item(0)->nodeValue;
@@ -2311,7 +2435,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   
 										   
 										    $rss1 = new DOMDocument(); 
-										   	@$rss1->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderDetails/".$cust_code."/".$ship_to_code."/".$order_id."/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
+										   	@$rss1->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderDetails/".$cust_code."/".$ship_to_code."/".$ordernumber."/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
 				                            $params = array();
 								            $i=0;
 								           foreach (@$rss1->getElementsByTagName('OrderDetails') as $node)
@@ -2321,11 +2445,13 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $uom = $node->getElementsByTagName('uom')->item(0)->nodeValue;
 										   $qty = $node->getElementsByTagName('qty')->item(0)->nodeValue;
 										   $item_price = $node->getElementsByTagName('item_price')->item(0)->nodeValue;
+										   $partnumber = $node->getElementsByTagName('part_code')->item(0)->nodeValue;
 										   $params1[$i] = array('item_no'=> $item_no,
 										                        'part_desc'=>$part_desc,
 																'uom'=>$uom,
 																'qty'=>$qty,
-																'item_price'=>$item_price
+																'item_price'=>$item_price,
+																'part_code'=>$partnumber
 										   );
                                             $data['item_no'] = $node->getElementsByTagName('item_no')->item(0)->nodeValue;
                                             $data['part_desc'] = $node->getElementsByTagName('part_desc')->item(0)->nodeValue;
@@ -2335,6 +2461,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
                                             $i++;
 									        $params	= $params1;									  
 										  }
+										  
+									
 									        $data['params'] =  $params;
                                             $this->load->view('pdfreport', $data);
 											exit;
@@ -2481,7 +2609,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 															{
 															
 														
-															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.", ".$node->getElementsByTagName('City')->item(0)->nodeValue.", ".$node->getElementsByTagName('ST')->item(0)->nodeValue.", ".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><st>".$node->getElementsByTagName('ST')->item(0)->nodeValue."</st><contract_status>Active</contract_status><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
+															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('ContrFrom')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.", ".$node->getElementsByTagName('City')->item(0)->nodeValue.", ".$node->getElementsByTagName('ST')->item(0)->nodeValue.", ".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><st>".$node->getElementsByTagName('ST')->item(0)->nodeValue."</st><contract_status>Active</contract_status><contract_status>".$node->getElementsByTagName('ItemDetails')->item(0)->nodeValue."</contract_status><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
 														   
 															
 															}else if($userstatus=="Expired")
@@ -2526,7 +2654,46 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					$rss = new DOMDocument(); 
 					$cust_code= $this->session->userdata('cust_code'); 
 					$email1=$this->session->userdata('email');
-					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/ServiceContractList/'.$cust_code.'/'.$contractnumber.'/'.$from.'/'.$to.'/100/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+					
+					
+					  $this->load->model('Mysmartportal_model');
+											$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+										
+											$ship_to_code = "";
+											foreach($locations as $locationsdata)
+											{
+													if($ship_to_code == ""){
+															$ship_to_code = $locationsdata->ship_to_code;
+													}else{
+															$ship_to_code = $ship_to_code."|".$locationsdata->ship_to_code;
+													}
+                                            }
+					
+					
+					
+					if($from == "%20")
+					{
+					$from = " ";
+					
+					}
+					
+					if($to == "%20")
+					{
+					$to = " ";
+					
+					}
+					
+					if($contractnumber == "%20")
+					{
+					$contractnumber = " ";
+					
+					}
+					
+					//echo 'http://216.234.105.194:8088/Alpha.svc/ServiceContractList/'.$cust_code.'/'.$ship_to_code.'/'.$contractnumber.'/'.$from.'/'.$to.'/100/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+					//exit;
+					
+					
+					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/ServiceContractList/'.$cust_code.'/'.$ship_to_code.'/'.$contractnumber.'/'.$from.'/'.$to.'/100/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 										  
 						  foreach ($urlArray as $url) 
@@ -3231,7 +3398,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
  *  Page Limit(25)
  */ 
    
-  public function all_assets($Contract_Number=null,$count1=25)
+  public function all_assets($Contract_Number=null,$count1=25,$type=null)
   {
 	if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
 				{
@@ -3297,10 +3464,46 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					
 					
 					}
-			// echo 'http://216.234.105.194:8088/Alpha.svc/AssetsPage/'.$cust_code.'/'.$ship_to_code.'/ /'.$Contract_Number.'/'.$count1.'/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+					
+					if($type==1)
+					{
+				
+					
+$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/15693-000/38137%7C38136%7C38135%7C38134%7C38133%7C1008134%7C38315%7C5468%7C38312%7C38285%7C38261%7C38176%7C38172%7C38171%7C38143%7C38137%7C38136%7C38135%7C38134%7C38133%7C1008134%7C38143%7C38171%7C38172%7C38176%7C38261%7C38285%7C38312%7C38315%7C5468/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+										  );
+					
+					}else{
+					
+							
 			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/AssetsPage/'.$cust_code.'/'.$ship_to_code.'/ /'.$Contract_Number.'/'.$count1.'/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 								  );
-								  
+					}
+					
+					
+					
+					
+					
+	                if($type==1)
+					{
+					
+					foreach ($urlArray as $url) 
+						  {
+			                           $rss->load($url['url']);
+ echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
+											   foreach ($rss->getElementsByTagName('AssetsUnderContract') as $node)
+											   {
+													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><Part_Number></Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><Options></Options><assetaddress>".$node->getElementsByTagName('Address')->item(0)->nodeValue.",".$node->getElementsByTagName('ST')->item(0)->nodeValue.",".$node->getElementsByTagName('zip')->item(0)->nodeValue."</assetaddress></assetspage>";
+											   }                      					    
+												  echo "</DocumentElement></diffgr:diffgram></DataTable>";
+												  
+						}
+					
+					
+					
+					}else
+						{
+						
+							  
 						  foreach ($urlArray as $url) 
 						  {
 			                           $rss->load($url['url']);
@@ -3336,6 +3539,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 									      echo "</DocumentElement></diffgr:diffgram></DataTable>";
 										  
 					      }
+						  
+						 } 
 									   
 						  
 
@@ -3387,7 +3592,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			
 					
 					}
-					//echo "http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/".$cust_code."/".$count1."/".$ship_to_code."/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
+					//echo "http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/".$cust_code."/".$ship_to_code."/".$count1."/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
 					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$ship_to_code.'/'.$count1.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 										  
@@ -4222,7 +4427,7 @@ public function viewmessage($id=null)
 					 }
   }
 
-public function assetsmap($cnumber=null)
+public function assetsmap($cnumber=null,$typedata=null)
   {
    if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
 				{
@@ -4261,10 +4466,13 @@ public function assetsmap($cnumber=null)
 					
 					}
 					
+					$data["typedata"] = $typedata;
+				
+					
 $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
 					 $this->load->view('header',$data);
-                     $this->load->view('newmap');  
+                     $this->load->view('newmap',$data);  
 					 
 					 
 					 }
@@ -5277,8 +5485,11 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   }
   
   
-  public function varstreetLoginAthenticationTest()
+  
+  public function btobportallogin()
   {
+  
+  
   $uid = $this->session->userdata('userid');
   $this->load->model('Mysmartportal_model');
   $data  = $this->Mysmartportal_model->getpassword($uid);
@@ -5371,13 +5582,73 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	$pageurl =  @$xml->Response[0]->PunchOutSetupResponse[0]->StartPage[0]->URL[0];
 	if($pageurl=="")
 	{
-	print_r($result);
-exit;
+	
+	
+	                         $this->load->model('Mysmartportal_model');
+							$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+							$userallmenu=$this->Mysmartportal_model->getallusermenu();
+							$split = explode(",",@$usermenu[0]->menu_id);
+							$usermenu1 = array();
+							for($i=1;$i<13;$i++)
+							{
+							  $finalusermenu = array('id'=>$i,
+													 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+													 );
+							  $usermenu1[$i] = $finalusermenu;
+							}
+							$data['menu']=$usermenu1;
+							$data['ids']=$usermenu[0]->menu_id;
+							
+                            $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+						    $data['user_notifications'] = $user_notification;
+							$this->load->view('header',$data);
+							$this->load->view('errorlogin');
+							$this->load->view('footerbtob'); 
+
 	
 	}else{
+	
+	//echo $pageurl;
+	
 	header("Location:".$pageurl);
 	exit;
 	}
+  
+  
+  
+  
+  
+  }
+  
+  
+  public function varstreetLoginAthenticationTest()
+  {
+  
+  
+    $this->load->model('Mysmartportal_model');
+							$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+							$userallmenu=$this->Mysmartportal_model->getallusermenu();
+							$split = explode(",",@$usermenu[0]->menu_id);
+							$usermenu1 = array();
+							for($i=1;$i<13;$i++)
+							{
+							  $finalusermenu = array('id'=>$i,
+													 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+													 );
+							  $usermenu1[$i] = $finalusermenu;
+							}
+							$data['menu']=$usermenu1;
+							$data['ids']=$usermenu[0]->menu_id;
+							
+                            $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+						    $data['user_notifications'] = $user_notification;
+							$this->load->view('header',$data);
+							$this->load->view('btob');
+							$this->load->view('footerbtob'); 
+  
+
+
+ 
 
   }
   

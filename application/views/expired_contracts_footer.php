@@ -586,6 +586,13 @@ aaSorting: [[1, 'desc']]
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+        $(document).on("click", ".popover .close" , function(){
+        $(this).parents(".popover").popover('hide');
+    });
+});
+</script>
 
     </body>
 </html>
