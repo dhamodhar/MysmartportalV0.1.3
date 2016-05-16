@@ -349,5 +349,15 @@ OR company_name IS NULL , 1, 0 ) , company_name ASC");
 	
 	}
 	
+	public function getfeedbackdata($id)
+	{
+	
+	    $query = $this->db->query("select * from feedback where page = '".$id."'");
+	    return $query->result();
+	
+	
+	
+	}
+	
 	
 }

@@ -38,7 +38,99 @@
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Technical Support </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> 
+
+                     <ul>
+<li><strong>Technical Support</strong></li>
+<li>The technical support page provides a snapshot of various services like,
+<ul class="sub-he">
+<li>Open orders</li>
+<li>Past due invoices</li>
+<li>Upcoming service renewal contracts</li>
+<li>Open tickets</li>
+<li>End of service devices</li> </ul> </li>
+<li>User can directly navigate to the above mentioned pages by clicking on the respective card to view the records.</li>
+<li><img src="http://lowrysmartportal.com/assets/images/technical-img.jpg"></li>
+<li>Other functionalities which User can perform from this page are,
+<ul class="sub-he">
+<li>Create a New Service Request</li>
+<li>View all service tickets status</li>
+</ul>
+</li>
+<li class="blue-bold">How to navigate</li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find Technical Support tab as the first option.</li>
+<li>Click on 'Technical Support' menu button to navigate to the page.</li>
+<li class="blue-bold">Functionality</li>
+<li class="blue-bold">Snapshot / Quick navigation Cards </li>
+<li class="blue-bold">Open orders</li>
+<li>If User have any open orders, the application will display a count of open orders on the card.
+User can click on the card to view Your open orders.</li>
+
+<li>How to check: Once User are in the Technical Support page, click on the 'Open Orders' card.
+The application will navigate User to open orders page where User can find the list of open orders if there are any.
+</li>
+<li class="blue-bold">Shipped orders</li>
+<li>If User have any Shipped orders, the application will display a count of Shipped orders on the card.
+Currently the application does not support the display of shipped orders.
+</li>
+<li class="blue-bold">Past due invoices</li>
+<li>If User have any past due invoices, the application will display a count of past due invoices on the card.</li>
+<li>User can click on the card to view Your past due invoices.</li>
+<li>How to check: Once User are in the Technical Support page, click on the 'Past due Invoices' card.</li>
+<li>The application will navigate User to past due invoices page where User can find the list of past due invoices  if there are any.</li>
+
+<li class="blue-bold">Upcoming Service Renewal Contracts</li>
+<li>If User have any service contracts about to expire in a span of 3 months, the application will display a count of those service contracts on the card.</li>
+<li>User can click on the card to view Your count service contracts about to expire in a span of 3 months.</li>
+<li>How to check: Once User are in the Technical Support page, click on the 'Upcoming Service Renewal Contracts' card.</li>
+<li>The application will navigate User to upcoming service renewal contracts page where User can find the list of list of service contracts about to expire in a span of 3 months if there are any.</li>
+
+<li class="blue-bold">Open Tickets</li>
+<li>If User have any open tickets, the application will display a count of the open tickets on the card.
+Currently the application does not support the display of open tickets.
+</li>
+
+<li class="blue-bold">End of  Service devices</li>
+<li>If User have any devices that may be reaching 'End of Service', the application will display a count of those devices on the card.</li>
+<li>Currently the application does not support the display of End of Service Devices. </li>
+
+<li class="blue-bold">New Service Request</li>
+<li>User can create a new service request for Your device right from the Technical Support page.</li>
+<li>Click on the 'New Service Request' button and User will be prompted to enter device serial number.</li>
+<li>Please provide the device serial number and click on 'Next'.</li>
+<li>The application will fetch the device details and displays it in a form.</li>
+<li>User can verify the device information and provide incident information along with User contact information and submit the form.</li>
+<li>User will receive a mail notification with the details submitted. The Lowry team will validate the information and perform further operations. </li>
+
+<li class="blue-bold">Service Tickets</li>
+<li> Currently the application displays the list of all open service tickets in the Technical Support page under 'New Service Request' button</li>
+<li>How to check: Once User are in the Technical Support page and if User have any open service tickets, the application will display the list of all open service tickets with specific details like,
+<ul class="sub-he">
+<li>Service Request Number</li>
+<li>Device Serial Number</li>
+<li>Depot/On-site</li>
+<li>Device Model</li>
+<li>Device Location</li>
+<li>Current status</li>
+<li>Additional information</li>
+<li>Last Activity Date</li>
+</ul>
+
+</li><li>User can navigate by selecting a service ticket number by clicking on it and their respective details will be displayed. </li>
+<li class="blue-bold">How to view User profile information</li>
+<li><img src="http://lowrysmartportal.com/assets/images/profile-img.jpg"></li>
+<li>Please navigate to Lowry Smart Portal link and login with your user credentials.</li>
+<li>On the right hand side top corner where your username is displayed, please click on the dropdown to view Your profile.</li>
+
+</ul>
+
+                        
+                   
+
+
+ </div>
+
 </div>
 </article>
 
@@ -85,7 +177,7 @@
           
 <div data-content>             
 <article data-accordion>
-<button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>Orders & Invoices</button>          
+<button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>Open Orders</button>          
 <div data-content>
 <div class="level3">
 <ul>
@@ -304,12 +396,7 @@ Search by combination of order id & invoice number<br/><small>pre-conditions: Or
 </div>
 </article> 
 
-<article data-accordion>
-<button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>Open Orders </button>          
-<div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
-</div>
-</article> 
+
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i></i>Invoices </button>          
@@ -408,14 +495,14 @@ Search by combination of order id & invoice number<br/><small>pre-conditions: Or
              
 
 <article data-accordion>
-<button data-control class="btn btn-primary width-100 text-left ">Managed Devices </button>          
+<button data-control class="btn btn-primary width-100 text-left ">My Projects</button>          
 <div data-content>
 <div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article>
 
 <article data-accordion>
-<button data-control class="btn btn-primary width-100 text-left ">My Projects </button>          
+<button data-control class="btn btn-primary width-100 text-left ">Managed Devices </button>          
 <div data-content>
 <div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>

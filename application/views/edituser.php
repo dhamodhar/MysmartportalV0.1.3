@@ -60,7 +60,7 @@
                                 <div class="">
                                   <div class="profile-form">   
 
-                                    <form action="<?php echo base_url()?>index.php/welcome/saveedituser" method="post"  role="form">
+                                    <form action="<?php echo base_url()?>index.php/welcome/saveedituser" method="post"  role="form" enctype="multipart/form-data">
                                      <?php 
 									 foreach($edituser as $edituserdata){
 									 
@@ -123,6 +123,15 @@
                                                 <input type="text" class="form-control" name="bus_name" id="bus_name" value="<?php echo $edituserdata->company_name?>"  readonly>
                                             </div>
                                         </div></div>
+										<!--priya-->
+						<div class="col-md-6">				  <div class="form-group">
+                                            <label for="input01"  class="control-label">Image <span style="color:red">*</span></label>
+                                            <div>
+                                                <img src="<?php echo base_url()?>assets/images/<?php echo @$edituserdata->image;?>" height="50px" width="50px">
+                                                <input type="file" name="updated_image" id="updated_image" class="form-control">
+                                            </div>
+                                        </div></div>
+										<!-- -->
 						
 									 <div class="col-md-6">	  <div class="form-group">
                                             <label for="input01" class=" control-label">Role <span style="color:red">*</span></label>

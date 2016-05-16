@@ -1,5 +1,3 @@
-
-
             <!-- ====================================================
             ================= CONTENT ===============================
             ===================================================== -->
@@ -18,7 +16,7 @@
                                     <a href="<?php echo base_url();?>index.php/welcome/technical_support"><i class="fa fa-home"></i> Lowry Solutions</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url();?>index.php/welcome/user_profile"></i>Feedback</a>
+                                    <a href="<?php echo base_url();?>index.php/welcome/user_profile"></i>Mobility</a>
                                 </li>
                           
                                 
@@ -41,8 +39,10 @@
         <th>Manufacturer</th>
         <th>Status</th>
         <th>More Details</th>
+        <th>Actions</th>
+<th>&nbsp;</th>
       </tr>
-      <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+      <tr>
         <td><img style="width:35px;height:35px;" alt="Offline Device" src="http://lowrysmartportal.com/assets/images/smartphone.png"></td>
         <td>CK71 - Production Floor</td>
         <td>WindowsCE 6.5</td>
@@ -51,7 +51,18 @@
         <td>2016-5-2 3:57 PM</td>
         <td>Intermec Technologies</td>
         <td><img style="width:22px;height:35px;" alt="Offline Device" src="http://lowrysmartportal.com/assets/images/status-green.png"></td>
-        <td><button class="btn btn-primary btn-xs" onclick="showDetails1()">Details</button></td>
+        <td data-toggle="collapse" data-target="#demo1" class="accordion-toggle"><button class="btn btn-primary btn-xs" onclick="showDetails1()">Details</button></td>
+
+<td><select name="orders-list_length" aria-controls="orders-list" class="form-control input-sm">
+<option value="Wipe">Wipe</option>
+<option value="Wipe">Lock</option>
+<option value="Wipe">Check-in</option>
+<option value="Wipe">Un-enroll</option>
+<option value="Wipe">Send Message</option>
+<option value="Wipe">Locate</option>
+</select>
+</td>
+<td><button onclick="showDetails1()" class="btn btn-primary btn-xs">Go</button></td>
       </tr>
 
  <tr>
@@ -80,7 +91,7 @@
 
 
 
-           <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
+           <tr>
           <td><img style="width:35px;height:35px;" alt="Offline Device" src="http://lowrysmartportal.com/assets/images/computer.png"></td>
         <td>CV41 - Cab On Floor 2</td>
         <td>WindowsWM</td>
@@ -89,7 +100,17 @@
         <td>2016-4-19 4:20 PM</td>
         <td>Intermec Technologies</td>
 <td><img style="width:35px;height:35px;" alt="Offline Device" src="http://lowrysmartportal.com/assets/images/computer-red.png"></td>
-         <td><button class="btn btn-primary btn-xs" onclick="showDetails1()">Details</button></td>
+         <td data-toggle="collapse" data-target="#demo2" class="accordion-toggle"><button class="btn btn-primary btn-xs" onclick="showDetails1()">Details</button></td>
+<td><select name="orders-list_length" aria-controls="orders-list" class="form-control input-sm">
+<option value="Wipe">Wipe</option>
+<option value="Wipe">Lock</option>
+<option value="Wipe">Check-in</option>
+<option value="Wipe">Un-enroll</option>
+<option value="Wipe">Send Message</option>
+<option value="Wipe">Locate</option>
+</select>
+</td>
+<td><button onclick="showDetails1()" class="btn btn-primary btn-xs">Go</button></td>
       </tr>
 
 <tr>
@@ -115,7 +136,7 @@
               
               </div> </td>
         </tr>
-      <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
+      <tr>
        <td><img style="width:35px;height:35px;" alt="Offline Device" src="http://lowrysmartportal.com/assets/images/smartphone.png"></td>
         <td>Psion Workabout Pro</td>
         <td>WindowsCE 6.5</td>
@@ -124,7 +145,17 @@
         <td>2015-2-2 11:58 AM</td>
 <td>Intermec Technologies</td>
         <td><img style="width:22px;height:35px;" alt="Offline Device" src="http://lowrysmartportal.com/assets/images/status-green.png"></td>
-         <td><button class="btn btn-primary btn-xs" onclick="showDetails1()">Details</button></td>
+           <td data-toggle="collapse" data-target="#demo2" class="accordion-toggle"><button class="btn btn-primary btn-xs" onclick="showDetails1()">Details</button></td>
+<td><select name="orders-list_length" aria-controls="orders-list" class="form-control input-sm">
+<option value="Wipe">Wipe</option>
+<option value="Wipe">Lock</option>
+<option value="Wipe">Check-in</option>
+<option value="Wipe">Un-enroll</option>
+<option value="Wipe">Send Message</option>
+<option value="Wipe">Locate</option>
+</select>
+</td>
+<td><button onclick="showDetails1()" class="btn btn-primary btn-xs">Go</button></td>
       </tr>
 
 <tr>

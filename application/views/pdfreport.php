@@ -109,14 +109,14 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
   <tr>
     <td align="left" valign="top" style="border-right:1px solid #000;">Client PO<br />
       '.$cust_po.'</td>
-    <td align="left" valign="top" style="border-right:1px solid #000;">
-      </td>
-    <td align="left" valign="top" style="border-right:1px solid #000;">
-      </td>
-    <td align="left" valign="top" style="border-right:1px solid #000;">
-     </td>
-    <td align="left" valign="top" style="border-right:1px solid #000;"></td>
-    <td align="left" valign="top" style="border-right:1px solid #000;"></td>
+    <td align="left" valign="top" style="border-right:1px solid #000;">Cost Center<br />
+      '.$costcenter.'</td>
+    <td align="left" valign="top" style="border-right:1px solid #000;">Consolidation <br />
+      '.$consolidation.'</td>
+    <td align="left" valign="top" style="border-right:1px solid #000;">Ship Via <br />
+     '.$shipvia.'</td>
+    <td align="left" valign="top" style="border-right:1px solid #000;">PPD/COLL/PP&A <br /> '.$ppdcoll.'</td>
+    <td align="left" valign="top" style="border-right:1px solid #000;">PPS# <br />'.$pps.'</td>
   </tr>
 </table>
 

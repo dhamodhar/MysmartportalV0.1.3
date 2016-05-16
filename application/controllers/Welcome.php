@@ -130,6 +130,7 @@ class Welcome extends CI_Controller {
 											'phone_number' => $user[0]->phone_number,
 											'role' => $user[0]->role,
 											'cust_code' => $user[0]->cus_code,
+											'image' => @$user[0]->image,
 											'is_logged_in' => 1
 												  );
 												  
@@ -383,6 +384,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				}else{
 				
 					$this->load->model('Mysmartportal_model');
+					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("OpenOrders");
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
 					$userallmenu=$this->Mysmartportal_model->getallusermenu();
 					$split = explode(",",@$usermenu[0]->menu_id);
@@ -409,7 +411,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
 							 $this->load->view('header',$data);
-							 $this->load->view('open_orders');
+							 $this->load->view('open_orders',$data);
 							 $this->load->view('open_orders_footer');
 				         }else
 						 {
@@ -446,7 +448,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					}
 					$data['menu']=$usermenu1;
 					$data['ids']=$usermenu[0]->menu_id;
-					$data['order_id'] = $order_id;
+					
+					$data['order_id'] = base64_decode(urldecode($order_id));
 					
 $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
@@ -1287,6 +1290,14 @@ Thank you for registering with Lowrysmartportal.</p>
 						 $ids = 1;
 						 
 						 }
+					if(!empty($_FILES["updated_image"]["name"]))
+					  {
+					  
+					 
+					  $img_name2 = $_FILES["updated_image"]["name"];         	
+					  move_uploaded_file($_FILES["updated_image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/assets/images/" . $_FILES["updated_image"]["name"]);
+					  }
+						 
 					$params = array('first_name'=>$this->input->post('first_name'),
 									'last_name'=>$this->input->post('last_name'),
 									'email_id'=>$this->input->post('email'),
@@ -1303,7 +1314,8 @@ Thank you for registering with Lowrysmartportal.</p>
                                     'city'=>$this->input->post('city'),
                                     'state'=>$this->input->post('state'),
                                     'zip'=>$this->input->post('zip'),
-                                    'country'=>$this->input->post('country')									
+                                    'country'=>$this->input->post('country'),
+									'image'=>$img_name2										
 									 );
 									 $this->load->model('Mysmartportal_model');
 									 $save = $this->Mysmartportal_model->saveedituser($params,$uid);
@@ -1466,26 +1478,99 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	}
 	
 	
+	public function commingsoon()
+	{
+		
+		if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+				{
+				   redirect(base_url()."index.php/welcome/index");
+				
+				}else{
+				
+				            $this->load->model('Mysmartportal_model');
+							$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+							$userallmenu=$this->Mysmartportal_model->getallusermenu();
+							$split = explode(",",@$usermenu[0]->menu_id);
+							$usermenu1 = array();
+							for($i=1;$i<13;$i++)
+							{
+							  $finalusermenu = array('id'=>$i,
+													 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+													 );
+							  $usermenu1[$i] = $finalusermenu;
+							}
+							$data['menu']=$usermenu1;
+							$data['ids']=$usermenu[0]->menu_id;
+							
+                            $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+						    $data['user_notifications'] = $user_notification;
+							$this->load->view('header',$data);
+							$this->load->view('commingsoon');
+							$this->load->view('footer'); 
+					}
+		
+	}
+	
+	
+	/**
+	 *  User Feedback Page Loading.
+	 
+	 */
+    public function manageddevices()
+	{
+		
+		if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+				{
+				   redirect(base_url()."index.php/welcome/index");
+				
+				}else{
+				
+				            $this->load->model('Mysmartportal_model');
+							$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+							$userallmenu=$this->Mysmartportal_model->getallusermenu();
+							$split = explode(",",@$usermenu[0]->menu_id);
+							$usermenu1 = array();
+							for($i=1;$i<13;$i++)
+							{
+							  $finalusermenu = array('id'=>$i,
+													 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+													 );
+							  $usermenu1[$i] = $finalusermenu;
+							}
+							$data['menu']=$usermenu1;
+							$data['ids']=$usermenu[0]->menu_id;
+							
+                            $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+						    $data['user_notifications'] = $user_notification;
+							$this->load->view('header',$data);
+							$this->load->view('manageddevices');
+							$this->load->view('footer'); 
+					}
+		
+	}
+	
+	
+	
 	public function savefeedback()
 	{
 	
 			$email = $this->input->post("username_req");
 			$first_name_req = $this->input->post("first_name_req");
-			$company = $this->input->post("bus_name_req");
-			$phone1_req = $this->input->post("phone1_req");
+			$component = $this->input->post("bus_name_req");
+		
 			$datauser = $this->input->post("datauser");
-			$feedbackdata = "<table><tr><td>Email: </td><td>".$email."</td></tr><tr><td>Name: </td><td>".$first_name_req."</td></tr><tr><td>Company: </td><td>".$company."</td></tr><tr><td>Phone Number: </td><td>".$phone1_req."</td></tr><tr><td>Message: </td><td>".$datauser."</td></tr></table>";
+			$feedbackdata = "<table><tr><td>Email: </td><td>".$email."</td></tr><tr><td>Name: </td><td>".$first_name_req."</td></tr><tr><td>Component: </td><td>".$component."</td></tr><tr><td>Message: </td><td>".$datauser."</td></tr></table>";
 			
 
                      $message=$feedbackdata;									
  
-					 $to = "dhamodhar.enaganti@livait.net,bhaskar@livait.com";
+					 $to = "dhamodhar.enaganti@livait.net";
 					 $subject = "Feedback from User";
 
                      $headers  = 'MIME-Version: 1.0' . "\r\n";
                      $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 					 $retval = mail ($to,$subject,$message,$headers);						 
-			 redirect(base_url()."index.php/welcome/technical");
+			 redirect(base_url()."index.php/welcome/technical_support");
 	
 	
 	
@@ -1534,6 +1619,13 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				}else{
 				
 				            $this->load->model('Mysmartportal_model');
+							
+							//getting feedback  data
+							
+							$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("Technical support");
+							
+							
+							
 							$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
 							$userallmenu=$this->Mysmartportal_model->getallusermenu();
 							$split = explode(",",@$usermenu[0]->menu_id);
@@ -2337,7 +2429,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							}
 							$data['menu']=$usermenu1;
 							$data['ids']=$usermenu[0]->menu_id;
-							$data['invoicenumber'] = $order_id;
+							$data['invoicenumber'] = base64_decode(urldecode($order_id));
 							
 $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
@@ -2387,6 +2479,17 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   
 										   
 										   $data['order_date'] = $node->getElementsByTagName('order_date')->item(0)->nodeValue;
+										   
+										   
+										   $data['costcenter'] = $node->getElementsByTagName('CostCenter')->item(0)->nodeValue;
+										   $data['consolidation'] = $node->getElementsByTagName('Consolidation')->item(0)->nodeValue;
+										   $data['shipvia'] = $node->getElementsByTagName('ShipVia')->item(0)->nodeValue;
+										   $data['ppdcoll'] = $node->getElementsByTagName('PPDcoll')->item(0)->nodeValue;
+										   $data['pps'] = $node->getElementsByTagName('pps')->item(0)->nodeValue;
+										   
+										   
+										   
+										   
 										   $data['post_date'] = $node->getElementsByTagName('post_date')->item(0)->nodeValue;
 										   $data['ship_date'] = $node->getElementsByTagName('ship_date')->item(0)->nodeValue;
 										   $data['billto_code'] = $node->getElementsByTagName('billto_code')->item(0)->nodeValue;
@@ -3469,7 +3572,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					{
 				
 					
-$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/15693-000/38137%7C38136%7C38135%7C38134%7C38133%7C1008134%7C38315%7C5468%7C38312%7C38285%7C38261%7C38176%7C38172%7C38171%7C38143%7C38137%7C38136%7C38135%7C38134%7C38133%7C1008134%7C38143%7C38171%7C38172%7C38176%7C38261%7C38285%7C38312%7C38315%7C5468/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$ship_to_code.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 					
 					}else{
@@ -3514,7 +3617,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 										{ 
 										
 										if($node->getElementsByTagName('Contract_Status')->item(0)->nodeValue == "Active"){
-											echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('SerialNumber')->item(0)->nodeValue."</SerialNumber><Part_Number>".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('Type')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('contract_number')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('End_date')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue."</Contract_Status><Options>".$node->getElementsByTagName('Options')->item(0)->nodeValue."</Options><assetaddress>".$node->getElementsByTagName('AssetAddress')->item(0)->nodeValue."</assetaddress><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
+											echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('SerialNumber')->item(0)->nodeValue."</SerialNumber><device_type>".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."</device_type><Part_Number>".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('Type')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('contract_number')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('End_date')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue."</Contract_Status><Options>".$node->getElementsByTagName('Options')->item(0)->nodeValue."</Options><assetaddress>".$node->getElementsByTagName('AssetAddress')->item(0)->nodeValue."</assetaddress><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
 		                                     }
 										
 										}else if($user_status == "Expired")
@@ -5794,6 +5897,18 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   
   
   
+  
+  }
+  
+  public function notyfyuser()
+  {
+  $email = $this->input->post("useremail");
+  $to="dhamodhar.enaganti@livait.net";
+  $subject="My Project Module Request From User.";
+  $message="My Project Module Request From User.<br>  Email: ".$email;
+  	 $headers  = 'MIME-Version: 1.0' . "\r\n";
+	 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+  $retval = mail ($to,$subject,$message,$headers);	
   
   }
 

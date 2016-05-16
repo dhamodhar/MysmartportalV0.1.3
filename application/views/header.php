@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/animate.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/vendor/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/scrolltabs.css">
-
+   <link rel="stylesheet" href="<?php echo base_url()?>assets/css/feedback.css">
       
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/animsition/css/animsition.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/daterangepicker/daterangepicker-bs3.css">
@@ -41,7 +41,6 @@
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/chosen/chosen.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/summernote/summernote.css">
   <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="<?php echo base_url()?>assets/css/feedback.css">
  
  
 
@@ -216,8 +215,20 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                                     <li class="list-group-item">
                                         <a href="<?php echo base_url()?>index.php/welcome/viewmessage/<?php echo $user_notificationsdata->id;?>" role="button" tabindex="0" class="media">
                                             <span class="pull-left media-object thumb thumb-sm">
-                                                <img src="<?php echo base_url()?>assets/images/logo.png" alt="" class="img-circle">
-                                            </span>
+											<?php 
+											
+											
+											if($this->session->userdata('image')!=""){
+											?>
+											
+                                                <img src="<?php echo base_url()?>assets/images/<?php echo $this->session->userdata('image'); ?>" width="80px" height="60px" alt="" class="img-circle">
+                                           
+										   <?php }else{ ?> 
+                                                <img src="<?php echo base_url()?>assets/images/dart.png" alt="" class="img-circle">
+                                           
+											<?php } ?>
+
+										   </span>
                                             <div class="media-body">
                                                 <span class="block"><?php echo $user_notificationsdata->msg_subject; ?></span>
                                                 <small class="text-muted"><?php echo $user_notificationsdata->created_date; ?> </small>
@@ -244,8 +255,19 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                         <li class="dropdown nav-profile">
 
                             <a href class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?php echo base_url()?>assets/images/logo.png" alt="" class="img-circle size-30x30">
-                                <span><?php echo ucfirst($this->session->userdata('firstname'))?> <?php echo ucfirst($this->session->userdata('lastname'))?> <i class="fa fa-angle-down"></i></span>
+								<?php 
+											
+											
+											if($this->session->userdata('image')!=""){
+											?>
+											
+                                                <img src="<?php echo base_url()?>assets/images/<?php echo $this->session->userdata('image'); ?>" width="80px" height="60px" alt="" class="img-circle size-30x30">
+                                           
+										   <?php }else{ ?> 
+                                               <img src="<?php echo base_url()?>assets/images/dart.png" alt="" class="img-circle size-30x30">
+                                
+											<?php } ?>
+                               <span><?php echo ucfirst($this->session->userdata('firstname'))?> <?php echo ucfirst($this->session->userdata('lastname'))?> <i class="fa fa-angle-down"></i></span>
                             </a>
 
                             <ul class="dropdown-menu animated littleFadeInRight" role="menu">
@@ -487,7 +509,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										 };
 										?>
 										
-										    <li><a href="#" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>My Projects</span></a></li>
+										    <li><a href="<?php echo base_url()."index.php/welcome/commingsoon" ?>" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>My Projects</span></a></li>
                                   
 										
 										<?php } else if($menu[$i]['id']==8)
@@ -500,7 +522,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 		
 										 };
 										?>
-										 <li><a href="<?php echo $url ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >Managed Devices</span></a></li>
+										 <li><a href="<?php echo base_url()."index.php/welcome/mobility" ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >Managed Devices</span></a></li>
                                          
 										 
 										
@@ -558,15 +580,12 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
                                         <!--/ NAVIGATION Content -->
 
 
-
-
                                     </div>
  <!-- tile -->
-                          
+                           <!-- <section class="products-cat">
 
-
-
-
+                                    <div id="pie-chart" style="height: 250px"></div>
+									</section>-->
 
                                 </div>
                             </div>
@@ -575,8 +594,6 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
                             </div>
                             
                         </div>
-
-
 
                     </div>
 

@@ -127,7 +127,7 @@ speed: 3000
 					  map_view_status = "<td style='width:100px;'>"+contract_status+"</td>";
 
 					}	
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+contract_number+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+contract_number+"'>"+contract_number+"</a></td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
                      }				 
 		   });
 			   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {

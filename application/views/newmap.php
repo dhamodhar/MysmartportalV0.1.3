@@ -156,7 +156,7 @@
 				
 				}
 				//alert(cnumber);
-				//alert(type);
+				//alert("http://lowrysmartportal.com/index.php/welcome/all_assets/"+cnumber+"/500/"+type);
 				
 				$.ajax({
 							type: "GET",
@@ -177,6 +177,7 @@
 														 var assetdesc= $(this).find('part_description').text();
 														 //var item_qty = $(this).find('assetitemdetails').text();
 														 var SerialNumber = $(this).find('SerialNumber').text();
+														 var contractnumber = $(this).find('contract_number').text();
 														 //var part_number = $(this).find('part_number').text();
 														 //var totalitem = $(this).find('totalrec').text();
 														 
@@ -186,10 +187,10 @@
 													
 															 if(typeof temp == "undefined")
 															 {
-																newdata[assetaddress] = SerialNumber;
+																newdata[assetaddress] = contractnumber;
 																partdescriptiondata[assetaddress] = assetdesc;
 															 }else{
-																newdata[assetaddress] = SerialNumber+","+temp; 															
+																newdata[assetaddress] = contractnumber+","+temp; 															
 																partdescriptiondata[assetaddress] = assetdesc; 															
 															 }
 														 
@@ -238,7 +239,7 @@
 		  tabledata = tabledata+"<tr><td>"+res[i]+"</td></tr>";
 		}
 		
-		var infodata = "<table><tr><td><b>Part Description: </b>"+partdescription+"</td></tr><tr><td>&nbsp;</td></tr><tr><td><b>Address: </b>"+assetaddress+"</td></tr><tr><td>&nbsp;</td></tr><tr><td><b>Serial Numbers: </b></td></tr>"+tabledata+"</table>";
+		var infodata = "<table><tr><td><b>Part Description: </b>"+partdescription+"</td></tr><tr><td>&nbsp;</td></tr><tr><td><b>Address: </b>"+assetaddress+"</td></tr><tr><td>&nbsp;</td></tr><tr><td><b>Contract Numbers: </b></td></tr>"+tabledata+"</table>";
 		
 		
 			 geocoder.geocode( { 'address': assetaddress}, function(results, status) {

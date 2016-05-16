@@ -196,8 +196,18 @@
 						var data = val.split(",");
 						for(var i=0;i<data.length;i++)
 						{
-						links = links+',<a href="http://lowrysmartportal.com/index.php/welcome/assets/'+data[i]+'">'+data[i]+'</a>';
 						
+						if(links == "")
+						{
+						links = '<a href="http://lowrysmartportal.com/index.php/welcome/assets/'+data[i]+'"  style="text-decoration: underline !important; color: blue;">'+data[i]+'</a>';
+					
+						
+						}else
+						{
+						links = links+', <a href="http://lowrysmartportal.com/index.php/welcome/assets/'+data[i]+'" style="text-decoration: underline !important; color: blue;">'+data[i]+'</a>';
+					
+						}
+							
 						}
 		
 			geocoder.geocode( { 'address': prop}, function(results, status) {
