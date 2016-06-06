@@ -149,7 +149,7 @@
 											
 											
                                         </div>
-<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<!--<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>-->
 
                                     </div> </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>

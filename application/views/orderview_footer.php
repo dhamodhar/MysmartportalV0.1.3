@@ -205,7 +205,7 @@ $.ajax({
                         $("#order_details1").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mb-20'><li><strong>Tax Amount: </strong> $ "+total_tax+"</li><li><strong>Shipping Charges: </strong>$ "+shipping_charge+"</li><li><strong>Handling Charges: </strong>$ "+handling_charges+"</li><li><strong>Total Amount: </strong> $"+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li><li><strong>Carrier: </strong> <a href='https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracking_number.trim()+"&cntry_code=us' target='_blank'>"+carrier+"</a></li></ul></ul>");
 						$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipst+"</li><li>"+shipcity+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");						
 						$("#billing").html("<p class='text-uppercase text-strong mb-10 custom-font'>BILLING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+billname+"</li><li>"+billadd1+"</li><li>"+billadd2+"</li><li>"+billadd3+"</li><li>"+billcity+"</li><li>"+billst+" - "+billzip+"</li><li>"+billcountry+"</li></ul>");
-						$("#order_number").html(order_numb.trim()+'-'+rel_number);
+						$("#order_number").html(order_numb.trim());
 						var full_order_number = order_numb.trim()+"-"+rel_number.trim();
 						var download = 2;
 						$("#pdf_id").html("<a href='javascript:void(0)' onclick='send_email_pdf("+order_numb.trim()+","+rel_number+",1)'   class='btn btn-primary  mb-10'>Email PDF</a>");
@@ -226,7 +226,7 @@ $.ajax({
 								$("#order_details1").css("display","none");
 								$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipst+"</li><li>"+shipcity+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");
 								$("#billing").html("<p class='text-uppercase text-strong mb-10 custom-font'>BILLING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+billname+"</li><li>"+billadd1+"</li><li>"+billadd2+"</li><li>"+billadd3+"</li><li>"+billcity+"</li><li>"+billst+" - "+billzip+"</li><li>"+billcountry+"</li></ul>");
-								$("#order_number").html(order_numb.trim()+'-'+rel_number);
+								$("#order_number").html(order_numb.trim());
 								var full_order_number = order_numb.trim()+"-"+rel_number.trim();
 								var download = 2;
 								$("#pdf_id").html("<a href='javascript:void(0)' onclick='send_email_pdf("+order_numb.trim()+","+rel_number+",1)'   class='btn btn-primary btn-sm mb-10'>Email PDF</a>");

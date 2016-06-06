@@ -158,11 +158,11 @@
                                                 <tr>
                                                     
                                                     <th style="width:180px;">Order&nbsp;Number</th>
-                                                    <th style="width:200px;">Order&nbsp;Date</th>
+                                                    <th style="width:120px;">Order&nbsp;Date</th>
                                                     <th style="width:150px;">Customer PO</th>                                                    
                                                    <!-- <th style="width:150px;">Tracking Number</th>-->
                                                      
-                                                    <th style="width:150px;">Delivery Date</th>
+                                                    <th style="width:150px;">Estimated Ship Date</th>
                                                    <!-- <th style="width:150px;">Order Amount</th>-->
                                                     <th style="width:150px;">Shipping City / State</th>
                                                     <th style="width:150px;">Status</th>

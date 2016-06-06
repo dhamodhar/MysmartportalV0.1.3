@@ -129,7 +129,7 @@ speed: 3000
 								
                                 var error =  $(this).find('error').text();             
 					if(error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+deviceType+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+deviceType+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
                  //datatables(); 
 
                      }				 
@@ -229,7 +229,7 @@ var invoicenumber = document.getElementById("serial_no").value;
                                 var Options= $(this).find('Options').text();
                                 var Error =  $(this).find('Error').text();             
 					if(Error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
                  //datatables(); 
 
                      }				 
@@ -311,7 +311,7 @@ $.fn.dataTable.ext.errMode = 'none';
                                 var Options= $(this).find('Options').text();
                                 var Error =  $(this).find('Error').text();             
 					if(Error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
                  //datatables(); 
 
                      }				 
@@ -410,7 +410,7 @@ var test1 = "";
                                 var Options= $(this).find('Options').text();
                                 var error =  $(this).find('error').text();             
 					if(error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
                  //datatables(); 
 
                      }				 
@@ -508,7 +508,7 @@ $.fn.dataTable.ext.errMode = 'none';
                                 var Options= $(this).find('Options').text();
                                 var error =  $(this).find('error').text();             
 					if(error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
                  //datatables(); 
 
                      }				 

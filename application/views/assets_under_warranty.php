@@ -141,7 +141,7 @@
                                             </table>
 </div> 
 											
-											<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
+											<!--<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>-->
 
 											
 											
@@ -164,7 +164,7 @@
                         </div>
                         <!-- /row -->
 
-<input type="hidden" name="count1" id="count1" value="25">
+<input type="hidden" name="count1" id="count1" value="1">
 
 
 

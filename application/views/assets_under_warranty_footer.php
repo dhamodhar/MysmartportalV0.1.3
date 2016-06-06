@@ -99,9 +99,10 @@ speed: 3000
                                 var End_date= $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
+                                var Device_Type= $(this).find('Device_Type').text();
                                 var error =  $(this).find('error').text();             
 					if(error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+Device_Type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
 
                      }				 
 		   });
@@ -343,9 +344,9 @@ function loadmore()
         $.fn.dataTable.ext.errMode = 'none';
 		var data = $('#assets-list').dataTable();
 		data.fnDestroy();
-		$('#assets-list tbody').html("");
+		//$('#assets-list tbody').html("");
 		var count = document.getElementById("count1").value;
-		var num_of_page = 25;
+		var num_of_page = 1;
 		var total_count = parseInt(count)+(num_of_page);
 		document.getElementById("count1").value = total_count;
 		
@@ -361,12 +362,10 @@ var test1 = "";
 	//alert("<?php echo base_url()?>index.php/welcome/all_assets/<?php if($c_number!=""){ echo $c_number; }else{ echo "%20";}?>/"+total_count);
         $.ajax({
             type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/all_assets/<?php if($c_number!=""){ echo $c_number; }else{  echo "%20";}?>/"+total_count,
+            url: "<?php echo base_url()?>index.php/welcome/all_assets_under_warranty_api/ /"+total_count,
             dataType: "text",
             success: function(xml){
-			//alert(xml);
-			//$('#orders-list tbody').append(xml);
-                          $(xml).find('assetspage').each(function(){
+	            $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
 				var Part_Number= $(this).find('Part_Number').text();
@@ -377,10 +376,10 @@ var test1 = "";
                                 var End_date= $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
+                                var Device_Type= $(this).find('Device_Type').text();
                                 var error =  $(this).find('error').text();             
 					if(error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
-                 //datatables(); 
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+Device_Type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
 
                      }				 
 		   });

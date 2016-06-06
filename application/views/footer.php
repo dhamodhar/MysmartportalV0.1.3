@@ -1457,14 +1457,14 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-function notifyuser_for_commingsoon()
+function notifyuser_for_commingsoon(page)
 {
 var useremail = document.getElementById("user_notyfy_email").value;
 
              $.ajax({
 					type: "POST",
 					url: "<?php echo base_url()?>index.php/welcome/notyfyuser",
-					data:"useremail="+useremail,
+					data:"useremail="+useremail+"&page="+page,
 					dataType: "text",
 					success: function(xml){
 					document.getElementById("notify").style.display ='none';

@@ -346,10 +346,7 @@ var user_role = document.getElementById("role").value;
 	<script>
 		function deletelocation(id)
 		{
-		var location = confirm("are you sure want to delete");
-				if(location)
-				{
-
+	
 						 $.ajax({
 							type: "GET",
 							url: "<?php echo base_url()?>index.php/welcome/deletelocations/"+id,
@@ -362,10 +359,7 @@ var user_role = document.getElementById("role").value;
 						 });
 						
 						
-				}else{
-						
-						
-				}
+				
 		
 		}
 

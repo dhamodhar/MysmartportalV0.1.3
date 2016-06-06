@@ -64,12 +64,11 @@
 
 
 <!--Start of Zopim Live Chat Script-->
-<!--Start of Zopim Live Chat Script-->
 <script type="text/javascript">
 window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
 d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
 _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-$.src="//v2.zopim.com/?3Zf5QymdG6au1kyopEzGeOmccuS5f5V7";z.t=+new Date;$.
+$.src="//v2.zopim.com/?2mvuakIdsN3nZV30kStyEHOrDebMHbDk";z.t=+new Date;$.
 type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 </script>
 <!--End of Zopim Live Chat Script-->
@@ -509,7 +508,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										 };
 										?>
 										
-										    <li><a href="<?php echo base_url()."index.php/welcome/commingsoon" ?>" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>My Projects</span></a></li>
+										    <li <?php if($this->uri->segment(2) == url_title('MyProjects', TRUE)){?> class="active"<?php }?>><a href="<?php echo base_url()."index.php/welcome/MyProjects" ?>" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>My Projects</span></a></li>
                                   
 										
 										<?php } else if($menu[$i]['id']==8)
@@ -522,7 +521,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 		
 										 };
 										?>
-										 <li><a href="<?php echo base_url()."index.php/welcome/mobility" ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >Managed Devices</span></a></li>
+										 <li <?php if($this->uri->segment(2) == url_title('ManagedDevices', TRUE)){?> class="active"<?php }?>><a href="<?php echo base_url()."index.php/welcome/ManagedDevices" ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >Managed Devices</span></a></li>
                                          
 										 
 										
@@ -530,14 +529,14 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										<?php } else if($menu[$i]['id']==9)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){
-										 $url = "https://mdm-trial.lowrysolutions.com/mobicontrol/";
+										 $url = base_url()."index.php/welcome/PrinterManagement";
 										 
 										 }else{
 										 $url = base_url()."index.php/welcome/accessdenied";
 		
 										 };
 										?>
-										 <li><a href="<?php echo $url ?>" target="_blank" class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> print-active<?php }?>"> <span>Printer Management</span></a></li>
+										 <li <?php if($this->uri->segment(2) == url_title('PrinterManagement', TRUE)){?> class="active"<?php }?>><a href="<?php echo $url ?>"  class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> print-active<?php }?>"> <span>Printer Management</span></a></li>
      
 										<?php } else if($menu[$i]['id']==10)
 										  {

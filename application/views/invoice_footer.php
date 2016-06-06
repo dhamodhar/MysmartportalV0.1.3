@@ -123,7 +123,7 @@ speed: 3000
 			   var encodedString = Base64.encode(invoice_numb);
 				var finalordernumber = encodeURIComponent(String(encodedString));
 			   
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px; text-align: right;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
                                 
 
 								}				 

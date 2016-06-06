@@ -197,7 +197,7 @@ View Assets in Map</a>
                                        
                                        
                                         </div>
-<div class="mt-20 float-left table-responsive">
+<div class="mt-20  table-responsive">
                                             <table class="table table-striped table-hover table-custom" id="assets-list">
                                                 <thead>
                                                 <tr>
@@ -211,7 +211,7 @@ View Assets in Map</a>
 													<th style="width:100px;">Start Date</th> 
 													<th style="width:100px;" class="active">End Date</th> 
 												        <th style="width:100px;">Status</th>
-                                                                                                        <th style="width:100px;">Options</th>	
+                                                                                                      
 																										
                                                 </tr>
                                                 </thead>
@@ -227,7 +227,7 @@ View Assets in Map</a>
 											
 											
                                         </div>
-<button class="btn btn-primary btn-xs  load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<!--<button class="btn btn-primary btn-xs  load-buts" onclick="loadmore()" value="Load More">Load More</button>-->
 </div>
 
                                     </div>  </div>

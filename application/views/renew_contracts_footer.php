@@ -139,7 +139,7 @@ $(document).ready(function(){
             success: function(xml){
 			//alert(xml);
 			//$('#orders-list tbody').append(xml);
-                $(xml).find('servicecontractlist').each(function(){
+                $(xml).find('contracts').each(function(){
 				
                 var contract_number= $(this).find('contract_number').text();
 				var start_date= $(this).find('start_date').text();

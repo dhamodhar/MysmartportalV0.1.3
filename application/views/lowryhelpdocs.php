@@ -145,14 +145,14 @@ Currently the application does not support the display of open tickets.
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> Service Tickets </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article> 
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> Service Contracts </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article> 
 
@@ -160,7 +160,7 @@ Currently the application does not support the display of open tickets.
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>  Labels & Supplies </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article> 
 
@@ -180,215 +180,39 @@ Currently the application does not support the display of open tickets.
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>Open Orders</button>          
 <div data-content>
 <div class="level3">
-<ul>
-<li><img src="http://lowrysmartportal.com/assets/images/orders-img.jpg"/></li>
+ <ul>
+<li><strong>Orders & Invoices</strong></li>
+<li><img src='http://lowrysmartportal.com/assets/images/orders-img.jpg'/></li>
 <li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
 <li>Once logged in, on the left hand side menu User can find Orders & Invoices tab as the third option.</li>
-<li>Click on "Orders & Invoices" to expand.</li>
-<li>Click on the first option "Orders & Invoices" to display orders & invoices page.</li>
-<li>The list of all orders & invoices will be displayed in a table.</li>
-<li class="blue-bold">Functionality</li>
-<li>User can perform various functionalities provided in the orders & invoices page for ease of use and access. They are,</li>
-<li class="blue-bold">Order & Invoice Search</li>
-<li>User can search orders & invoices up to a span of past one year by using this functionality. </li>
-<li>User can use anyone option or two combinations  or all of these,
-<ul><li>Search by Order ID.</li> <li>Search by Invoice number.</li> <li>Search between dates.</li></ul>
+<li>Click on 'Orders & Invoices' to expand.</li>
+<li>Click on the second option 'Open Orders' to display open orders  page.</li>
+<li>The list of all open orders  will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the open orders  page for ease of use and access. They are,</li>
+<li class='blue-bold'>Open Order Search</li>
+<li>User can search open orders up to a span of past one year by using this functionality.  </li>
+<li> User can use anyone option or two combinations  or all of these,
+<ul class='sub-he'><li>Search by Order ID.</li> <li>Search between dates.</li> </ul>
 </li>
 
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
 
-<li style="width:40%;display:inline-block;" class="blue-bold">
-Search by Order ID<br/><br/>
-<table  border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <th align="left" bgcolor="#338cc2"><strong>S.No.</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Input</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Expected Result</strong></th>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">1</td>
-    <td align="left" bgcolor="#E8E8E8">Order  ID</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Number</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Order  Date</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Customer  PO</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Invoice</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Amount</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Shipping  City / State</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Status</td>
-  </tr>
-</table>
-</li>
-
-<li style="width:40%;display:inline-block;" class="blue-bold">
-Search by Invoice number<br/><br/>
-
-<table  border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <th align="left" bgcolor="#338cc2"><strong>S.No.</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Input</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Expected Result</strong></th>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">1</td>
-    <td align="left" bgcolor="#E8E8E8">Invoice Number</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Number</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Order  Date</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Customer  PO</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Invoice</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Amount</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Shipping  City / State</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Status</td>
-  </tr>
-</table>
-</li>
-
-
-<li style="width:40%;display:inline-block;" class="blue-bold">
-Search between dates<br/><br/>
-
-<table  border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <th align="left" bgcolor="#338cc2"><strong>S.No.</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Input</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Expected Result</strong></th>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">1</td>
-    <td align="left" bgcolor="#E8E8E8">From Date</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Number</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">To Date</td>
-    <td align="left">Order  Date</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Customer  PO</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Invoice</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Amount</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Shipping  City / State</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Status</td>
-  </tr>
-</table>
-</li>
-
-<li style="width:40%;display:inline-block;" class="blue-bold">
-Search by combination of order id & invoice number<br/><small>pre-conditions: Order id & Invoice number must match</small><br/><br/>
-
-<table  border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <th align="left" bgcolor="#338cc2"><strong>S.No.</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Input</strong></th>
-    <th align="left" bgcolor="#338cc2"><strong>Expected Result</strong></th>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">1</td>
-    <td align="left" bgcolor="#E8E8E8">Order Id</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Number</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">From Date</td>
-    <td align="left">Invoice Number</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">To Date</td>
-    <td align="left" bgcolor="#E8E8E8">Customer  PO</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Invoice</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Order  Amount</td>
-  </tr>
-  <tr>
-    <td align="left">&nbsp;</td>
-    <td align="left">&nbsp;</td>
-    <td align="left">Shipping  City / State</td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">&nbsp;</td>
-    <td align="left" bgcolor="#E8E8E8">Status</td>
-  </tr>
-</table>
-</li>
-
-
-
-
-
-</li>
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
 </ul>
 
  </div>
@@ -401,14 +225,86 @@ Search by combination of order id & invoice number<br/><small>pre-conditions: Or
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i></i>Invoices </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+ <ul>
+<li><strong>Orders & Invoices</strong></li>
+<li><img src='http://lowrysmartportal.com/assets/images/invoice-page.jpg'/></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find Orders & Invoices tab as the third option.</li>
+<li>Click on 'Orders & Invoices' to expand.</li>
+<li>Click on the third option 'Invoices' to display invoices  page.</li>
+<li>The list of all Invoices  will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the Invoice  page for ease of use and access. They are,</li>
+<li class='blue-bold'>Invoice Search</li>
+<li>User can search Invoice up to a span of past one year by using this functionality.  </li>
+<li> User can use anyone option or two combinations  or all of these,
+<ul class='sub-he'><li>Search by Invoice number.</li> <li>Search between dates.</li> </ul>
+</li>
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+</ul>
+
+</div>
 </div>
 </article> 
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>Past Due Invoices</button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> 
+             <ul>
+<li><strong>Orders & Invoices</strong></li>
+<li><img src='http://lowrysmartportal.com/assets/images/past-due.jpg'/></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find Orders & Invoices tab as the third option.</li>
+<li>Click on 'Orders & Invoices' to expand.</li>
+<li>Click on the fourth option 'Past due Invoices' to display open orders  page.</li>
+<li>The list of all Past due Invoices  will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the Past due Invocies  page for ease of use and access. They are,</li>
+<li class='blue-bold'>Open Order Search</li>
+<li>User can search open orders up to a span of past one year by using this functionality.  </li>
+<li> User can use anyone option or two combinations  or all of these,
+<ul class='sub-he'><li>Search by Order ID.</li> <li>Search between dates.</li> </ul>
+</li>
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+</ul>
+
+ </div>
 </div>
 </article>               
 </div>
@@ -416,7 +312,7 @@ Search by combination of order id & invoice number<br/><small>pre-conditions: Or
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">My Catalog </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article>
 
@@ -428,20 +324,156 @@ Search by combination of order id & invoice number<br/><small>pre-conditions: Or
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> Active Contracts </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+        <ul>
+<li><strong>Service Contracts</strong></li>
+<li>The service contracts module provides a comprehensive list of details about all Your service contracts which are active, expired and about to expire.</li>
+<li class='blue-bold'>How to navigate</li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find Service Contracts tab as the fifth option.</li>
+<li>Click on Service contracts to view all the sub pages. The sub pages are,
+<ul class='sub-he'>
+<li>Active Contracts.</li>
+<li>Expired Contracts.</li>
+<li>Upcoming for renewal.</li>
+</ul>
+</li>
+<li class='blue-bold'>Active Contracts</li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find service contracts tab as the fifth option.</li>
+<li>Click on 'Service Contracts' to expand. </li>
+<li>Click on the first option 'Active Contracts' to display Active contracts page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/active-contracts-img.jpg'></li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the active contracts page for ease of use and access. They are,</li>
+<li class='blue-bold'>Active contracts Search</li>
+<li>User can search service contracts by using this functionality. </li>
+<li>User can use anyone option or two combinations  or all of these,
+<ul class='sub-he'>
+<li>Search by Contract number.</li>
+<li>Search between dates.</li>
+</ul>
+</li>
+
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+
+
+<li class='blue-bold'>View All Contracts in Map</li>
+<li>User can view all Your service contracts location in Map by clicking on the 'View All Contracts in Map' button.</li>
+<li>How to check: Click on 'View All Contracts in Map' button at the top of the table. The application will be navigate to map page and displays locations of the active service contracts using markers.</li>
+
+
+</ul>
+ 
+</div>
 </div>
 </article> 
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> Expired Contracts </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+  <ul>
+<li><strong>Expired Contracts</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find service contracts tab as the fifth option.</li>
+<li>Click on 'Orders & Invoices' to expand.</li>
+<li>Click on 'Service Contracts' to expand.</li>
+<li>Click on the second option 'Expired Contracts' to display Expired contracts page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/expired-contracts-img.jpg'/></li>
+<li>The list of all expired contracts will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the expired contracts page for ease of use and access. They are, </li>
+<li class='blue-bold'> Expired contracts Search</li>
+<li>User can search service contracts by using this functionality. </li>
+
+<li>User can use anyone option or two combinations  or all of these,
+<ul class='sub-he'>
+<li>Search by Contract number.</li>
+<li>Search between dates.</li>
+</ul>
+</li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+</ul>
+
+</div>
 </div>
 </article>
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>  Upcoming for renewal </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+<ul>
+<li><strong>Upcoming for renewal</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find service contracts tab as the fifth option.</li>
+<li>Click on 'Service Contracts' to expand.</li>
+<li>Click on the third option 'Upcoming for renewal' to display upcoming for renewal contracts page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/upcoming-img.jpg'/></li>
+<li>The list of all upcoming for renewal contracts will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the renewal contracts page for ease of use and access. They are, </li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+</ul>
+
+</div>
 </div>
 </article>  
 
@@ -457,34 +489,241 @@ Search by combination of order id & invoice number<br/><small>pre-conditions: Or
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>  Under Contract </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> 
+          <ul>
+<li><strong>Under Contract</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find service contracts tab as the sixth option.</li>
+<li>Click on 'Asset Inventory' to expand.</li>
+<li>Click on the first option 'Under Contract' to display Under contract page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/under-contracts-img.jpg'/></li>
+<li>The list of all assets under contract will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the under contract page for ease of use and access. They are,</li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+
+<li class='blue-bold'>New Service Request</li>
+<li>User can create a new service request for Your device right from the Under contract page. Click on the 'New Service Request' icon and User will be navigated to a page with service request form which automatically fetches the device information based on serial number of the corresponding row where the Service Request icon is clicked.</li>
+<li>The application will fetch the device details and displays it in a form.</li>
+<li>User can verify the device information and provide incident information along with User contact information and submit the form.</li>
+<li>User will receive a mail notification with the details submitted. The Lowry team will validate the information and perform further operations. </li>
+</ul>
+ </div>
 </div>
 </article> 
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>  No Contract </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+ <ul>
+<li><strong>No Contract</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li> 
+<li>Once logged in, on the left hand side menu User can find service contracts tab as the sixth option.</li>
+<li>Click on 'Asset Inventory' to expand.</li>
+<li>Click on the second option 'No Contract' to display No contract page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/no-contracts-img.jpg'/></li>
+<li>The list of all assets with no contract will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the no contract page for ease of use and access. They are, </li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+
+<li class='blue-bold'> New Service Request</li>
+<li>User can create a new service request for Your device right from the No contract page.</li>
+<li>Click on the 'New Service Request' icon and User will be navigated to a page with service request form which automatically fetches the device information based on serial number of the corresponding row where the Service Request icon is clicked.</li>
+<li>The application will fetch the device details and displays it in a form.</li>
+<li>User can verify the device information and provide incident information along with User contact information and submit the form.</li>
+<li>User will receive a mail notification with the details submitted. The Lowry team will validate the information and perform further operations. </li>
+</ul>
+</div>
 </div>
 </article>
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>Under Warranty </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+  <ul>
+<li><strong>Under Warranty</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find service contracts tab as the sixth option.</li>
+<li>Click on 'Asset Inventory' to expand.</li>
+<li>Click on the third option 'Under Warranty' to display contracts under warranty page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/under-warranty-img.jpg'/></li>
+<li>The list of all assets under warranty will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the under warranty page for ease of use and access. They are, </li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+
+<li class='blue-bold'>New Service Request</li>
+<li>User can create a new service request for Your device right from the Under warranty page.</li>
+<li>Click on the 'New Service Request' icon and User will be navigated to a page with service request form which automatically fetches the device information based on serial number of the corresponding row where the Service Request icon is clicked.</li>
+<li>The application will fetch the device details and displays it in a form.</li>
+<li>User can verify the device information and provide incident information along with User contact information and submit the form.</li>
+<li>User will receive a mail notification with the details submitted. The Lowry team will validate the information and perform further operations. </li>
+
+</ul>
+
+ </div>
 </div>
 </article> 
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> End of Life Assets </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+     <ul>
+<li><strong>End of Life Assets</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find service contracts tab as the sixth option.</li>
+<li>Click on 'Asset Inventory' to expand.</li>
+<li>Click on the fourth option 'End of life Assets' to display contracts assets with end of life page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/endof-life-img.jpg'/></li>
+<li>The list of all assets under warranty will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the end of life assets page for ease of use and access. They are </li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+
+<li class='blue-bold'>New Service Request</li>
+<li>User can create a new service request for Your device right from the Under warranty page.</li>
+<li>Click on the 'New Service Request' icon and User will be navigated to a page with service request form which automatically fetches the device information based on serial number of the corresponding row where the Service Request icon is clicked.</li>
+<li>The application will fetch the device details and displays it in a form.</li>
+<li>User can verify the device information and provide incident information along with User contact information and submit the form.</li>
+<li>User will receive a mail notification with the details submitted. The Lowry team will validate the information and perform further operations. </li>
+
+</ul>
+ </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> All Assets    </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3">
+  <ul>
+<li><strong>All Assets</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu User can find asset inventory tab as the sixth option.</li>
+<li>Click on 'Asset Inventory' to expand.</li>
+<li>Click on the fifth option 'All Assets' to display All Assets page.</li>
+<li><img src='http://lowrysmartportal.com/assets/images/all-assets-img.jpg'/></li>
+<li>The list of all assets will be displayed in a table.</li>
+<li class='blue-bold'>Functionality</li>
+<li>User can perform various functionalities provided in the all assets page for ease of use and access. They are,</li>
+
+<li class='blue-bold'>Expired contracts Search</li>
+<li>User can search service contracts by using this functionality. </li>
+<li>User can use anyone option or two combinations  or all of these,
+<ul class='sub-he'>
+<li>Search by Serial number.</li>
+<li>Display assets based on Location</li>
+</ul>
+</li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+
+<li class='blue-bold'>New Service Request</li>
+<li>User can create a new service request for Your device right from the Under warranty page.</li>
+<li>Click on the 'New Service Request' icon and User will be navigated to a page with service request form which automatically fetches the device information based on serial number of the corresponding row where the Service Request icon is clicked.</li>
+<li>The application will fetch the device details and displays it in a form.</li>
+<li>User can verify the device information and provide incident information along with User contact information and submit the form.</li>
+<li>User will receive a mail notification with the details submitted. The Lowry team will validate the information and perform further operations. </li>
+
+</ul>
+</div>
 </div>
 </article>
 
@@ -497,35 +736,35 @@ Search by combination of order id & invoice number<br/><small>pre-conditions: Or
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">My Projects</button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Managed Devices </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Printer Management </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Mobility Social Media </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Chat Now </button>          
 <div data-content>
-<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
+<div class="level3"> <button> </button> </div>
 </div>
 </article>
 

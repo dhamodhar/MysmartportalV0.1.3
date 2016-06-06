@@ -19,7 +19,7 @@
                                     <a href="<?php echo base_url();?>index.php/welcome/active_service_contracts">Active Contracts</a>
                                 </li>
                                 <li>
-                                    <a href="" class="sub-active">Map View</a>
+                                    <a href="" class="sub-active">Active Contract Map View</a>
                                 </li>
                             </ul>
                             
@@ -43,7 +43,7 @@
                                 <!-- tile body -->
                                 <div class="tile-body">
 
-                                    <div id="markers-map" style="height: 500px;"></div>
+                                    <div id="markers-map" style="height: 770px;"></div>
 
                                 </div>
 <div style="text-align:center"><a href="<?php echo base_url();?>index.php/welcome/active_service_contracts" class="btn btn-primary mb-10" >Return to Active Contracts</a></div>
@@ -147,8 +147,16 @@
             success: function(xml){
 		 var newdata = [];
 		 var temp = "";
+		 
 		 var partdescriptiondata = [];
 		 var partdesctemp = "";
+		 
+		  var Device_Typedata = [];
+		 var Device_Typetemp = "";
+		 
+		 
+		  var printersdata = [];
+		 var fullassetdatatemp = "";
 		 
 		 
 					 $(xml).find('contracts').each(function(){
@@ -159,16 +167,31 @@
 							 var start_date= $(this).find('start_date').text();
 							 var end_date= $(this).find('end_date').text();
 							 var service_level= $(this).find('service_level').text();
+							 
+							 var Device_Type= $(this).find('Device_Type').text();
+							 var partno= $(this).find('partno').text();
+							 var partcount= $(this).find('partcount').text();
+							 var fullassetdata= $(this).find('fullassetdata').text();
+							 var totalcountassets= $(this).find('totalcountassets').text();
+							 
 							 var service_status= $(this).find('status').text();
 							 
 							 temp = newdata[assetaddress];
 							 partdesctemp = partdescriptiondata[assetaddress];
+							 Device_Typetemp = Device_Typedata[assetaddress];
+							 fullassetdatatemp = printersdata[assetaddress];
+							 
 							 if(typeof temp == "undefined"){
 								newdata[assetaddress] = contract_number;
-								partdescriptiondata[assetaddress] = assetdesc;
+								partdescriptiondata[assetaddress] = partcount;
+								Device_Typedata[assetaddress] = totalcountassets;
+								printersdata[assetaddress] = fullassetdata;
+								
 							 }else{
 								newdata[assetaddress] = contract_number+","+temp; 
-								partdescriptiondata[assetaddress] = assetdesc+","+partdesctemp; 
+								partdescriptiondata[assetaddress] = partcount+","+partdesctemp; 
+								Device_Typedata[assetaddress] = totalcountassets+","+Device_Typetemp; 
+								printersdata[assetaddress] = fullassetdata+","+fullassetdatatemp; 
 							 }
 											
 										
@@ -181,7 +204,7 @@
 					 {
 						// alert(prop+" Conratctnumber"+newdata[prop]);
 						  geocoder = new google.maps.Geocoder();
-						  loadMaps(geocoder, prop,newdata[prop],partdescriptiondata[prop]);
+						  loadMaps(geocoder, prop,newdata[prop],partdescriptiondata[prop],Device_Typedata[prop],printersdata[prop]);
                      }
 					 	 
 			 },
@@ -190,9 +213,13 @@
             }
         });
 		
-		function loadMaps(geocoder, prop,val,partdescription){
+		function loadMaps(geocoder, prop,val,partdescription,devicetype,printersdata){
 		
 			var links = "";
+			var assets = "";
+			
+			
+			
 						var data = val.split(",");
 						for(var i=0;i<data.length;i++)
 						{
@@ -209,6 +236,86 @@
 						}
 							
 						}
+						var totalcount = 0;
+							var assetdata = devicetype.split(",");
+							var partdescriptiondata = partdescription.split(",");
+							
+						for(var k=0;k<assetdata.length;k++)
+						{
+						
+							totalcount = totalcount+Number(assetdata[k]);
+							
+						}
+						
+						
+						var assets1 = "";
+						var getprinter = printersdata.split("##");
+						
+						
+						//start code for grouping 
+							var groupdata = [];
+				            var groupvarible = "";
+							var finalvalue = "";
+						for (m = 0; m < getprinter.length; m++) 
+						{
+						var tt = getprinter[m].split(":");
+						//alert(tt[0]);
+						  groupvarible = groupdata[tt[0]];
+						  
+						  if(typeof groupvarible == "undefined")
+						  {
+								groupdata[tt[0]] = getprinter[m].replace(/\,/g,"");							
+						  }else{
+						   var firstdata = getprinter[m].split(":");
+						  var seconddata = groupvarible.split(":");
+						  
+						  var firstvalue = firstdata[1];
+						  var secondvalue = seconddata[1];
+						 // alert("firstvalue"+firstvalue+"secondvalue"+secondvalue.replace(/&nbsp;/gi,'').trim());
+						  //alert(Number(firstvalue.replace(/\,/g,"").trim())+Number(secondvalue.replace(/\,/g,"").trim());
+						  
+						  finalvalue = firstdata[0]+":&nbsp;&nbsp;&nbsp;"+(Number(firstvalue.replace(/\,/g,"").replace(/&nbsp;/gi,'').trim())+Number(secondvalue.replace(/&nbsp;/gi,'').replace(/\,/g,"").trim()) );
+						  
+						  
+							groupdata[tt[0]] = finalvalue; 
+
+						  }
+						  
+						  
+						}
+						
+						var assetfinaldata  = "";
+						for (var proptest in groupdata) 
+						{
+						  if (groupdata.hasOwnProperty(proptest)) {
+						  if(assetfinaldata == ""){
+						  assetfinaldata = groupdata[proptest];
+						  
+						  }else{
+						  assetfinaldata = assetfinaldata+"###"+groupdata[proptest];
+						  
+						  }
+						  
+							//console.log(prop + "----------"+groupdata[prop]);
+						  }
+						}
+						
+						//end code for grouping
+						
+						var parnumberdata = assetfinaldata.split("###");
+						
+						//console.log(printersdata);
+						for(var b=0;b<parnumberdata.length;b++)
+						{
+						assets1 = assets1+'<br>'+parnumberdata[b];
+
+						}
+						
+						
+						
+						
+						
+						
 		
 			geocoder.geocode( { 'address': prop}, function(results, status) {
 				  if (status == google.maps.GeocoderStatus.OK) {
@@ -221,7 +328,7 @@
 						infoWindow: {
 					
 						
-							content: '<p><b>Contract Number</b>: '+links+'</p><br><p><b>Part Description:</b> '+partdescription+'</p>'
+							content: '<p style="font-size:20px"><b>Contract Number</b>: '+links+'</p><br><br><p style="font-size:20px"><b>Total Count: </b>'+totalcount+'</p><table>'+assets1+'</table>'
 						}
 					});
 				   } else {

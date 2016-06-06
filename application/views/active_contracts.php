@@ -129,7 +129,7 @@
 
                                              
                                             <div class="input-group datepicker form-group" data-format="L">
-                                                <input type="text" name="from"  id="from" class="form-control " placeholder="From">
+                                                <input type="text" name="from"  id="from" class="form-control " placeholder="End Date From">
                                                    <span class="input-group-addon">
                                                         <span class="fa fa-calendar"></span>
                                                     </span>
@@ -140,7 +140,7 @@
                                         <div class="col-md-2">
                                             
                                             <div class="input-group datepicker form-group" data-format="L">
-                                                <input type="text" name="to"  id="to" class="form-control " placeholder="To">
+                                                <input type="text" name="to"  id="to" class="form-control " placeholder=" End Date To">
                                                    <span class="input-group-addon">
                                                         <span class="fa fa-calendar"></span>
                                                     </span>
@@ -210,7 +210,7 @@
 											
 											
                                         </div>
-<button class="btn btn-primary btn-xs  load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<!--<button class="btn btn-primary btn-xs  load-buts" onclick="loadmore()" value="Load More">Load More</button>-->
 
                                     </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>

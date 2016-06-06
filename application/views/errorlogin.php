@@ -62,7 +62,7 @@
 
    
 <div><span style="margin-left: 15%;font-size: 20px;">
-<div class="alert-box error"><span>We apologize that we are unable to redirect you to the B2B portal. Please contact the Lowry MySmart Portal Admin for assistance</span></div>
+<div class="alert-box error"><span>We apologize that we are unable to redirect you to the B2B portal. Please contact the Lowry MySmart Portal Admin for assistance.</span></div>
 </span></div>
 
                                 </div>

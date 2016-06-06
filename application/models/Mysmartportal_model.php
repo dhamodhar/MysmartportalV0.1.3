@@ -160,8 +160,12 @@ OR company_name IS NULL , 1, 0 ) , company_name ASC");
 	
 	public function saveuserlocations($params)
 	{
-	   $query = $this->db->insert("User_locations",$params);
-	   return 1;
+	
+	
+	  $query = $this->db->insert("User_locations",$params);
+	
+	
+return 1;
 	
 	}
 	

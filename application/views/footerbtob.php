@@ -70,15 +70,7 @@
 <script>
             $(window).load(function(){
 			
-var pastdue = document.getElementById("passdueacess").value;
-if(pastdue == "1")
-{
-document.getElementById("pastdue").style.display='block';
 
-}else{
-document.getElementById("pastdue").style.display='none';
-
-}
 
 
 
@@ -262,344 +254,9 @@ error: function() {
 });
 });
 </script>
-<script type="text/javascript">
-$(document).ready(function() {
-
-$(document).ajaxStart(function(){
-$("#wait11").css("display", "block");
-});
-
-$(document).ajaxComplete(function(){
-$("#wait11").css("display", "none");
-});
-
-var alltickets = "";
-var allinfo = "";
-var i = 0;
-$.ajax({
-type: "GET",
-url: "<?php echo base_url()?>index.php/welcome/all_opentickets_by_email",
-dataType: "text",
-success: function(xml){ 
-var def_active = "";
-var div_class = "";
-var def_select = "";
-$(xml).find('checkserviceticket').each(function(){
-var se_num = $(this).find('ticketnumber').text();
-var currentstatus = $(this).find('currentstatus').text();
-var serialnumber = $(this).find('serialnumber').text();
-var do1 = $(this).find('do').text();
-var partnumber = $(this).find('partnumber').text();
-var city = $(this).find('city').text();
-var state = $(this).find('state').text();
-var lastaction = $(this).find('lastaction').text();
-var lastactivity = $(this).find('lastactivity').text();
-
-document.getElementById("ticket1_info").style.display = "block";
-if(i == 0)
-{
-def_select =se_num;
-div_class = "intro1"
-}else
-{
-div_class = "intro"
-
-}
-
-if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Shipped for Repair")
-			{
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class=''>Request Complete</li></ul>";
-			
-		
-			}else if(currentstatus == "Renotify Technician" || currentstatus == "Technician has been Notified")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Accepted awaiting sub invoice" || currentstatus == "Completed")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='active'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Accepted awaiting sub invoice and awaiting parts" || currentstatus == "Completed")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='active'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Accepted by Customer" || currentstatus == "Completed")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='active'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Accepted Awaiting Parts" || currentstatus == "Parts in Transit")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Customer Delay" || currentstatus == "Waiting on Customer Response")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Customer Delay PO" || currentstatus == "Waiting on Customer Response")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Dispatch Complete" || currentstatus == "Technician has been Dispatched")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Dispatch Delay" || currentstatus == "Service Contract Validation")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Dispatched" || currentstatus == "Technician has been Dispatched")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Entitlement Delay" || currentstatus == "Service Contract Validation")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='active'>Warranty Validation</li><li class='next'>Device in Transit</li><li class='previous visited'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Parts Delay1" || currentstatus == "Parts in Transit")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Parts Ordered" || currentstatus == "Parts in Transit")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Parts Recomended" || currentstatus == "Parts in Transit")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Parts Requested" || currentstatus == "Parts in Transit")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Received at Manufacturer Depot" || currentstatus == "Device received at Depot Repair")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Recvd at Manuf Escalated" || currentstatus == "Escalation to Remediate Device")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Support Delay 2")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Tech Support Complete" || currentstatus == "Technical Support Complete")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Triage Completed" || currentstatus == "Triage Requested")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}else if(currentstatus == "Triage Requested" || currentstatus == "Triage Requested")
-			{
-			
-			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='active'>Device in Transit</li><li class='next'>Repair in Progress</li><li class='previous visited'>Request Complete</li></ul>";
-			
-			
-			}
-			else
-			{
-				var status_by_image ="<ul class='checkout-bar'><li class='active'>Request Created</li><li class='next'>Warranty Validation</li><li class=''>Device in Transit</li><li class=''>Repair in Progress</li><li class=''>Request Complete</li></ul>";
-			}
-			
-			
-			var status=" ";
-			
-			if(currentstatus == "Cust sent direct to Manuf")
-			{
-				var status = "Device Shipped for Repair";
-			}else if(currentstatus == "Renotify Technician")
-			{
-				var status="Technician has been Notified";
-			}else if(currentstatus == "Accepted awaiting sub invoice")
-			{
-				var status="Completed";
-			}else if(currentstatus == "Accepted awaiting sub invoice and awaiting parts")
-			{
-				var status="Completed";
-			}else if(currentstatus == "Accepted by Customer")
-			{
-				var status="Completed";
-			}else if(currentstatus == "Accepted Awaiting Parts")
-			{
-				var status="Parts in Transit";
-			}else if(currentstatus == "Customer Delay")
-			{
-				var status="Waiting on Customer Response";
-			}else if(currentstatus == "Customer Delay")
-			{
-				var status="Waiting on Customer Response";
-			}else if(currentstatus == "Customer Delay PO")
-			{
-				var status="Waiting on Customer Response";
-			}else if(currentstatus == "Dispatch Complete")
-			{
-				var status="Technician has been Dispatched";
-			}else if(currentstatus == "Dispatch Delay")
-			{
-				var status="Service Contract Validation";
-			}else if(currentstatus == "Dispatched")
-			{
-				var status="Technician has been Dispatched";
-			}else if(currentstatus == "Entitlement Delay")
-			{
-				var status="Service Contract Validation";
-			}else if(currentstatus == "Parts Delay1")
-			{
-				var status="Parts in Transit";
-			}else if(currentstatus == "Parts Ordered")
-			{
-				var status="Parts in Transit";
-			}else if(currentstatus == "Parts Recomended")
-			{
-				var status="Parts in Transit";
-			}else if(currentstatus == "Parts Requested")
-			{
-				var status="Parts in Transit";
-			}else if(currentstatus == "Received at Manufacturer Depot")
-			{
-				var status="Device received at Depot Repair";
-			}else if(currentstatus == "Recvd at Manuf Escalated")
-			{
-				var status="Escalation to Remediate Device";
-			}else if(currentstatus == "RMA Requested")
-			{
-				var status="Service Contract Validation";
-			}else if(currentstatus == "Support Delay 2")
-			{
-				var status=" ";
-			}else if(currentstatus == "Tech Support Complete")
-			{
-				var status="Technician Support Complete";
-			}else if(currentstatus == "Tech Support Requested")
-			{
-				var status="Technician has been Dispatched";
-			}else if(currentstatus == "Triage Completed")
-			{
-				var status="Triage Requested";
-			}else
-			{
-				var status="Triage Requested";
-			}
-			
 
 
 
-alltickets = alltickets+"<span>Another Tab 1</span>";
-
-if(serialnumber == ""){
-serialnumber = "s1";
-
-}
-allinfo = allinfo+"<li id='"+serialnumber+"' class='"+div_class+"'><div id='"+serialnumber+"_content' class='tab-pane fade in active ticket_num show'><input type='hidden' name='i"+i+"' id='i"+i+"' value='"+serialnumber+"'><div style='width: 100%; border-top: 3px solid rgb(255, 117, 0); height: 0px; margin: 50px 0px;' class='aligncenter'></div><div id='tab1' class='service_request_information'><div style=' padding: 0px 0;word-wrap: break-word;'><h4>Service Request Search Results for: "+serialnumber+"<span style='padding-top:5px;color:#57aed1'> </span></h4></div><ul style='padding-top:30px; text-align:left !important;' id='all_ticket_info'><li><strong>Service Request Number:</strong> "+se_num+"</li><li><strong>Device Serial Number:</strong> " +serialnumber+"</li><li><strong>Depot/On-site:</strong> "+do1+"</li><li><strong>Device Model:</strong> "+partnumber+"</li><li><strong>Device Location:</strong> "+city+"/"+state+"<li><strong>Current Status:</strong> " +status+"</li></ul><div class='checkout-wrap' id='transit'>"+status_by_image+"</ul></div><div style='border: medium none; width: auto; font-family: &quot;PT Sans Caption&quot;,sans-serif; font-weight: 400; font-size: 16px; color: rgb(102, 102, 102); word-wrap: break-word; display: block; padding-top: 100px; text-align: center; background: transparent none repeat scroll 0px 0px;'><p style='text-align:center;'><b>Additional Information:</b> <br>"+lastactivity+"</p><p><strong> Last Activity Date: </strong> "+lastaction+"</p></div></div></div></li>";
-
-
-i++;
-
-});
-
-$("#all_ticket_info1").html(allinfo);
-
-if(alltickets == ""){
-document.getElementById("ticket1_info").style.display = "block";
-
-}else
-{
-
-}
-
-
-},
-error: function() {
-
-}
-});
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-function resetpassword(email)
-{
-	var email_final = email.replace("@", "zzz");
-        $.ajax({
-            type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/resetpassword_link/"+email_final,
-            dataType: "text",
-            success: function(xml){
-			    //alert(xml);
-				document.getElementById('succ').style.display = 'block';
-					document.getElementById('reset_pass').style.display = 'none';
-               
-            },
-            error: function() {
-            //alert("No Response - Cannot process the data.");
-            }
-        });
-	
-	
-	
-}
-</script>
 
    <script>
 $("#user_profile_latest1").load(getuserprofileinfo());
@@ -1415,8 +1072,21 @@ $(document).ready(function(){
 <script>
 $( document ).ready(function() {
 URL = "http://lowrysmartportal.com/index.php/welcome/btobportallogin";
-    var delay = 10000; //Your delay in milliseconds
-setTimeout(function(){ window.location = URL; }, delay);
+    var delay = 8000; //Your delay in milliseconds
+setTimeout(function(){ 
+
+var is_var = '<?php echo $is_login_var ?>';
+//alert(is_var);
+if(is_var ==  0)
+{
+//alert('test');
+window.location = URL; 
+
+}
+
+
+
+}, delay);
 });
 </script>
 

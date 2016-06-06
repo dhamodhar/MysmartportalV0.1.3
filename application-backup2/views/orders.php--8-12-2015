@@ -1,0 +1,116 @@
+
+
+            <!-- ====================================================
+            ================= CONTENT ===============================
+            ===================================================== -->
+            <section id="content">
+
+                <div class="page page-shop-orders">
+
+                    <div class="pageheader">
+
+                        <h2>Orders History</h2>
+
+                        <div class="page-bar">
+
+                            <ul class="page-breadcrumb">
+                                <li>
+                                    <a href="index.html"><i class="fa fa-home"></i> Lowry Solutions</a>
+                                </li>
+                                <li>
+                                    <a href="#">Orders & invoices</a>
+                                </li>
+                                <li>
+                                    <a href="shop-orders.html">Orders History</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+
+                    </div>
+
+                    <!-- page content -->
+                    <div class="pagecontent">
+
+
+                        <!-- row -->
+                        <div class="row">
+                            <!-- col -->
+                            <div class="col-md-12">
+
+
+
+
+                                <!-- tile -->
+                                <section class="tile">
+
+                                   
+
+                                    <!-- tile body -->
+                                    <div class="tile-body">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover table-custom" id="orders-list">
+                                                <thead>
+                                                <tr>
+                                                    
+                                                    <th style="width:180px;">Order&nbsp;Number</th>
+                                                    <th style="width:200px;">Order&nbsp;Date</th>
+                                                    <th style="width:150px;">PO Number</th>
+                                                    <th style="width:150px;">Invoice</th>
+                                                    <th style="width:150px;">Order Amount</th>
+                                                    <th style="width:150px;">Shipping City / State</th>
+                                                    <th style="width:100px;">Status</th> 
+                                                </tr>
+                                                </thead>
+												<tbody>
+												
+												</tbody>
+                                            </table>
+											
+											
+											
+											
+											
+                                        </div>
+
+                                    </div>
+                                    <!-- /tile body -->
+
+                                </section>
+                                <!-- /tile -->
+
+                            </div>
+                            <!-- /col -->
+                        </div>
+                        <!-- /row -->
+
+
+
+
+                    </div>
+                    <!-- /page content -->
+
+                </div>
+                
+            </section>
+            <!--/ CONTENT -->
+
+
+
+
+
+
+        </div>
+        <!--/ Application Content -->
+
+
+
+
+
+
+
+
+
+
+

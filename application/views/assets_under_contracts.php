@@ -80,14 +80,15 @@
                             
                         </div>
 						<div id="tableTools"> </div>
-<div class="col-md-3  float-right">  
+<div class="col-md-2  float-right">  
 
 <div style="cursor: pointer; position: absolute; right: 162px;top:62px;"><div class="shadow"></div>
 <div class="pulse"></div>
 <div class="pin-wrap"><div class="pin"></div>
 </div>
 </div>
-<a class="btn btn-primary mb-10 float-right" href="<?php echo base_url()?>index.php/welcome/assetsmap/<?php if($c_number == ""){ echo 0;}else{ echo $c_number;}?>/undercontracts" target="_self">
+<!--<a class="btn btn-primary mb-10 float-right" href="<?php echo base_url()?>index.php/welcome/assetsmap/<?php if($c_number == ""){ echo 0;}else{ echo $c_number;}?>/undercontracts" target="_self">-->
+<a class="btn btn-primary mb-10 float-right" href="<?php echo base_url()?>index.php/welcome/active_contracts_map" target="_self">
 View Assets in Map</a> 
 </div> 
  
@@ -160,7 +161,7 @@ View Assets in Map</a>
 											
 											
                                         </div>
-<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<!--<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>-->
 
                                     </div> </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>
@@ -175,7 +176,7 @@ View Assets in Map</a>
                         </div>
                         <!-- /row -->
 
-<input type="hidden" name="count1" id="count1" value="25">
+<input type="hidden" name="count1" id="count1" value="1">
 
 
 

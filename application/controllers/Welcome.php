@@ -136,7 +136,7 @@ class Welcome extends CI_Controller {
 												  
 												 $ip = $this->input->ip_address();
 												 $addr = $_SERVER['REMOTE_ADDR'];
-                                                $params = 	array("uid"=>$user[0]->id,
+                                                 $params = 	array("uid"=>$user[0]->id,
 												                  "login_time"=>date("Y-m-d h:m:s"),
 																  "is_login"=>1,
 																  "ip_address"=>$ip
@@ -229,9 +229,9 @@ class Welcome extends CI_Controller {
 						
 						$ServiceContractList_node = "ServiceContractList";
 
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAllExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAllExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$ship_to_code.'/50/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
-											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213')
+											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213')
 											  );
 					
 											$k=0;  
@@ -255,7 +255,7 @@ class Welcome extends CI_Controller {
 									  
 									  }
 									  
-												   $rss->load($url['url']);
+												   @$rss->load($url['url']);
 												   foreach ($rss->getElementsByTagName($ServiceContractList_node) as $node)
 												   {
 															if($k==0)
@@ -1290,6 +1290,7 @@ Thank you for registering with Lowrysmartportal.</p>
 						 $ids = 1;
 						 
 						 }
+						 $img_name2 ="";
 					if(!empty($_FILES["updated_image"]["name"]))
 					  {
 					  
@@ -1444,7 +1445,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	 *  User Feedback Page Loading.
 	 
 	 */
-    public function mobility()
+    public function ManagedDevices()
 	{
 		
 		if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
@@ -1472,13 +1473,13 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 						    $data['user_notifications'] = $user_notification;
 							$this->load->view('header',$data);
 							$this->load->view('mobility');
-							$this->load->view('footer'); 
+							$this->load->view('mobilityfooter'); 
 					}
 		
 	}
 	
 	
-	public function commingsoon()
+	public function MyProjects()
 	{
 		
 		if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
@@ -1516,7 +1517,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	 *  User Feedback Page Loading.
 	 
 	 */
-    public function manageddevices()
+    public function PrinterManagement()
 	{
 		
 		if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
@@ -1656,6 +1657,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										}
 							     }
 					        $rss = new DOMDocument(); 
+							
 			                @$rss->load("http://216.234.105.194:8088/Alpha.svc/E21DashBoardData/".$cust_code."/".$ship_to_code."/".$email1."/UserType/PermLevel/1-1-2010/1-1-2016/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
 			                            $pendingorders = "";	
 										 $opencases = "";	
@@ -2225,7 +2227,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							}
 			  
 					}
-
+  //echo 'http://216.234.105.194:8088/Alpha.svc/E21GetInvoiceList/'.$cust_code.'/'.$ship_to_code.'/'.$email1.'/UserType/PermLevel/'.$count.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/invoice_numb/desc';
+  //exit;
 			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetInvoiceList/'.$cust_code.'/'.$ship_to_code.'/'.$email1.'/UserType/PermLevel/'.$count.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213/invoice_numb/desc'),
 								  );
 								  
@@ -2267,7 +2270,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 									$ship_to_code = $ship_to_code."|".$locationsdata->ship_to_code;
 							}
                     }
-			//echo "http://216.234.105.194:8088/Alpha.svc/E21PastDueInvoices/".$cust_code."/".$ship_to_code."/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
+			//echo 'http://216.234.105.194:8088/Alpha.svc/E21PastDueInvoices/'.$cust_code.'/'.$ship_to_code.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+			//exit;
 			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21PastDueInvoices/'.$cust_code.'/'.$ship_to_code.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 			
 								  );
@@ -2465,9 +2469,16 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
                                         }
 				
 				//echo "http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/ /".$order_id."/".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
+				
 				$rss = new DOMDocument(); 
+				if($type == 2)
+				{
+					    @$rss->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/".$order_id."/ /".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
+				
+				}else{
+				
 			    @$rss->load("http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/ /".$order_id."/".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213");
-					
+					}
 					
 			    	$ordernumber = "";
 									   foreach (@$rss->getElementsByTagName('InvoiceHeader') as $node)
@@ -2484,8 +2495,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $data['costcenter'] = $node->getElementsByTagName('CostCenter')->item(0)->nodeValue;
 										   $data['consolidation'] = $node->getElementsByTagName('Consolidation')->item(0)->nodeValue;
 										   $data['shipvia'] = $node->getElementsByTagName('ShipVia')->item(0)->nodeValue;
-										   $data['ppdcoll'] = $node->getElementsByTagName('PPDcoll')->item(0)->nodeValue;
-										   $data['pps'] = $node->getElementsByTagName('pps')->item(0)->nodeValue;
+										   $data['ppdcoll'] = $node->getElementsByTagName('PPDColl')->item(0)->nodeValue;
+										   $data['pps'] = $node->getElementsByTagName('PPS')->item(0)->nodeValue;
 										   
 										   
 										   
@@ -2520,6 +2531,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $data['entry_type'] = $node->getElementsByTagName('entry_type')->item(0)->nodeValue;
 										   $data['order_stat'] = $node->getElementsByTagName('order_stat')->item(0)->nodeValue;
 										   $data['tracker_no'] = $node->getElementsByTagName('tracker_no')->item(0)->nodeValue;
+										   $data['due_date'] = $node->getElementsByTagName('due_date')->item(0)->nodeValue;
+										   $data['terms_code'] = $node->getElementsByTagName('terms_code')->item(0)->nodeValue;
 											 
 										   }
 										   //Getting Locations 
@@ -2677,18 +2690,22 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 						if($userstatus=="Active")
 						{
 						$ServiceContractList_node = "ActiveServiceContracts";
-                     
-						$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'));
+                   
+						$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'));
 						
 						}else if($userstatus=="Expired")
 						{
-						$ServiceContractList_node = "AssetsUnderContract";
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+						//echo 'http://216.234.105.194:8088/Alpha.svc/E21GetExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+						//exit;
+						$ServiceContractList_node = "E21GetExpiredContracts";
+							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/2000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 											  );
 						
 						}else if($userstatus=="Cancelled")
 						{
 						$ServiceContractList_node = "ServiceContractList";
+						//echo 'http://216.234.105.194:8088/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$ship_to_code.'/50/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+						//exit;
 							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$ship_to_code.'/50/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 											  );
 						
@@ -2696,7 +2713,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 						{
 						
 						$ServiceContractList_node = "GetAllActiveContract";
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAllExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAllExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 											  );
 						
 						}
@@ -2712,7 +2729,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 															{
 															
 														
-															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('ContrFrom')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.", ".$node->getElementsByTagName('City')->item(0)->nodeValue.", ".$node->getElementsByTagName('ST')->item(0)->nodeValue.", ".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><st>".$node->getElementsByTagName('ST')->item(0)->nodeValue."</st><contract_status>Active</contract_status><contract_status>".$node->getElementsByTagName('ItemDetails')->item(0)->nodeValue."</contract_status><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
+															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('ContrFrom')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.", ".$node->getElementsByTagName('City')->item(0)->nodeValue.", ".$node->getElementsByTagName('ST')->item(0)->nodeValue.", ".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><st>".$node->getElementsByTagName('ST')->item(0)->nodeValue."</st><contract_status>Active</contract_status><ItemDetails>".$node->getElementsByTagName('ItemDetails')->item(0)->nodeValue."</ItemDetails><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
 														   
 															
 															}else if($userstatus=="Expired")
@@ -2723,7 +2740,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 															}else if($userstatus=="Cancelled")
 															{
 
-															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('cconth_id')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('fr_date')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('to_date')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('descr')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('service_level_id')->item(0)->nodeValue."</service_level><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
+															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('contract_number')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('start_date')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('end_date')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('description')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('service_level')->item(0)->nodeValue."</service_level><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
 														   
 															}else{
 															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('cconth_id')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('fr_date')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('to_date')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('descr')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('service_level_id')->item(0)->nodeValue."</service_level><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
@@ -2866,8 +2883,11 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					$ship_to_code = $servicenumber;
 					
 					}
-							//echo 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'));
+							//echo 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+							//exit;
+							
+							
+							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'));
 								 foreach ($urlArray as $url) 
 										  {
 												echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
@@ -2875,7 +2895,27 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 													   $rss->load($url['url']);
 													  foreach ($rss->getElementsByTagName('ActiveServiceContracts') as $node)
 													   {	
-														echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.",".$node->getElementsByTagName('City')->item(0)->nodeValue.",".$node->getElementsByTagName('ST')->item(0)->nodeValue.",".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><contract_status>Active</contract_status></contracts>";	 
+													   $mapdetails = "<mapdetails>".$node->getElementsByTagName('ItemDetails')->item(0)->nodeValue."</mapdetails>";
+													   $xml = simplexml_load_string($mapdetails);							
+													    $PartNo = $xml->Item->attributes()->{'PartNo'};
+													    $partcount = $xml->Item->attributes()->{'PartCount'};
+													    $dtype= $xml->Item->attributes()->{'Device_Type'};
+														$fullassetdata = "";
+														$totalcountassets = 0;
+																for($s=0;$s<sizeOf($xml);$s++)
+																{
+																if($xml->Item[$s]->attributes()->{'PartCount'} !=0){
+																
+																$totalcountassets = (($totalcountassets)+($xml->Item[$s]->attributes()->{'PartCount'}));
+																
+																$fullassetdata = $fullassetdata.'##'.$xml->Item[$s]->attributes()->{'Device_Type'}.' ('.$xml->Item[$s]->attributes()->{'PartNo'}.'): &nbsp; '.$xml->Item[$s]->attributes()->{'PartCount'};
+																}
+																
+																}
+													   
+														
+													   
+														echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><PartNo>".$PartNo."</PartNo><partcount>".$partcount."</partcount><fullassetdata>".$fullassetdata."</fullassetdata><totalcountassets>".$totalcountassets."</totalcountassets><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.",".$node->getElementsByTagName('City')->item(0)->nodeValue.",".$node->getElementsByTagName('ST')->item(0)->nodeValue.",".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><Device_Type>".$dtype."</Device_Type><itemdetails>".$node->getElementsByTagName('ItemDetails')->item(0)->nodeValue."</itemdetails><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><start_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><contract_status>Active</contract_status></contracts>";	 
 													   }						 
 												echo "</DocumentElement></diffgr:diffgram></DataTable>";
 							   
@@ -3572,18 +3612,19 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					{
 				
 					
-$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$ship_to_code.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$ship_to_code.'/2000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 					
 					}else{
 					
 							
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/AssetsPage/'.$cust_code.'/'.$ship_to_code.'/ /'.$Contract_Number.'/'.$count1.'/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/AssetsPage/'.$cust_code.'/'.$ship_to_code.'/ /'.$Contract_Number.'/2000/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 								  );
 					}
 					
 					
-					
+					//echo 'http://216.234.105.194:8088/Alpha.svc/AssetsPage/'.$cust_code.'/'.$ship_to_code.'/ /'.$Contract_Number.'/2000/1/End_date/desc/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+					//exit;
 					
 					
 	                if($type==1)
@@ -3591,15 +3632,15 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 					
 					foreach ($urlArray as $url) 
 						  {
-			                           $rss->load($url['url']);
- echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
-											   foreach ($rss->getElementsByTagName('AssetsUnderContract') as $node)
-											   {
-													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><Part_Number></Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><Options></Options><assetaddress>".$node->getElementsByTagName('Address')->item(0)->nodeValue.",".$node->getElementsByTagName('ST')->item(0)->nodeValue.",".$node->getElementsByTagName('zip')->item(0)->nodeValue."</assetaddress></assetspage>";
-											   }                      					    
-												  echo "</DocumentElement></diffgr:diffgram></DataTable>";
-												  
-						}
+									   $rss->load($url['url']);
+									         echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
+									   foreach ($rss->getElementsByTagName('AssetsUnderContract') as $node)
+									   {
+											 echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><Part_Number></Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><device_type>".$node->getElementsByTagName('device_type')->item(0)->nodeValue."</device_type><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><Options></Options><assetaddress>".$node->getElementsByTagName('Address')->item(0)->nodeValue.",".$node->getElementsByTagName('ST')->item(0)->nodeValue.",".$node->getElementsByTagName('zip')->item(0)->nodeValue."</assetaddress></assetspage>";
+									   }                      					    
+										     echo "</DocumentElement></diffgr:diffgram></DataTable>";
+										  
+						  }
 					
 					
 					
@@ -3633,7 +3674,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 										
 										$assetiteminformationfinal = simplexml_load_string($assetiteminformation);
 										//print_r($assetiteminformationfinal);
-											echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('SerialNumber')->item(0)->nodeValue."</SerialNumber><Part_Number>".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('Type')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('contract_number')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('End_date')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue."</Contract_Status><Options>".$node->getElementsByTagName('Options')->item(0)->nodeValue."</Options><assetaddress>".$node->getElementsByTagName('AssetAddress')->item(0)->nodeValue."</assetaddress><assetitemdetails>".$assetiteminformationfinal."</assetitemdetails><totalrec>".$node->getElementsByTagName('TotRecD')->item(0)->nodeValue."</totalrec><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
+											echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('SerialNumber')->item(0)->nodeValue."</SerialNumber><device_type>".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."</device_type><Part_Number>".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('Type')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('contract_number')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('End_date')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue."</Contract_Status><Options>".$node->getElementsByTagName('Options')->item(0)->nodeValue."</Options><assetaddress>".$node->getElementsByTagName('AssetAddress')->item(0)->nodeValue."</assetaddress><assetitemdetails>".$assetiteminformationfinal."</assetitemdetails><totalrec>".$node->getElementsByTagName('TotRecD')->item(0)->nodeValue."</totalrec><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
 		                               
 										
 										}	
@@ -3695,8 +3736,9 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 			
 					
 					}
-					//echo "http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/".$cust_code."/".$ship_to_code."/".$count1."/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
-					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$ship_to_code.'/'.$count1.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+					
+					
+					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -3705,7 +3747,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 												  echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
 											   foreach ($rss->getElementsByTagName('AssetsUnderContract') as $node)
 											   {
-													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><servicedescription>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</servicedescription><Part_Number></Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue."</Contract_Status><Options></Options><assetaddress></assetaddress><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
+													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><servicedescription>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</servicedescription><Part_Number>".$node->getElementsByTagName('Product')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><device_type>".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."</device_type><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue."</Contract_Status><Options></Options><assetaddress></assetaddress><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
 											   }                      					    
 												  echo "</DocumentElement></diffgr:diffgram></DataTable>";
 
@@ -3753,7 +3795,9 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 							}
                     }
 					
-					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21AssetsWithNoContract/'.$cust_code.'/'.$ship_to_code.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+					//echo 'http://216.234.105.194:8088/Alpha.svc/E21AssetsWithNoContract/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+					//exit;
+					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21AssetsWithNoContract/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -3810,8 +3854,9 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 									$ship_to_code = $ship_to_code."|".$locationsdata->ship_to_code;
 							}
                     }
-					
-					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21AssetsUnderWarranty/'.$cust_code.'/'.$ship_to_code.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+					//echo 'http://216.234.105.194:8088/Alpha.svc/E21AssetsUnderWarranty/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+					//exit;
+					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21AssetsUnderWarranty/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -3820,7 +3865,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 												  echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
 											   foreach ($rss->getElementsByTagName('AssetsUnderWarranty') as $node)
 											   {
-													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><servicedescription>".$node->getElementsByTagName('servicedescription')->item(0)->nodeValue."</servicedescription><Part_Number>".$node->getElementsByTagName('Product')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue."</Contract_Status><Options></Options><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
+													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><Part_Number>".$node->getElementsByTagName('Product')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."</End_date><Contract_Status>".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue."</Contract_Status><Device_Type>".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."</Device_Type><Options></Options><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
 											   }                      					    
 												  echo "</DocumentElement></diffgr:diffgram></DataTable>";
 
@@ -3873,8 +3918,9 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 									$ship_to_code = $ship_to_code."|".$locationsdata->ship_to_code;
 							}
                     }
-					//echo "http://216.234.105.194:8088/Alpha.svc/E21GetAssetsEndOfLife/".$cust_code."/".$ship_to_code."/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
-				    $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsEndOfLife/'.$cust_code.'/'.$ship_to_code.'/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+					//echo 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsEndOfLife/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
+					//exit;
+				    $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAssetsEndOfLife/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -3883,7 +3929,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 												  echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
 											   foreach ($rss->getElementsByTagName('AssetsEndOfLife') as $node)
 											   {
-													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><Part_Number>".$node->getElementsByTagName('Product')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContrFrom')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</End_date><EndofLifeDate>".$node->getElementsByTagName('EndofLifeDate')->item(0)->nodeValue."</EndofLifeDate> <Contract_Status>".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue."</Contract_Status><Options></Options><assetaddress>".$node->getElementsByTagName('Address')->item(0)->nodeValue."</assetaddress><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
+													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><Part_Number>".$node->getElementsByTagName('Product')->item(0)->nodeValue."</Part_Number><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."</End_date><EndofLifeDate>".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."</EndofLifeDate> <Contract_Status>".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue."</Contract_Status><Options></Options><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
 											   }                      					    
 												  echo "</DocumentElement></diffgr:diffgram></DataTable>";
 
@@ -5704,9 +5750,10 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							
                             $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
+							$data["is_login_var"] = 1;
 							$this->load->view('header',$data);
 							$this->load->view('errorlogin');
-							$this->load->view('footerbtob'); 
+							$this->load->view('footerbtob',$data); 
 
 	
 	}else{
@@ -5745,9 +5792,10 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							
                             $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
+							$data["is_login_var"] = 0;
 							$this->load->view('header',$data);
 							$this->load->view('btob');
-							$this->load->view('footerbtob'); 
+							$this->load->view('footerbtob',$data); 
   
 
 
@@ -5840,9 +5888,9 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 						
 						$ServiceContractList_node = "ServiceContractList";
 
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAllExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
-											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$ship_to_code.'/50/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
-											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213')
+							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAllExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213')
 											  );
 					
 											$k=0;  
@@ -5903,9 +5951,10 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   public function notyfyuser()
   {
   $email = $this->input->post("useremail");
-  $to="dhamodhar.enaganti@livait.net";
-  $subject="My Project Module Request From User.";
-  $message="My Project Module Request From User.<br>  Email: ".$email;
+  $page = $this->input->post("page");
+  $to="dhamodhar.enaganti@livait.net,bhaskar@livait.com";
+  $subject=$page." Module Access Request";
+  $message="User has requested updates about ".$page." module.<br>Email:  ".$email;
   	 $headers  = 'MIME-Version: 1.0' . "\r\n";
 	 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
   $retval = mail ($to,$subject,$message,$headers);	
