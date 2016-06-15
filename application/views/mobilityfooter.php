@@ -53,6 +53,7 @@
 
  <script src="<?php echo base_url()?>assets/js/feedback.min.js"></script>
 
+
 <script src="<?php echo base_url()?>assets/js/upload.js"></script>
         <!--/ vendor javascripts -->
 

@@ -40,6 +40,7 @@ $c_number == " ";
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>	
   <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/moment.min.js"></script>
+ <script src="<?php echo base_url()?>assets/js/feedback.min.js"></script>
            <script src="<?php echo base_url()?>assets/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
      
         <script src="<?php echo base_url()?>assets/js/vendor/date-format/jquery-dateFormat.min.js"></script>
@@ -53,7 +54,7 @@ $c_number == " ";
         ============================================= -->
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
         <!--/ custom javascripts -->
-
+ <script src="<?php echo base_url()?>assets/progressbar/progress.js"></script>
 		
 		  <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
         rel="stylesheet" type="text/css" />
@@ -102,35 +103,38 @@ speed: 3000
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
      });
-	
+	      var progress = $(".loading-progress").progressTimer({
+        timeLimit: 20,
+        onFinish: function () {
+		document.getElementById("progress").style.display = 'none';
+            
+        }
+    });
+	//alert("<?php echo base_url()?>index.php/welcome/all_assets/<?php echo $c_number;?>");
         $.ajax({
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/all_assets/<?php echo $c_number;?>",
             dataType: "text",
             success: function(xml){
-			//alert(xml);
-			//$('#orders-list tbody').append(xml);
                           $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
-				var Part_Number= $(this).find('Part_Number').text();
-				var Part_Description= $(this).find('Part_Description').text();
-				var Type= $(this).find('Type').text();
-				var deviceType= $(this).find('device_type').text();
-				var contract_number= $(this).find('contract_number').text();
-				var Start_Date= $(this).find('Start_Date').text();
+								var Part_Number= $(this).find('Part_Number').text();
+								var Part_Description= $(this).find('Part_Description').text();
+								var Type= $(this).find('Type').text();
+								var deviceType= $(this).find('device_type').text();
+								var contract_number= $(this).find('contract_number').text();
+								var Start_Date= $(this).find('Start_Date').text();
                                 var End_date= $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
                                 var assetaddress= $(this).find('assetaddress').text();
                                 var assetitemdetails= $(this).find('assetitemdetails').text();
-								
-								//alert(assetitemdetails);
-								
+
                                 var error =  $(this).find('error').text();             
 					if(error!="Error"){		   
 			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+deviceType+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
-                 //datatables(); 
+
 
                      }				 
 		   });
@@ -140,7 +144,8 @@ speed: 3000
 
 
 			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},										
+"language": {"emptyTable": "No Data Found."},
+ "bFilter": false,										
 "aoColumnDefs": [
 									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
 									]
@@ -182,7 +187,16 @@ speed: 3000
             $('#assets-list').DataTable({
 "language": {"emptyTable": "No Response - Cannot process the data."},	});
             }
-        });
+        }).done(function(){
+		
+		if($('#progress').css('display') == "block")
+		{
+		   progress.progressTimer('complete');
+		}
+		
+		
+        
+    });
     });    
 
            
@@ -192,11 +206,12 @@ speed: 3000
   <script type="text/javascript">
 function searchbydates()
 {
-
+var data = $('#assets-list').dataTable();
+data.fnDestroy();
  $('#assets-list tbody').html("");
                
 var invoicenumber = document.getElementById("serial_no").value;
-
+ var columntype = document.getElementById("columntype").value; 
   if(invoicenumber=="")
   {
     invoicenumber = "%20";
@@ -212,32 +227,74 @@ var invoicenumber = document.getElementById("serial_no").value;
      });
         $.ajax({
             type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/all_assets_by_search/"+invoicenumber,
+            url: "<?php echo base_url()?>index.php/welcome/all_assets/"+invoicenumber+"/ / /"+columntype,
             dataType: "text",
             success: function(xml){
                  $('#assets-list tbody').html("");
-                          $(xml).find('assetspage').each(function(){
+                       $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
-				var Part_Number= $(this).find('Part_Number').text();
-				var Part_Description= $(this).find('Part_Description').text();
-				var Type= $(this).find('Type').text();
-				var contract_number= $(this).find('contract_number').text();
-				var Start_Date= $(this).find('Start_Date').text();
+								var Part_Number= $(this).find('Part_Number').text();
+								var Part_Description= $(this).find('Part_Description').text();
+								var Type= $(this).find('Type').text();
+								var deviceType= $(this).find('device_type').text();
+								var contract_number= $(this).find('contract_number').text();
+								var Start_Date= $(this).find('Start_Date').text();
                                 var End_date= $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
-                                var Error =  $(this).find('Error').text();             
-					if(Error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
-                 //datatables(); 
+                                var assetaddress= $(this).find('assetaddress').text();
+                                var assetitemdetails= $(this).find('assetitemdetails').text();
+
+                                var error =  $(this).find('error').text();             
+					if(error!="Error"){		   
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+deviceType+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
+
 
                      }				 
 		   });
-		    <!--$(".inline-controls").css("display","none");
-		    //$(".dataTables_paginate").css("display","none");
-			//$(".dataTables_info").css("display","none");-->
-		  
+		   
+            var table4 = $('#assets-list').DataTable({
+                "language": {"emptyTable": "No Data Found."},
+			 "bFilter": false,
+				"order": [[1, "desc"]],
+                    "aoColumnDefs": [
+                      { 'bSortable': false, 'aTargets': [2,"desc" ] }
+                    ]
+                });
+				
+				
+				
+
+                var colvis = new $.fn.dataTable.ColVis(table4);
+
+                $(colvis.button()).insertAfter('#colVis');
+                $(colvis.button()).find('button').addClass('btn btn-default').removeClass('ColVis_Button');
+
+                var tt = new $.fn.dataTable.TableTools(table4, {
+                    sRowSelect: 'single',
+                    "aButtons": [
+                        'copy',
+                        'print', {
+                            'sExtends': 'collection',
+                            'sButtonText': 'Save',
+                            'aButtons': [{
+                'sExtends': 'csv',
+                'sTitle': 'Invoices'
+            },
+									{
+                'sExtends': 'xls',
+                'sTitle': 'Invoices'
+            }, {
+                'sExtends': 'pdf',
+                'sTitle': 'Invoices'
+            }]
+                        }
+                    ],
+                    "sSwfPath": "<?php echo base_url()?>assets/js/vendor/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                });
+
+                $(tt.fnContainer()).insertAfter('#tableTools');
             },
             Error: function() {
             $('#assets-list').DataTable({
@@ -249,16 +306,7 @@ var invoicenumber = document.getElementById("serial_no").value;
 
 }
    </script>      
- <script>
-            $(window).load(function(){
 
-
-                $('#from').datetimepicker();
-                 $('#to').datetimepicker();
-                 });
- 
-                
-                </script>
 
 <script>
  $('#feed-carousel').owlCarousel({
@@ -376,7 +424,7 @@ function loadmore()
 		data.fnDestroy();
 		$('#assets-list tbody').html("");
 		var count = document.getElementById("count1").value;
-		var num_of_page = 25;
+		var num_of_page = 1000;
 		var total_count = parseInt(count)+(num_of_page);
 		document.getElementById("count1").value = total_count;
 		

@@ -43,12 +43,16 @@
                                 <!-- tile body -->
                                 <div class="tile-body">
 
-                                    <div id="markers-map" style="height: 770px;"></div>
+                                    <div id="markers-map" style="height: 750px;"></div>
 
                                 </div>
 <div style="text-align:center"><a href="<?php echo base_url();?>index.php/welcome/active_service_contracts" class="btn btn-primary mb-10" >Return to Active Contracts</a></div>
                                 <!-- /tile body -->
 <div id="data"></div>
+
+
+<div class="loading-progress" id="progress" style="width: 38% !important;
+    margin-left: 24%;display:block"></div>
                             </section>
                             <!-- /tile -->
 
@@ -122,7 +126,7 @@
         ============================================= -->
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
         <!--/ custom javascripts -->
-
+ <script src="<?php echo base_url()?>assets/progressbar/progress.js"></script>
 
 
 
@@ -140,9 +144,17 @@
                     lng: -85.6024
                 });
 				
+				    var progress = $(".loading-progress").progressTimer({
+        timeLimit: 20,
+        onFinish: function () {
+		document.getElementById("progress").style.display = 'none';
+            
+        }
+    });
+				
 				$.ajax({
             type: "GET",
-            url: "http://lowrysmartportal.com/index.php/welcome/all_servicecontracts_to_map_view/<?php echo $servicenumber; ?>",
+            url: "<?php echo base_url();?>index.php/welcome/all_servicecontracts_to_map_view/<?php echo $servicenumber; ?>",
             dataType: "text",
             success: function(xml){
 		 var newdata = [];
@@ -157,7 +169,7 @@
 		 
 		  var printersdata = [];
 		 var fullassetdatatemp = "";
-		 
+		// alert(xml);
 		 
 					 $(xml).find('contracts').each(function(){
 					
@@ -211,7 +223,16 @@
             error: function() {
             //alert("No Response - Cannot process the data.");
             }
-        });
+        }).done(function(){
+		
+		if($('#progress').css('display') == "block")
+		{
+		   progress.progressTimer('complete');
+		}
+		
+		
+        
+    });
 		
 		function loadMaps(geocoder, prop,val,partdescription,devicetype,printersdata){
 		

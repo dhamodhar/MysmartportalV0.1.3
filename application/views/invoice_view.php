@@ -49,7 +49,7 @@
 
 
                                         <!-- row -->
-                                        <div class="row">
+                                        <div>
                                             <!-- col -->
                                             <div class="col-md-12">
 
@@ -143,13 +143,13 @@
                                                                 <!--<h3 style="padding:8px;">Items On Invoice:<span id="count">1</span></h3>-->
                                                                 <tr>
                                                                     <th>Line No</th>
-								    <th>Product Description</th>
+								    <th >Product Description</th>
                                                                     <th>Product Code</th>
                                                                     <th>Qty</th>
                                                                     <th>Unit Size</th>
-                                                                    <th>Unit Price</th>
-                                                                    <th>Total Price</th>
-                                                                    <th>Ship Date</th>
+                                                                    <th style="text-align:right;padding-right:30px;">Unit Price</th>
+                                                                    <th style="text-align:right;padding-right:30px;">Total Price</th>
+                                                                    <th  style="text-align:right;padding-right:30px;">Ship Date</th>
                                                                     
                                                                    
                                                                 </tr>

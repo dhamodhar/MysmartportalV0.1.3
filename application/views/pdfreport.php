@@ -6,16 +6,17 @@ $order_title = '<td align="left">Invoice#:</td><td>'.$invoice_numb.'</td>';
 $ordertext = '<td width="72%" align="left" style="border:0.5px solid #f7f7f7; background-color:#f7f7f7;">
 	<strong>
 	***** IMPORTANT UPDATE &amp; INFORMATION REQUEST *****<br />
-      </strong>We are moving to an Automated invoicing System. Please provide us your Accounts Payable Contact Email &amp; Email <br />
-      Address where invoices should be send. Lastly, if tax exempt please provide an updated Tax Exemption Certificate.<br />
-     <span style="font-weight:bold; text-decoration:underline;"> Please email the requested information above to skye@lowrysolutions.com and reference the invoice. FOR QUESTIONS REGARDING THIS INVOICE CONTACT SKYE GARDNER AT (810) 534-1661</span></td>';
+      </strong>
+	  
+	  We are moving to an Automated invoicing System. Please provide us your Accounts Payable Contact Email &amp; Email Address where invoices should be send. <br> Lastly, if tax exempt please provide an updated Tax Exemption Certificate.<br />
+     <span style="font-weight:bold; text-decoration:underline;">Please email the requested information above to skye@lowrysolutions.com and reference the invoice. <br><br>FOR QUESTIONS REGARDING THIS INVOICE CONTACT SKYE GARDNER AT (810) 534-1661</span></td>';
 
 }else{
 $title1 = 'Order Copy';
 $order_title = '<td align="left">Order#:</td><td>'.$order_numb.'</td>';
 $ordertext = '<td width="72%" align="left" style="border:0.5px solid #000; background-color:#f7f7f7;">
-	<p style="font-size:8px">All sales of goods by Lowry are subject exclusively to Lowry’s then-current Terms and Conditions of Sale, available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SalesTermsGoods.pdf.<br/> All equipment maintenance services are subject exclusively to Lowry’s then-current Equipment Maintenance Terms and Conditions, available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/EquipmentMaintenance.<br/>pdf All professional services other than equipment maintenance services and software maintenance or support are subject exclusively to Lowry’s then-current Professional Services Agreement Terms and Conditions available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/ProfessionalServices.pdf If Lowry software is provided and it is not otherwise subject to a particular Lowry license agreement, the Software License Agreement at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareLicense.pdf will apply to such software. Any software maintenance or support will be governed by Lowry’s then-current Software Maintenance and Support Agreement available at http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareMaintenance.pdf. If any of the above terms are first tendered to the customer before the customer tenders a purchase order or similar document to Lowry, the above terms are in lieu of any terms later submitted by the customer and Lowry rejects all additional or different terms and conditions of the customer, whether confirmatory or otherwise. If Lowry tenders these terms after the tender by the customer of other terms, whether as part of a purchase order or otherwise, then Lowry’s acceptance of any offer by the customer associated with the customer’s terms is expressly conditioned upon customer’s acceptance of the above terms exclusively and to the exclusion of any proffered customer terms or conditions, regardless of whether the above terms contain any terms additional to, or different from, any terms proffered by the customer</p><br />
-     <span style="font-weight:bold; text-decoration:underline;"> FOR ORDER ISSUES, PLEASE CALL 800-733-0210.</span></td>';
+	<p style="font-size:8px; align="justify"">All sales of goods by Lowry are subject exclusively to Lowry’s then-current Terms and Conditions of Sale, available at <span style="text-decoration:under-line; color:blue;">http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SalesTermsGoods.pdf</span><br/><br/> All equipment maintenance services are subject exclusively to Lowry’s then-current Equipment Maintenance Terms and Conditions, available at <span style="text-decoration:under-line; color:blue;">http://www.lowrycomputer.com/sites/lowrycomputer.com/files/EquipmentMaintenance.pdf</span> <br/><br/> All professional services other than equipment maintenance services and software maintenance or support are subject exclusively to Lowry’s then-current Professional Services Agreement Terms and Conditions available at <span style="text-decoration:under-line; color:blue;"> http://www.lowrycomputer.com/sites/lowrycomputer.com/files/ProfessionalServices.pdf</span> <br/> <br/>If Lowry software is provided and it is not otherwise subject to a particular Lowry license agreement, the Software License Agreement at <span style="text-decoration:under-line; color:blue;">http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareLicense.pdf </span>will apply to such software. <br/>Any software maintenance or support will be governed by Lowry’s then-current Software Maintenance and Support Agreement available at <span style="text-decoration:under-line; color:blue;"> http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareMaintenance.pdf</span><br/> <br/>If any of the above terms are first tendered to the customer before the customer tenders a purchase order or similar document to Lowry, the above terms are in lieu of any terms later submitted by the customer and Lowry rejects all additional or different terms and conditions of the customer, whether confirmatory or otherwise. If Lowry tenders these terms after the tender by the customer of other terms, whether as part of a purchase order or otherwise, then Lowry’s acceptance of any offer by the customer associated with the customer’s terms is expressly conditioned upon customer’s acceptance of the above terms exclusively and to the exclusion of any proffered customer terms or conditions, regardless of whether the above terms contain any terms additional to, or different from, any terms proffered by the customer</p><br />
+    </td>  ';
 }
 
 
@@ -70,29 +71,58 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
 
 <table width="100%" border="0" cellspacing="5" cellpadding="5">
   <tr>
-    <td  width="47%" align="left">Bill To:</td>
-     <td width="8%"></td>
-    <td  width="47%" align="left">Ship To:</td>
+    <td align="left" width="47%">Bill To:</td>
+    <td width="8%">&nbsp;</td>
+    <td width="47%" align="left">Ship To:</td>
   </tr>
   <tr>
     <td align="left" width="47%" valign="top" style="border:0.5px solid #000;padding:0px;">'.$billadd1.'<br />'.$billname.'<br />'.trim($billcity, " ").', '.trim($billst," ").', '.$billzip.'
       </td>
-      <td width="8%"></td>
+      <td width="8%">&nbsp;</td>
     <td align="left" width="47%" valign="top" style="border:0.5px solid #000;padding:0px;">'.$shipadd1.'<br />'.@$shipadd2.'<br>'.$shipname.'<br />'.trim($shipcity," ").', '.trim($shipst," ").', '.$shipzip.'</td>
   </tr>
-</table>
+</table> 
 
 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="5" style="border:0.5px solid #000;">
+  <tr >
+    <td align="left" valign="top" width="19.5%" style="border-bottom:0.5px solid #000;border-right:0.5px solid #000;"><span style="color:#000"><strong>Customer#</strong></span><br />
+      '.$this->session->userdata("cust_code").' </td>
+    <td align="left" valign="top" style="border-bottom:0.5px solid #000;border-right:0.5px solid #000;"><span style="color:#000"><strong>Order#</strong></span><br />
+      '.$order_numb.'-'.$rel_numb.'</td>
+    <td align="left" valign="top" style="border-bottom:0.5px solid #000;border-right:0.5px solid #000;"><span style="color:#000"><strong>Order Date</strong></span><br />
+      '.$order_date.'</td>
+    <td align="left" valign="top" style="border-bottom:0.5px solid #000;border-right:0.5px solid #000;"><span style="color:#000"><strong>Ship Date</strong></span><br />
+      '.$ship_date.'</td>
+    <td align="left" valign="top" style="border-bottom:0.5px solid #000;border-right:0.5px solid #000;"><span style="color:#000"><strong>Terms</strong></span><br />
+      NET '.$terms_code.' DAYS</td>
+    <td align="left" valign="top" style="border-bottom:0.5px solid #000;border-right:0.5px solid #000;"><span style="color:#000"><strong>Due Date</strong></span><br />
+      '.$due_date.'</td>
+  </tr>
   <tr>
-    <td width="7%" height="30" align="center" style="border-right:0.5px solid #000;">ITEM</td>
-    <td width="37%" align="center" style="border-right:0.5px solid #000;">DESCRIPTION</td>
-    <td width="9%" align="center" style="border-right:0.5px solid #000;">UOM</td>
-    <td width="9%" align="center" style="border-right:0.5px solid #000;">BACK ORD.</td>
-    <td width="11%" align="center" style="border-right:0.5px solid #000;">QTY SHIPPED</td>
-    <td width="15%" align="right" style="border-right:0.5px solid #000;">UNIT PRICE</td>
-    <td width="15%" align="right" style="border-right:0.5px solid #000;">NET PRICE</td>
+    <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>Client PO</strong></span><br />
+      '.$cust_po.'</td>
+    <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>Cost Center</strong></span><br />
+      '.$costcenter.'</td>
+    <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>Consolidation</strong></span> <br />
+      '.$consolidation.'</td>
+    <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>Ship Via</strong> </span><br />
+     '.$shipvia.'</td>
+    <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>PPD/COLL/PP&A</strong> </span><br /> '.$ppdcoll.'</td>
+    <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>PPS#</strong></span> <br />'.$pps.'</td>
+  </tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" style="border:0.5px solid #000;">
+  <tr>
+    <td width="7%" height="30" align="center" style="border-right:0.5px solid #000;"><strong>ITEM</strong></td>
+    <td width="37%" align="center" style="border-right:0.5px solid #000;"><strong>DESCRIPTION</strong></td>
+    <td width="9%" align="center" style="border-right:0.5px solid #000;"><strong>UOM</strong></td>
+    <td width="9%" align="center" style="border-right:0.5px solid #000;"><strong>BACK ORD.</strong></td>
+    <td width="11%" align="center" style="border-right:0.5px solid #000;"><strong>QTY SHIPPED</strong></td>
+    <td width="15%" align="right" style="border-right:0.5px solid #000;"><strong>UNIT PRICE</strong></td>
+    <td width="15%" align="right" style="border-right:0.5px solid #000;"><strong>NET PRICE</strong></td>
   </tr>';
  $m=1;
  $tcount = 0;
@@ -101,9 +131,9 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
   
   $total_val = $paramsdata['item_price']*$paramsdata['qty'];
  $content .='<tr>
-    <td align="center"  style="border-right:0.5px solid #000; border-top:0.5px solid #000;">'.$m.'</td>
-    <td align="center"  style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['part_desc'].','.$paramsdata['part_code'].'</td>
-    <td align="center"  style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['uom'].'</td>
+    <td align="center" style="border-right:0.5px solid #000; border-top:0.5px solid #000;">'.$m.'</td>
+    <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['part_desc'].','.$paramsdata['part_code'].'</td>
+    <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['uom'].'</td>
     <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;"></td>
     <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['qty'].'</td>
     <td align="right" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">$ '.number_format($paramsdata['item_price'], 2).'</td>
@@ -139,6 +169,7 @@ $content .='</table>
       </tr>
     </table></td>
   </tr>
+<span style="font-weight:bold;"> FOR ORDER ISSUES, PLEASE CALL 800-733-0210.</span>
  </table>
 
 
@@ -146,14 +177,18 @@ $content .='</table>
 </body>
 </html>
 ';
+
+
+
+
 ob_end_clean();
 $obj_pdf->writeHTML($content);
 if($type == 2){
-$fileatt = $obj_pdf->Output('Order'.$order_numb.'.pdf', 'D');
+$fileatt = $obj_pdf->Output('Order_'.$order_numb.'.pdf', 'D');
 exit;
 }else if($type == 5)
 {
-$invoicefilename = "Invoice".$invoice_numb.".pdf";
+$invoicefilename = "Invoice_".$invoice_numb.".pdf";
 $fileatt = $obj_pdf->Output($invoicefilename, 'D');
 exit;
 
@@ -161,9 +196,9 @@ exit;
 $fileatt = $obj_pdf->Output($_SERVER['DOCUMENT_ROOT'].'Order_and_invoice.pdf', 'F');
 if($type == 3)
 {
-$fileName = 'Invoice'.$invoice_numb.'.pdf';
+$fileName = 'Invoice_'.$invoice_numb.'.pdf';
 }else{
-$fileName = 'Order'.$order_numb.'.pdf';
+$fileName = 'Order_'.$order_numb.'.pdf';
 }
 
 // $html = file_get_contents($content);

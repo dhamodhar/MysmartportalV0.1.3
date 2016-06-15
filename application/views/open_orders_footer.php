@@ -1,4 +1,13 @@
-        <!-- ============================================
+      
+<style>
+.progress{}
+
+
+.progress.hide {
+    opacity: 0;
+    transition: opacity 1.3s;
+}
+</style>	  <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -46,7 +55,7 @@
         ============================================= -->
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
         <!--/ custom javascripts -->
-
+     <script src="<?php echo base_url()?>assets/progressbar/progress.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -77,14 +86,24 @@ speed: 3000
 	 
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
+		//document.getElementById("prgs").style.display='none';
      });
-        $.ajax({
+	    var progress = $(".loading-progress").progressTimer({
+        timeLimit: 20,
+        onFinish: function () {
+		document.getElementById("progress").style.display = 'none';
+            
+        }
+    });
+	 
+        $.ajax({		
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/all_orders/1",
             dataType: "text",
             success: function(xml){
 			//alert(xml);
 			//$('#orders-list tbody').append(xml);
+			var i = 0;
                 $(xml).find('order').each(function(){
 				
                 var orderNumber= $(this).find('order_number').text();
@@ -116,17 +135,31 @@ speed: 3000
 				var encodedString = Base64.encode(orderNumber);
 				var finalordernumber = encodeURIComponent(String(encodedString));
 
-			   
-			      $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'>? </a></td></tr>"); }
+			   if(orderNumber!="")
+			   {
+			    $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'><img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </a></td></tr>"); }
                
 			   
 			   }
-			  //datatables();           
+			     
+			   
+			   }
+			  //datatables(); 
+i++;			  
 		   });
 		   
 		    var table4 = $('#orders-list').DataTable({
             "language": {"emptyTable": "No Data Found."},
-                    "order": [[1, "desc"]],			
+                    "order": [[1, "desc"]],	
+                      "bFilter": false,
+					   buttons: {
+									copyTitle: 'Ajouté au presse-papiers',
+									copyKeys: 'Appuyez sur <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> pour copier les données du tableau à votre presse-papiers. <br><br>Pour annuler, cliquez sur ce message ou appuyez sur Echap.',
+									copySuccess: {
+										_: 'Copiés %d rangs',
+										1: 'Copié 1 rang'
+									}
+								},					  
                     "aoColumnDefs": [
                       { 'bSortable': false, 'aTargets': [ "no-sort" ] }
                     ]
@@ -141,6 +174,7 @@ speed: 3000
                     sRowSelect: 'single',
                     "aButtons": [
                         'copy',
+						
                         'print', {
                             'sExtends': 'collection',
                             'sButtonText': 'Save',
@@ -161,28 +195,24 @@ speed: 3000
                 });
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
-		    /* $('#orders-list').DataTable({
-                    "dom": '<"row"<"col-md-8 col-sm-12"<"inline-controls"l>><"col-md-4 col-sm-12"<"pull-right"f>>>t<"row"<"col-md-4 col-sm-12"<"inline-controls"l>><"col-md-4 col-sm-12"<"inline-controls text-center"i>><"col-md-4 col-sm-12"p>>',
-                    "language": {
-                        "sLengthMenu": 'View _MENU_ records',
-                        "sInfo":  'Found _TOTAL_ records',
-                        "oPaginate": {
-                            "sPage":    "Page ",
-                            "sPageOf":  "of",
-                            "sNext":  '<i class="fa fa-angle-right"></i>',
-                            "sPrevious":  '<i class="fa fa-angle-left"></i>'
-                        }
-                    },
-                    "pagingType": "input"
-                   
-                //*initialize datatable
-				});*/
+$('#orders-list_info').prepend("Total entries: "+i+"<br>");
             },
             error: function() {
             $('#orders-list').DataTable({
 "language": {"emptyTable": "No Response - Cannot process the data."},	});
             }
-        });
+        }).done(function(){
+		
+		if($('#progress').css('display') == "block")
+		{
+		   progress.progressTimer('complete');
+		}
+		
+		
+        
+    });
+	
+	
     });    
 
            
@@ -198,21 +228,52 @@ function searchbydates()
 
 
 		 var test1 = "";
-		 var fromdate = document.getElementById("from").value;
-		 var todate =document.getElementById("to").value;
-		 var order_id = document.getElementById("order_id").value;
+		 var columntype = document.getElementById("columntype").value;
+		 
+		 var fromdate = "";
+		 var todate = "";
+		 var order_id = "";
+		
+		 if(columntype == "Order Date")
+		 {
+		
+		   fromdate = document.getElementById("from").value;
+		 
+		   todate = document.getElementById("to").value;
+		 }else
+		 {
+		   order_id = document.getElementById("order_id").value;
+		 }
+		 
+		 
+		
+		
+		 
+		 //alert(fromdate);
+		
+		
 		 var invoicenumber = " ";
 		 
 			 if(order_id=="")
 			 {
 			 order_id = "%20";
 			 }
+			 
+			
  
 			  var d = new Date(fromdate);
 			  var t = new Date(todate);
 			  var from = (d.getMonth()+1)+"-"+d.getDate()+"-"+d.getFullYear();
 			  var to = (t.getMonth()+1)+"-"+t.getDate()+"-"+t.getFullYear();
-  
+             if(from=="")
+			 {
+			 from = "%20";
+			 }
+			 
+			 if(to=="")
+			 {
+			 to = "%20";
+			 }
 			  if(from=="NaN-NaN-NaN")
 			  {
 				  from = "%20";
@@ -228,12 +289,13 @@ function searchbydates()
 				 $(document).ajaxComplete(function(){
 				$("#wait").css("display", "none");
 				 });
+				 //alert("<?php echo base_url()?>index.php/welcome/orders_search_by_dates/"+from+"/"+to+"/"+order_id+"/"+invoicenumber+"/1/"+columntype);
         $.ajax({
             type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/orders_search_by_dates/"+from+"/"+to+"/"+order_id+"/"+invoicenumber+"/1",
+            url: "<?php echo base_url()?>index.php/welcome/orders_search_by_dates/"+from+"/"+to+"/"+order_id+"/"+invoicenumber+"/1/"+columntype,
             dataType: "text",
             success: function(xml){
-			
+			//alert(xml);
 			$('#orders-list tbody').html("");
                 $(xml).find('order').each(function(){
 				
@@ -511,7 +573,26 @@ document.getElementById("count").value = total_count;
         </script>
 
 
+<script>
+function displyDate(selectedValue)
+{
 
+	if(selectedValue == "Order Date")
+	{
+			document.getElementById("date").style.display = 'block';
+			document.getElementById("keyvalue").style.display = 'none';
+
+	}else
+	{
+	document.getElementById("date").style.display = 'none';
+	document.getElementById("keyvalue").style.display = 'block';
+	
+	}
+
+
+
+}
+</script>
 
 
     </body>

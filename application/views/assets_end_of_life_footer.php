@@ -32,15 +32,16 @@ $c_number == " ";
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/dataTables.bootstrap.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/Pagination/input.js"></script>
-	<script src="<?php echo base_url()?>assets/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+	    <script src="<?php echo base_url()?>assets/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.min.js"></script>
-	<script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
-	 <script src="<?php echo base_url()?>assets/vendor/flot/jquery.flot.min.js"></script>
+	    <script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
+	    <script src="<?php echo base_url()?>assets/vendor/flot/jquery.flot.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.pie.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>	
-  <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/moment.min.js"></script>
-           <script src="<?php echo base_url()?>assets/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/moment.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/feedback.min.js"></script>
      
         <script src="<?php echo base_url()?>assets/js/vendor/date-format/jquery-dateFormat.min.js"></script>
         <!--/ vendor javascripts -->
@@ -52,6 +53,7 @@ $c_number == " ";
         ============== Custom JavaScripts ===============
         ============================================= -->
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
+		 <script src="<?php echo base_url()?>assets/progressbar/progress.js"></script>
         <!--/ custom javascripts -->
 
 
@@ -81,7 +83,14 @@ speed: 3000
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
      });
-	
+	     var progress = $(".loading-progress").progressTimer({
+        timeLimit: 20,
+        onFinish: function () {
+		document.getElementById("progress").style.display = 'none';
+            
+        }
+    });
+	var totalrecars = "";
         $.ajax({
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/all_assets_end_of_life/<?php echo $c_number;?>",
@@ -101,8 +110,11 @@ speed: 3000
                                 var Options= $(this).find('Options').text();
 							    var end_life_date= $(this).find('EndofLifeDate').text();
                                 var error =  $(this).find('error').text();             
+                                var de_type =  $(this).find('detype').text();     
+ var totreccount =  $(this).find('totreccount').text();   
+									totalrecars	= totreccount;									
 					if(SerialNumber!="No Data"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+end_life_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+de_type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+end_life_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
 
                      }				 
 		   });
@@ -110,7 +122,8 @@ speed: 3000
 
 
 			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},										
+"language": {"emptyTable": "No Data Found."},
+ "bFilter": false,										
 "aoColumnDefs": [
 									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
 									]
@@ -147,12 +160,22 @@ speed: 3000
 								$(tt.fnContainer()).insertAfter('#tableTools');
 								
 					}	
+					 $('#assets-list_info').prepend("Total entries: "+totalrecars+"<br>");
             },
             error: function() {
             $('#assets-list').DataTable({
 "language": {"emptyTable": "No Response - Cannot process the data."},	});
             }
-        });
+        }).done(function(){
+		
+		if($('#progress').css('display') == "block")
+		{
+		   progress.progressTimer('complete');
+		}
+		
+		
+        
+    });
     });    
 
            
@@ -162,11 +185,12 @@ speed: 3000
   <script type="text/javascript">
 function searchbydates()
 {
-
+var data = $('#assets-list').dataTable();
+data.fnDestroy();
  $('#assets-list tbody').html("");
                
 var invoicenumber = document.getElementById("serial_no").value;
-
+ var columntype = document.getElementById("columntype").value;  
   if(invoicenumber=="")
   {
     invoicenumber = "%20";
@@ -182,32 +206,74 @@ var invoicenumber = document.getElementById("serial_no").value;
      });
         $.ajax({
             type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/all_assets_by_search/"+invoicenumber,
+            url: "<?php echo base_url()?>index.php/welcome/all_assets_end_of_life/"+invoicenumber+"/ /"+columntype,
             dataType: "text",
             success: function(xml){
                  $('#assets-list tbody').html("");
-                          $(xml).find('assetspage').each(function(){
+                                  $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
 				var Part_Number= $(this).find('Part_Number').text();
 				var Part_Description= $(this).find('Part_Description').text();
 				var Type= $(this).find('Type').text();
 				var contract_number= $(this).find('contract_number').text();
-				var Start_Date= $(this).find('Start_Date').text();
-                                var End_date= $(this).find('End_date').text();
+				var Start_Date = $(this).find('Start_Date').text();
+                                var End_date = $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
-                                var Error =  $(this).find('Error').text();             
-					if(Error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
-                 //datatables(); 
+							    var end_life_date= $(this).find('EndofLifeDate').text();
+                                var error =  $(this).find('error').text();             
+                                var de_type =  $(this).find('detype').text();     
+ var totreccount =  $(this).find('totreccount').text();   
+									totalrecars	= totreccount;									
+					if(SerialNumber!="No Data"){		   
+			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+de_type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+end_life_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
 
                      }				 
 		   });
-		    <!--$(".inline-controls").css("display","none");
-		    //$(".dataTables_paginate").css("display","none");
-			//$(".dataTables_info").css("display","none");-->
+
 		  
+            var table4 = $('#assets-list').DataTable({
+                "language": {"emptyTable": "No Data Found."},
+			 "bFilter": false,
+				"order": [[1, "desc"]],
+                    "aoColumnDefs": [
+                      { 'bSortable': false, 'aTargets': [2,"desc" ] }
+                    ]
+                });
+				
+				
+				
+
+                var colvis = new $.fn.dataTable.ColVis(table4);
+
+                $(colvis.button()).insertAfter('#colVis');
+                $(colvis.button()).find('button').addClass('btn btn-default').removeClass('ColVis_Button');
+
+                var tt = new $.fn.dataTable.TableTools(table4, {
+                    sRowSelect: 'single',
+                    "aButtons": [
+                        'copy',
+                        'print', {
+                            'sExtends': 'collection',
+                            'sButtonText': 'Save',
+                            'aButtons': [{
+                'sExtends': 'csv',
+                'sTitle': 'Invoices'
+            },
+									{
+                'sExtends': 'xls',
+                'sTitle': 'Invoices'
+            }, {
+                'sExtends': 'pdf',
+                'sTitle': 'Invoices'
+            }]
+                        }
+                    ],
+                    "sSwfPath": "<?php echo base_url()?>assets/js/vendor/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                });
+
+                $(tt.fnContainer()).insertAfter('#tableTools');
             },
             Error: function() {
             $('#assets-list').DataTable({
@@ -359,6 +425,7 @@ var test1 = "";
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
      });
+	  var totalrecars = "";
 	//alert("<?php echo base_url()?>index.php/welcome/all_assets/<?php if($c_number!=""){ echo $c_number; }else{ echo "%20";}?>/"+total_count);
         $.ajax({
             type: "GET",
@@ -378,7 +445,9 @@ var test1 = "";
                                 var End_date= $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
-                                var error =  $(this).find('error').text();             
+                                var error =  $(this).find('error').text();  
+ var totreccount =  $(this).find('totreccount').text();   
+									totalrecars	= totreccount;									
 					if(error!="Error"){		   
 			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td><td style='width:100px;'>"+Options+"</td></tr>");
                  //datatables(); 
@@ -426,6 +495,7 @@ var test1 = "";
 								$(tt.fnContainer()).insertAfter('#tableTools');
 								
 					}	
+					 $('#assets-list_info').append("   Total entries: "+totalrecars);
             },
             error: function() {
            $('#assets-list').DataTable({

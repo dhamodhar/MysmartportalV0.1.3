@@ -1,3 +1,4 @@
+<title>login-menu.css</title>
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
@@ -22,22 +23,36 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(223%) translateY(80%);
+          transform: translateX(223%) translateY(80%);
 }
 
 .menu {
   width: 5em;
   height: 5em;
 }
+.technical-tile {
+     margin-left: -43px;
+    margin-top: -32px;
+}
+
+.orders-box{
+margin-left: -14px;
+    margin-top: -1px;
+}
+
+.dashboard-box{
+margin-left: -40px;
+    margin-top: 0;
+}
 
 .bg-logo{
-background: rgba(0, 0, 0, 0) url("http://lowrysmartportal.com/development/assets/images/login-logo.png") no-repeat scroll 0 0 !important;
+ background: rgba(0, 0, 0, 0) url("http://lowrysmartportal.com/development/assets/images/login-logo.png") no-repeat scroll 0 0 !important;
     border-radius: 0 !important;
     height: 93px !important;
-    left: -21px !important;
+    left: -246px !important;
     position: relative;
-    top: -11px !important;
+    top: -125px !important;
     width: 146px !important;
 }
 .menu .btn {
@@ -124,8 +139,8 @@ color:#000;
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
+  -webkit-transform-origin: -242% -121%;
+           transform-origin: -242% -121% 0;
   position: absolute;
 }
 .menu .textbox {

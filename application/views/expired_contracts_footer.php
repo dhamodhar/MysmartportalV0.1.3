@@ -29,6 +29,7 @@
 	 <script src="<?php echo base_url()?>assets/vendor/flot/jquery.flot.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.pie.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
+ <script src="<?php echo base_url()?>assets/js/feedback.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>	
        	
 		
@@ -46,7 +47,7 @@
         ============================================= -->
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
         <!--/ custom javascripts -->
-
+ <script src="<?php echo base_url()?>assets/progressbar/progress.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -77,11 +78,19 @@ speed: 3000
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
      });
+	   var progress = $(".loading-progress").progressTimer({
+        timeLimit: 20,
+        onFinish: function () {
+		document.getElementById("progress").style.display = 'none';
+            
+        }
+    });
         $.ajax({
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/all_servicecontracts/Expired",
             dataType: "text",
             success: function(xml){
+			var i = 0;
                 $(xml).find('contracts').each(function(){
 				
                 var contract_number= $(this).find('contract_number').text();
@@ -103,15 +112,21 @@ speed: 3000
 					{
 					  map_view_status = "<td style='width:100px;'>"+contract_status+"</td>";
 
-					}	
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+contract_number+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
-                     }				 
+					}
+  var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+									
+					 var encodedString = Base64.encode(contract_number);
+				var finalordernumber = encodeURIComponent(String(encodedString));
+			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+                     }	
+i++;					 
 		   });
 			   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
 	 var table4 = $('#contracts-list').DataTable({
-"language": {"emptyTable": "No Data Found."},							
+"language": {"emptyTable": "No Data Found."},	
+ "bFilter": false,						
 "aoColumnDefs": [
 							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
 							],
@@ -147,6 +162,7 @@ aaSorting: [[1, 'desc']]
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$('#contracts-list_info').prepend("Total entries: "+i+"<br>");
 						
 			}	
             },
@@ -154,7 +170,16 @@ aaSorting: [[1, 'desc']]
             $('#contracts-list').DataTable({
 "language": {"emptyTable": "No Response - Cannot process the data."},	});
             }
-        });
+        }).done(function(){
+		
+		if($('#progress').css('display') == "block")
+		{
+		   progress.progressTimer('complete');
+		}
+		
+		
+        
+    });
     });    
 
            
@@ -170,9 +195,20 @@ function searchbydates()
     var data = $('#contracts-list').dataTable();
     data.fnDestroy(); 
 $('#contracts-list tbody').html(" ");
-				 var contract_number = document.getElementById("contract_number").value;
-				 var fromdate = document.getElementById("from").value;
-				 var todate =document.getElementById("to").value;
+		 var columntype = document.getElementById("columntype").value;
+ 
+  var contract_number = "";
+ var fromdate = "";
+ var todate = "";
+ 
+ if(columntype == "Date")
+ {
+    fromdate = document.getElementById("from").value;
+    todate =document.getElementById("to").value;
+ }else
+ {
+    contract_number = document.getElementById("invoice_number").value; 
+ }
 				 
 				  if(contract_number=="")
 				  {
@@ -213,7 +249,7 @@ $('#contracts-list tbody').html(" ");
 					// alert(from);
 						$.ajax({
 							type: "GET",
-							url: "<?php echo base_url()?>index.php/welcome/all_servicecontracts_search/null/"+from+"/"+to+"/"+contract_number,
+							url: "<?php echo base_url()?>index.php/welcome/all_servicecontracts_search/Expired/"+from+"/"+to+"/"+contract_number+"/"+columntype,
 							dataType: "text",
 							success: function(xml){
                              $('#contracts-list tbody').html(" ");
@@ -238,8 +274,12 @@ $('#contracts-list tbody').html(" ");
 					{
 					  map_view_status = "<td style='width:100px;'>"+contract_status+"</td>";
 
-					}					
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+contract_number+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+					}
+  var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+									
+	 var encodedString = Base64.encode(contract_number);
+				var finalordernumber = encodeURIComponent(String(encodedString));					
+			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
                  //datatables(); 
 
                      }	;           
@@ -248,7 +288,8 @@ $('#contracts-list tbody').html(" ");
 
 
 	 var table4 = $('#contracts-list').DataTable({
-"language": {"emptyTable": "No Data Found."},							
+"language": {"emptyTable": "No Data Found."},	
+ "bFilter": false,						
 "aoColumnDefs": [
 							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
 							],
@@ -359,8 +400,12 @@ $('#contracts-list tbody').html(" ");
 					{
 					  map_view_status = "<td style='width:100px;'>"+contract_status+"</td>";
 
-					}					
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+contract_number+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+					}
+					  var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+				
+	 var encodedString = Base64.encode(contract_number);
+				var finalordernumber = encodeURIComponent(String(encodedString));					
+			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
                  //datatables(); 
 
                      }				 
@@ -468,8 +513,12 @@ if(contract_status == "Active")
 					{
 					  map_view_status = "<td style='width:100px;'>"+contract_status+"</td>";
 
-					}					
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+contract_number+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+					}
+  var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+									
+ var encodedString = Base64.encode(contract_number);
+				var finalordernumber = encodeURIComponent(String(encodedString));					
+			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
                      }				 
 		   });
 			   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
@@ -593,6 +642,25 @@ $(document).ready(function(){
     });
 });
 </script>
+<script>
+function displyDate(selectedValue)
+{
 
+	if(selectedValue == "Contract End Date")
+	{
+			document.getElementById("date").style.display = 'block';
+			document.getElementById("keyvalue").style.display = 'none';
+
+	}else
+	{
+	document.getElementById("date").style.display = 'none';
+	document.getElementById("keyvalue").style.display = 'block';
+	
+	}
+
+
+
+}
+</script>
     </body>
 </html>

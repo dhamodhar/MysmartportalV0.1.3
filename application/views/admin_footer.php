@@ -346,11 +346,13 @@ var user_role = document.getElementById("role").value;
 	<script>
 		function deletelocation(id)
 		{
-	
+	var cust_code1 = document.getElementById("cust_code1").value;
+	var email = document.getElementById("email_id").value;
 						 $.ajax({
-							type: "GET",
-							url: "<?php echo base_url()?>index.php/welcome/deletelocations/"+id,
+							type: "POST",
+							url: "<?php echo base_url()?>index.php/welcome/deletelocations",
 							dataType: "text",
+							data:"email="+email+"&cuscode="+cust_code1+"&id="+id,
 							success: function(xml){	 
                               window.location.reload();
 							},
@@ -364,6 +366,50 @@ var user_role = document.getElementById("role").value;
 		}
 
 		</script>
+		
+		
+			<script>
+		function deleteall()
+		{
+	var cust_code1 = document.getElementById("cust_code1").value;
+	var email = document.getElementById("email_id").value;
+	
+		var checkboxes = document.getElementsByName('locations[]');
+		var vals = "";
+		for (var i=0, n=checkboxes.length;i<n;i++) {
+		if(i<11)
+		{
+			if (checkboxes[i].checked) 
+			  {
+			  vals += "|"+checkboxes[i].value;
+			  }
+		}else{
+
+		  }
+		}
+		var id = s = vals.substr(1);
+		
+						 $.ajax({
+							type: "POST",
+							url: "<?php echo base_url()?>index.php/welcome/deletelocationsall",
+							dataType: "text",
+							data:"email="+email+"&cuscode="+cust_code1+"&id="+id,
+							success: function(xml){	 
+                              window.location.reload();
+							},
+							error: function() {
+							}
+						 });
+						
+						
+				
+		
+		}
+
+		</script>
+		
+		
+		
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -387,6 +433,7 @@ var user_role = document.getElementById("role").value;
 									 ?>
 									 <input type="hidden" name="user_id_location" id="user_id_location" value="<?php echo $uid;?>">
 									 <input type="hidden" name="location_cust_code" id="location_cust_code" value="<?php echo $edituserdata1->cus_code?>">
+									 <input type="hidden" name="email_id" id="email_id" value="<?php echo $edituserdata1->email_id?>">
 									 <?php } ?>
                     <div class="modal-body">
                         <div class="tile-body load-locations">

@@ -33,6 +33,7 @@
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>
         <script src="<?php echo base_url()?>assets/jquery.simple-text-rotator.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/moment.min.js"></script>
+ <script src="<?php echo base_url()?>assets/js/feedback.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
      
         <script src="<?php echo base_url()?>assets/js/vendor/date-format/jquery-dateFormat.min.js"></script>
@@ -46,7 +47,7 @@
         ============================================= -->
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
         <!--/ custom javascripts -->
-
+ <script src="<?php echo base_url()?>assets/progressbar/progress.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -76,11 +77,20 @@ speed: 3000
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
      });
+	 
+	     var progress = $(".loading-progress").progressTimer({
+        timeLimit: 20,
+        onFinish: function () {
+		document.getElementById("progress").style.display = 'none';
+            
+        }
+    });
         $.ajax({
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/all_past_invoices",
             dataType: "text",
             success: function(xml){
+			var i = 0;
                 $(xml).find('Invoice').each(function(){
 				
                 var invoice_numb= $(this).find('invoice_numb').text();
@@ -102,13 +112,16 @@ speed: 3000
 			        var encodedString = Base64.encode(invoice_numb);
 				    var finalordernumber = encodeURIComponent(String(encodedString));
 			   
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+cust_po+"</td><td style='widtd:200px;'>"+order_numb+"</td></tr>");
-                                 }				 
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
+                                 }	
+i++;								 
 		                     });
 		   
 		   
 		     var table4 = $('#orders-list').DataTable({
                 "language": {"emptyTable": "No Data Found."},
+				"bFilter": false,
+						
 				"order": [[1, "desc"]],
                     "aoColumnDefs": [
                       { 'bSortable': false, 'aTargets': [2,"desc" ] }
@@ -147,12 +160,22 @@ speed: 3000
                 });
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
+				$('#orders-list_info').prepend("Total entries: "+i+"<br>");
             },
             error: function() {
             $('#orders-list').DataTable({
 "language": {"emptyTable": "No Response - Cannot process the data."},	});
             }
-        });
+        }).done(function(){
+		
+		if($('#progress').css('display') == "block")
+		{
+		   progress.progressTimer('complete');
+		}
+		
+		
+        
+    });
     });    
 
            
@@ -164,10 +187,27 @@ function searchbydates()
 {
 var data = $('#orders-list').dataTable();
 data.fnDestroy();
-//var table4 = $('#orders-list').DataTable();
- var invoicenumber = document.getElementById("invoice_number").value;
-var fromdate = document.getElementById("from").value;
- var todate =document.getElementById("to").value;
+var custpo = "";
+
+ 
+  var columntype = document.getElementById("columntype").value;
+  
+         var fromdate = "";
+		 var todate = "";
+		 var invoicenumber = "";
+		
+		 if(columntype == "Order Date")
+		 {
+		
+		   fromdate = document.getElementById("from").value;
+		 
+		   todate = document.getElementById("to").value;
+		 }else
+		 {
+		   invoicenumber = document.getElementById("invoice_number").value;
+		 }
+		 
+ 
  
   if(invoicenumber=="")
   {
@@ -207,50 +247,48 @@ var fromdate = document.getElementById("from").value;
      });
         $.ajax({
             type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/invoice_search/"+from+"/"+to+"/"+invoicenumber,
+            url: "<?php echo base_url()?>index.php/welcome/all_past_invoices_search/"+from+"/"+to+"/"+invoicenumber+"/"+columntype,
             dataType: "text",
-            success: function(xml){
-			//alert(xml);
-			$('#orders-list tbody').html("");
-                $(xml).find('invoice').each(function(){
+               success: function(xml){
+			  
+                $(xml).find('Invoice').each(function(){
 				
                 var invoice_numb= $(this).find('invoice_numb').text();
-				var carr_code= $(this).find('carr_code').text();
 				var billto_code= $(this).find('billto_code').text();
+				//var carr_code= $(this).find('carr_code').text();
 				var billname= $(this).find('billname').text();
 				var inv_date= $(this).find('inv_date').text();
 				var due_date= $(this).find('due_date').text();
-				var amount= $(this).find('amount').text();
-				var status= $(this).find('entry_type').text();
-			    var cust_po= $(this).find('cust_po').text();
-                var tracker_no= $(this).find('tracker_no').text();
-	 //alert(due.getMonth());
-var duedate_month = "";	 
+				var amount= $(this).find('open_amount').text();
+				var order_numb= $(this).find('order_numb').text();
+                          var cust_po= $(this).find('cust_po').text();
+                                //var tracker_no= $(this).find('tracker_no').text();
+				var error =  $(this).find('error').text();
+                var traking_link = "";
+			   if(error!="Error"){
+			   
+			var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
 				
-				var d= new Date(inv_date);
- var inv_date_final = d.getMonth()+"-"+d.getDate()+"-"+d.getFullYear();
-
-					var due= new Date(due_date);
-					if(due.getMonth()==0)
-				{
-				duedate_month = 1;
-				
-				}else
-				{
-				
-				duedate_month = due.getMonth();
-				}
-                var due_date_final = duedate_month+"-"+due.getDate()+"-"+due.getFullYear();	
-
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date +"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
-      
-		   });
-			   var table4 = $('#orders-list').DataTable({
+			        var encodedString = Base64.encode(invoice_numb);
+				    var finalordernumber = encodeURIComponent(String(encodedString));
+			   
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
+                                 }				 
+		                     });
+		   
+		   
+		     var table4 = $('#orders-list').DataTable({
                 "language": {"emptyTable": "No Data Found."},
+				"bFilter": false,
+					"bInfo": false,	
+				"order": [[1, "desc"]],
                     "aoColumnDefs": [
-                      { 'bSortable': false, 'aTargets': [ "no-sort" ] }
+                      { 'bSortable': false, 'aTargets': [2,"desc" ] }
                     ]
                 });
+				
+				
+				
 
                 var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -493,6 +531,26 @@ $(document).ready(function(){
         $(this).parents(".popover").popover('hide');
     });
 });
+</script>
+<script>
+function displyDate(selectedValue)
+{
+
+	if(selectedValue == "Order Date")
+	{
+			document.getElementById("date").style.display = 'block';
+			document.getElementById("keyvalue").style.display = 'none';
+
+	}else
+	{
+	document.getElementById("date").style.display = 'none';
+	document.getElementById("keyvalue").style.display = 'block';
+	
+	}
+
+
+
+}
 </script>
 
     </body>

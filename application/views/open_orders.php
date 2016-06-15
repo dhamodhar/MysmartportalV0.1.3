@@ -1,4 +1,6 @@
-   <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
+  
+ <link href="<?php echo base_url()?>assets/progressbar/demo.css" rel="stylesheet"/>  
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
 
             <!-- ====================================================
             ================= CONTENT ===============================
@@ -101,34 +103,59 @@
                                  <section class="tile padding-top-20">
 
 <div class="col-md-12 no-padding">
-							<div class="col-md-3">
+
+
+ <div class="col-md-2">
 <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2">Search By Order Id</label>
-                                            <input type="text" name="order_id" id="order_id" class="form-control" id="exampleInputEmail2" placeholder="Search by Order Id">                                 
+                                            <label class="sr-only" for="exampleInputEmail2">Search By Culumn</label>
+											
+											<select name="columntype" id="columntype" class="form-control" onchange="displyDate(this.value)" >
+											<option>Select Search Parameter</option>
+											<option>Order Number</option>
+											<option>Order Date</option>
+											<option>Customer PO</option>
+											</select>
+                                           <!-- <input type="text" name="invoice_number" id="invoice_number" class="form-control" id="exampleInputEmail2" placeholder="Search by Invoice Number">   
+-->
+											
+  </div></div>
+  
+
+  <div class="col-md-2" id="keyvalue" style="display:block">
+<div class="form-group">
+                                            <label class="sr-only" for="exampleInputEmail2">Search</label>
+                                            <input type="text" name="order_id" id="order_id" class="form-control" id="exampleInputEmail2" placeholder="Enter Details">   
+
+										
   </div></div>
 
-
-
-                                     
-                                        
-                                        <!-- col -->
-                                        <div class="col-md-3">
+                                  <div id="date" style="display:none;">
+							                                      <div class="col-md-2">
 
                                              
                                              <div class="input-group datepicker form-group" data-format="L">
                                                 <input type="text" name="from"  id="from" class="form-control " placeholder="From">
+													<span class="input-group-addon">
+                                                        <span class="fa fa-calendar"></span>
+                                                    </span>  
+                                            </div>
+                                        </div>
+
+										<div class="col-md-2">
+                                            
+                                              <div class="input-group datepicker form-group" data-format="L">
+                                                <input type="text" name="to" id="to"  class="form-control " placeholder="To">
 <span class="input-group-addon">
                                                         <span class="fa fa-calendar"></span>
                                                     </span>
-
-
-                                                
-                                               
+                                              
                                             </div>
                                         </div>
+										
+									</div>	
                                         <!-- /col -->
                                          <!-- col -->
-                                        <div class="col-md-3">
+                                       <!-- <div class="col-md-3">
                                             
                                               <div class="input-group datepicker form-group" data-format="L">
                                                 <input type="text" name="to" id="to"  class="form-control " placeholder="To">
@@ -184,7 +211,12 @@
 <button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
                                     </div>
                                     <!-- /tile body -->
-<div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>
+<div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"><br><span style="color: #418bca;
+    margin-left: -139px;
+    font-size: 17px;
+    font-weight: bold;">Data may take a while to load depending on amount of records</span></div>
+	 <div class="loading-progress" id="progress" style="width: 38% !important;
+    margin-left: 24%;display:block"></div>
 
 
 

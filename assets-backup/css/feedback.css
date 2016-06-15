@@ -1,0 +1,53 @@
+label {
+	display:block; 
+	padding-bottom:5px; 
+	margin-top:20px;
+}
+
+#mrova-feedback{
+	display: hidden;
+	width: 445px;
+	position: fixed;
+	
+	border: 1px solid #3cb58c;
+	padding: 8px 20px;
+	background-color: #fff;
+}
+
+
+#mrova-contactform ul {
+	margin: 0;
+	padding: 0;
+	
+}
+
+#mrova-contactform input, #mrova-contactform textarea{
+width: 400px;
+padding: 5px;
+border: 1px solid #ccc;
+}
+
+#mrova-contactform ul li {
+	list-style:none; 
+	
+}
+
+
+#mrova-img-control{
+	cursor: pointer;
+	
+position: absolute;
+left: -52px;
+width: 37px;
+background-image:url(http://lowrysmartportal.com/assets/images/feedback.jpg);
+background-repeat:no-repeat;
+height: 168px;
+}
+#mrova-contactform #feedbacksubmit {
+	width:60px;
+	background:#3cb58c; color:#fff; 
+	cursor:pointer;
+	padding:5px 10px; 
+	border: none;
+margin-top:20px;
+}

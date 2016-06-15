@@ -507,11 +507,18 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 		
 										 };
 										?>
+										 <li> <a role="button" href="<?php echo $url?>" tabindex="0" class="asset  <?php if($this->uri->segment(2) == url_title('assets', TRUE)){?> asset-active <?php }?>"><span>MySmart Apps (Beta) </span></a>
+                                         <ul>
+                                                    
+													  <li class="top-41" <?php if($this->uri->segment(2) == url_title('MyProjects', TRUE)){?> class="active"<?php }?>><a href="<?php echo base_url()."index.php/welcome/MyProjects" ?>" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>My Projects</span></a></li>
+                                   <li <?php if($this->uri->segment(2) == url_title('ManagedDevices', TRUE)){?> class="active"<?php }?>><a href="<?php echo base_url()."index.php/welcome/ManagedDevices" ?>" class="projects <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> project-active<?php }?>"> <span >Managed Devices</span></a></li>
+                                      <li <?php if($this->uri->segment(2) == url_title('PrinterManagement', TRUE)){?> class="active"<?php }?>><a href="<?php echo base_url()."index.php/welcome/PrinterManagement" ?>"  class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> print-active<?php }?>"> <span>Printer Management</span></a></li>
+         
+                                                </ul>
+										</li>
 										
-										    <li <?php if($this->uri->segment(2) == url_title('MyProjects', TRUE)){?> class="active"<?php }?>><a href="<?php echo base_url()."index.php/welcome/MyProjects" ?>" class="devices <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> device-active<?php }?>"> <span>My Projects</span></a></li>
-                                  
 										
-										<?php } else if($menu[$i]['id']==8)
+										<!--<?php } else if($menu[$i]['id']==8)
 										  {
 										  if(in_array($menu[$i]['id'], $id) == 1){
 										 $url = "#";
@@ -537,7 +544,7 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										 };
 										?>
 										 <li <?php if($this->uri->segment(2) == url_title('PrinterManagement', TRUE)){?> class="active"<?php }?>><a href="<?php echo $url ?>"  class="printer <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> print-active<?php }?>"> <span>Printer Management</span></a></li>
-     
+                                 -->
 										<?php } else if($menu[$i]['id']==10)
 										  {
 										   if(in_array($menu[$i]['id'], $id) == 1){

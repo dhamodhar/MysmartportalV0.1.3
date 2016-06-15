@@ -58,6 +58,16 @@ clear:both;
 }
 .small-header-bg{
 height:auto!important;
+}
+.top-64{
+margin-top:64px;
+}
+
+.top-129{
+margin-top:129px;
+}
+.top-246{
+margin-top:246px;
 }	
 }
 
@@ -117,6 +127,33 @@ height:auto!important;
 }
 #assets-list_length label{
 margin-left:2%;
+}
+.dash-board, .support, .pa, .catalog, .contracts, .asset, .devices, .projects, .printer{
+padding-left:0px!important;
+}
+.appWrapper.sidebar-xs #header .branding{
+padding:8px;
+width:12%;
+}
+.appWrapper.sidebar-xs #header .nav-right{
+float:right!important;
+}
+.messages .dropdown-menu{
+left:-181px !important;
+
+}
+.top-41{
+margin-top:41px;
+}
+
+.top-91{
+margin-top:91px;
+}
+.top-168{
+margin-top:168px;
+}
+.top-40{
+margin-top:0px;
 }
 }
 
@@ -188,4 +225,44 @@ height:auto!important;
 #assets-list_length label{
 margin-left:2%;
 }
+.appWrapper.sidebar-xs #header .branding{
+padding:14px 8px 8px;
+width:20%;
+}
+.top-41{
+margin-top:41px;
+}
+
+.top-91{
+margin-top:91px;
+}
+.top-168{
+margin-top:168px;
+}
+.top-40{
+margin-top:0px;
+}
+.dash-board, .support, .pa, .catalog, .contracts, .asset, .devices, .projects, .printer{
+padding-left:0px!important;
+}
+.dropdown.nav-profile .dropdown-menu{
+left:200px;
+right:0px!important;
+}
+.messages .dropdown-menu{
+left:50px !important;
+}
+.page{
+padding-top:10px;
+padding-bottom:10px;
+}
+.popover .popover-title{
+width:290px;
+left:35px;
+}
+.popover-content{
+padding:0;
+}
+.popover > .arrow, .popover > .arrow::after{
+visibility:hidden;
 }

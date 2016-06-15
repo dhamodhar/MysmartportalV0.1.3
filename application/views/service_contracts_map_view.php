@@ -142,10 +142,10 @@
 				
 				$.ajax({
             type: "GET",
-            url: "http://lowrysmartportal.com/index.php/welcome/all_servicecontracts_to_map_view/<?php echo $servicenumber; ?>",
+            url: "http://lowrysmartportal.com/index.php/welcome/all_servicecontracts_to_map_view",
             dataType: "text",
             success: function(xml){
-			
+			alert(xml);
 			 $(xml).find('contracts').each(function(){
 				geocoder = new google.maps.Geocoder();
 			 var assetaddress= $(this).find('location').text();

@@ -6,6 +6,25 @@
 html{
 overflow-x:hidden;
 }
+
+
+.active-page .dataTables_wrapper {
+     top: -35px;
+}
+.padding-top-10{
+padding-top:10px;
+}
+.in-numbers{
+width:120px!important;
+}
+.multiselect-container{
+left:-119px;
+}
+.active-page-location {
+    position: relative;
+    top: 31px;
+    z-index: 9;
+}
 .mt-7 {
     margin-top: 7px !important;
 }
@@ -96,8 +115,8 @@ top:0px!important;
 text-align-left!important;
 }
 .load-buts {
-    margin-left: 160px;
-    margin-top: -58px;
+    margin-left: 15%;
+    margin-top: -31px;
     position: relative;
 }
 #assets-list th, #contracts-list th, #orders-list th{
@@ -126,7 +145,7 @@ background: rgba(0, 0, 0, 0) url("http://lowrysmartportal.com/assets/images/head
 float:right;
 }
 .icons-wheel{
-margin-top:200px;
+margin-top:250px;
 }
 .width-100{
 width:100%;

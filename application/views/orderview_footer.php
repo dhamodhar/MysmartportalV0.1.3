@@ -106,9 +106,13 @@ var specialElementHandlers = {
 				var order_tracking_number = $(this).find('tracker_no').text();
 				var totshipqty = $(this).find('totshipqty').text();
 				var error = $(this).find('error').text();
-
-			   $('#orders-list tbody').append("<tr><td>"+part_code+"</td><td>"+part_desc+"</td><td>"+qty+"</td><td>"+totshipqty+"</td><td >"+uom+"</td><td >$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td></tr>");
-                        
+              if(orderNumber!="")
+			  {
+			  $('#orders-list tbody').append("<tr><td>"+part_code+"</td><td>"+part_desc+"</td><td>"+qty+"</td><td>"+totshipqty+"</td><td >"+uom+"</td><td >$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td></tr>");
+                
+			  
+			  }
+			           
 		   });
 		   $('#orders-list').DataTable({
 			 "order": [[ 1, "desc" ]],
@@ -202,7 +206,7 @@ $.ajax({
 						
 						}else{
 		                $("#order_details").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mt-10'> "+inv_order_open_diff+"<li><strong>Order Number: </strong>"+order_numb+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Estimated Ship Date: </strong> "+ship_date+"</li><li><strong>Post Date: </strong>"+post_date+"</li><ul class='list-unstyled text-default lt mb-20'></ul></ul>");
-                        $("#order_details1").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mb-20'><li><strong>Tax Amount: </strong> $ "+total_tax+"</li><li><strong>Shipping Charges: </strong>$ "+shipping_charge+"</li><li><strong>Handling Charges: </strong>$ "+handling_charges+"</li><li><strong>Total Amount: </strong> $"+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li><li><strong>Carrier: </strong> <a href='https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracking_number.trim()+"&cntry_code=us' target='_blank'>"+carrier+"</a></li></ul></ul>");
+                        $("#order_details1").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mb-20'><li><strong>Tax Amount: </strong> $ "+Number(total_tax).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Shipping Charges: </strong>$ "+Number(shipping_charge).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Handling Charges: </strong>$ "+Number(handling_charges).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Total Amount: </strong> $"+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li><li><strong>Carrier: </strong> <a href='https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracking_number.trim()+"&cntry_code=us' target='_blank'>"+carrier+"</a></li></ul></ul>");
 						$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipst+"</li><li>"+shipcity+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");						
 						$("#billing").html("<p class='text-uppercase text-strong mb-10 custom-font'>BILLING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+billname+"</li><li>"+billadd1+"</li><li>"+billadd2+"</li><li>"+billadd3+"</li><li>"+billcity+"</li><li>"+billst+" - "+billzip+"</li><li>"+billcountry+"</li></ul>");
 						$("#order_number").html(order_numb.trim());

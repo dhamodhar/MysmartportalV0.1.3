@@ -20,16 +20,6 @@
                                 <li>
                                     <a href=" " class="sub-active">Labels & Supplies</a>
                                 </li>
-								 <li>
-                                    Filter by Year 
-									<select name="fil" id="fil" onchange="filter(this.value)" class="form-group">
-									
-									<option>Select Year</option>
-									<option>All</option>
-									<option>2015</option>
-									<option>2016</option>
-									</select>
-                                </li>
                                 
                             </ul>
                             

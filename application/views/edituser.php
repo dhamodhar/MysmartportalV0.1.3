@@ -102,6 +102,7 @@
                                             <div>
                                                 <input type="text" class="form-control" name="cust_code" id="cust_code" value="<?php echo $edituserdata->cus_code?>" readonly >
                                                 <input type="hidden" name="cust_code1" id="cust_code1" value="<?php echo ($edituserdata->cus_code);?>" >
+                                                <input type="hidden" name="email_id" id="email_id" value="<?php echo ($edituserdata->email_id);?>" >
                                             </div>
                                         </div></div>
 											
@@ -260,35 +261,40 @@
 
 </div>
 <div class="col-md-12 pt-20 pb-20" style="background:#fff;">
+<input type="button" name="del" id="del" class="btn btn-lightred" style="margin-left:77%; !important" value="Delete" onclick="deleteall()">
       <table id="orders-list1">
                                                 <thead>
                                                 <tr>
 
                                                     <th style="width:180px;">ShipToCode</th>
                                                     <th style="width:200px;" class="active">CustomerCode</th>
-                                                    <th style="width:150px;">ShiptoBusName</th>
+                                                   <!-- <th style="width:150px;">ShiptoBusName</th>
                                                     <th style="width:150px;">Address2</th>
                                                     <th style="width:150px;">City</th>
                                                     <th style="width:150px;">State</th>
-                                                    <th style="width:100px;">Zip</th> 
+                                                    <th style="width:100px;">Zip</th> -->
 													<th style="width:100px;">Actions</th> 
                                                 </tr>
                                                 </thead>
 												<tbody>
 												
 												<?php 
-												foreach($userlocations as $userlocationsdata){
+												foreach($latestlocations as $userlocationsdata){
 												?>
 												 <tr>
-											    <td> <?php echo $userlocationsdata->ship_to_code?></td>
-											    <td> <?php echo $userlocationsdata->custum_code?></td>
-											    <td> <?php echo $userlocationsdata->ship_to_busname?></td>
+											    <td> <?php echo $userlocationsdata['LocationId']?></td>
+											    <td> <?php echo $userlocationsdata['custcode']?></td>
+											   <!-- <td> <?php echo $userlocationsdata->ship_to_busname?></td>
 											    <td> <?php echo $userlocationsdata->address_1?></td>
 											
 											    <td> <?php echo $userlocationsdata->city?></td>
 											    <td> <?php echo $userlocationsdata->state?></td>
-											    <td> <?php echo $userlocationsdata->zip?></td>
-												 <td> <a href="javascript:void(0)" onclick="deletelocation(<?php echo $userlocationsdata->id?>)" >Delete </a></td>
+											    <td> <?php echo $userlocationsdata->zip?></td>-->
+												 <td> 
+												 
+												 <input type="checkbox" name="locations[]" id="location"  value="<?php echo $userlocationsdata['LocationId']?>">
+												 
+												 <!--<a href="javascript:void(0)" onclick="deletelocation(<?php echo $userlocationsdata['LocationId']?>)" >Delete </a>--></td>
 												 	</tr>
 												 <?php } ?>
 												 

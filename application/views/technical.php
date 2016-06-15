@@ -379,7 +379,7 @@ document.getElementById("service_btns").style.display='block';
 							
 						}else
 						{
-							$hour = date('H')+2;
+							$hour = date('H');
 							
 						}
 						
@@ -390,7 +390,7 @@ document.getElementById("service_btns").style.display='block';
 							{
 							$dayTerm = "Morning";
 							
-							}else if($hour < 16)
+							}else if($hour < 18)
 							{
 								$dayTerm = "Afternoon";
 							

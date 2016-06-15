@@ -1,3 +1,4 @@
+ <link href="<?php echo base_url()?>assets/progressbar/demo.css" rel="stylesheet"/>  
             <!-- ====================================================
             ================= CONTENT ===============================
             ===================================================== -->
@@ -117,53 +118,64 @@
  <div class="col-md-12 no-padding">
   <div class="col-md-2">
 <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2">Search By Contract number</label>
-                                            <input type="text" name="contract_number" id="contract_number" class="form-control" id="exampleInputEmail2" placeholder="Search by Contract number">                                 
+                                            <label class="sr-only" for="exampleInputEmail2">Search By Culumn</label>
+											
+											<select name="columntype" id="columntype" class="form-control" onchange="displyDate(this.value)">
+											<option>Select Search Parameter</option>
+											<option>Serial Number</option>
+											<option>Contract Number</option>										
+											<option>Contract End Date</option>											
+											</select>
+                                           <!-- <input type="text" name="invoice_number" id="invoice_number" class="form-control" id="exampleInputEmail2" placeholder="Search by Invoice Number">   
+-->
+											
   </div></div>
 
 
                                      
                                         
+                               <div class="col-md-2" id="keyvalue" style="display:block">
+<div class="form-group">
+                                            <label class="sr-only" for="exampleInputEmail2">Search</label>
+                                            <input type="text" name="invoice_number" id="invoice_number" class="form-control" id="exampleInputEmail2" placeholder="Enter Details">   
+								
+  </div></div>
+                                               <div id="date" style="display:none;">
                                         <!-- col -->
-                                        <div class="col-md-2">
+                                      <div class="col-md-2">
 
                                              
-                                            <div class="input-group datepicker form-group" data-format="L">
-                                                <input type="text" name="from"  id="from" class="form-control " placeholder="End Date From">
-                                                   <span class="input-group-addon">
+                                           <div class="input-group datepicker form-group" data-format="L">
+                                                <input type="text" name="from"  id="from" class="form-control " placeholder="From">
+<span class="input-group-addon">
                                                         <span class="fa fa-calendar"></span>
                                                     </span>
-                                         </div>
-                                        </div>
-                                        <!-- /col -->
-                                         <!-- col -->
-                                        <div class="col-md-2">
-                                            
-                                            <div class="input-group datepicker form-group" data-format="L">
-                                                <input type="text" name="to"  id="to" class="form-control " placeholder=" End Date To">
-                                                   <span class="input-group-addon">
-                                                        <span class="fa fa-calendar"></span>
-                                                    </span>
+
+
+                                                
+                                               
                                             </div>
                                         </div>
                                         <!-- /col -->
+                                         <!-- col -->
+                                      <div class="col-md-2">
+                                            
+                                              <div class="input-group datepicker form-group" data-format="L">
+                                                <input type="text" name="to" id="to"  class="form-control " placeholder="To">
+<span class="input-group-addon">
+                                                        <span class="fa fa-calendar"></span>
+                                                    </span>
+                                              
+                                            </div>
+                                        </div>
+										</div>
+                                        <!-- /col -->
                                           <div class="col-md-1 form-group no-padding"> <button class="btn btn-blue " onclick="searchbydates()"><i class="fa fa-search" ></i></button></div>
 
-<div class="col-md-2">
-<div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2">Search</label>
- <select class="form-control" name="user_status" id="user_status" onchange="getdetails_by_location(this.value)">
 
-  <option value="All">ALL</option>
- <?php for($i=0;$i<sizeOf($locations);$i++){ ?>
- <option value="<?php echo $locations[$i]?>"><?php echo $city[$i].", ".$state[$i]." (".$locations[$i].")";?></option>
-<?php } ?>
- </select>
- </div></div>	
+<div class="col-md-3 no-padding pull-right">
 
-<div class="col-md-3 no-padding">
-
-<div style="cursor: pointer; position: absolute; right: 193px; top: 63px;"><div class="shadow"></div>
+<div style="cursor: pointer; position: absolute; right: 200px; top: 61px;"><div class="shadow"></div>
 <div class="pulse"></div>
 <div class="pin-wrap"><div class="pin"></div>
 </div>
@@ -178,14 +190,23 @@
 
 									
                                         
-                                        <div class="table-responsive">
+                                        <div class="table-responsive active-page">
 
                                             			
  
-                                         <div class="row">
-                                    
-                                        <div class="col-md-6"><div id="colVis"></div></div>
-                                        </div>
+                                     <!-- <div class="row"> <div class="col-md-6"><div id="colVis"></div></div></div>-->
+
+                                        <div class="col-md-2 pull-right active-page-location"><div class="form-group pull-right">
+                                            <label class="sr-only" for="exampleInputEmail2">Search</label>
+ <select class="form-control" name="user_status" id="user_status" onchange="getdetails_by_location(this.value)">
+  <option value="All">Select Location</option>
+  <option value="All">ALL</option>
+ <?php for($i=0;$i<sizeOf($locations);$i++){ ?>
+ <option value="<?php echo $locations[$i]?>"><?php echo $city[$i].", ".$state[$i]." (".$locations[$i].")";?></option>
+<?php } ?>
+ </select>
+ </div>
+</div>
                                          <table class="table table-striped table-hover table-custom" id="contracts-list">
                                                 <thead>
                                                 <tr>
@@ -213,7 +234,13 @@
 <!--<button class="btn btn-primary btn-xs  load-buts" onclick="loadmore()" value="Load More">Load More</button>-->
 
                                     </div>
-									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"></div>
+									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"><br><span style="color: #418bca;
+    margin-left: -139px;
+    font-size: 17px;
+    font-weight: bold;">Data may take a while to load depending on amount of records</span></div>
+		 <div class="loading-progress" id="progress" style="width: 38% !important;
+    margin-left: 24%;display:block"></div>
+
                                     <!-- /tile body -->
 <!--<a href="<?php echo base_url()?>index.php/welcome/all_servicecontracts_to_csv" style="margin-left:15px;" class="btn btn-primary btn-sm mb-10">Export To CSV</a>-->
 									
@@ -233,6 +260,47 @@
                     <!-- /page content -->
 
                 </div>
+
+ <!--Feedback form-->
+
+<div style="margin-top: -243.5px; top: 50%; display: block; right: -462px;" id="mrova-feedback">
+		<div id="mrova-contact-thankyou" style="display: none;">
+			Thank you.  We'hv received your feedback.
+		</div>
+		<div id="mrova-form">
+			<form id="mrova-contactform" action="<?php echo base_url()."index.php/welcome/savefeedback"?>" method="post">
+				<ul>
+<li><h2 class="mt-10">Feedback </h2></li>
+					<li>
+						<label for="mrova-name">Your Name*</label> <input name="first_name_req" class="required" id="first_name_req" value="<?php echo $this->session->userdata('firstname')." ".$this->session->userdata('lastname');?>" type="text">
+					</li>
+					<li>
+						<label for="mrova-email">Email*</label> <input name="username_req" class="required" id="username_req" value="<?php echo $this->session->userdata('email')?>" type="text">
+					</li>
+<li> <label for="mrova-name">Select Type*</label>
+<select name="bus_name_req" id="bus_name_req" aria-controls="orders-list" class="form-control input-sm">
+<option value="">--Select Type--</option>
+<?php 
+foreach($feedback as $feedbackdata){
+?>
+<option><?php echo $feedbackdata->component_name; ?></option>
+
+<?php } ?>
+</select>
+</li>
+					<li>
+						<label for="mrova-message">Message*</label>
+						<textarea class="required" id="datauser" name="datauser" rows="5" cols="30"></textarea>
+					</li>
+<li><input type="submit" value="Send" name="feedbacksubmit" id="feedbacksubmit"></li>
+				</ul>
+				
+			</form>
+		</div>
+		<div style="margin-top: -84px; top: 50%;" id="mrova-img-control"></div>
+	</div>
+
+<!-- end feed back -->
                 
             </section>
             <!--/ CONTENT -->

@@ -145,14 +145,14 @@ Currently the application does not support the display of open tickets.
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> Service Tickets </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article> 
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> Service Contracts </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article> 
 
@@ -160,7 +160,7 @@ Currently the application does not support the display of open tickets.
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>  Labels & Supplies </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article> 
 
@@ -312,7 +312,7 @@ Currently the application does not support the display of open tickets.
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">My Catalog </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article>
 
@@ -736,35 +736,35 @@ Currently the application does not support the display of open tickets.
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">My Projects</button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Managed Devices </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Printer Management </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Mobility Social Media </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article>
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left ">Chat Now </button>          
 <div data-content>
-<div class="level3"> <button> </button> </div>
+<div class="level3"> <button>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</button> </div>
 </div>
 </article>
 
