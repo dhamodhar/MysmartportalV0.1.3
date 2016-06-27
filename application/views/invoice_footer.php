@@ -52,6 +52,15 @@
 
 <script>
 $(document).ready(function(){ 
+      window.setInterval(function(){
+document.getElementById("savemsg").style.display = 'none';
+if(document.getElementById("copymsg").style.display == 'block')
+{
+document.getElementById("copymsg").style.display = 'none';
+
+}
+
+}, 8000);
 $(".demo2 .rotate").textrotator({
 animation: "flip",
 speed: 3000
@@ -103,6 +112,7 @@ speed: 3000
 			    var cust_po= $(this).find('cust_po').text();
 			    var tracker_no= $(this).find('tracker_no').text();
 				var error =  $(this).find('error').text();
+				i =  $(this).find('RecCount').text();
                 var traking_link = "";
 				var tracklinkfinal = "";
 				
@@ -120,11 +130,11 @@ speed: 3000
 			   {
 			   
 			   traking_link = "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracker_no.trim()+"&cntry_code=us";
-			   tracklinkfinal ="<a href='"+traking_link+"' target='_blank'>"+tracker_no+"</a>";
+			   tracklinkfinal ="<a href='"+traking_link+"' target='_blank' style='color:#0D7BDE;text-decoration: underline !important;'>"+tracker_no+"</a>";
 			   }else
 			   {
 			   traking_link = "#";
-			     tracklinkfinal ="<a href='#'>"+tracker_no+"</a>";
+			     tracklinkfinal ="<a href='#' style='color:#0D7BDE;text-decoration: underline !important;'>"+tracker_no+"</a>";
 				 status = "";
 				 
 			   }
@@ -134,14 +144,14 @@ speed: 3000
 				var finalordernumber = encodeURIComponent(String(encodedString));
 			   if(invoice_numb!="")
 			   {
-			     $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='widtd:150px;text-align: right;'>"+inv_date+"</td><td style='widtd:150px; text-align: right;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;text-align: right;'>"+due_date+"</td><td style='widtd:200px;text-align: right;'>"+tracklinkfinal+"</td><td style='widtd:200px;text-align: right;'>"+carr_code+"</td><td style='widtd:200px;text-align: right;'>"+status+"</td><td style='widtd:200px;text-align: right;'>"+cust_po+"</td></tr>");
+			     $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='widtd:150px;text-align: right;'>"+inv_date+"</td><td style='widtd:150px; text-align: right;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;text-align: right;'>"+due_date+"</td><td style='widtd:200px;text-align: right;'>"+tracklinkfinal+"</td><td style='widtd:200px;text-align: right;'>"+carr_code+"</td><td style='widtd:200px;text-align: right;'>"+status+"</td><td style='widtd:200px;text-align: right;'>"+cust_po+"</td></tr>");
                
 			   
 			   }
 			                  
 
 								}	
-i++;								
+							
 		                     });
 		   
 		   
@@ -184,6 +194,7 @@ i++;
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
 				$('#orders-list_info').prepend("Total entries: "+i+"<br>");
+				$("#ToolTables_orders-list_2").hide();
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -309,11 +320,11 @@ data.fnDestroy();
 				   {
 				   
 				   traking_link = "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracker_no.trim()+"&cntry_code=us";
-				   tracklinkfinal ="<a href='"+traking_link+"' target='_blank'>"+tracker_no+"</a>";
+				   tracklinkfinal ="<a href='"+traking_link+"' target='_blank' style='color:#0D7BDE;text-decoration: underline !important;'>"+tracker_no+"</a>";
 				   }else
 				   {
 				   traking_link = "#";
-					 tracklinkfinal ="<a href='#'>"+tracker_no+"</a>";
+					 tracklinkfinal ="<a href='#' style='color:#0D7BDE;text-decoration: underline !important;'>"+tracker_no+"</a>";
 					 status = "";
 					 
 				   }
@@ -332,7 +343,7 @@ data.fnDestroy();
 				
 				    var encodedString = Base64.encode(invoice_numb);
 				    var finalordernumber = encodeURIComponent(String(encodedString));
-				  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+				  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
                
 
 			  // $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+invoice_numb+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date +"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
@@ -376,6 +387,7 @@ data.fnDestroy();
                 });
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
+				$("#save").hide();
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -453,11 +465,11 @@ document.getElementById("count").value = total_count;
 			   {
 			   
 			   traking_link = "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracker_no.trim()+"&cntry_code=us";
-			   tracklinkfinal ="<a href='"+traking_link+"' target='_blank'>"+tracker_no+"</a>";
+			   tracklinkfinal ="<a href='"+traking_link+"' target='_blank' style='color:#0D7BDE;text-decoration: underline !important;'>"+tracker_no+"</a>";
 			   }else
 			   {
 			   traking_link = "#";
-			     tracklinkfinal ="<a href='#'>"+tracker_no+"</a>";
+			     tracklinkfinal ="<a href='#' style='color:#0D7BDE;text-decoration: underline !important;'>"+tracker_no+"</a>";
 				 status = "";
 				 
 			   }
@@ -466,7 +478,7 @@ document.getElementById("count").value = total_count;
 			        var encodedString = Base64.encode(invoice_numb);
 				    var finalordernumber = encodeURIComponent(String(encodedString));
 			   
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracklinkfinal+"</td><td style='widtd:200px;'>"+carr_code+"</td><td style='widtd:200px;'>"+status+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
   }				 
 									 });
 				   
@@ -509,6 +521,7 @@ document.getElementById("count").value = total_count;
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$("#save").hide();
 					},
 					error: function() {
                                         $('#orders-list').DataTable({
@@ -632,6 +645,12 @@ function displyDate(selectedValue)
 
 }
 </script>
-
+<script>
+function saveexcel()
+{
+	document.getElementById("savemsg").style.display = 'block';
+    window.open('<?php echo base_url()?>index.php/welcome/all_invoices_tocsv', '_blank');
+}
+</script>
     </body>
 </html>

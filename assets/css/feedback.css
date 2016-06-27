@@ -43,6 +43,7 @@ width: 37px;
 background-image:url(http://lowrysmartportal.com/assets/images/feedback.jpg);
 background-repeat:no-repeat;
 height: 168px;
+z-index:9;
 }
 #mrova-contactform #feedbacksubmit {
 	width:60px;

@@ -238,10 +238,20 @@ function sendfinalemail(ordersnumber,relnumber)
 
 var email = document.getElementById("email").value;
 var finalemail = email.replace(/@/g,'ZZZ');
-//alert(finalemail);
-location.href='<?php echo base_url();?>index.php/welcome/pdf/'+ordersnumber+'/'+finalemail+'/3';
-
 document.getElementById("sendemail").style.display = 'none';
+
+ $.ajax({
+					type: "GET",
+					url: '<?php echo base_url();?>index.php/welcome/pdf/'+ordersnumber+'/'+finalemail+'/3',
+					dataType: "text",
+					success: function(xml){
+				document.getElementById("msg").style.display = 'block';
+					
+                  //$("#num_un_read").html("0");
+				  
+					}
+
+			  });
 
 }
 </script>

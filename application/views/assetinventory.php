@@ -11,7 +11,7 @@
 
                         
 
-                        <div class="page-bar col-md-9">
+                        <div class="page-bar col-md-6">
 
                             <ul class="page-breadcrumb">
                                 <li>
@@ -23,7 +23,7 @@
  <li class="information-btn">
 <div  rel="tooltip" data-placement="left" class="btn btn-default  bg-none  btn-xs  pull-right  ml-10 col-md-1"    data-toggle="popover"    data-html="true"   data-title="<a href='#' class='close' data-dismiss='alert'>×</a>
 
-<div class='line-hieght-22'>You may search by order id / invoice number. You may search between order dates. You may use both.<br/> <br/><span class='red'>Note:</span> You may search orders & invoices using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
+<div class='line-hieght-22'>You may search by Serial Number or Contract Number<br/> <br/><span class='red'>Note:</span> You may search Asset Inventory using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
 
 <div data-toggle='collapse' data-target='#demo1' class='accordion-toggle float-right'><button onclick='showDetails1()' class='btn btn-primary btn-xs'>More</button></div>
 <div class='hiddenRow'>
@@ -37,14 +37,15 @@
 <li><img src='http://lowrysmartportal.com/assets/images/all-assets-img.jpg'/></li>
 <li>The list of all assets will be displayed in a table.</li>
 <li class='blue-bold'>Functionality</li>
-<li>User can perform various functionalities provided in the all assets page for ease of use and access. They are,</li>
+<li>Users can perform various functionalities provided in the All Assets page for ease of use and access,  They are </li>
+<li class='blue-bold'>All Assets Search:</li>
+<li>User can search All Assets records by using the functionality</li>
 
-<li class='blue-bold'>Expired contracts Search</li>
-<li>User can search service contracts by using this functionality. </li>
-<li>User can use anyone option or two combinations  or all of these,
+
+<li>User can use any one option below for search
 <ul class='sub-he'>
-<li>Search by Serial number.</li>
-<li>Display assets based on Location</li>
+<li>Serial Number</li>
+<li>Contract Number</li>
 </ul>
 </li>
 
@@ -94,7 +95,15 @@
                             </ul>
                             
                         </div>
-<div class="col-md-3 cps"> <div id="tableTools"></div>
+<div class="col-md-6 cps"> 
+<input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
+<div id="tableTools"></div>
+
+<div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+
+
+</div>
 
                     </div>
 
@@ -126,8 +135,8 @@
 											
 											<select name="columntype" id="columntype" class="form-control">
 											<option>Select Search Parameter</option>
-											<option>SerialNumber</option>
-											<option>contract_number</option>										
+											<option>Serial Number</option>
+											<option>Contract Number</option>										
 											
 											</select>
                                            <!-- <input type="text" name="invoice_number" id="invoice_number" class="form-control" id="exampleInputEmail2" placeholder="Search by Invoice Number">   

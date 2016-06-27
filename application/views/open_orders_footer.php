@@ -59,7 +59,15 @@
 
 <script>
 $(document).ready(function(){
+      window.setInterval(function(){
+document.getElementById("savemsg").style.display = 'none';
+if(document.getElementById("copymsg").style.display == 'block')
+{
+document.getElementById("copymsg").style.display = 'none';
 
+}
+
+}, 8000);
 $(".demo2 .rotate").textrotator({
 animation: "flip",
 speed: 3000
@@ -104,6 +112,7 @@ speed: 3000
 			//alert(xml);
 			//$('#orders-list tbody').append(xml);
 			var i = 0;
+			
                 $(xml).find('order').each(function(){
 				
                 var orderNumber= $(this).find('order_number').text();
@@ -117,6 +126,7 @@ speed: 3000
 				var tracker_no = $(this).find('tracker_no').text();
 				var act_ship_date = $(this).find('act_ship_date').text();
 				var error = $(this).find('error').text();
+				 i = $(this).find('RecCount').text();
 				
 				
 				if(order_status == "Printed and Posted")
@@ -137,7 +147,7 @@ speed: 3000
 
 			   if(orderNumber!="")
 			   {
-			    $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'><img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </a></td></tr>"); }
+			    $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"' style='color:#0D7BDE;text-decoration: underline !important;'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'><img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </a></td></tr>"); }
                
 			   
 			   }
@@ -145,7 +155,7 @@ speed: 3000
 			   
 			   }
 			  //datatables(); 
-i++;			  
+		  
 		   });
 		   
 		    var table4 = $('#orders-list').DataTable({
@@ -196,6 +206,8 @@ i++;
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
 $('#orders-list_info').prepend("Total entries: "+i+"<br>");
+$("#ToolTables_orders-list_2").hide();
+//$("#ToolTables_orders-list_1").hide();
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -313,7 +325,7 @@ function searchbydates()
 				
 				var encodedString = Base64.encode(orderNumber);
 				var finalordernumber = encodeURIComponent(String(encodedString));
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'>? </a></td></tr>");
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"' style='color:#0D7BDE;text-decoration: underline !important;'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+act_ship_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+orderNumber+"/"+po_number.trim()+"/"+order_status+"'><img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </a></td></tr>");
          
 		   });
 
@@ -321,6 +333,7 @@ function searchbydates()
 							   
 									var table4 = $('#orders-list').DataTable({
 									"language": {"emptyTable": "No Data Found."},	
+									 "bFilter": false,
 										"aoColumnDefs": [
 										  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
 										]
@@ -355,6 +368,9 @@ function searchbydates()
 									});
 
 									$(tt.fnContainer()).insertAfter('#tableTools');
+									
+									$("#save").hide();
+                                    //$("#ToolTables_orders-list_1").hide();
 				
 				
 		   
@@ -420,12 +436,13 @@ document.getElementById("count").value = total_count;
 			    var encodedString = Base64.encode(orderNumber);
 				var finalordernumber = encodeURIComponent(String(encodedString));
 			   
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+order_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> ? </td></tr>"); }
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href='<?php echo base_url()?>index.php/welcome/order_view/"+finalordernumber+"' style='color:#0D7BDE;text-decoration: underline !important;'>"+orderNumber+"</a></td><td style='widtd:200px;'>"+order_date+"</td><td style='widtd:150px;'>"+po_number+"</td><td style='widtd:150px;'>"+order_date+"</td><td style='widtd:150px;'>"+ship_city+" / "+ship_state+"</td><td style='widtd:150px;'>"+order_status+"</td><td style='widtd:150px;'> <img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </td></tr>"); }
                  //datatables();           
 		   });
 		   
 		    var table4 = $('#orders-list').DataTable({
-                "language": {"emptyTable": "No Data Found."},	
+                "language": {"emptyTable": "No Data Found."},
+ "bFilter": false,				
                     "aoColumnDefs": [
                       { 'bSortable': false, 'aTargets': [ "no-sort" ] }
                     ]
@@ -460,7 +477,8 @@ document.getElementById("count").value = total_count;
                 });
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
-
+                                    $("#save").hide();
+                                   // $("#ToolTables_orders-list_1").hide();
 				
             },
             error: function() {
@@ -593,6 +611,32 @@ function displyDate(selectedValue)
 
 }
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+        $(document).on("click", ".popover .close" , function(){
+        $(this).parents(".popover").popover('hide');
+    });
+});
+</script>
+<script>
+function saveexcel()
+{
+	document.getElementById("savemsg").style.display = 'block';
+    window.open('<?php echo base_url()?>index.php/welcome/all_orders_to_csv', '_blank');
+}
+</script>
+<script>
+function printdata()
+{
+   var divToPrint=document.getElementById("orders-list");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+</script>
+
 
 
     </body>

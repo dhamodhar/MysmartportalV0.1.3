@@ -122,7 +122,7 @@ var email = document.getElementById("username-login").value;
   <div class="icons">
     <div class="rotater">
       <div class="btn btn-icon technical-tile">
-   <div class="textbox" ><p style="position:relative;left:-10px">Technical Support</p></div>
+   <div class="textbox" ><p class="tech-txt">Technical Support</p></div>
        <img src="http://lowrysmartportal.com/assets/images/tech-support.png" class="img-responsive" style="margin-top:26px;"/>
      
       </div>

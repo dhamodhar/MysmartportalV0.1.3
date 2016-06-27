@@ -22,6 +22,7 @@ h1 {
   margin: 40px auto;
   max-width: 1200px;
   position: relative;
+z-index:-1;
 }
 
 ul.checkout-bar li {
@@ -409,15 +410,16 @@ echo "Good " . $dayTerm;?>,&nbsp; <?php echo $this->session->userdata('firstname
 <div  rel="tooltip"  data-placement="left" class="btn btn-default bg-none "    data-toggle="popover"    data-html="true"   data-title="<a href='#' class='close' data-dismiss='alert'>×</a>
 
 
-<div class='line-hieght-22'>You may search by order id / invoice number. You may search between order dates. You may use both.<br/> <br/><span class='red'>Note:</span> You may search orders & invoices using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
-<div data-toggle='collapse' data-target='#demo1' class='accordion-toggle float-right'><button onclick='showDetails1()' class='btn btn-primary btn-xs'>More</button></div>
+
+
 <div class='hiddenRow'>
- <div class='level3 accordian-body collapse' id='demo1'>
+ <div class='level3' >
                      <ul>
 <li><strong>Technical Support</strong></li>
 <li>The technical support page provides a snapshot of various services like,
 <ul class='sub-he'>
 <li>Open orders</li>
+<li >Shipped orders</li>
 <li>Past due invoices</li>
 <li>Upcoming service renewal contracts</li>
 <li>Open tickets</li>
@@ -437,6 +439,7 @@ echo "Good " . $dayTerm;?>,&nbsp; <?php echo $this->session->userdata('firstname
 <li class='blue-bold'>Functionality</li>
 <li class='blue-bold'>Snapshot / Quick navigation Cards </li>
 <li class='blue-bold'>Open orders</li>
+
 <li>If User have any open orders, the application will display a count of open orders on the card.
 User can click on the card to view Your open orders.</li>
 
@@ -457,7 +460,7 @@ Currently the application does not support the display of shipped orders.
 <li>If User have any service contracts about to expire in a span of 3 months, the application will display a count of those service contracts on the card.</li>
 <li>User can click on the card to view Your count service contracts about to expire in a span of 3 months.</li>
 <li>How to check: Once User are in the Technical Support page, click on the 'Upcoming Service Renewal Contracts' card.</li>
-<li>The application will navigate User to upcoming service renewal contracts page where User can find the list of list of service contracts about to expire in a span of 3 months if there are any.</li>
+<li>The application will navigate User to upcoming service renewal contracts page where User can find the list of service contracts about to expire in a span of 3 months if there are any.</li>
 
 <li class='blue-bold'>Open Tickets</li>
 <li>If User have any open tickets, the application will display a count of the open tickets on the card.
@@ -612,7 +615,7 @@ Currently the application does not support the display of open tickets.
                                     <div class="row">
                                         <!-- col -->
                                         <div class="col-xs-12">
-<img src="http://lowrysmartportal.com/assets/images/icons/contracts-icon-th.png"/>  <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding" id="ren_count"> 0 </div>
+<img src="http://lowrysmartportal.com/assets/images/icons/contracts-icon-th.png"/>  <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding" id="ren_count"> <?php echo @$UpComingRenewal;?> </div>
                                          
                                         
                                         </div>

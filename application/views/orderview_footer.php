@@ -108,7 +108,7 @@ var specialElementHandlers = {
 				var error = $(this).find('error').text();
               if(orderNumber!="")
 			  {
-			  $('#orders-list tbody').append("<tr><td>"+part_code+"</td><td>"+part_desc+"</td><td>"+qty+"</td><td>"+totshipqty+"</td><td >"+uom+"</td><td >$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td></tr>");
+			  $('#orders-list tbody').append("<tr><td>"+part_code+"</td><td>"+part_desc+"</td><td>"+qty+"</td><td>"+totshipqty+"</td><td >"+uom+"</td><td style='text-align:right;' >$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='text-align:right;'>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td></tr>");
                 
 			  
 			  }
@@ -287,10 +287,25 @@ function sendfinalemail(ordersnumber,relnumber)
 {
 var email = document.getElementById("email").value;
 var finalemail = email.replace(/@/g,'ZZZ');
-
-location.href='<?php echo base_url();?>index.php/welcome/pdf/'+ordersnumber+'-00'+relnumber+'/'+finalemail;
-
 document.getElementById("sendemail").style.display = 'none';
+ $.ajax({
+					type: "GET",
+					url: '<?php echo base_url();?>index.php/welcome/pdf/'+ordersnumber+'-00'+relnumber+'/'+finalemail+'/4',
+					dataType: "text",
+					success: function(xml){
+				document.getElementById("msg").style.display = 'block';
+					
+                  //$("#num_un_read").html("0");
+				  
+					}
+
+			  });	
+
+
+
+//location.href='<?php echo base_url();?>index.php/welcome/pdf/'+ordersnumber+'-00'+relnumber+'/'+finalemail+'/4';
+
+
 
 }
 </script>

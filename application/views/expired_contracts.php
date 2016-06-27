@@ -10,7 +10,7 @@
 
                         
 
-                        <div class="page-bar col-md-8 col-xs-12 xs-mb-10">
+                        <div class="page-bar col-md-6 col-xs-12 xs-mb-10">
 
                             <ul class="page-breadcrumb">
                                 <li>
@@ -23,7 +23,7 @@
 <li class="information-btn">
 <div  rel="tooltip" data-placement="left" class="btn btn-default  bg-none  btn-xs  pull-right  ml-10 col-md-1"    data-toggle="popover"    data-html="true"   data-title="<a href='#' class='close' data-dismiss='alert'>×</a>
 
-<div class='line-hieght-22'>You may search by order id / invoice number. You may search between order dates. You may use both.<br/> <br/><span class='red'>Note:</span> You may search orders & invoices using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
+<div class='line-hieght-22'>You may search by Serial Number, Contract Number and Contract Date<br/> <br/><span class='red'>Note:</span> You may search Service Contracts using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
 
 <div data-toggle='collapse' data-target='#demo1' class='accordion-toggle float-right'><button onclick='showDetails1()' class='btn btn-primary btn-xs'>More</button></div>
 <div class='hiddenRow'>
@@ -32,20 +32,19 @@
 <li><strong>Expired Contracts</strong></li>
 <li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
 <li>Once logged in, on the left hand side menu User can find service contracts tab as the fifth option.</li>
-<li>Click on 'Orders & Invoices' to expand.</li>
 <li>Click on 'Service Contracts' to expand.</li>
 <li>Click on the second option 'Expired Contracts' to display Expired contracts page.</li>
 <li><img src='http://lowrysmartportal.com/assets/images/expired-contracts-img.jpg'/></li>
 <li>The list of all expired contracts will be displayed in a table.</li>
 <li class='blue-bold'>Functionality</li>
 <li>User can perform various functionalities provided in the expired contracts page for ease of use and access. They are, </li>
-<li class='blue-bold'> Expired contracts Search</li>
-<li>User can search service contracts by using this functionality. </li>
-
-<li>User can use anyone option or two combinations  or all of these,
+<li class='blue-bold'> Expired Contracts Search</li>
+<li>User can search Expired Contracts by using this functionality
+User can use any option to search Expired Contracts
 <ul class='sub-he'>
-<li>Search by Contract number.</li>
-<li>Search between dates.</li>
+<li>Serial Number</li>
+<li>Contract Number</li>
+<li>Contract End Date</li>
 </ul>
 </li>
 
@@ -83,7 +82,12 @@
                             </ul>
                             
                         </div>
-<div class="col-md-4 cps "> <div id="tableTools"></div>
+<div class="col-md-6 cps ">
+<input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
+<div id="tableTools"></div>
+<div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+
 
                     </div>
 
@@ -193,7 +197,7 @@
 											
 											
                                         </div>
-<!--<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>-->
+<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
 
                                     </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"><br><span style="color: #418bca;
@@ -216,7 +220,7 @@
                         </div>
                         <!-- /row -->
 
-<input type="hidden" name="count1" id="count1" value="25">
+<input type="hidden" name="count1" id="count1" value="1000">
 
 
                     </div>

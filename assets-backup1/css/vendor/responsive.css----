@@ -1,0 +1,69 @@
+/* --------------------------------------------
+	iPAD/TABLET LANDSCAPE
+-------------------------------------------- */
+
+@media only screen and (max-width: 1024px) {
+	
+}
+
+
+/* --------------------------------------------
+	iPAD/TABLET PORTRAIT
+-------------------------------------------- */
+
+@media only screen and (max-width: 979px) {
+	
+	
+}
+
+/* --------------------------------------------
+	iPHONE LANDSCAPE
+-------------------------------------------- */
+
+@media only screen and (max-width: 767px) {
+	
+
+	
+	
+	
+}
+
+
+/* --------------------------------------------
+	iPHONE PORTRAIT
+-------------------------------------------- */
+
+@media only screen and (max-width: 479px) {
+	
+	
+
+	
+.ml-130{
+	 padding-left:0px;
+}
+.ml-70{
+	 padding-left:0px;
+}
+	
+.menu .rotater {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform-origin: 36% -40% 0;
+    width: 100%;
+}
+.menu .textbox {
+    font-size: 9px;
+}
+
+.bg-logo {
+    top: -78px !important;
+border:1px solid red;
+   }
+.menu #menulogo{
+border:1px solid red;
+float:left;
+}
+
+}

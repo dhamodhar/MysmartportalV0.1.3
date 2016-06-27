@@ -6,8 +6,36 @@
 html{
 overflow-x:hidden;
 }
+#save {
+   
+    float: right;
+}
 
+#print{
+ float: right;
+    margin-right: 5px;
+}
+.multiselect {
+ 
+    border: 1px solid #c16930 !important;
+    
+}
 
+.tech-txt{
+position:relative;
+left:-10px
+}
+
+#copymsg {
+    float: right;
+    font-size: 16px;
+    padding-right: 13px;
+    padding-top: 5px;
+    text-align: left;
+}
+.pro-desc{
+width:auto!important;
+}
 .active-page .dataTables_wrapper {
      top: -35px;
 }
@@ -19,6 +47,7 @@ width:120px!important;
 }
 .multiselect-container{
 left:-119px;
+right:0;
 }
 .active-page-location {
     position: relative;
@@ -115,9 +144,7 @@ top:0px!important;
 text-align-left!important;
 }
 .load-buts {
-    margin-left: 15%;
-    margin-top: -31px;
-    position: relative;
+   margin-top:15px;
 }
 #assets-list th, #contracts-list th, #orders-list th{
 background:#338cc2;

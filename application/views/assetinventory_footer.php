@@ -79,7 +79,15 @@ $c_number == " ";
 		
 <script>
 $(document).ready(function(){
-  
+  window.setInterval(function(){
+document.getElementById("savemsg").style.display = 'none';
+if(document.getElementById("copymsg").style.display == 'block')
+{
+document.getElementById("copymsg").style.display = 'none';
+
+}
+
+}, 8000);
 $(".demo2 .rotate").textrotator({
 animation: "flip",
 speed: 3000
@@ -116,6 +124,7 @@ speed: 3000
             url: "<?php echo base_url()?>index.php/welcome/all_assets/<?php echo $c_number;?>",
             dataType: "text",
             success: function(xml){
+			var i =0;
                           $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
@@ -132,11 +141,17 @@ speed: 3000
                                 var assetitemdetails= $(this).find('assetitemdetails').text();
 
                                 var error =  $(this).find('error').text();             
-					if(error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+deviceType+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
+                                i =  $(this).find('totalrec').text();             
+					if(SerialNumber!="No Data"){	
+					if(SerialNumber!="")
+					{
+					  $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+deviceType+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
 
+					}
+			 
 
-                     }				 
+                     }		
+					 
 		   });
 		   
 		   
@@ -180,6 +195,8 @@ speed: 3000
 								});
 
 								$(tt.fnContainer()).insertAfter('#tableTools');
+								$('#assets-list_info').prepend("Total entries: "+i+"<br>");
+								 $("#ToolTables_assets-list_2").hide();
 								
 					}	
             },
@@ -443,8 +460,7 @@ var test1 = "";
             url: "<?php echo base_url()?>index.php/welcome/all_assets/<?php if($c_number!=""){ echo $c_number; }else{  echo "%20";}?>/"+total_count,
             dataType: "text",
             success: function(xml){
-			//alert(xml);
-			//$('#orders-list tbody').append(xml);
+			var i = 0;
                           $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
@@ -461,7 +477,8 @@ var test1 = "";
 			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
                  //datatables(); 
 
-                     }				 
+                     }	
+i++;					 
 		   });
 				 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
@@ -502,6 +519,7 @@ var test1 = "";
 								});
 
 								$(tt.fnContainer()).insertAfter('#tableTools');
+								$('#assets-list_info').prepend("Total entries: "+i+"<br>");
 								
 					}	
             },
@@ -541,8 +559,7 @@ $.fn.dataTable.ext.errMode = 'none';
             dataType: "text",
 			data:"location="+location,
             success: function(xml){
-			//alert(xml);
-			//$('#orders-list tbody').append(xml);
+				var i =0;
                           $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
@@ -554,10 +571,16 @@ $.fn.dataTable.ext.errMode = 'none';
                                 var End_date= $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
-                                var error =  $(this).find('error').text();             
-					if(error!="Error"){		   
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
-                 //datatables(); 
+                                var error =  $(this).find('error').text(); 
+  i =  $(this).find('totalrec').text(); 								
+					if(error!="Error"){	
+if(SerialNumber!="")
+{
+  $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'></td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
+               
+
+}					
+			   //datatables(); 
 
                      }				 
 		   });
@@ -565,7 +588,8 @@ $.fn.dataTable.ext.errMode = 'none';
 
 
 			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},										
+"language": {"emptyTable": "No Data Found."},	
+ "bFilter": false,									
 "aoColumnDefs": [
 									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
 									]
@@ -600,6 +624,7 @@ $.fn.dataTable.ext.errMode = 'none';
 								});
 
 								$(tt.fnContainer()).insertAfter('#tableTools');
+								$('#assets-list_info').prepend("Total entries: "+i+"<br>");
 								
 					}	
             },
@@ -683,5 +708,28 @@ $(document).ready(function(){
     });
 });
 </script>
+<script>
+function saveexcel()
+{
+	document.getElementById("savemsg").style.display = 'block';
+ /* $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/all_under_contract_assets_to_csv",
+            dataType: "text",
+            success: function(xml){
+			alert(xml);
+			}
+			
+			});*/
+window.open('<?php echo base_url()?>index.php/welcome/all_assets_to_csv', '_blank');
+
+
+}
+</script>
+
+<script>
+	$('<div class="load"><button class="btn btn-primary btn-xs  load-buts" onclick="loadmore()" value="Load More">Load More</button></div>').insertBefore('.no-footer');
+</script>
+
     </body>
 </html>

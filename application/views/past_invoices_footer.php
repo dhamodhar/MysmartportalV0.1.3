@@ -51,7 +51,15 @@
 
 <script>
 $(document).ready(function(){
-  
+        window.setInterval(function(){
+document.getElementById("savemsg").style.display = 'none';
+if(document.getElementById("copymsg").style.display == 'block')
+{
+document.getElementById("copymsg").style.display = 'none';
+
+}
+
+}, 8000);
 $(".demo2 .rotate").textrotator({
 animation: "flip",
 speed: 3000
@@ -104,6 +112,7 @@ speed: 3000
                           var cust_po= $(this).find('cust_po').text();
                                 //var tracker_no= $(this).find('tracker_no').text();
 				var error =  $(this).find('error').text();
+				i =  $(this).find('RecCount').text();
                 var traking_link = "";
 			   if(error!="Error"){
 			   
@@ -112,9 +121,9 @@ speed: 3000
 			        var encodedString = Base64.encode(invoice_numb);
 				    var finalordernumber = encodeURIComponent(String(encodedString));
 			   
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
                                  }	
-i++;								 
+								 
 		                     });
 		   
 		   
@@ -161,6 +170,7 @@ i++;
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
 				$('#orders-list_info').prepend("Total entries: "+i+"<br>");
+					$("#ToolTables_orders-list_2").hide();
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -272,7 +282,7 @@ var custpo = "";
 			        var encodedString = Base64.encode(invoice_numb);
 				    var finalordernumber = encodeURIComponent(String(encodedString));
 			   
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
                                  }				 
 		                     });
 		   
@@ -319,6 +329,7 @@ var custpo = "";
                 });
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
+				$("#save").hide();
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -388,7 +399,7 @@ document.getElementById("count").value = total_count;
 												var encodedString = Base64.encode(invoice_numb);
 												var finalordernumber = encodeURIComponent(String(encodedString));
 											 
-												  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+">"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+												  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
 											 }				 
 									 });
 				   
@@ -429,6 +440,7 @@ document.getElementById("count").value = total_count;
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$("#save").hide();
 					},
 					error: function() {
                                         $('#orders-list').DataTable({
@@ -552,6 +564,12 @@ function displyDate(selectedValue)
 
 }
 </script>
-
+<script>
+function saveexcel()
+{
+	document.getElementById("savemsg").style.display = 'block';
+    window.open('<?php echo base_url()?>index.php/welcome/all_past_due_invoices_tocsv', '_blank');
+}
+</script>
     </body>
 </html>

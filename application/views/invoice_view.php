@@ -26,6 +26,9 @@
 <div class="float-right">
 <div id="sendemail" style="display:none"> </div>
 </div>
+<div id="msg" style="display:none;color:green">
+Email Sent!
+ </div> 
 </div>
 
                     </div>
@@ -145,8 +148,8 @@
                                                                     <th>Line No</th>
 								    <th >Product Description</th>
                                                                     <th>Product Code</th>
-                                                                    <th>Qty</th>
-                                                                    <th>Unit Size</th>
+                                                                    <th style="padding-left:7px;">Qty</th>
+                                                                    <th style="padding-left:7px;">Unit Size</th>
                                                                     <th style="text-align:right;padding-right:30px;">Unit Price</th>
                                                                     <th style="text-align:right;padding-right:30px;">Total Price</th>
                                                                     <th  style="text-align:right;padding-right:30px;">Ship Date</th>

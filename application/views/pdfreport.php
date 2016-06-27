@@ -240,9 +240,16 @@ $mail->FromName = "Lowrysmartportal.com";
 
 if($type == 3)
 {
-redirect(base_url()."index.php/welcome/invoice_view/".str_replace(" ","",$invoice_numb));
+$inv = urlencode(base64_encode(str_replace(" ","",$invoice_numb)));
+
+
+
+//redirect(base_url()."index.php/welcome/invoice_view/".$inv);
 }else{
-redirect(base_url()."index.php/welcome/order_view/".str_replace(" ","",$order_numb)."-".$rel_numb);
+
+
+$ord = urlencode(base64_encode(str_replace(" ","",$order_numb)."-".$rel_numb));
+redirect(base_url()."index.php/welcome/order_view/".$ord);
 }
 
 }

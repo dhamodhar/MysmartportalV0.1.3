@@ -102,8 +102,7 @@
 
                                         <div class="col-md-12">
 
-                                          <div id="chartContainer" style="height: 400px; width: 100%;">
-	</div>
+        <div id="chartdiv" style="width:100%; height:600px;"></div>
 
                                         </div>
 

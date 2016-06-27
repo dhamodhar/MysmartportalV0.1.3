@@ -42,7 +42,12 @@
 
 
 
- </div> </div>
+ </div>
+
+<div id="msg" style="display:none;color:green">
+Email Sent!
+ </div> 
+ </div>
 
 
 </div> </div>  
@@ -168,12 +173,12 @@
                                                                 <tr>
                                                                     <!--<th>Item No</th>-->
                                                                     <th>Product Code</th>
-                                                                    <th>Product Description</th>
-                                                                    <th>Quantity</th>
-																	<th>Quantity Shipped</th>
-                                                                    <th>Unit Size</th>
-                                                                    <th>Unit Price</th>
-                                                                    <th>Total Price</th>
+                                                                    <th class="pro-desc">Product Description</th>
+                                                                    <th style="padding-left:7px;">Quantity</th>
+																	<th style="padding-left:7px;">Quantity Shipped</th>
+                                                                    <th style="padding-left:7px;" >Unit Size</th>
+                                                                    <th style="text-align:right;padding-right:20px;">Unit Price</th>
+                                                                    <th style="text-align:right;padding-right:20px;">Total Price</th>
                                                                     <!--<th>Status</th>-->
                                                                     
                                                                    

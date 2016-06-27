@@ -73,7 +73,15 @@
 <script>
 $(document).ready(function(){
    $('#user_status').prop('selectedIndex',0);
-   
+       window.setInterval(function(){
+document.getElementById("savemsg").style.display = 'none';
+if(document.getElementById("copymsg").style.display == 'block')
+{
+document.getElementById("copymsg").style.display = 'none';
+
+}
+
+}, 8000);
    
 $(".demo2 .rotate").textrotator({
 animation: "flip",
@@ -126,6 +134,7 @@ speed: 3000
 				var contract_status= $(this).find('contract_status').text();
                 var location= $(this).find('location').text();
                 var error =  $(this).find('error').text();             
+                i =  $(this).find('RecCount').text();             
 					if(error!="Error"){	
                     var map_view_status = "";
 					if(contract_status == "Active")
@@ -144,10 +153,13 @@ speed: 3000
 				var finalordernumber = encodeURIComponent(String(encodedString));
 					
 					if(contract_number!="No Data"){
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
-                   } 
-					}	
-i++;					
+					if(contract_number!="")
+					{
+					   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"' style='color:#0D7BDE;text-decoration: underline !important;'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+               
+					}
+			    } 
+					}						
 		   });
 			   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
@@ -191,6 +203,7 @@ aaSorting: [[1, 'desc']]
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
 							$('#contracts-list_info').prepend("Total entries: "+i+"<br>");
+							 $("#ToolTables_contracts-list_2").hide();
 						
 			}	
             },
@@ -312,7 +325,7 @@ $('#contracts-list tbody').html(" ");
 				
   var encodedString = Base64.encode(contract_number);
 				var finalordernumber = encodeURIComponent(String(encodedString));					
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"' style='color:#0D7BDE;text-decoration: underline !important;'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
                  //datatables(); 
 
                      }	;           
@@ -438,7 +451,7 @@ $('#contracts-list tbody').html(" ");
 									
  var encodedString = Base64.encode(contract_number);
 				var finalordernumber = encodeURIComponent(String(encodedString));						
-			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
+			   $('#contracts-list tbody').append("<tr><td style='width:100px;'><a href='<?php echo base_url()?>index.php/welcome/assets/"+finalordernumber+"' style='color:#0D7BDE;text-decoration: underline !important;'>"+contract_number+"</a></td><td style='width:100px;'>"+start_date+"</td><td style='width:100px;'>"+end_date+"</td><td style='width:100px;'>"+description+"</td><td style='width:100px;'>"+service_level+"</td><td style='width:100px;'>"+location+"</td>"+map_view_status+"</tr>");
                  //datatables(); 
 
                      }				 
@@ -794,6 +807,12 @@ function displyDate(selectedValue)
 
 }
 </script>
-
+<script>
+function saveexcel()
+{
+	document.getElementById("savemsg").style.display = 'block';
+    window.open('<?php echo base_url()?>index.php/welcome/all_servicecontracts_to_csv', '_blank');
+}
+</script>
     </body>
 </html>

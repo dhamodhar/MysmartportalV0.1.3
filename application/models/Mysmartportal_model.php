@@ -26,6 +26,15 @@ class mysmartportal_model extends CI_Model {
 	    return $lasr_rec;
 
 	}
+	public function getfeedbackdataAllAssets($id)
+	{
+	
+	    $query = $this->db->query("select * from feedback where page = '".$id."'");
+	    return $query->result();
+	
+	
+	
+	}
 	
 	public function getallusers()
 	{
@@ -352,7 +361,15 @@ OR company_name IS NULL , 1, 0 ) , company_name ASC");
 	
 	
 	}
+	public function getfeedbackdataInvoices($id)
+	{
 	
+	    $query = $this->db->query("select * from feedback where page = '".$id."'");
+	    return $query->result();
+	
+	
+	
+	}
 	public function getfeedbackdata($id)
 	{
 	

@@ -61,6 +61,21 @@ $c_number == " ";
 
 <script>
 $(document).ready(function(){
+window.setInterval(function(){
+document.getElementById("savemsg").style.display = 'none';
+if(document.getElementById("copymsg").style.display == 'block')
+{
+document.getElementById("copymsg").style.display = 'none';
+
+}
+
+}, 8000);
+  
+  $("#backLink").click(function(event) {
+    event.preventDefault();
+    history.back(1);
+});
+  
   
 $(".demo2 .rotate").textrotator({
 animation: "flip",
@@ -116,9 +131,14 @@ speed: 3000
                                 var totreccount =  $(this).find('totreccount').text();   
 									totalrecars	= totreccount;							
 					if(error!="Error")
-					{		   
-			          $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+Device_Type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
-                     }				 
+					{	
+if(SerialNumber!="")
+{
+    $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+Device_Type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
+                    
+
+}					
+			       }				 
 		   });
 		  
 		   
@@ -166,6 +186,7 @@ speed: 3000
 								
 					}	
 					 $('#assets-list_info').prepend("Total entries: "+totalrecars+"<br>");
+					 $("#ToolTables_assets-list_2").hide();
             },
             error: function() {
             $('#assets-list').DataTable({
@@ -602,6 +623,24 @@ function displyDate(selectedValue)
 	
 	}
 
+
+
+}
+</script>
+<script>
+function saveexcel()
+{
+	document.getElementById("savemsg").style.display = 'block';
+ /* $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/all_under_contract_assets_to_csv",
+            dataType: "text",
+            success: function(xml){
+			alert(xml);
+			}
+			
+			});*/
+window.open('<?php echo base_url()?>index.php/welcome/all_under_contract_assets_to_csv', '_blank');
 
 
 }

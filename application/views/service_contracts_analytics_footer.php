@@ -65,218 +65,216 @@
 
 
 <script type="text/javascript" src="<?php echo base_url()?>assets/scripts/jquery.canvasjs.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url()?>assets/amcharts/style.css"	type="text/css">
 
+		<script src="<?php echo base_url()?>assets/amcharts/amcharts.js" type="text/javascript"></script>
+		<script src="<?php echo base_url()?>assets/amcharts/serial.js" type="text/javascript"></script>
+		<script src="<?php echo base_url()?>assets/amcharts/amstock.js" type="text/javascript"></script>
 
 
         <!-- ===============================================
         ============== Page Specific Scripts ===============
         ================================================ -->
-<script type="text/javascript">
-	window.onload = function () {
-		var chart = new CanvasJS.Chart("chartContainer",
-		{
-			zoomEnabled: false,
-                        animationEnabled: true,
-			title:{
-				text: "Tickets Count",
-				fontSize: 17
-			},
-			axisY2:{
-				valueFormatString:"0.0 bn",
+				<script>
+			AmCharts.ready(function () {
+				generateChartData();
+				createStockChart();
+			});
+
+			var chartData1 = [];
+			var chartData2 = [];
+			var chartData3 = [];
+			
+
+			function generateChartData() {
+				var firstDate = new Date();
+				firstDate.setDate(firstDate.getDate() - 1500);
+				firstDate.setHours(0, 0, 0, 0);
+
+                              chartData1 = [{date:new Date(2015, 0, 1),
+								  value:140,
+								  volume:100},{date:new Date(2015, 0, 10),
+								  value:160,
+								  volume:260},{date:new Date(2015, 0, 15),
+								  value:300,
+								  volume:430},{date:new Date(2015, 0, 20),
+								  value:40,
+								  volume:340},{date:new Date(2015, 0, 25),
+								  value:510,
+								  volume:510}
+								  
+								  ];
+								      chartData2 = [{date:new Date(2015, 0, 1),
+								  value:100,
+								  volume:100},{date:new Date(2015, 0, 10),
+								  value:60,
+								  volume:60},{date:new Date(2015, 0, 15),
+								  value:30,
+								  volume:30},{date:new Date(2015, 0, 20),
+								  value:140,
+								  volume:140},{date:new Date(2015, 0, 25),
+								  value:210,
+								  volume:210}
+								  
+								  ];
+								       chartData3 = [{date:new Date(2015, 0, 1),
+								  value:10,
+								  volume:10},{date:new Date(2015, 0, 10),
+								  value:70,
+								  volume:70},{date:new Date(2015, 0, 15),
+								  value:40,
+								  volume:40},{date:new Date(2015, 0, 20),
+								  value:340,
+								  volume:340},{date:new Date(2015, 0, 25),
+								  value:610,
+								  volume:610}
+								  
+								  ];
+								       
+			}
+
+			function createStockChart() {
+				var chart = new AmCharts.AmStockChart();
+
+				// DATASETS //////////////////////////////////////////
+				// create data sets first
+				var dataSet1 = new AmCharts.DataSet();
+				dataSet1.title = "Active Service Contracts";
+				dataSet1.fieldMappings = [{
+					fromField: "value",
+					toField: "value"
+				}, {
+					fromField: "volume",
+					toField: "volume"
+				}];
+				dataSet1.dataProvider = chartData1;
+				dataSet1.categoryField = "date";
+
+				var dataSet2 = new AmCharts.DataSet();
+				dataSet2.title = "Expired Service Contracts";
+				dataSet2.fieldMappings = [{
+					fromField: "value",
+					toField: "value"
+				}, {
+					fromField: "volume",
+					toField: "volume"
+				}];
+				dataSet2.dataProvider = chartData2;
+				dataSet2.categoryField = "date";
+
+				var dataSet3 = new AmCharts.DataSet();
+				dataSet3.title = "Upcomming Renewal Contracts";
+				dataSet3.fieldMappings = [{
+					fromField: "value",
+					toField: "value"
+				}, {
+					fromField: "volume",
+					toField: "volume"
+				}];
+				dataSet3.dataProvider = chartData3;
+				dataSet3.categoryField = "date";
+
 				
-				maximum: 1.2,
-				interval: .2,
-				interlacedColor: "#F5F5F5",
-				gridColor: "#D7D7D7",      
-	 			tickColor: "#D7D7D7"								
-			},
-                        theme: "theme2",
-                        toolTip:{
-                                shared: true
-                        },
-			legend:{
-				verticalAlign: "bottom",
-				horizontalAlign: "center",
-				fontSize: 15,
-				fontFamily: "Lucida Sans Unicode"
 
-			},
-			data: [
-			{        
-				type: "line",
-				lineThickness:3,
-				showInLegend: true,           
-				name: "AK", 
-				dataPoints: [
-				{ x: new Date(2014, 0), y: 300 },
-				{ x: new Date(2014, 1), y: 300 },
-				{ x: new Date(2014, 2), y: 2739 },
-				{ x: new Date(2014, 3), y: 1450},
-				{ x: new Date(2014, 4), y: 1697 },
-				{ x: new Date(2014, 5), y: 2525 },
-				{ x: new Date(2014, 6), y: 1622 },
-				{ x: new Date(2014, 7), y: 1417 },
-				{ x: new Date(2014, 8), y: 1388  },
-				{ x: new Date(2014, 9), y: 1096 },
-				{ x: new Date(2014, 10), y: 1352 },
-				{ x: new Date(2014, 11), y: 1846 }
+				// set data sets to the chart
+				chart.dataSets = [dataSet1, dataSet2, dataSet3];
+
+				// PANELS ///////////////////////////////////////////
+				// first stock panel
+				var stockPanel1 = new AmCharts.StockPanel();
+				stockPanel1.showCategoryAxis = false;
+				stockPanel1.title = "Value";
+				stockPanel1.percentHeight = 70;
+
+				// graph of first stock panel
+				var graph1 = new AmCharts.StockGraph();
+				graph1.valueField = "value";
+				graph1.comparable = true;
+				graph1.compareField = "value";
+				graph1.bullet = "round";
+				graph1.bulletBorderColor = "#FFFFFF";
+				graph1.bulletBorderAlpha = 1;
+				graph1.balloonText = "[[title]]:<b>[[value]]</b>";
+				graph1.compareGraphBalloonText = "[[title]]:<b>[[value]]</b>";
+				graph1.compareGraphBullet = "round";
+				graph1.compareGraphBulletBorderColor = "#FFFFFF";
+				graph1.compareGraphBulletBorderAlpha = 1;
+				stockPanel1.addStockGraph(graph1);
+
+				// create stock legend
+				var stockLegend1 = new AmCharts.StockLegend();
+				stockLegend1.periodValueTextComparing = "[[percents.value.close]]%";
+				stockLegend1.periodValueTextRegular = "[[value.close]]";
+				stockPanel1.stockLegend = stockLegend1;
+
+
+				// second stock panel
+				var stockPanel2 = new AmCharts.StockPanel();
+				stockPanel2.title = "Volume";
+				stockPanel2.percentHeight = 30;
+				var graph2 = new AmCharts.StockGraph();
+				graph2.valueField = "volume";
+				graph2.type = "column";
+				graph2.showBalloon = false;
+				graph2.fillAlphas = 1;
+				stockPanel2.addStockGraph(graph2);
+
+				var stockLegend2 = new AmCharts.StockLegend();
+				stockLegend2.periodValueTextRegular = "[[value.close]]";
+				stockPanel2.stockLegend = stockLegend2;
+
+				// set panels to the chart
+				chart.panels = [stockPanel1, stockPanel2];
+
+
+				// OTHER SETTINGS ////////////////////////////////////
+				var sbsettings = new AmCharts.ChartScrollbarSettings();
+				sbsettings.graph = graph1;
+				sbsettings.updateOnReleaseOnly = false;
+				chart.chartScrollbarSettings = sbsettings;
+
+				// CURSOR
+				var cursorSettings = new AmCharts.ChartCursorSettings();
+				cursorSettings.valueBalloonsEnabled = true;
+				chart.chartCursorSettings = cursorSettings;
+
+
+				// PERIOD SELECTOR ///////////////////////////////////
+				var periodSelector = new AmCharts.PeriodSelector();
+				periodSelector.position = "left";
+				periodSelector.periods = [{
+					period: "DD",
+					count: 10,
+					label: "10 days"
+				}, {
+					period: "MM",
+					selected: true,
+					count: 1,
+					label: "1 month"
+				}, {
+					period: "YYYY",
+					count: 1,
+					label: "1 year"
+				}, {
+					period: "YTD",
+					label: "YTD"
+				}, {
+					period: "MAX",
+					label: "MAX"
+				}];
+				chart.periodSelector = periodSelector;
+
+
+				// DATA SET SELECTOR
+				var dataSetSelector = new AmCharts.DataSetSelector();
+				dataSetSelector.position = "left";
+				chart.dataSetSelector = dataSetSelector;
+
+				chart.write('chartdiv');
+			}
+		</script>
 			
 
-
-				]
-			},{        
-				type: "line",
-				lineThickness:3,
-				showInLegend: true,           
-				name: "AL", 
-				dataPoints: [
-				{ x: new Date(2014, 0), y: 239 },
-				{ x: new Date(2014, 1), y: 300 },
-				{ x: new Date(2014, 2), y: 239 },
-				{ x: new Date(2014, 3), y: 150},
-				{ x: new Date(2014, 4), y: 167 },
-				{ x: new Date(2014, 5), y: 255 },
-				{ x: new Date(2014, 6), y: 162 },
-				{ x: new Date(2014, 7), y: 1417 },
-				{ x: new Date(2014, 8), y: 138  },
-				{ x: new Date(2014, 9), y: 106 },
-				{ x: new Date(2014, 10), y: 12 },
-				{ x: new Date(2014, 11), y: 186 }
-			
-
-
-				]
-			},{        
-				type: "line",
-				lineThickness:3,
-				showInLegend: true,           
-				name: "Alabama", 
-				dataPoints: [
-				{ x: new Date(2014, 0), y: 2300 },
-				{ x: new Date(2014, 1), y: 2300 },
-				{ x: new Date(2014, 2), y: 2239 },
-				{ x: new Date(2014, 3), y: 1250},
-				{ x: new Date(2014, 4), y: 2167 },
-				{ x: new Date(2014, 5), y: 2255 },
-				{ x: new Date(2014, 6), y: 1622 },
-				{ x: new Date(2014, 7), y: 1417 },
-				{ x: new Date(2014, 8), y: 1238  },
-				{ x: new Date(2014, 9), y: 1062 },
-				{ x: new Date(2014, 10), y: 1222 },
-				{ x: new Date(2014, 11), y: 1826 }
-			
-
-
-				]
-			},
-		
-	
-
-
-
-			],
-          legend: {
-            cursor:"pointer",
-			 horizontalAlign: "left", // left, center ,right 
-     verticalAlign: "center",  // top, center, bottom
-            itemclick : function(e) {
-              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-              e.dataSeries.visible = false;
-              }
-              else {
-                e.dataSeries.visible = true;
-              }
-              chart.render();
-            }
-          }
-        });
-
-chart.render();
-$(".canvasjs-chart-credit").css("display", "none");
-}
-</script>	
-
-        <!--/ Page Specific Scripts -->
-
-
-			   
-<script>			  
- $('#feed-carousel').owlCarousel({
-                    autoPlay: 5000,
-                    stopOnHover: true,
-                    slideSpeed : 300,
-                    paginationSpeed : 400,
-                    singleItem : true,
-                    responsive: true
-                }); 
-        </script>
-      
-        <!--/ Page Specific Scripts -->
-
-<script>
-            $(window).load(function(){
-
-
-                // Initialize Pie Chart
-                var data6 = [
-                    { label: 'Handheld Printer', data: 16.6 },
-                    { label: 'RFID', data: 16.6 },
-                    { label: 'Services', data: 16.6 },
-                    { label: 'Wireless', data: 16.6 },
-                    { label: 'Labels', data: 16.6},
-                    { label: 'Software', data: 16.6}
-                ];
-
-                var options6 = {
-                    series: {
-                        pie: {
-                            show: true,
-                            innerRadius: 0,
-                            stroke: {
-                                width: 0
-                            },
-                            label: {
-                                show: true,
-                                threshold: 0.15
-                            }
-                        }
-                    },
-
-                    colors: ['#428bca','#5cb85c','#f0ad4e','#d9534f','#5bc0de','#616f77'],
-                    grid: {
-                        hoverable: true,
-                        clickable: true,
-                        borderWidth: 0,
-                        color: '#ccc'
-                    },
-                    tooltip: false,
-                    tooltipOpts: { content: '%s: %p.0%' }
-                };
-
-                var plot6 = $.plot($("#pie-chart"), data6, options6);
-
-                $(window).resize(function() {
-                    // redraw the graph in the correctly sized div
-                    plot6.resize();
-                    plot6.setupGrid();
-                    plot6.draw();
-                });
-                // * Initialize Pie Chart
-             
-            });
-        </script>
-
-
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
 
     </body>
 </html>

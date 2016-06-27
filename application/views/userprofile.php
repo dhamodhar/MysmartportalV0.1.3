@@ -858,16 +858,15 @@
 <div  rel="tooltip" data-placement="left" class="btn btn-default  bg-none  btn-xs  pull-right  ml-10 col-md-1"    data-toggle="popover"    data-html="true"   data-title="<a href='#' class='close' data-dismiss='alert'>×</a>
 
 
-<div class='line-hieght-22'>You may search by order id / invoice number. You may search between order dates. You may use both.<br/> <br/><span class='red'>Note:</span> You may search orders & invoices using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
-<div data-toggle='collapse' data-target='#demo1' class='accordion-toggle float-right'><button onclick='showDetails1()' class='btn btn-primary btn-xs'>More</button></div>
+
 <div class='hiddenRow'>
- <div class='level3 accordian-body collapse' id='demo1'>
+ <div class='level3 ' id='demo1'>
                      <ul>
 <li><strong>How to update Your profile information</strong></li>
 
 <li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
 <li>On the right hand side top corner where Your username is displayed, please click on the dropdown to view Your profile.</li>
-<li>Please click on 'Update Profile' link and User will be redirected to edit profile page where User can provide new information and click on 'Save Changes'.</li>
+<li>Please click on 'Update Profile' link and User will be redirected to edit profile page where User can provide new information and click on 'Update Profile'.</li>
 <li><img src='http://lowrysmartportal.com/assets/images/update-pr.jpg'/></li>
 <li>The updated information is sent to Lowry Admin to validate.</li>
 <li>Once validation is done, Your profile information will be updated in Lowry Smart Portal and a confirmation mail will be sent.</li>

@@ -58,7 +58,15 @@ $c_number == " ";
 
 <script>
 $(document).ready(function(){
-  
+  window.setInterval(function(){
+document.getElementById("savemsg").style.display = 'none';
+if(document.getElementById("copymsg").style.display == 'block')
+{
+document.getElementById("copymsg").style.display = 'none';
+
+}
+
+}, 8000);
 $(".demo2 .rotate").textrotator({
 animation: "flip",
 speed: 3000
@@ -160,6 +168,7 @@ speed: 3000
 								
 					}	
 						 $('#assets-list_info').prepend("Total entries: "+totalrecars+"<br>");
+						  $("#ToolTables_assets-list_2").hide();
             },
             error: function() {
             $('#assets-list').DataTable({
@@ -452,6 +461,7 @@ var test1 = "";
 								
 					}	
 						 $('#assets-list_info').append("   Total entries: "+totalrecars);
+						 $("#ToolTables_assets-list_2").hide();
             },
             error: function() {
            $('#assets-list').DataTable({
@@ -533,6 +543,24 @@ $(document).ready(function(){
         $(this).parents(".popover").popover('hide');
     });
 });
+</script>
+<script>
+function saveexcel()
+{
+	document.getElementById("savemsg").style.display = 'block';
+ /* $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/all_under_contract_assets_to_csv",
+            dataType: "text",
+            success: function(xml){
+			alert(xml);
+			}
+			
+			});*/
+window.open('<?php echo base_url()?>index.php/welcome/all_assets_under_warrenty_to_csv', '_blank');
+
+
+}
 </script>
 
     </body>

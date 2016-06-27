@@ -55,10 +55,19 @@
                                 <!-- /tile header -->
 
                                 <!-- tile widget -->
-                                <div class="tile-widget bg-greensea">
-                                                             <div id="chartContainer1" style="height: 300px; width: 100%;">
+                                <div class="tile-widget ">
+                                                             <div id="chartContainer1" style="height: 300px; width: 50%;float:right;">
+									
   </div>
                                 </div>
+								
+								  <div class="tile-widget ">
+                                                     	  <div id="chartContainer2" style="height: 300px; width: 50%;">
+									
+  </div>
+                                </div>
+								
+													
                                 <!-- /tile widget -->
 
                                

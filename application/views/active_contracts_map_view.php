@@ -43,7 +43,7 @@
                                 <!-- tile body -->
                                 <div class="tile-body">
 
-                                    <div id="markers-map" style="height: 750px;"></div>
+                                    <div id="markers-map" style="padding-bottom:45%;"></div>
 
                                 </div>
 <div style="text-align:center"><a href="<?php echo base_url();?>index.php/welcome/active_service_contracts" class="btn btn-primary mb-10" >Return to Active Contracts</a></div>
