@@ -77,59 +77,41 @@
         ================================================ -->
 				<script>
 			AmCharts.ready(function () {
-				generateChartData();
-				createStockChart();
+
 			});
 
 			var chartData1 = [];
 			var chartData2 = [];
 			var chartData3 = [];
 			
+			$.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/contractschartdata",
+            dataType: "text",
+            success: function(xml)
+			{
+				
+			var obj = JSON.parse(xml);
+			chartData1 = obj;
+			chartData2 = obj;
+			chartData3 = obj;
+			generateChartData();
+				createStockChart();
+
+			}
+			
+			});
 
 			function generateChartData() {
 				var firstDate = new Date();
 				firstDate.setDate(firstDate.getDate() - 1500);
 				firstDate.setHours(0, 0, 0, 0);
+				
 
-                              chartData1 = [{date:new Date(2015, 0, 1),
-								  value:140,
-								  volume:100},{date:new Date(2015, 0, 10),
-								  value:160,
-								  volume:260},{date:new Date(2015, 0, 15),
-								  value:300,
-								  volume:430},{date:new Date(2015, 0, 20),
-								  value:40,
-								  volume:340},{date:new Date(2015, 0, 25),
-								  value:510,
-								  volume:510}
+								   
 								  
-								  ];
-								      chartData2 = [{date:new Date(2015, 0, 1),
-								  value:100,
-								  volume:100},{date:new Date(2015, 0, 10),
-								  value:60,
-								  volume:60},{date:new Date(2015, 0, 15),
-								  value:30,
-								  volume:30},{date:new Date(2015, 0, 20),
-								  value:140,
-								  volume:140},{date:new Date(2015, 0, 25),
-								  value:210,
-								  volume:210}
-								  
-								  ];
-								       chartData3 = [{date:new Date(2015, 0, 1),
-								  value:10,
-								  volume:10},{date:new Date(2015, 0, 10),
-								  value:70,
-								  volume:70},{date:new Date(2015, 0, 15),
-								  value:40,
-								  volume:40},{date:new Date(2015, 0, 20),
-								  value:340,
-								  volume:340},{date:new Date(2015, 0, 25),
-								  value:610,
-								  volume:610}
-								  
-								  ];
+								  //alert(chartData3);
+								     
 								       
 			}
 
@@ -163,7 +145,7 @@
 				dataSet2.categoryField = "date";
 
 				var dataSet3 = new AmCharts.DataSet();
-				dataSet3.title = "Upcomming Renewal Contracts";
+				dataSet3.title = "Upcoming Renewal Contracts";
 				dataSet3.fieldMappings = [{
 					fromField: "value",
 					toField: "value"

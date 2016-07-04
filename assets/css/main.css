@@ -21,6 +21,39 @@ overflow-x:hidden;
     
 }
 
+
+
+
+
+.gray-box  .tooltip.bottom > .tooltip-inner {
+  background-color: #77848f!important;
+
+}
+.gray-box  .tooltip.bottom > .tooltip-arrow {
+  border-bottom-color: #77848f!important;
+}
+
+.blue-box  .tooltip.bottom > .tooltip-inner {
+  background-color: #42afe4 !important;
+z-index:9999!important;
+
+}
+.blue-box  .tooltip.bottom > .tooltip-arrow {
+  border-bottom-color: #42afe4 !important;
+}
+
+
+
+
+
+.hvr-bounce-in .tooltip{
+position:absolute;
+top:100px!important;
+
+
+
+}
+
 .tech-txt{
 position:relative;
 left:-10px
@@ -916,6 +949,7 @@ font-size:13px;
     transition-duration: 0.5s;
     vertical-align: middle;
     width: 100%;
+z-index:99;
 }
 .hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
     transform: scale(1.2);

@@ -37,8 +37,8 @@
 <li>The list of all End of LIfe Assets will be displayed in a table</li>
 <li><img src='http://lowrysmartportal.com/assets/images/end-of-life-img.jpg'/></li>
 <li class='blue-bold'>Functionality</li>
-<li>Users can perform various functionalities provided in the End of Life Assets page for ease of use and access,  They are Under Contract Search: </li>
-<li class='blue-bold'> Expired contracts Search</li>
+<li>Users can perform various functionalities provided in the End of Life Assets page for ease of use and access,  They are: </li>
+<li class='blue-bold'>  End of Life Assets Search</li>
 <li>User can search End of Life Assets records by using the functionality </li>
 
 <li>User can use any one option below for search
@@ -175,6 +175,8 @@
    <div class="row">
                                        
                                         <div class="col-md-6" style="display:none"><div id="colVis"></div></div>
+ <div class="col-md-12" style="line-height:25px;background:#d6e8f3;">
+                                        <strong>End of Product Life Cycle:</strong>&nbsp;&nbsp; Product has reached its end of sale date and/or the last date when the affected product can be ordered according to the manufacturer.  Your Lowry Solutions On-Site Service Contract will remain in effect as long as parts are available by reasonable means. </div>
                                         </div>
                                             <table class="table table-striped table-hover table-custom" id="assets-list">
                                                 <thead>

@@ -80,7 +80,7 @@ User can use any option below to search the invoices
                             
                         </div>
 
-<div class="col-md-6 cps">
+<div class="col-md-6 cps" id="allbtns">
 <input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
 <div id="tableTools"></div>
 <div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
@@ -180,7 +180,7 @@ User can use any option below to search the invoices
                                                 <thead>
                                                 <tr>
                                                     
-                                                    <th class="in-numbers">Invoice&nbsp;Numbers</th>
+                                                    <th class="in-numbers">Invoice&nbsp;Number</th>
                                                    
 													<th style="width:100px;text-align:right;padding-right:20px;" class="active">Invoice Date</th> 
 													<th style="width:100px;text-align:right;padding-right:20px;">Amount</th> 
@@ -207,7 +207,7 @@ User can use any option below to search the invoices
 											
                                         </div>
 <input type="hidden" name="count" id="count" value="1000">
-<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<button id="ldmr" class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
                                     </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"><br><span style="color: #418bca;
     margin-left: -139px;

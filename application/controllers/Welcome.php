@@ -1673,7 +1673,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							     }
 					        $rss = new DOMDocument(); 
 							
-							
+							//echo "http://216.234.105.194:8089/Alpha.svc/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D";
+							//exit;
 							
 			                @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
 			                            $pendingorders = "";	
@@ -1683,6 +1684,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										 $pastdueinvoices = "";
 										 $assetsendoflife ="";
 										 $UpComingRenewal ="";
+										 $assetsservicelifecycle ="";
 										 
 										 
       				        foreach ($rss->getElementsByTagName('E21DashBoardData') as $node)
@@ -1699,7 +1701,9 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										 $pastdueinvoices = $node->getElementsByTagName('PastDueInvoices')->item(0)->nodeValue;	
 										 $assetsendoflife = $node->getElementsByTagName('AssetsEndofLife')->item(0)->nodeValue;	
 										 $UpComingRenewal = $node->getElementsByTagName('UpComingRenewal')->item(0)->nodeValue;	
-									    }
+										 $assetsservicelifecycle = $node->getElementsByTagName('AssetsEndofService')->item(0)->nodeValue;	
+									    
+										}
 										 $data['pendingorders'] = $pendingorders;
 										 $data['opencases'] = $opencases;
 										 $data['openorders'] = $openorders;
@@ -1707,6 +1711,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										 $data['pastdueinvoices'] = $pastdueinvoices;
 										 $data['assetsendoflife'] = $assetsendoflife;
 										 $data['UpComingRenewal'] = $UpComingRenewal;
+										 $data['AssetsEndofService'] = $assetsservicelifecycle;
 							}
  
 						    $ticket_info = "";
@@ -2722,8 +2727,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   
 										    $rss1 = new DOMDocument(); 
 											
-											//echo "http://216.234.105.194:8089/Alpha.svc/E21GetOrderDetails/".$cust_code."/".$order_id."/".$email1."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D";
-											//exit;
+											
 										   	@$rss1->load("http://216.234.105.194:8089/Alpha.svc/E21GetOrderDetails/".$cust_code."/".$ordernumber."/".$email1."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
 				                            $params = array();
 								            $i=0;
@@ -2735,12 +2739,14 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $qty = $node->getElementsByTagName('qty')->item(0)->nodeValue;
 										   $item_price = $node->getElementsByTagName('item_price')->item(0)->nodeValue;
 										   $partnumber = $node->getElementsByTagName('part_code')->item(0)->nodeValue;
+										   $totshipqty = $node->getElementsByTagName('TotShipQty')->item(0)->nodeValue;
 										   $params1[$i] = array('item_no'=> $item_no,
 										                        'part_desc'=>$part_desc,
 																'uom'=>$uom,
 																'qty'=>$qty,
 																'item_price'=>$item_price,
-																'part_code'=>$partnumber
+																'part_code'=>$partnumber,
+																'totshipqty'=>$totshipqty
 										   );
                                             $data['item_no'] = $node->getElementsByTagName('item_no')->item(0)->nodeValue;
                                             $data['part_desc'] = $node->getElementsByTagName('part_desc')->item(0)->nodeValue;
@@ -2868,7 +2874,7 @@ $ship_to_code = " ";
 						{
 						$ServiceContractList_node = "ServiceContractList";
 						
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/ / / / /'.$email1.'/'.LIMIT.'/1/3/Perm/3/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/ / / / /'.$email1.'/'.LIMIT.'/1/3/Perm/4/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
 											  );
 						
 						}else
@@ -3777,6 +3783,57 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	  
   
   }
+  
+  
+  public function assetsendofserviceassets($Contract_Number=null)
+  {
+  
+  
+	  			 if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+				{
+				   redirect(base_url()."index.php/welcome/index");
+				
+				}else{
+				
+					$this->load->model('Mysmartportal_model');
+					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("AssetsEndOfLife");
+					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+					$userallmenu=$this->Mysmartportal_model->getallusermenu();
+					$split = explode(",",@$usermenu[0]->menu_id);
+					$usermenu1 = array();
+					$orderpageaccess = "";
+					for($i=1;$i<13;$i++)
+					{
+					if($i==2)
+					{
+					$orderpageaccess = "ok";
+					
+					}
+					  $finalusermenu = array('id'=>$i,
+											 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+											 );
+					  $usermenu1[$i] = $finalusermenu;
+					}
+					
+					$data['menu']=$usermenu1;
+					$data['ids']=$usermenu[0]->menu_id;
+                     if($orderpageaccess=="ok")
+					 {
+					 $data['c_number'] = $Contract_Number;
+					 
+$user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+						    $data['user_notifications'] = $user_notification;
+						 $this->load->view('header',$data);
+						 $this->load->view('assets_end_of_service');
+						 $this->load->view('assets_end_of_service_footer',$data);
+				     }else
+					 {
+						 redirect(base_url()."index.php/welcome/technical_support"); 
+					 }
+				 }
+	  
+  
+  }
  /**
  *  All Assets to CSV from API
  *  @API(AssetsPage) 
@@ -4471,7 +4528,58 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 			                      }  
 	              }
 				  
-	  }		 	  
+	  }	
+
+ public function all_assets_end_of_service($Contract_Number=null,$count1=100,$type="")
+	  {
+			if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+			{
+			   redirect(base_url()."index.php/welcome/index");
+			
+			}else{  
+			if($Contract_Number==null)
+				{
+				$Contract_Number = " ";
+				
+				}else if($Contract_Number=="%20")
+				{
+				
+				$Contract_Number = " ";
+				
+				}
+				$SerialNumber = " ";
+				if($type == "Serial%20Number")
+				{
+				$SerialNumber = $Contract_Number;
+				$Contract_Number = " ";
+				
+				}
+					$user_status = "";
+					$rss = new DOMDocument(); 
+					$cust_code= $this->session->userdata('cust_code'); 
+					$email1=$this->session->userdata('email');
+					$this->load->model('Mysmartportal_model');
+					$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+				
+					$ship_to_code = "";
+
+				    $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetEndofServiceAssets/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/'.$count1.'/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+										  );
+										  
+								  foreach ($urlArray as $url) 
+								  {
+											   $rss->load($url['url']);
+												  echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
+											   foreach ($rss->getElementsByTagName('EndofServiceAssets') as $node)
+											   {
+													echo "<assetspage diffgr:id='AssetsPage1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><SerialNumber>".$node->getElementsByTagName('Serial')->item(0)->nodeValue."</SerialNumber><Part_Number>".$node->getElementsByTagName('Product')->item(0)->nodeValue."</Part_Number><totreccount>".$node->getElementsByTagName('TotRecCount')->item(0)->nodeValue."</totreccount><Part_Description>".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."</Part_Description><Type>".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."</Type><detype>".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."</detype><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><Start_Date>".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."</Start_Date><End_date>".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."</End_date><EndofLifeDate>".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."</EndofLifeDate> <Contract_Status>".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue."</Contract_Status><Options></Options><Error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</Error></assetspage>";
+											   }                      					    
+												  echo "</DocumentElement></diffgr:diffgram></DataTable>";
+
+			                      }  
+	              }
+				  
+	  }		  
  /**
  *  All Assets By Search  data fetching from API.
  *  @API(E21GetAssetsEndOfLife) 
@@ -6300,9 +6408,9 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 
       <Credential domain="NetworkID">
 
-        <Identity>'.$email.'</Identity>
+        <Identity>christineb@lowrysolutions.com.usa</Identity>
 
-        <SharedSecret>'.$password.'</SharedSecret>
+        <SharedSecret>16Lowry*</SharedSecret>
 
       </Credential>
 
@@ -6669,6 +6777,28 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
     
 	  
 	  
+  }
+  
+  public function contractschartdata()
+  {
+  
+           $rss = new DOMDocument(); 				
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts_Graph/10090-000/1-1-2000/1-1-2017/Shari.Fann@cevalogistics.com/3/Perm/%20/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+      	   
+		   $chartdata = array();
+		   $i=0;
+		   foreach ($rss->getElementsByTagName('ActiveServiceContracts') as $node)
+			{
+								  
+			$params = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
+			$chartdata[$i] = $params;
+			$i++;
+			}
+			
+			$finaldata =  json_encode($chartdata);
+			print_r($finaldata);
+  
+  
   }
 
 

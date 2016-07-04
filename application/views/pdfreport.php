@@ -7,9 +7,9 @@ $ordertext = '<td width="72%" align="left" style="border:0.5px solid #f7f7f7; ba
 	<strong>
 	***** IMPORTANT UPDATE &amp; INFORMATION REQUEST *****<br />
       </strong>
-	  
-	  We are moving to an Automated invoicing System. Please provide us your Accounts Payable Contact Email &amp; Email Address where invoices should be send. <br> Lastly, if tax exempt please provide an updated Tax Exemption Certificate.<br />
-     <span style="font-weight:bold; text-decoration:underline;">Please email the requested information above to skye@lowrysolutions.com and reference the invoice. <br><br>FOR QUESTIONS REGARDING THIS INVOICE CONTACT SKYE GARDNER AT (810) 534-1661</span></td>';
+	  You can now pay invoices online using TermSync. Please log into your TermSync account or <b>CLICK ON THE LINK</b> provided within your reminder emails and select <b>MAKE ONLINE PAYMENT.</b><br><br>Payments can be one time or autopay and all major credit cards, ACH and EFT are accepted.<br><br>
+<b>FOR QUESTIONS REGARDING INVOICE OR PAYMENT CONTACT SKYE GARDNER AT (810) 534-1661</b>
+	 </td>';
 
 }else{
 $title1 = 'Order Copy';
@@ -118,9 +118,10 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
   <tr>
     <td width="7%" height="30" align="center" style="border-right:0.5px solid #000;"><strong>ITEM</strong></td>
     <td width="37%" align="center" style="border-right:0.5px solid #000;"><strong>DESCRIPTION</strong></td>
-    <td width="9%" align="center" style="border-right:0.5px solid #000;"><strong>UOM</strong></td>
-    <td width="9%" align="center" style="border-right:0.5px solid #000;"><strong>BACK ORD.</strong></td>
-    <td width="11%" align="center" style="border-right:0.5px solid #000;"><strong>QTY SHIPPED</strong></td>
+
+    <td width="9%" align="center" style="border-right:0.5px solid #000;"><strong>UNIT SIZE</strong></td>
+    <td width="11%" align="center" style="border-right:0.5px solid #000;"><strong>QTY</strong></td>
+	    <td width="11%" align="center" style="border-right:0.5px solid #000;"><strong>QTY SHIPPED</strong></td>
     <td width="15%" align="right" style="border-right:0.5px solid #000;"><strong>UNIT PRICE</strong></td>
     <td width="15%" align="right" style="border-right:0.5px solid #000;"><strong>NET PRICE</strong></td>
   </tr>';
@@ -133,9 +134,10 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
  $content .='<tr>
     <td align="center" style="border-right:0.5px solid #000; border-top:0.5px solid #000;">'.$m.'</td>
     <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['part_desc'].','.$paramsdata['part_code'].'</td>
+
     <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['uom'].'</td>
-    <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;"></td>
     <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['qty'].'</td>
+	    <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['totshipqty'].'</td>
     <td align="right" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">$ '.number_format($paramsdata['item_price'], 2).'</td>
     <td align="right" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">$ '.number_format($total_val, 2).'</td>
   </tr>';
@@ -203,6 +205,10 @@ $fileName = 'Order_'.$order_numb.'.pdf';
 
 // $html = file_get_contents($content);
 
+
+if($order_numb!="")
+{
+
 $to = $usemail;
 $subject = 'Lowry - Your Requested Email Copy';
 $repEmail = 'lowrysma@box547.bluehost.com';
@@ -236,7 +242,7 @@ $mail->FromName = "Lowrysmartportal.com";
         } else {  
           
         } 
-
+}
 
 if($type == 3)
 {

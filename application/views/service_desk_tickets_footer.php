@@ -180,7 +180,7 @@ function pieservice()
 	var chart = new CanvasJS.Chart("chartContainer2",
 	{
 		title:{
-			text: "All Service Contracts",
+			text: "All Service Tickets",
 			fontFamily: "arial black"
 		},
                 animationEnabled: true,
@@ -204,9 +204,9 @@ function pieservice()
 			indexLabel: "{Y}", 
 			percentFormatString:"#0",
 			dataPoints: [
-				{  y: 378, name: "Active Service Contracts", legendMarkerType: "triangle"},
-				{  y: 1501, name: "Expired Service Contracts", legendMarkerType: "square"},
-				{  y: 27, name: "Renewal Service Contracts", legendMarkerType: "circle"}
+				{  y: 378, name: "Closed Tickets", legendMarkerType: "triangle"},
+				{  y: 1501, name: "Pending Tickets", legendMarkerType: "square"},
+				{  y: 27, name: "Open Tickets", legendMarkerType: "circle"}
 			]
 		}
 		],
@@ -257,7 +257,7 @@ var obj = "";
 		]
 	};
 
-	$("#chartContainer").CanvasJSChart(options);
+	//$("#chartContainer").CanvasJSChart(options);
 	
 	opentickets(); 
 	pieservice();

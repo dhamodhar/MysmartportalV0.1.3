@@ -183,6 +183,8 @@ View Assets in Map</a>
                                         </div>
 <div class="table-responsive active-page">
 
+<div class="row"> <div class="col-md-12" style="line-height:25px;background:#d6e8f3;"> This page displays assets that are under contract and under warranty.</div> </div>
+
 
 <div class="col-md-2 pull-right active-page-location">
 <div class="form-group pull-right">

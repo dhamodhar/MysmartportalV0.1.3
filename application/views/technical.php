@@ -545,34 +545,7 @@ Currently the application does not support the display of open tickets.
                         </div>
                         <!-- /col -->
 
-                        <!-- col -->
-                        <div class="card-container col-lg-2 col-sm-6 col-sm-12 ">
-                           
-                                 <a href="#" class="hvr-bounce-in"> <div class="front bg-blue2">
-
-                                    <!-- row -->
-                                    <div class="row ">
-                                        <!-- col -->
-                                        <div class="col-xs-12 ">
-<i class="fa fa-truck fa-4x pl-10 mt-5 p-5"></i> <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding "><?php if(isset($shippedorders)) {echo $shippedorders;}else{echo "-";}?></div>
-                                            
- 
-                                        </div>
-                                        <!-- /col -->
-                                        <!-- col -->
-                                        <div class="col-xs-12 bg-s-2 ">
-                                           
-                                            <span>Shipped Orders</span>
-                                        </div>
-                                        <!-- /col -->
-                                    </div>
-                                    <!-- /row -->
-
-                                </div></a>
-                                
-                           
-                        </div>
-                        <!-- /col -->
+                       
 						<!-- col -->
                         
 <div class="card-container col-lg-2 col-sm-6 col-sm-12 " id="pastdue" style="display:block">
@@ -669,7 +642,9 @@ Currently the application does not support the display of open tickets.
                         
 <div class="card-container col-lg-2 col-sm-6 col-sm-12 ">
                             
-                               <a href="<?php echo base_url()?>index.php/welcome/assetsendoflife" class="hvr-bounce-in"> <div class="front bg-cranb">
+                               <a href="<?php echo base_url()?>index.php/welcome/assetsendoflife" class="hvr-bounce-in gray-box"> 
+<div class="front bg-cranb" data-toggle="tooltip" data-placement="bottom"  data-html="true" title=" Product has reached its end of sale date and/or the last date when the affected product can be ordered according to the manufacturer.  Your Lowry Solutions On-Site Service Contract will remain in effect as long as parts are available by reasonable means" >
+
 
                                     <!-- row -->
                                     <div class="row ">
@@ -683,7 +658,7 @@ Currently the application does not support the display of open tickets.
                                         <!-- col -->
                                         <div class="col-xs-12 bg-s-6 ">
                                            
-                                            <span>End of Service Devices</span>
+                                            <span>End of Product Life Cycle</span>
                                         </div>
                                         <!-- /col -->
                                     </div>
@@ -701,6 +676,36 @@ Currently the application does not support the display of open tickets.
 
 
                     </div>
+
+ <!-- col -->
+                        <div class="card-container col-lg-2 col-sm-6 col-sm-12 ">
+                           
+                                 <a href="<?php echo base_url()?>index.php/welcome/assetsendofserviceassets" class="hvr-bounce-in blue-box">
+ <div class="front bg-blue2" data-toggle="tooltip" data-html="true" data-placement="bottom" title=" Product is no longer supported by the manufacturer. As a general rule, your Lowry Solutions On-Site Service Contract will remain in effect as long as parts are available by reasonable means">
+
+                                    <!-- row -->
+                                    <div class="row ">
+                                        <!-- col -->
+                                        <div class="col-xs-12 ">
+<i class="fa fa-truck fa-4x pl-10 mt-5 p-5"></i> <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding "><?php echo @$AssetsEndofService;?></div>
+                                            
+ 
+                                        </div>
+                                        <!-- /col -->
+                                        <!-- col -->
+                                        <div class="col-xs-12 bg-s-2 ">
+                                           
+                                            <span>End of Service Life Cycle</span>
+                                        </div>
+                                        <!-- /col -->
+                                    </div>
+                                    <!-- /row -->
+
+                                </div></a>
+                                
+                           
+                        </div>
+                        <!-- /col -->
                     <!-- /row -->
 
 
@@ -710,7 +715,7 @@ Currently the application does not support the display of open tickets.
 
 
 </div>
-<div class="col-md-12" style="text-align: center; margin-top:30px; margin-left:5px; margin-right:5px;">
+<div class="col-md-12" style="text-align: center; margin-top:30px; margin-left:5px; margin-right:5px;z-index:-1;">
 <h1 style="text-transform: uppercase;"><b>At your service</b></h1>
 <h4 class="blink_me" >Our in-house experts are standing by 24/7 to not only solve technical issues, but to give you the advice and guidance you need to succeed online.</h4>
 
