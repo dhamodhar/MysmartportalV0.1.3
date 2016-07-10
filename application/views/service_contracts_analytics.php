@@ -42,7 +42,7 @@
 
                                 <!-- tile header -->
                                 <div class="tile-header bg-greensea dvd dvd-btm" style="display: none;">
-                                    <h1 class="custom-font"><strong>Open Tickets</strong></h1>
+                                    <h1 class="custom-font"><strong></strong></h1>
                                     <ul class="controls">
                                         <li>
                                             <a role="button" tabindex="0" class="pickDate">
@@ -91,6 +91,17 @@
                                 <!-- tile header -->
                                 <div class="tile-header dvd dvd-btm">
                                     <h1 class="custom-font"><strong>Service Contracts </strong></h1>
+									 	<span style="font-size:18px"><br>Select Location: 
+										<select name="locations" id="locations" class="form-control" style="width:20%" onchange="getdatabylocations(this.value)">
+										
+										<option>Select Location</option>
+										<?php 
+												foreach($latestlocations as $userlocationsdata){
+												?>
+										<option><?php echo $userlocationsdata['LocationId']?></option>
+										<?php } ?>
+										</select></span>
+
                                     
                                 </div>
                                 <!-- /tile header -->

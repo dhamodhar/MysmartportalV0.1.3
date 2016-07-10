@@ -650,7 +650,8 @@ Currently the application does not support the display of open tickets.
                                     <div class="row ">
                                         <!-- col -->
                                         <div class="col-xs-12">
-    <i class="fa fa-mobile fa-44x pl-10 mt-5 p-5"></i> <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding "><?php if(isset($assetsendoflife)) {echo $assetsendoflife;}else{echo "-";};?></div>
+<img src="http://lowrysmartportal.com/assets/images/icons/product-life-icon.png">
+    <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding "><?php if(isset($assetsendoflife)) {echo $assetsendoflife;}else{echo "-";};?></div>
                                         
 
                                         </div>
@@ -687,7 +688,8 @@ Currently the application does not support the display of open tickets.
                                     <div class="row ">
                                         <!-- col -->
                                         <div class="col-xs-12 ">
-<i class="fa fa-truck fa-4x pl-10 mt-5 p-5"></i> <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding "><?php echo @$AssetsEndofService;?></div>
+<img src="http://lowrysmartportal.com/assets/images/icons/life-cycle-icon.png">
+ <div class="text-elg text-strong mt-5 col-xs-5 float-right no-padding "><?php echo @$AssetsEndofService;?></div>
                                             
  
                                         </div>

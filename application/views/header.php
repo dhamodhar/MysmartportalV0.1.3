@@ -10,7 +10,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>::Welcome to Mysmartportal</title>
+        <title>::Welcome to LowrySmartportal</title>
         <link rel="icon" type="image/ico" href="<?php echo base_url()?>assets/images/favicon.ico" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,7 +89,16 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 
 
 
- 
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-80437909-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 
 
@@ -134,7 +143,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 
 
                     <!-- Search -->
-                    <h3 class="sub-title">MySmart Portal</h3>
+                    <h3 class="sub-title">LowrySmart Portal</h3>
                     <!-- Search end -->
 					 <ul class="nav-left pull-left list-unstyled list-inline">
                         <li class="sidebar-collapse divided-right">
@@ -393,11 +402,11 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> ser
 <ul <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE) or 
 $this->uri->segment(2) == url_title('labels_supplies', TRUE) or 
 $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> style="display:block;" <?php } ?>>
- <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Tickets (Demo)</a></li>
+ <li class="top-41"> <a href="<?php echo $url?>" <?php if($this->uri->segment(2) == url_title('service_desk_tickets', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Tickets</a></li>
 													 
-<li> <a href="<?php echo $url2?>" <?php if($this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Contracts (Demo)</a></li>
+<li> <a href="<?php echo $url2?>" <?php if($this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Contracts</a></li>
 													
-<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Labels & Supplies (Demo)</a></li>
+<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Labels</a></li>
 
 <li> <a href="<?php echo base_url()?>index.php/welcome/questionnaire" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Questionnaire</a></li>
 													

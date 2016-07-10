@@ -412,7 +412,7 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
 			
 			
-			}else if(currentstatus == "Recvd at Manuf Escalated" || currentstatus == "Escalation to Remediate Device")
+			}else if(currentstatus == "Recvd at Manuf  Escalated" || currentstatus == "Escalation to Remediate Device")
 			{
 			
 			var status_by_image = "<ul class='checkout-bar'><li class='previous visited'>Request Created</li><li class='previous visited'>Warranty Validation</li><li class='previous visited'>Device in Transit</li><li class='active'>Repair in Progress</li><li class='next'>Request Complete</li></ul>";
@@ -524,7 +524,7 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			}else if(currentstatus == "Received at Manufacturer Depot")
 			{
 				var status="Device received at Depot Repair";
-			}else if(currentstatus == "Recvd at Manuf Escalated")
+			}else if(currentstatus == "Recvd at Manuf  Escalated")
 			{
 				var status="Escalation to Remediate Device";
 			}else if(currentstatus == "RMA Requested")
@@ -549,6 +549,12 @@ if(currentstatus == "Cust sent direct to Manuf" || currentstatus == "Device Ship
 			}else if(currentstatus == "Triage Requested")
 			{
 				var status="Triage Requested";
+			}else
+			{
+		
+			var status=currentstatus;
+			
+			
 			}
 			
 

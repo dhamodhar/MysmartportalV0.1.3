@@ -138,7 +138,7 @@ var email = document.getElementById("username-login").value;
     <div class="rotater">
       <div class="btn btn-icon orders-box">
 <div class="textbox" ><p>Orders & Invoices</p></div>
-       <img src="http://lowrysmartportal.com/assets/images/folder.png" class="img-responsive" style="margin-top:26px; margin-left: 4px;"/>
+       <a href="#"><img src="http://lowrysmartportal.com/assets/images/folder.png" class="img-responsive" style="margin-top:26px; margin-left: 4px;"/></a>
       </div>
     </div>
     <div class="rotater">
@@ -242,7 +242,22 @@ var email = document.getElementById("username-login").value;
 
 
 
-
+<div class="modal splash fade" id="splash" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width:830px;">
+                <div class="modal-content">
+<div class="modal-header order-header"><h3 style="float:left;padding:10px;margin-bottom:0px;">Order &amp; Invoices</h3> <button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>
+</button>  </div>
+                    
+                    <div class="modal-body" style="clear:both;">
+<video controls preload=metadata width=800 height=500>
+    <source src=' http://lowrysmartportal.com/assets/videos/openorders-video.mp4 ' type='video/mp4'>
+    </video>
+                       
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
 
 
 

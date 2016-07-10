@@ -1,4 +1,6 @@
-        <!-- ============================================
+      
+
+	  <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -60,224 +62,554 @@
         <script src="<?php echo base_url()?>assets/js/main.js"></script>
         <!--/ custom javascripts -->
 
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( ".amcharts-start-date-input" ).datepicker();
+  } );
+  </script>
 
 <script type="text/javascript" src="<?php echo base_url()?>assets/scripts/jquery.canvasjs.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url()?>assets/amcharts/style.css"	type="text/css">
+<script src="<?php echo base_url()?>assets/amcharts/amcharts.js"></script>
 
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/funnel.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	<script src="<?php echo base_url()?>assets/amcharts/amstock.js" type="text/javascript"></script>
 
- <script type="text/javascript">
-function opentickets()
-{
-
-
-
-         $.ajax({
-            type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/servicetickets_graphdata",
-            dataType: "text",
-            success: function(ticketsdata)
-			{
-			
-			ticketsdataobj = JSON.parse(ticketsdata);
-			//alert(ticketsdataobj);
-			 var chart = new CanvasJS.Chart("chartContainer1",
-    {
-      title:{
-        text: "All Service Tickets",
-        fontFamily: "arial black",
-        fontColor: "#695A42"
-
-      },
-     animationEnabled: true,
-      toolTip: {
-        shared: true,
-        content: function(e){
-          var str = '';
-          var total = 0 ;
-          var str3;
-          var str2 ;
-          for (var i = 0; i < e.entries.length; i++){
-            var  str1 = "<span style= 'color:"+e.entries[i].dataSeries.color + "'> " + e.entries[i].dataSeries.name + "</span>:<strong>"+  e.entries[i].dataPoint.y + "</strong><br/>" ; 
-            total = e.entries[i].dataPoint.y + total;
-            str = str.concat(str1);
-          }
-          str2 = "<span style = 'color:DodgerBlue; '><strong>"+ (e.entries[0].dataPoint.x).getFullYear() + "</strong></span><br/>";
-          total = Math.round(total*100)/100 
-          str3 = "<span style = 'color:Tomato '>Total:</span><strong> " + total + "</strong><br/>";
-          
-          return (str2.concat(str)).concat(str3);
-        }
-      },
-      axisX: {
-        interval: 1,
-        intervalType: "year"
-      },
-	  
-      data: [{        
-       type: "stackedColumn",       
-       showInLegend:true,
-       name:"Closed Tickets",
-       color:"#695A42",
-       dataPoints: [
-       {  y: 50, x: new Date(2009,0)},
-       {  y: 30, x: new Date(2010,0)},
-       {  y: 20, x: new Date(2011,0)},
-       {  y: 50, x: new Date(2012,0)},
-       {  y: 50, x: new Date(2013,0)},
-       {  y: 50, x: new Date(2014,0)},
-       {  y: 46, x: new Date(2015,0)}
-       ]
-     },
-     {        
-       type: "stackedColumn",       
-       showInLegend:true,
-       name:"Open Tickets",
-       color: "#337ab7",
-       dataPoints: [
-     {  y: 50, x: new Date(2009,0)},
-       {  y: 30, x: new Date(2010,0)},
-       {  y: 20, x: new Date(2011,0)},
-       {  y: 50, x: new Date(2012,0)},
-       {  y: 50, x: new Date(2013,0)},
-       {  y: 50, x: new Date(2014,0)},
-       {  y: 68, x: new Date(2015,0)}
-       ]
-     },
-	 
-	 ],
-      legend:{
-        cursor:"pointer",
-        itemclick: function(e) {
-          if (typeof (e.dataSeries.visible) ===  "undefined" || e.dataSeries.visible) {
-	          e.dataSeries.visible = false;
-          }
-          else
-          {
-            e.dataSeries.visible = true;
-          }
-          chart.render();
-		
-		  
-        }
-      }
-   });
-
-chart.render();
-  
-$(".canvasjs-chart-credit").css("display", "none");
-
-			
-			},	
-		});
-
-
-
-
-}
-
-function pieservice()
-{
-	var chart = new CanvasJS.Chart("chartContainer2",
-	{
-		title:{
-			text: "All Service Tickets",
-			fontFamily: "arial black"
-		},
-                animationEnabled: true,
-		legend: {
-			verticalAlign: "bottom",
-			horizontalAlign: "center"
-		},
-		theme: "theme1",
-		data: [
-		{        
-			type: "pie",
-			indexLabelFontFamily: "Garamond",       
-			indexLabelFontSize: 20,
-			indexLabelFontWeight: "bold",
-			startAngle:0,
-			indexLabelFontColor: "MistyRose",       
-			indexLabelLineColor: "darkgrey", 
-			indexLabelPlacement: "inside", 
-			toolTipContent: "{name}: {y}",
-			showInLegend: true,
-			indexLabel: "{Y}", 
-			percentFormatString:"#0",
-			dataPoints: [
-				{  y: 378, name: "Closed Tickets", legendMarkerType: "triangle"},
-				{  y: 1501, name: "Pending Tickets", legendMarkerType: "square"},
-				{  y: 27, name: "Open Tickets", legendMarkerType: "circle"}
-			]
-		}
-		],
-		 legend:{
-        cursor:"pointer",
-        itemclick: function(e) {
-          if (typeof (e.dataSeries.visible) ===  "undefined" || e.dataSeries.visible) {
-	          e.dataSeries.visible = false;
-          }
-          else
-          {
-            e.dataSeries.visible = true;
-          }
-          chart.render();
-		
-		  
-        }
-      }
-	});
-	chart.render();
-}
-</script>
 
 <script type="text/javascript">
 window.onload = function () {
+opentickets();
+opentickets1();
+alltickets();
+onsite_deport();
+$( ".amcharts-start-date-input" ).datepicker();
+$( ".amcharts-end-date-input" ).datepicker();
+}
 
-//Better to construct options first and then pass it as a parameter
-var obj = "";
- $.ajax({
-            type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/dashboarddata_test",
-            dataType: "text",
-            success: function(xml){
-				obj = JSON.parse(xml);
-				 //alert(xml);
-				 
-				 
-				 		var options = {
-		title: {
-			text: "Dashboard Data"
-		},
-                animationEnabled: true,
-		data: [
-		{
-			type: "column", //change it to line, area, bar, pie, etc
-			dataPoints: obj
-		}
-		]
-	};
+</script>
 
-	//$("#chartContainer").CanvasJSChart(options);
-	
-	opentickets(); 
-	pieservice();
-			}
-			
- });
- 
+<script>
+function opentickets()
+{
 
- 
+/**
+ * Define data for each year
+ */
+var chartData = {
+  "1": [ 
+   { "sector": "Request Created", "size": 12 }, 
+    { "sector": "Warranty Validation", "size": 7 }, 
+    { "sector": "Device in Transit", "size": 4 }, 
+    { "sector": "Repair in Progress", "size": 9 }, 
+    { "sector": "Request Complete", "size": 17} ],
+  "2": [ 
+   { "sector": "Request Created", "size": 31 }, 
+    { "sector": "Warranty Validation", "size": 8 }, 
+    { "sector": "Device in Transit", "size": 10 }, 
+    { "sector": "Repair in Progress", "size": 5 }, 
+    { "sector": "Request Complete", "size": 22 } ],
+  "3": [ 
+   { "sector": "Request Created", "size": 11 }, 
+    { "sector": "Warranty Validation", "size": 31 }, 
+    { "sector": "Device in Transit", "size": 44 }, 
+    { "sector": "Repair in Progress", "size": 1 }, 
+    { "sector": "Request Complete", "size": 60 } ],
+  "4": [ 
+   { "sector": "Request Created", "size": 6 }, 
+    { "sector": "Warranty Validation", "size": 10}, 
+    { "sector": "Device in Transit", "size": 23 }, 
+    { "sector": "Repair in Progress", "size": 2 }, 
+    { "sector": "Request Complete", "size": 4 } ],
+  "5": [ 
+   { "sector": "Request Created", "size": 60 }, 
+    { "sector": "Warranty Validation", "size": 53 }, 
+    { "sector": "Device in Transit", "size": 42 }, 
+    { "sector": "Repair in Progress", "size": 22 }, 
+    { "sector": "Request Complete", "size": 45 } ],
+  "6": [ 
+   { "sector": "Request Created", "size": 160 }, 
+    { "sector": "Warranty Validation", "size": 53 }, 
+    { "sector": "Device in Transit", "size": 142 }, 
+    { "sector": "Repair in Progress", "size": 22 }, 
+    { "sector": "Request Complete", "size": 85 } ],
+  "7": [ 
+   { "sector": "Request Created", "size": 60 }, 
+    { "sector": "Warranty Validation", "size": 53 }, 
+    { "sector": "Device in Transit", "size": 42 }, 
+    { "sector": "Repair in Progress", "size": 22 }, 
+    { "sector": "Request Complete", "size": 45 } ]
+};
 
- 
- 
- 
- 
- 
+
+/**
+ * Create the chart
+ */
+var currentYear = 1;
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "pie",
+  "theme": "light",
+  "dataProvider": [],
+  "valueField": "size",
+  "titleField": "sector",
+  "startDuration": 0,
+  "innerRadius": 80,
+  "pullOutRadius": 20,
+  "marginTop": 30,
+  "titles": [{
+    "text": "Open Tickets"
+  }],
+  "allLabels": [{
+    "y": "54%",
+    "align": "center",
+    "size": 25,
+    "bold": true,
+    "text": "1995",
+    "color": "#555"
+  }, {
+    "y": "49%",
+    "align": "center",
+    "size": 15,
+    "text": "Month",
+    "color": "#555"
+  }],
+  "listeners": [ {
+    "event": "init",
+    "method": function( e ) {
+      var chart = e.chart;
+      
+      function getCurrentData() {
+        var data = chartData[currentYear];
+		//alert(data);
+        currentYear++;
+        if (currentYear > 6)
+          currentYear = 2;
+        return data;
+      }
+      
+      function loop() {
+	  var textdata = "Jan,2016";
+	  if(currentYear==1)
+	  {
+	  var textdata = "Jan,2016";
+	  
+	  }else if(currentYear==2)
+	  {
+	  var textdata = "Feb,2016";
+	  
+	  
+	  }else if(currentYear==3)
+	  {
+	  var textdata = "Mar,2016";
+	  
+	  
+	  }else if(currentYear==4)
+	  {
+	  var textdata = "Apr,2016";
+	  
+	  
+	  }else if(currentYear==5)
+	  {
+	  var textdata = "may,2016";
+	  
+	  
+	  }else if(currentYear==6)
+	  {
+	  var textdata = "jun,2016";
+	  
+	  
+	  }else
+	  {
+	  textdata = currentYear;
+	  
+	  }
+        chart.allLabels[0].text = textdata;
+        var data = getCurrentData();
+		
+        chart.animateData( data, {
+          duration: 1000,
+          complete: function() {
+            setTimeout( loop, 3000 );
+          }
+        } );
+      }
+
+      loop();
+    }
+  } ],
+   "export": {
+   "enabled": true
+  }
+} );
+
+
 
 
 }
 
 </script>
+
+<script>
+function opentickets1()
+{
+var chartData1 = [];
+var chartData2 = [];
+var chartData3 = [];
+
+
+generateChartData();
+
+function generateChartData() {
+                     chartData1 = [{date:new Date(2015, 0, 1),
+								  value:140,
+								  volume:100},{date:new Date(2015, 0, 10),
+								  value:160,
+								  volume:260},{date:new Date(2015, 0, 15),
+								  value:300,
+								  volume:430},{date:new Date(2015, 0, 20),
+								  value:40,
+								  volume:340},{date:new Date(2015, 0, 25),
+								  value:510,
+								  volume:510}
+								  
+								  ];
+								      chartData2 = [{date:new Date(2015, 0, 1),
+								  value:100,
+								  volume:100},{date:new Date(2015, 0, 10),
+								  value:60,
+								  volume:60},{date:new Date(2015, 0, 15),
+								  value:30,
+								  volume:30},{date:new Date(2015, 0, 20),
+								  value:140,
+								  volume:140},{date:new Date(2015, 0, 25),
+								  value:210,
+								  volume:210}
+								  
+								  ];
+								       chartData3 = [{date:new Date(2015, 0, 1),
+								  value:10,
+								  volume:10},{date:new Date(2015, 0, 10),
+								  value:70,
+								  volume:70},{date:new Date(2015, 0, 15),
+								  value:40,
+								  volume:40},{date:new Date(2015, 0, 20),
+								  value:340,
+								  volume:340},{date:new Date(2015, 0, 25),
+								  value:610,
+								  volume:610}
+								  
+								  ];
+}
+
+var chart = AmCharts.makeChart( "chartdiv4", {
+  "type": "stock",
+  "theme": "light",
+
+  "dataSets": [ {
+      "title": "handheld",
+      "fieldMappings": [ {
+        "fromField": "value",
+        "toField": "value"
+      }, {
+        "fromField": "volume",
+        "toField": "volume"
+      } ],
+      "dataProvider": chartData1,
+      "categoryField": "date"
+    }, {
+      "title": "scanners",
+      "fieldMappings": [ {
+        "fromField": "value",
+        "toField": "value"
+      }, {
+        "fromField": "volume",
+        "toField": "volume"
+      } ],
+      "dataProvider": chartData2,
+      "categoryField": "date"
+    }, {
+      "title": "printers",
+      "fieldMappings": [ {
+        "fromField": "value",
+        "toField": "value"
+      }, {
+        "fromField": "volume",
+        "toField": "volume"
+      } ],
+      "dataProvider": chartData3,
+      "categoryField": "date"
+    }
+  ],
+
+  "panels": [ {
+    "showCategoryAxis": false,
+    "title": "Value",
+    "percentHeight": 70,
+    "stockGraphs": [ {
+      "id": "g1",
+      "valueField": "value",
+      "comparable": true,
+      "compareField": "value",
+      "balloonText": "[[title]]:<b>[[value]]</b>",
+      "compareGraphBalloonText": "[[title]]:<b>[[value]]</b>"
+    } ],
+    "stockLegend": {
+      "periodValueTextComparing": "[[percents.value.close]]%",
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  }, {
+    "title": "Volume",
+    "percentHeight": 30,
+    "stockGraphs": [ {
+      "valueField": "volume",
+      "type": "column",
+      "showBalloon": false,
+      "fillAlphas": 1
+    } ],
+    "stockLegend": {
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  } ],
+
+  "chartScrollbarSettings": {
+    "graph": "g1"
+  },
+
+  "chartCursorSettings": {
+    "valueBalloonsEnabled": true,
+    "fullWidth": true,
+    "cursorAlpha": 0.1,
+    "valueLineBalloonEnabled": true,
+    "valueLineEnabled": true,
+    "valueLineAlpha": 0.5
+  },
+
+  "periodSelector": {
+    "position": "left",
+    "periods": [ {
+      "period": "MM",
+      "selected": true,
+      "count": 1,
+      "label": "1 month"
+    }, {
+      "period": "YYYY",
+      "count": 1,
+      "label": "1 year"
+    }, {
+      "period": "YTD",
+      "label": "YTD"
+    }, {
+      "period": "MAX",
+      "label": "MAX"
+    } ]
+  },
+
+  "dataSetSelector": {
+    "position": "left"
+  },
+
+  "export": {
+    "enabled": true
+  }
+} );
+
+}
+</script>
+
+<script>
+function alltickets()
+{
+
+var chart = AmCharts.makeChart( "chartdiv2", {
+  "type": "serial",
+  "addClassNames": true,
+  "theme": "light",
+  "autoMargins": false,
+  "marginLeft": 30,
+  "marginRight": 8,
+  "marginTop": 10,
+  "marginBottom": 26,
+  "balloon": {
+    "adjustBorderColor": false,
+    "horizontalPadding": 10,
+    "verticalPadding": 8,
+    "color": "#ffffff"
+  },
+
+  "dataProvider": [ {
+    "year": "Jan",
+    "total": 23,
+    "otickets": 16,
+    "closedtickets": 7
+	
+  }, {
+    "year": "Feb",
+    "total": 26,
+    "otickets": 14,
+	 "closedtickets": 12
+  }, {
+    "year": "Mar",
+    "total": 30,
+    "otickets": 28,
+	 "closedtickets": 2
+  }, {
+    "year": "Apr",
+    "total": 40,
+    "otickets": 28,
+	 "closedtickets": 12
+  }, {
+    "year": "May",
+    "total": 20,
+    "otickets": 8,
+	 "closedtickets": 12
+  }, {
+    "year": "June",
+    "total": 50,
+    "otickets": 38,
+	 "closedtickets": 22
+  } , {
+    "year": "July",
+    "total": 60,
+    "otickets": 48,
+	 "closedtickets": 22
+  }  ],
+  "valueAxes": [ {
+    "axisAlpha": 0,
+    "position": "left"
+  } ],
+  "startDuration": 1,
+  "graphs": [ {
+    "alphaField": "alpha",
+    "balloonText": "<span style='font-size:12px;color:#000000'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+    "fillAlphas": 1,
+    "title": "Total Tickets",
+    "type": "column",
+    "valueField": "total",
+    "dashLengthField": "dashLengthColumn"
+  }, {
+    "id": "graph2",
+    "balloonText": "<span style='font-size:12px;color:#000000'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+    "bullet": "round",
+    "lineThickness": 3,
+    "bulletSize": 7,
+    "bulletBorderAlpha": 1,
+    "bulletColor": "#FFFFFF",
+    "useLineColorForBulletBorder": true,
+    "bulletBorderThickness": 3,
+    "fillAlphas": 0,
+    "lineAlpha": 1,
+    "title": "Open Tickets",
+    "valueField": "otickets",
+    "dashLengthField": "dashLengthLine"
+  },{
+    "id": "graph3",
+    "balloonText": "<span style='font-size:12px;color:#000000'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+    "bullet": "round",
+    "lineThickness": 3,
+    "bulletSize": 7,
+    "bulletBorderAlpha": 1,
+    "bulletColor": "#FFFFFF",
+    "useLineColorForBulletBorder": true,
+    "bulletBorderThickness": 3,
+    "fillAlphas": 0,
+    "lineAlpha": 1,
+    "title": "Closed Tickets",
+    "valueField": "closedtickets",
+    "dashLengthField": "dashLengthLine"
+  } ],
+  "categoryField": "year",
+  "categoryAxis": {
+    "gridPosition": "start",
+    "axisAlpha": 0,
+    "tickLength": 0
+  },
+  "export": {
+    "enabled": true
+  }
+} );
+}
+
+</script>
+
+<script>
+function onsite_deport()
+{
+
+
+var chart = AmCharts.makeChart("chartdiv3", {
+  "type": "pie",
+  "startDuration": 0,
+   "theme": "light",
+  "addClassNames": true,
+  "legend":{
+   	"position":"right",
+    "marginRight":100,
+    "autoMargins":false
+  },
+  "innerRadius": "30%",
+  "defs": {
+    "filter": [{
+      "id": "shadow",
+      "width": "200%",
+      "height": "200%",
+      "feOffset": {
+        "result": "offOut",
+        "in": "SourceAlpha",
+        "dx": 0,
+        "dy": 0
+      },
+      "feGaussianBlur": {
+        "result": "blurOut",
+        "in": "offOut",
+        "stdDeviation": 5
+      },
+      "feBlend": {
+        "in": "SourceGraphic",
+        "in2": "blurOut",
+        "mode": "normal"
+      }
+    }]
+  },
+  "dataProvider": [{
+    "country": "Depot",
+    "litres": 501
+  }, {
+    "country": "On-site",
+    "litres": 301
+  }],
+  "valueField": "litres",
+  "titleField": "country",
+  "export": {
+    "enabled": true
+  }
+});
+
+chart.addListener("init", handleInit);
+
+chart.addListener("rollOverSlice", function(e) {
+  handleRollOver(e);
+});
+
+function handleInit(){
+  chart.legend.addListener("rollOverItem", handleRollOver);
+}
+
+function handleRollOver(e){
+  var wedge = e.dataItem.wedge.node;
+  wedge.parentNode.appendChild(wedge);  
+}
+
+
+}
+
+</script>
+
 
 
 
@@ -299,58 +631,7 @@ var obj = "";
       
         <!--/ Page Specific Scripts -->
 
-<script>
-            $(window).load(function(){
 
-
-                // Initialize Pie Chart
-                var data6 = [
-                    { label: 'Handheld Printer', data: 16.6 },
-                    { label: 'RFID', data: 16.6 },
-                    { label: 'Services', data: 16.6 },
-                    { label: 'Wireless', data: 16.6 },
-                    { label: 'Labels', data: 16.6},
-                    { label: 'Software', data: 16.6}
-                ];
-
-                var options6 = {
-                    series: {
-                        pie: {
-                            show: true,
-                            innerRadius: 0,
-                            stroke: {
-                                width: 0
-                            },
-                            label: {
-                                show: true,
-                                threshold: 0.15
-                            }
-                        }
-                    },
-
-                    colors: ['#428bca','#5cb85c','#f0ad4e','#d9534f','#5bc0de','#616f77'],
-                    grid: {
-                        hoverable: true,
-                        clickable: true,
-                        borderWidth: 0,
-                        color: '#ccc'
-                    },
-                    tooltip: false,
-                    tooltipOpts: { content: '%s: %p.0%' }
-                };
-
-                var plot6 = $.plot($("#pie-chart"), data6, options6);
-
-                $(window).resize(function() {
-                    // redraw the graph in the correctly sized div
-                    plot6.resize();
-                    plot6.setupGrid();
-                    plot6.draw();
-                });
-                // * Initialize Pie Chart
-             
-            });
-        </script>
 
 
 

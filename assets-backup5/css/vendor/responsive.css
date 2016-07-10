@@ -1,0 +1,171 @@
+/* --------------------------------------------
+	iPAD/TABLET LANDSCAPE
+-------------------------------------------- */
+
+@media only screen and (max-width: 1024px) {
+	
+}
+
+
+/* --------------------------------------------
+	iPAD/TABLET PORTRAIT
+-------------------------------------------- */
+
+@media only screen and (max-width: 979px) {
+
+
+
+
+.bg-logo {
+    left: -2px !important;
+    top: -32px !important;
+}
+
+.icons-wheel {
+    margin-top: 462px;
+}
+.page {
+    overflow-x: hidden;
+    padding-top: 0;
+}
+.menu .textbox {
+      left: 4px;
+    margin-top: -41px;
+    position: relative;
+}
+	
+.bg-white {
+    margin: 0 auto;
+    width: 50%;
+}
+#login {
+    margin-bottom: 10px;
+}
+	
+	
+}
+
+/* --------------------------------------------
+	iPHONE LANDSCAPE
+-------------------------------------------- */
+
+@media only screen and (max-width: 767px) {
+	
+.menu .rotater {
+height: 80%;
+      position: absolute;
+    top: 0;
+    transform-origin: -194% -210% 0;
+    width: 80%;
+}
+
+
+.bg-logo {
+   left: -179px !important;
+    top: -161px !important;
+   }
+
+.icons-wheel {
+    margin-top: 462px;
+}
+.page {
+    overflow-x: hidden;
+    padding-top: 0;
+}
+.menu .textbox {
+    font-size: 9px;
+    left: 4px;
+    margin-top: -29px;
+    position: relative;
+}
+	
+.bg-white {
+    margin: 0 auto;
+    width: 50%;
+}
+#login {
+    margin-bottom: 10px;
+}
+.menu {
+transform:translateX(594%) translateY(93%);    
+left:0;
+}
+.tech-txt{
+left:0;
+}
+.technical-tile {
+    margin-left: -43px;
+    margin-top: -28px;
+}
+.tech-txt{
+left:0;
+}
+.menu .textbox {
+left:-12px;
+}	
+}
+
+
+/* --------------------------------------------
+	iPHONE PORTRAIT
+-------------------------------------------- */
+
+@media only screen and (max-width: 479px) {
+	
+	
+
+	
+.ml-130{
+	 padding-left:0px;
+}
+.ml-70{
+	 padding-left:0px;
+}
+	
+.menu .rotater {
+height: 80%;
+      position: absolute;
+    top: 0;
+    transform-origin: -194% -210% 0;
+    width: 80%;
+}
+
+
+.bg-logo {
+ left: -176px !important;
+  top: -162px !important;
+   }
+
+.icons-wheel {
+    margin-top: 462px;
+}
+.page {
+    overflow-x: hidden;
+    padding-top: 0;
+}
+.menu .textbox {
+    font-size: 9px;
+    left: -12px;
+    margin-top: -29px;
+    position: relative;
+}
+.bg-white{
+float:left;
+width:100%;
+}
+#login{
+margin-bottom:0px;
+}
+.menu {
+transform:translateX(384%) translateY(87%);    
+left:0;
+}
+.tech-txt{
+left:0;
+}
+.technical-tile {
+    margin-left: -43px;
+    margin-top: -28px;
+}
+
+}

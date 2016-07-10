@@ -2740,13 +2740,15 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $item_price = $node->getElementsByTagName('item_price')->item(0)->nodeValue;
 										   $partnumber = $node->getElementsByTagName('part_code')->item(0)->nodeValue;
 										   $totshipqty = $node->getElementsByTagName('TotShipQty')->item(0)->nodeValue;
+										   $QtyOrdered = $node->getElementsByTagName('QtyOrdered')->item(0)->nodeValue;
 										   $params1[$i] = array('item_no'=> $item_no,
 										                        'part_desc'=>$part_desc,
 																'uom'=>$uom,
 																'qty'=>$qty,
 																'item_price'=>$item_price,
 																'part_code'=>$partnumber,
-																'totshipqty'=>$totshipqty
+																'totshipqty'=>$totshipqty,
+																'qtyordered'=>$QtyOrdered
 										   );
                                             $data['item_no'] = $node->getElementsByTagName('item_no')->item(0)->nodeValue;
                                             $data['part_desc'] = $node->getElementsByTagName('part_desc')->item(0)->nodeValue;
@@ -2900,7 +2902,7 @@ $ship_to_code = " ";
 															
 															}else if($userstatus=="Expired")
 															{
-															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><RecCount>".$node->getElementsByTagName('TotRecCount')->item(0)->nodeValue."</RecCount><start_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.",".$node->getElementsByTagName('ST')->item(0)->nodeValue.",".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><st>".$node->getElementsByTagName('ST')->item(0)->nodeValue."</st><contract_status>Expired</contract_status><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
+															echo "<contracts diffgr:id='contract1' msdata:rowOrder='0' diffgr:hasChanges='inserted'><contract_number>".$node->getElementsByTagName('Contract')->item(0)->nodeValue."</contract_number><RecCount>".$node->getElementsByTagName('TotRecCount')->item(0)->nodeValue."</RecCount><start_date>".$node->getElementsByTagName('ContrFrom')->item(0)->nodeValue."</start_date><end_date>".$node->getElementsByTagName('ContrTo')->item(0)->nodeValue."</end_date><description>".$node->getElementsByTagName('ServiceDescription')->item(0)->nodeValue."</description><service_level>".$node->getElementsByTagName('ServiceLevelHeaderlevel')->item(0)->nodeValue."</service_level><location>".$node->getElementsByTagName('Address')->item(0)->nodeValue.",".$node->getElementsByTagName('ST')->item(0)->nodeValue.",".$node->getElementsByTagName('zip')->item(0)->nodeValue."</location><st>".$node->getElementsByTagName('ST')->item(0)->nodeValue."</st><contract_status>Expired</contract_status><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error></contracts>";
 														   
 															
 															}else if($userstatus=="Cancelled")
@@ -5888,7 +5890,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				   redirect(base_url()."index.php/welcome/index");
 				
 				}else{
-				
+				    $useremail = $this->session->userdata('email');
+				    $cust_code = $this->session->userdata('cust_code');
 					$this->load->model('Mysmartportal_model');
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
 					$userallmenu=$this->Mysmartportal_model->getallusermenu();
@@ -5909,13 +5912,29 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					}
 					$data['menu']=$usermenu1;
 					$data['ids']=$usermenu[0]->menu_id;
+					
+						  $rss = new DOMDocument(); 
+                      @$rss->load("http://216.234.105.194:8089/Alpha.svc/ListAllLocations/".$useremail."/".$cust_code."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+			                $i=1;
+							$alllocationdata = array();
+					        foreach ($rss->getElementsByTagName('ListAllLocations') as $node)
+							{
+							$params = array('custcode'=>$node->getElementsByTagName('CustCode')->item(0)->nodeValue,
+							                'EmailId'=>$node->getElementsByTagName('EmailId')->item(0)->nodeValue,
+											'LocationId'=>$node->getElementsByTagName('LocationId')->item(0)->nodeValue);
+							$alllocationdata[$i] = $params;
+							$i++;
+							}
+					$data["latestlocations"] = $alllocationdata;
+					
+					
 						 if($orderpageaccess=="ok")
 						 {
 						 
 $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
 							 $this->load->view('header',$data);
-							 $this->load->view('service_contracts_analytics');
+							 $this->load->view('service_contracts_analytics',$data);
 							 $this->load->view('service_contracts_analytics_footer');
 				         }else
 						 {
@@ -6750,6 +6769,8 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   {
 	  $msg1 = $this->input->post("message1");
 	  $msg2 = $this->input->post("message2");
+	  $msg5 = @$this->input->post("message3");
+	  $msg6 = @$this->input->post("message4");
 	  //echo $msg1;
 	  $msg3 = "";
 	  $msg4 = "";
@@ -6765,7 +6786,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
          $subject = "Dashboard Questions";
          
          $message = "<b>Hi,</b><br>";
-         $message .= "<h3>What types of dashboards will you find most useful? </h3>".$msg1."<h3>What purpose would you like your dashboards to serve?</h3>".$msg2."<h3>What do you want to measure?</h3>".$msg3."<h3>What would be your desired key takeaways from your dashboards?</h3>".$msg4."<br><br>Thanks,";
+         $message .= "<h3>What types of dashboards will you find most useful? </h3>".$msg1."<h3>What purpose would you like your dashboards to serve?</h3>".$msg2."<h3>What do you want to measure?</h3>".$msg3."<br>".$msg5."<h3>What would be your desired key takeaways from your dashboards?</h3>".$msg4."<br>".$msg6."<br>Thanks,";
          
          $header = "From:lowrysmartportal.com \r\n";
          $header .= "Cc:lowrysmartportal \r\n";
@@ -6779,24 +6800,57 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	  
   }
   
-  public function contractschartdata()
+  public function contractschartdata($location="")
   {
   
+  if($location=="")
+  {
+  $location = "%20";
+  
+  }
+           $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
            $rss = new DOMDocument(); 				
-		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts_Graph/10090-000/1-1-2000/1-1-2017/Shari.Fann@cevalogistics.com/3/Perm/%20/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts_Graph/".$cust_code."/1-1-2000/1-1-2017/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
       	   
 		   $chartdata = array();
+		   $chartdataexpired = array();
+		   $chartdatacancel = array();
 		   $i=0;
+		   $j=0;
+		   $k=0;
 		   foreach ($rss->getElementsByTagName('ActiveServiceContracts') as $node)
 			{
-								  
-			$params = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
-			$chartdata[$i] = $params;
+			if($node->getElementsByTagName('ContractStatus')->item(0)->nodeValue == "Expired Service Contracts")
+			{
+			$params1 = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
 			$i++;
+			}else if($node->getElementsByTagName('ContractStatus')->item(0)->nodeValue == "Active Service Contracts")
+			{
+		    $params = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
+			$chartdata[$j] = $params;
+			 $j++;
+			}else
+			{
+			  $params2 = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
+			  $chartdatacancel[$k] = $params2;
+			 $k++;
+			
+			}					  
+			
+			
+			
+			
+			
 			}
 			
-			$finaldata =  json_encode($chartdata);
-			print_r($finaldata);
+			$finaldata = array("activeservice"=>$chartdata,
+			"expiredservice"=>$chartdataexpired,
+			"cancelservice"=>$chartdatacancel);
+			
+			$finaldata1 =  json_encode($finaldata);
+			print_r($finaldata1);
   
   
   }

@@ -1,4 +1,6 @@
-            <!-- ====================================================
+     
+
+      <!-- ====================================================
             ================= CONTENT ===============================
             ===================================================== -->
             <section id="content">
@@ -46,12 +48,14 @@
 <label for="measure">What do you want to measure?</label>
 
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Agreements"><i></i> Service Agreements </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Requests"><i></i>Service Requests </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Order Delivery Time"><i></i>Order Delivery Time </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Requests"><i></i> Service Requests </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Order Delivery Time"><i></i> Order Delivery Time </label>
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Agreements"><i></i> Asset Inventory </label>
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Asset Inventory"><i></i> Supplies - Costs &amp; Usage </label>
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Cost Savings"><i></i> Cost Savings </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Others "><i></i> Others </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Other" onclick="showmsgbox(this.checked)"><i></i> Other </label>
+<textarea required="" style="display:none" placeholder="Type your message" id="message3" name="message3" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
+
 </div>
 
 <div class="col-md-6 mt-20" >
@@ -62,7 +66,9 @@
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="desired[]" id="desired[]" value="Pay Invoices"><i></i> Pay Invoices</label>
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="desired[]" id="desired[]" value="Print Reports"><i></i> Print Reports </label>
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="desired[]" id="desired[]" value="Export Data"><i></i> Export Data </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="desired[]" id="desired[]" value="Other"><i></i> Other </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="desired[]" id="desired[]" value="Other" onclick="showmsgbox1(this.checked)"><i></i> Other </label>
+<textarea required="" style="display:none" placeholder="Type your message" id="message4" name="message4" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
+
 </div>
 
 <div class="col-md-12 text-center">
@@ -341,6 +347,40 @@
     }
     $('.panel-group').on('hidden.bs.collapse', toggleIcon);
     $('.panel-group').on('shown.bs.collapse', toggleIcon);
+</script>
+
+<script>
+function showmsgbox(val)
+{
+
+if(val)
+{
+document.getElementById("message3").style.display = 'block';
+
+}else
+{
+document.getElementById("message3").style.display = 'none';
+}
+
+
+}
+</script>
+
+<script>
+function showmsgbox1(val)
+{
+
+if(val)
+{
+document.getElementById("message4").style.display = 'block';
+
+}else
+{
+document.getElementById("message4").style.display = 'none';
+}
+
+
+}
 </script>
 
     </body>

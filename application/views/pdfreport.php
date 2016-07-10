@@ -116,14 +116,15 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
 
 <table width="100%" border="0" cellspacing="0" cellpadding="5" style="border:0.5px solid #000;">
   <tr>
-    <td width="7%" height="30" align="center" style="border-right:0.5px solid #000;"><strong>ITEM</strong></td>
-    <td width="37%" align="center" style="border-right:0.5px solid #000;"><strong>DESCRIPTION</strong></td>
+    <td width="7%" height="30" align="center" style="border-right:0.5px solid #000;font-size:8px;"><strong>ITEM</strong></td>
+    <td width="38%" align="center" style="border-right:0.5px solid #000;font-size:8px;"><strong>DESCRIPTION</strong></td>
 
-    <td width="9%" align="center" style="border-right:0.5px solid #000;"><strong>UNIT SIZE</strong></td>
-    <td width="11%" align="center" style="border-right:0.5px solid #000;"><strong>QTY</strong></td>
-	    <td width="11%" align="center" style="border-right:0.5px solid #000;"><strong>QTY SHIPPED</strong></td>
-    <td width="15%" align="right" style="border-right:0.5px solid #000;"><strong>UNIT PRICE</strong></td>
-    <td width="15%" align="right" style="border-right:0.5px solid #000;"><strong>NET PRICE</strong></td>
+
+      <td width="11%" align="center" style="border-right:0.5px solid #000;font-size:8px;"><strong>QTY ORDERED</strong></td>
+	    <td width="11%" align="center" style="border-right:0.5px solid #000;font-size:8px;"><strong>QTY SHIPPED</strong></td>
+	    <td width="9%" align="center" style="border-right:0.5px solid #000;font-size:8px;"><strong>UOM</strong></td>  
+  <td width="13%" align="right" style="border-right:0.5px solid #000;font-size:8px;"><strong>UNIT PRICE</strong></td>
+    <td width="13%" align="right" style="border-right:0.5px solid #000;font-size:8px;"><strong>NET PRICE</strong></td>
   </tr>';
  $m=1;
  $tcount = 0;
@@ -135,10 +136,12 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
     <td align="center" style="border-right:0.5px solid #000; border-top:0.5px solid #000;">'.$m.'</td>
     <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['part_desc'].','.$paramsdata['part_code'].'</td>
 
-    <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['uom'].'</td>
-    <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['qty'].'</td>
-	    <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['totshipqty'].'</td>
-    <td align="right" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">$ '.number_format($paramsdata['item_price'], 2).'</td>
+<td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['qtyordered'].'</td>
+   	 
+	 <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['totshipqty'].'</td>
+  <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['uom'].'</td>
+      
+   <td align="right" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">$ '.number_format($paramsdata['item_price'], 2).'</td>
     <td align="right" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">$ '.number_format($total_val, 2).'</td>
   </tr>';
   

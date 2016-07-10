@@ -174,9 +174,9 @@ Email Sent!
                                                                     <!--<th>Item No</th>-->
                                                                     <th>Product Code</th>
                                                                     <th class="pro-desc">Product Description</th>
-                                                                    <th style="padding-left:7px;">Quantity</th>
+                                                                    <th style="padding-left:7px;">Quantity Ordered</th>
 																	<th style="padding-left:7px;">Quantity Shipped</th>
-                                                                    <th style="padding-left:7px;" >Unit Size</th>
+                                                                    <th style="padding-left:7px;" >UOM</th>
                                                                     <th style="text-align:right;padding-right:20px;">Unit Price</th>
                                                                     <th style="text-align:right;padding-right:20px;">Total Price</th>
                                                                     <!--<th>Status</th>-->

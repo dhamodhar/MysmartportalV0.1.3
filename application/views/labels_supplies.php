@@ -18,7 +18,7 @@
                                     <a href="<?php echo base_url();?>index.php/welcome/technical_support"><i class="fa fa-home"></i> Lowry Solutions</a>
                                 </li>
                                 <li>
-                                    <a href=" " class="sub-active">Labels & Supplies</a>
+                                    <a href=" " class="sub-active">Labels</a>
                                 </li>
                                 
                             </ul>
