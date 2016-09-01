@@ -370,16 +370,7 @@ User can use any option below to search the Past Due Invoices.
                      <ul>
 <li><strong>Service Contracts</strong></li>
 <li>The service contracts module provides a comprehensive list of details about all Your service contracts which are active, expired and about to expire.</li>
-<li class="blue-bold">How to navigate</li>
-<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
-<li>Once logged in, on the left hand side menu User can find Service Contracts tab as the fifth option.</li>
-<li>Click on Service contracts to view all the sub pages. The sub pages are,
-<ul class="sub-he">
-<li>Active Contracts.</li>
-<li>Expired Contracts.</li>
-<li>Upcoming for renewal.</li>
-</ul>
-</li>
+
 <li class="blue-bold">Active Contracts</li>
 <li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
 <li>Once logged in, on the left hand side menu User can find service contracts tab as the fifth option.</li>
@@ -736,7 +727,7 @@ User can use any option to search the contracts
 </article> 
 
 <article data-accordion>
-<button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> End of Life Assets </button>          
+<button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>  End of Product Life Cycle </button>          
 <div data-content>
 <div class="col-md-12">
 <div class="line-hieght-22">You may search by Serial Number or Contract Number<br> <br><span class="red">Note:</span> You may search Asset Inventory using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
@@ -749,13 +740,13 @@ User can use any option to search the contracts
 <li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
 <li>Once logged in, on the left hand side menu user can find Asset Inventory tab as the sixth option</li>
 <li>Click on 'Asset Inventory' to expand</li>
-<li>Click on 'End of Life Assets' to open the corresponding page</li>
-<li>The list of all End of LIfe Assets will be displayed in a table</li>
+<li>Click on ' End of Product Life Cycle' to open the corresponding page</li>
+<li>The list of all End of Product Life Cycle records will be displayed in a table</li>
 <li><img src="http://lowrysmartportal.com/assets/images/end-of-life-img.jpg"></li>
 <li class="blue-bold">Functionality</li>
-<li>Users can perform various functionalities provided in the End of Life Assets page for ease of use and access,  They are: </li>
-<li class="blue-bold">  End of Life Assets Search</li>
-<li>User can search End of Life Assets records by using the functionality </li>
+<li>Users can perform various functionalities provided in the End of Product Life Cycle page for ease of use and access,  They are: </li>
+<li class="blue-bold">  End of Product Life Cycle Search</li>
+<li>User can search End of Product Life Cycle records by using the functionality </li>
 
 <li>User can use any one option below for search
 <ul class="sub-he">
@@ -790,6 +781,63 @@ User can use any option to search the contracts
  </div>
 </div>
 </article>
+
+<article data-accordion>
+<button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i>   End of Service Life Cycle </button>          
+<div data-content>
+<div class="col-md-12">
+<div class='line-hieght-22'>You may search by Serial Number or Contract Number<br/> <br/><span class='red'>Note:</span> You may search Asset Inventory using dates up to 1 year, if you want to get data for more than 1 year, please contact Lowry </div>
+
+
+
+ <div id="demo1" class="level3 accordian-body collapse in" aria-expanded="true" style="">
+                 <ul>
+<li><strong>End of Sevice Life Cycle</strong></li>
+<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
+<li>Once logged in, on the left hand side menu user can find Asset Inventory tab as the sixth option</li>
+<li>Click on ‘Asset Inventory’ to expand</li>
+<li>Click on ‘End of Sevice Life Cycle’ to open the corresponding page</li>
+<li>The list of all End of Sevice Life Cycle records will be displayed in a table</li>
+<li><img src='http://lowrysmartportal.com/assets/images/end-of-life-service-img.jpg'/></li>
+<li class='blue-bold'>Functionality</li>
+<li>Users can perform various functionalities provided in the End of Sevice Life Cycle page for ease of use and access,  They are: </li>
+<li class='blue-bold'>  End of Sevice Life Cycle Search</li>
+<li>User can search End of Sevice Life Cycle records by using the functionality </li>
+
+<li>User can use any one option below for search
+<ul class='sub-he'>
+<li> Serial Number</li>
+<li>Contract Number</li>
+</ul>
+</li>
+
+
+
+<li class='blue-bold'>Copy, Print and save </li>
+<li><strong>Copy</strong></li>
+<li>User can copy all the records and paste in any desired location User wish to and the data will maintain its column and row integrity.</li>
+<li>How to check:Click on copy and paste it in any desired location.</li>
+<li><strong>Print</strong></li>
+<li>User can print all the records from Your browser.</li>
+<li>How to check: Click on print, a new browser window is opened with all the table details.</li>
+<li><strong>Save</strong></li>
+<li>User can save the records to the following formats,</li>
+<li>CSV</li>
+<li>Excel</li>
+<li>PDF</li>
+<li>How to check: Click on Save and select the format in which User would like to save the records. A file will be generated with the selected format and request to download the file will be shown automatically.</li>
+
+<li class='blue-bold'>Load more</li>
+<li>By default Lowry smart portal displays only 25 current records, User can load 25 more records each time User click on 'Load more' button provided under the table. User can load records until User have no more records left to load.</li>
+<li>How to check: Click on 'Load more' button at the bottom of the table. If there are more records then the records will be fetched and appended to the existing table, User can find the total number of records count increase with count of 25 each time User click on 'Load more' and count is shown at the bottom of the table until there are no records left to show.</li>
+</ul>
+</div>    
+
+
+ </div>
+</div>
+</article>
+
 
 <article data-accordion>
 <button data-control class="btn btn-primary width-100 text-left arrow-1"><i class="fa fa-caret-right"></i> All Assets    </button>          

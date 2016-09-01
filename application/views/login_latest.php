@@ -151,7 +151,7 @@ var email = document.getElementById("username-login").value;
     <div class="rotater">
       <div class="btn btn-icon">
 
-<div class="textbox" ><p>Contracts</p></div>
+<div class="textbox" ><p>Service Contracts</p></div>
         <img src="http://lowrysmartportal.com/assets/images/contracts.png" class="img-responsive" style="margin-top:23px;"/>
       </div>
     </div>
@@ -219,7 +219,8 @@ var email = document.getElementById("username-login").value;
                         <div class="form-group text-left mt-20">
                             
                            <input type="submit" name="login" id="login" class="btn btn-greensea b-0 br-2 mr-5" value="Login">
-                            <a href="<?php echo base_url()?>index.php/welcome/forgetpassword" class="pull-right mt-10 fogot">Forgot Password?</a>
+                            <a href="<?php echo base_url()?>index.php/welcome/forgetpassword" class="pull-right mt-10 fogot" style="text-decoration: underline!important;">Forgot Password?</a>
+<div class="terms-txt-login"><a href="http://lowrysmartportal.com/index.php/welcome/terms">Terms &amp; Conditions</a></div>
                         </div>
 
                     </form>
@@ -231,13 +232,14 @@ var email = document.getElementById("username-login").value;
                   
 
                 </div>
-                
+               
 
             </div>
 
 
 
         </div>
+<div class="copy-right" ><div class="col-md-12"> © 2016 Lowry Solutions. All Rights Reserved. </div> </div>
         <!--/ Application Content -->
 
 

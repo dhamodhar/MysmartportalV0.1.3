@@ -1,0 +1,287 @@
+
+@media only screen and (max-width: 1500px) {
+.bg-s-6, .bg-s-2{
+line-height:18px;
+}
+}
+
+@media only screen and (max-width: 1280px) {
+.bg-s, .bg-s-2, .bg-s-3, .bg-s-4, .bg-s-5, .bg-s-6{
+font-size:12px;
+}
+.bg-s-6, .bg-s-2{
+line-height:18px;
+}
+}
+
+
+
+/* --------------------------------------------
+	iPAD/TABLET LANDSCAPE
+-------------------------------------------- */
+
+@media only screen and (max-width: 1024px) {
+
+.card-container {
+    margin-bottom: 5px;
+}
+#device-number {
+    width: 50%;
+}
+.bg-s, .bg-s-2, .bg-s-2, .bg-s-3, .bg-s-4, .bg-s-5, .bg-s-6{
+width:98%;
+}
+
+	
+}
+
+
+/* --------------------------------------------
+	iPAD/TABLET PORTRAIT
+-------------------------------------------- */
+
+@media only screen and (max-width: 979px) {
+.card-container {
+    margin-bottom: 5px;
+}
+.service_bg{
+width:100%;
+}
+.xs-mb-10 {
+    margin-bottom: 10px;
+}
+
+.cps .DTTT{
+float:none;
+}
+#contracts-list_filter {
+    margin: 0 !important;
+}
+.header-bg {
+    background: rgba(0, 0, 0, 0) url("http://lowrysmartportal.com/assets/images/header-strip-2.jpg") no-repeat scroll 0 0;
+    box-shadow: none;
+    height: auto;
+margin-top: 0px;
+}	
+.bg-s, .bg-s-2, .bg-s-2, .bg-s-3, .bg-s-4, .bg-s-5, .bg-s-6{
+width:97.5%;
+}
+.appWrapper.header-fixed.aside-fixed #content {
+    top: 55px;
+}
+.cps{
+clear:both;
+}
+#orders-list_filter {
+    margin: 0 !important;
+}
+.small-header-bg{
+height:auto!important;
+}
+.top-64{
+margin-top:64px;
+}
+
+.top-129{
+margin-top:129px;
+}
+.top-246{
+margin-top:246px;
+}	
+}
+
+/* --------------------------------------------
+	iPHONE LANDSCAPE
+-------------------------------------------- */
+
+@media only screen and (max-width: 767px) {
+	
+.card-container {
+    margin-bottom: 5px;
+}	
+
+.service_bg{
+width:100%;
+}
+
+#sparkline01 canvas {
+    width: 100% !important;
+}
+#orders-list_length {
+    margin-left: 1%;
+    margin-top: 1%;
+}
+#contracts-list_length{
+margin-left: 1%;
+margin-top: 1%;
+}
+#contracts-list_filter {
+    margin: 12px 0 0 !important;
+}
+.xs-mb-10 {
+    margin-bottom: 10px;
+}
+.cps .DTTT{
+float:none;
+}
+.header-bg {
+    background: rgba(0, 0, 0, 0) url("http://lowrysmartportal.com/assets/images/header-strip-2.jpg") no-repeat scroll 0 0;
+    box-shadow: none;
+    height: auto;
+margin-top: 0px;
+}
+.bg-s, .bg-s-2, .bg-s-2, .bg-s-3, .bg-s-4, .bg-s-5, .bg-s-6{
+width:99%;
+}
+.load-buts {
+    margin-left: 0;
+    margin-top: 0;
+    position: relative;
+}
+.cps{
+clear:both;
+}
+.small-header-bg{
+height:auto!important;
+}
+#assets-list_length label{
+margin-left:2%;
+}
+.dash-board, .support, .pa, .catalog, .contracts, .asset, .devices, .projects, .printer{
+padding-left:0px!important;
+}
+.appWrapper.sidebar-xs #header .branding{
+padding:8px;
+width:12%;
+}
+.appWrapper.sidebar-xs #header .nav-right{
+float:right!important;
+}
+.messages .dropdown-menu{
+left:-181px !important;
+
+}
+.top-41{
+margin-top:41px;
+}
+
+.top-91{
+margin-top:91px;
+}
+.top-168{
+margin-top:168px;
+}
+.top-40{
+margin-top:0px;
+}
+}
+
+
+/* --------------------------------------------
+	iPHONE PORTRAIT
+-------------------------------------------- */
+
+@media only screen and (max-width: 479px) {
+	
+.card-container {
+    margin-bottom: 5px;
+}	
+.appWrapper.header-fixed.aside-fixed #content {
+    top: 75px;
+}
+
+#sparkline01 canvas {
+    width: 100% !important;
+}
+#orders-list_filter {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#orders-list_length {
+    margin-left: 1%;
+}
+.xs-nopadding{
+padding:0px!important;
+}
+.cps .DTTT{
+float:none;
+}
+#contracts-list_filter {
+    margin: 12px 0 0 !important;
+}
+#contracts-list_length{
+margin-left: 1%;
+}
+.header-bg {
+    background: rgba(0, 0, 0, 0) url("http://lowrysmartportal.com/assets/images/header-strip-2.jpg") no-repeat scroll 0 0;
+    box-shadow: none;
+    height: auto;
+margin-top: 0px;
+}
+.bg-s, .bg-s-2, .bg-s-2, .bg-s-3, .bg-s-4, .bg-s-5, .bg-s-6{
+width:97%;
+}
+.load-buts {
+    margin-left: 0;
+    margin-top: 0;
+    position: relative;
+}
+#orders-list_filter label {
+    margin-top: 13px;
+}
+.cps{
+clear:both;
+}
+.small-header-bg{
+height:auto!important;
+}
+
+#assets-list_filter {
+      float: right;
+    width: 50%;
+}
+#assets-list_length label{
+margin-left:2%;
+}
+.appWrapper.sidebar-xs #header .branding{
+padding:14px 8px 8px;
+width:20%;
+}
+.top-41{
+margin-top:41px;
+}
+
+.top-91{
+margin-top:91px;
+}
+.top-168{
+margin-top:168px;
+}
+.top-40{
+margin-top:0px;
+}
+.dash-board, .support, .pa, .catalog, .contracts, .asset, .devices, .projects, .printer{
+padding-left:0px!important;
+}
+.dropdown.nav-profile .dropdown-menu{
+left:200px;
+right:0px!important;
+}
+.messages .dropdown-menu{
+left:50px !important;
+}
+.page{
+padding-top:10px;
+padding-bottom:10px;
+}
+.popover .popover-title{
+width:290px;
+left:35px;
+}
+.popover-content{
+padding:0;
+}
+.popover > .arrow, .popover > .arrow::after{
+visibility:hidden;
+}

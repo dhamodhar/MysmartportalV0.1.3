@@ -131,7 +131,8 @@ class Welcome extends CI_Controller {
 											'role' => $user[0]->role,
 											'cust_code' => $user[0]->cus_code,
 											'image' => @$user[0]->image,
-											'is_logged_in' => 1
+											'is_logged_in' => 1,
+											'terms_status' => @$user[0]->terms_read_status
 												  );
 												  
 												 $ip = $this->input->ip_address();
@@ -200,86 +201,39 @@ class Welcome extends CI_Controller {
 				    redirect(base_url()."index.php/welcome/index");
 				
 				}else{
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
 				
+				}
 				
 				//Code start
-				  $rss = new DOMDocument(); 
-						$cust_code= $this->session->userdata('cust_code'); 
-						$email1=$this->session->userdata('email');
-						//Getting Locations
-						$this->load->model('Mysmartportal_model');
-					    $locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
-				
-							$ship_to_code = "";
-							$location = "";
-							if($location==""){
-							foreach($locations as $locationsdata)
-							{
-									if($ship_to_code == ""){
-											$ship_to_code = $locationsdata->ship_to_code;
-									}else{
-											$ship_to_code = $ship_to_code."|".$locationsdata->ship_to_code;
-									}
-							}}else
-							{
-							$ship_to_code = $location;
-							
-							}
-						
-						
-						$ServiceContractList_node = "ServiceContractList";
-
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21GetAllExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
-											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$ship_to_code.'/50/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
-											  array('name' => 'api', 'url' => 'http://216.234.105.194:8088/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$ship_to_code.'/5000/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213')
-											  );
+$this->load->model('Mysmartportal_model');
+	$cust_code= $this->session->userdata('cust_code'); 
+					$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+					$ship_to_code = "";
+					$state = "";
+					$city = "";
 					
-											$k=0;  
-											$active = 0;
-											$expired = 0;
-											$Upcomming = 0;
-											
-									  foreach ($urlArray as $url) 
-									  {
-									  if($k==0)
-									  {
-									  $ServiceContractList_node = "AssetsUnderContract";
-									  
-									  }else if($k==1)
-									  {
-									  $ServiceContractList_node = "ServiceContractList";
-									  
-									  }else if($k==2)
-									  {
-									  $ServiceContractList_node = "ActiveServiceContracts";
-									  
-									  }
-									  
-												   @$rss->load($url['url']);
-												   foreach ($rss->getElementsByTagName($ServiceContractList_node) as $node)
-												   {
-															if($k==0)
-															{
-						                                      $Upcomming++;
-															
-															}else if($k==1)
-															{
-											                 $expired++;
-															
-															}else if($k==2)
-															{
-																$active++;
-													
-															}									   
-													 }   
+					
+					foreach($locations as $locationsdata)
+					{
+							if($ship_to_code == ""){
+									$ship_to_code = $locationsdata->ship_to_code;
+									$state = $locationsdata->state;
+									$city = $locationsdata->city;
+									
+							}else{
+									$ship_to_code = $ship_to_code.",".$locationsdata->ship_to_code;
+									$state = $state.",".$locationsdata->state;
+									$city = $city.",".$locationsdata->city;
+							}
+                    }
+					
+					$data['locations'] = explode(",",$ship_to_code);
+					$data['state'] = explode(",",$state);
+					$data['city'] = explode(",",$city);
 
-                                         $k++; 													 
-													 
-									   }	
-									   
-									   $data["active"] = $active;
-									   $data["expired"] = $expired;
-				
 				//End code
 				
 				
@@ -309,7 +263,7 @@ class Welcome extends CI_Controller {
 						 if($orderpageaccess=="ok")
 						 {
 						 
-$user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+                             $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
 							 $this->load->view('header',$data);
 							 $this->load->view('service_desk_tickets',$data);
@@ -384,6 +338,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("OpenOrders");
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -435,6 +395,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			
 			 }else{
 			 
+			 if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+			 
 			        $this->load->model('Mysmartportal_model');
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
 					$userallmenu=$this->Mysmartportal_model->getallusermenu();
@@ -465,7 +431,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	 *  @pamars
 	 *  Order Id
 	 */
-	public function orderview_data($order_id)
+	public function orderview_data($order_id,$type="")
 	{
 	
 		  if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
@@ -491,9 +457,16 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				
 				$rss = new DOMDocument(); 
-				//echo "http://216.234.105.194:8089/Alpha.svc/E21GetOrderDetails/".$cust_code."/".$order_id."/".$email."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D";
+                if($type=="invoice")
+				{
+				//echo "http://216.234.105.194:8089/Alpha.svc/E21GetOrderDetails_ByInvoiceNo/".$cust_code."/".$order_id."/".$email."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D";
 				//exit;
-				$rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetOrderDetails/".$cust_code."/".$order_id."/".$email."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+				
+				   $rss->load(WEBSERVICEURL."/E21GetOrderDetails_ByInvoiceNo/".$cust_code."/".$order_id."/".$email."/3/PermLevel/".KEY1."/".KEY2);
+				}else
+				{
+				   $rss->load(WEBSERVICEURL."/E21GetOrderDetails/".$cust_code."/".$order_id."/".$email."/3/PermLevel/".KEY1."/".KEY2);
+				}
 				                             echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
 										   foreach ($rss->getElementsByTagName('OrderDetails') as $node)
 										   {									  
@@ -573,20 +546,39 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					
 					$rss = new DOMDocument(); 
 					
-					
-					$rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$order_id."/ /".$email1."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+				$finaldata = "";
+				$invoicenumbers = "";
+				$shippingcharge = "";
+				$handilingcharge = "";
+				$totalamount = "";
+				$taxamount = "";
+					$rss->load(WEBSERVICEURL."/E21GetOrderInvoiceHeader/".$cust_code."/".$order_id."/ /".$email1."/3/PermLevel/".KEY1."/".KEY2);
 					
 					echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''><InvoiceHeader>";
 											   foreach ($rss->getElementsByTagName('InvoiceHeader') as $node)
-											   {	
-													 
-												   if (strpos($node->getElementsByTagName('carr_code')->item(0)->nodeValue,'Error Number') !== false) {
-															 
-													   }else{
-												  echo "<carr_code>".$node->getElementsByTagName('carr_code')->item(0)->nodeValue."</carr_code><invoice_numb>".$node->getElementsByTagName('invoice_numb')->item(0)->nodeValue."</invoice_numb><rel_numb>".$node->getElementsByTagName('rel_numb')->item(0)->nodeValue."</rel_numb><order_numb>".$node->getElementsByTagName('order_numb')->item(0)->nodeValue."</order_numb><order_date>".$node->getElementsByTagName('order_date')->item(0)->nodeValue."</order_date><post_date>".$node->getElementsByTagName('post_date')->item(0)->nodeValue."</post_date><ship_date>".$node->getElementsByTagName('ship_date')->item(0)->nodeValue."</ship_date><billto_code>".$node->getElementsByTagName('billto_code')->item(0)->nodeValue."</billto_code><billname>".$node->getElementsByTagName('billname')->item(0)->nodeValue."</billname><billadd1>".$node->getElementsByTagName('billadd1')->item(0)->nodeValue."</billadd1><billadd2>".$node->getElementsByTagName('billadd2')->item(0)->nodeValue."</billadd2><billadd3>".$node->getElementsByTagName('billadd3')->item(0)->nodeValue."</billadd3><billcity>".$node->getElementsByTagName('billcity')->item(0)->nodeValue."</billcity><billst>".$node->getElementsByTagName('billst')->item(0)->nodeValue."</billst><billzip>".$node->getElementsByTagName('billzip')->item(0)->nodeValue."</billzip><billcountry>".$node->getElementsByTagName('billcountry')->item(0)->nodeValue."</billcountry><shipto_code>".$node->getElementsByTagName('shipto_code')->item(0)->nodeValue."</shipto_code><shipname>".$node->getElementsByTagName('shipname')->item(0)->nodeValue."</shipname><shipadd1>".$node->getElementsByTagName('shipadd1')->item(0)->nodeValue."</shipadd1><shipadd2>".$node->getElementsByTagName('shipadd2')->item(0)->nodeValue."</shipadd2><shipcity>".$node->getElementsByTagName('shipcity')->item(0)->nodeValue."</shipcity><shipst>".$node->getElementsByTagName('shipst')->item(0)->nodeValue."</shipst><shipzip>".$node->getElementsByTagName('shipzip')->item(0)->nodeValue."</shipzip><shipcountry>".$node->getElementsByTagName('shipcountry')->item(0)->nodeValue."</shipcountry><cust_po>".$node->getElementsByTagName('cust_po')->item(0)->nodeValue."</cust_po><total_tax>".$node->getElementsByTagName('total_tax')->item(0)->nodeValue."</total_tax><amount>".$node->getElementsByTagName('totalamount')->item(0)->nodeValue."</amount><shipping_charge>".$node->getElementsByTagName('shipping_charge')->item(0)->nodeValue."</shipping_charge><handling_charge>".$node->getElementsByTagName('handling_charge')->item(0)->nodeValue."</handling_charge><ship_charge>".$node->getElementsByTagName('ship_charge')->item(0)->nodeValue."</ship_charge><order_stat>".$node->getElementsByTagName('order_stat')->item(0)->nodeValue."</order_stat><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error><pay_type>".$node->getElementsByTagName('pay_type')->item(0)->nodeValue."</pay_type><tracker_no>".$node->getElementsByTagName('tracker_no')->item(0)->nodeValue."</tracker_no>";
-											   }
+											   {
+											   $shippingcharge = ((int)$shippingcharge+(int)$node->getElementsByTagName('shipping_charge')->item(0)->nodeValue);
+											   $handilingcharge = ((int)$handilingcharge+(int)$node->getElementsByTagName('handling_charge')->item(0)->nodeValue);
+											   $totalamount = ((int)$totalamount+(int)$node->getElementsByTagName('totalamount')->item(0)->nodeValue);
+											   $taxamount = ((int)$taxamount+(int)$node->getElementsByTagName('total_tax')->item(0)->nodeValue);
+											   
+													if($invoicenumbers == "")
+													{
+														$invoicenumbers = 	$node->getElementsByTagName('invoice_numb')->item(0)->nodeValue; 
+												
+													}else
+													{
+														$invoicenumbers = 	$invoicenumbers.','.$node->getElementsByTagName('invoice_numb')->item(0)->nodeValue; 
+												
+
+													}											   
+												
+												 $finaldata = "<carr_code>".$node->getElementsByTagName('carr_code')->item(0)->nodeValue."</carr_code><rel_numb>".$node->getElementsByTagName('rel_numb')->item(0)->nodeValue."</rel_numb><order_numb>".$node->getElementsByTagName('order_numb')->item(0)->nodeValue."</order_numb><order_date>".$node->getElementsByTagName('order_date')->item(0)->nodeValue."</order_date><post_date>".$node->getElementsByTagName('post_date')->item(0)->nodeValue."</post_date><ship_date>".$node->getElementsByTagName('ship_date')->item(0)->nodeValue."</ship_date><billto_code>".$node->getElementsByTagName('billto_code')->item(0)->nodeValue."</billto_code><billname>".$node->getElementsByTagName('billname')->item(0)->nodeValue."</billname><billadd1>".$node->getElementsByTagName('billadd1')->item(0)->nodeValue."</billadd1><billadd2>".$node->getElementsByTagName('billadd2')->item(0)->nodeValue."</billadd2><billadd3>".$node->getElementsByTagName('billadd3')->item(0)->nodeValue."</billadd3><billcity>".$node->getElementsByTagName('billcity')->item(0)->nodeValue."</billcity><billst>".$node->getElementsByTagName('billst')->item(0)->nodeValue."</billst><billzip>".$node->getElementsByTagName('billzip')->item(0)->nodeValue."</billzip><billcountry>".$node->getElementsByTagName('billcountry')->item(0)->nodeValue."</billcountry><shipto_code>".$node->getElementsByTagName('shipto_code')->item(0)->nodeValue."</shipto_code><shipname>".$node->getElementsByTagName('shipname')->item(0)->nodeValue."</shipname><shipadd1>".$node->getElementsByTagName('shipadd1')->item(0)->nodeValue."</shipadd1><shipadd2>".$node->getElementsByTagName('shipadd2')->item(0)->nodeValue."</shipadd2><shipcity>".$node->getElementsByTagName('shipcity')->item(0)->nodeValue."</shipcity><shipst>".$node->getElementsByTagName('shipst')->item(0)->nodeValue."</shipst><shipzip>".$node->getElementsByTagName('shipzip')->item(0)->nodeValue."</shipzip><shipcountry>".$node->getElementsByTagName('shipcountry')->item(0)->nodeValue."</shipcountry><cust_po>".$node->getElementsByTagName('cust_po')->item(0)->nodeValue."</cust_po><total_tax>".$taxamount."</total_tax><amount>".$totalamount."</amount><shipping_charge>".$shippingcharge."</shipping_charge><handling_charge>".$handilingcharge."</handling_charge><ship_charge>".$node->getElementsByTagName('ship_charge')->item(0)->nodeValue."</ship_charge><order_stat>".$node->getElementsByTagName('order_stat')->item(0)->nodeValue."</order_stat><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error><pay_type>".$node->getElementsByTagName('pay_type')->item(0)->nodeValue."</pay_type><tracker_no>".$node->getElementsByTagName('tracker_no')->item(0)->nodeValue."</tracker_no><order_status>".$node->getElementsByTagName('order_status')->item(0)->nodeValue."</order_status>";
+											                 
 												
 											   }
+											   
+											   echo "<invoice_numb>".$invoicenumbers."</invoice_numb>".$finaldata;
 												  echo "</InvoiceHeader></DocumentElement></diffgr:diffgram></DataTable>";
 											   
 			
@@ -625,7 +617,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					
 					$rss = new DOMDocument(); 
 					
-					$rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/ /".$invoiceid."/".$email1."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+					$rss->load(WEBSERVICEURL."/E21GetOrderInvoiceHeader/".$cust_code."/ /".$invoiceid."/".$email1."/3/PermLevel/".KEY1."/".KEY2);
 					echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''><InvoiceHeader>";
 											   foreach ($rss->getElementsByTagName('InvoiceHeader') as $node)
 											   {	
@@ -633,7 +625,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 												   if (strpos($node->getElementsByTagName('carr_code')->item(0)->nodeValue,'Error Number') !== false) {
 															 
 													   }else{
-												  echo "<carr_code>".$node->getElementsByTagName('carr_code')->item(0)->nodeValue."</carr_code><invoice_numb>".$node->getElementsByTagName('invoice_numb')->item(0)->nodeValue."</invoice_numb><rel_numb>".$node->getElementsByTagName('rel_numb')->item(0)->nodeValue."</rel_numb><order_numb>".$node->getElementsByTagName('order_numb')->item(0)->nodeValue."</order_numb><order_date>".$node->getElementsByTagName('order_date')->item(0)->nodeValue."</order_date><post_date>".$node->getElementsByTagName('post_date')->item(0)->nodeValue."</post_date><ship_date>".$node->getElementsByTagName('ship_date')->item(0)->nodeValue."</ship_date><billto_code>".$node->getElementsByTagName('billto_code')->item(0)->nodeValue."</billto_code><billname>".$node->getElementsByTagName('billname')->item(0)->nodeValue."</billname><billadd1>".$node->getElementsByTagName('billadd1')->item(0)->nodeValue."</billadd1><billadd2>".$node->getElementsByTagName('billadd2')->item(0)->nodeValue."</billadd2><billadd3>".$node->getElementsByTagName('billadd3')->item(0)->nodeValue."</billadd3><billcity>".$node->getElementsByTagName('billcity')->item(0)->nodeValue."</billcity><billst>".$node->getElementsByTagName('billst')->item(0)->nodeValue."</billst><billzip>".$node->getElementsByTagName('billzip')->item(0)->nodeValue."</billzip><billcountry>".$node->getElementsByTagName('billcountry')->item(0)->nodeValue."</billcountry><shipto_code>".$node->getElementsByTagName('shipto_code')->item(0)->nodeValue."</shipto_code><shipname>".$node->getElementsByTagName('shipname')->item(0)->nodeValue."</shipname><shipadd1>".$node->getElementsByTagName('shipadd1')->item(0)->nodeValue."</shipadd1><shipadd2>".$node->getElementsByTagName('shipadd2')->item(0)->nodeValue."</shipadd2><shipcity>".$node->getElementsByTagName('shipcity')->item(0)->nodeValue."</shipcity><shipst>".$node->getElementsByTagName('shipst')->item(0)->nodeValue."</shipst><shipzip>".$node->getElementsByTagName('shipzip')->item(0)->nodeValue."</shipzip><shipcountry>".$node->getElementsByTagName('shipcountry')->item(0)->nodeValue."</shipcountry><cust_po>".$node->getElementsByTagName('cust_po')->item(0)->nodeValue."</cust_po><total_tax>".$node->getElementsByTagName('total_tax')->item(0)->nodeValue."</total_tax><amount>".$node->getElementsByTagName('totalamount')->item(0)->nodeValue."</amount><shipping_charge>".$node->getElementsByTagName('shipping_charge')->item(0)->nodeValue."</shipping_charge><handling_charge>".$node->getElementsByTagName('handling_charge')->item(0)->nodeValue."</handling_charge><ship_charge>".$node->getElementsByTagName('ship_charge')->item(0)->nodeValue."</ship_charge><order_stat>".$node->getElementsByTagName('order_stat')->item(0)->nodeValue."</order_stat><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error><pay_type>".$node->getElementsByTagName('pay_type')->item(0)->nodeValue."</pay_type>";
+												  echo "<carr_code>".$node->getElementsByTagName('carr_code')->item(0)->nodeValue."</carr_code><invoice_numb>".$node->getElementsByTagName('invoice_numb')->item(0)->nodeValue."</invoice_numb><rel_numb>".$node->getElementsByTagName('rel_numb')->item(0)->nodeValue."</rel_numb><order_numb>".$node->getElementsByTagName('order_numb')->item(0)->nodeValue."</order_numb><order_date>".$node->getElementsByTagName('order_date')->item(0)->nodeValue."</order_date><post_date>".$node->getElementsByTagName('post_date')->item(0)->nodeValue."</post_date><ship_date>".$node->getElementsByTagName('ship_date')->item(0)->nodeValue."</ship_date><billto_code>".$node->getElementsByTagName('billto_code')->item(0)->nodeValue."</billto_code><billname>".$node->getElementsByTagName('billname')->item(0)->nodeValue."</billname><billadd1>".$node->getElementsByTagName('billadd1')->item(0)->nodeValue."</billadd1><billadd2>".$node->getElementsByTagName('billadd2')->item(0)->nodeValue."</billadd2><billadd3>".$node->getElementsByTagName('billadd3')->item(0)->nodeValue."</billadd3><billcity>".$node->getElementsByTagName('billcity')->item(0)->nodeValue."</billcity><billst>".$node->getElementsByTagName('billst')->item(0)->nodeValue."</billst><billzip>".$node->getElementsByTagName('billzip')->item(0)->nodeValue."</billzip><billcountry>".$node->getElementsByTagName('billcountry')->item(0)->nodeValue."</billcountry><shipto_code>".$node->getElementsByTagName('shipto_code')->item(0)->nodeValue."</shipto_code><shipname>".$node->getElementsByTagName('shipname')->item(0)->nodeValue."</shipname><shipadd1>".$node->getElementsByTagName('shipadd1')->item(0)->nodeValue."</shipadd1><shipadd2>".$node->getElementsByTagName('shipadd2')->item(0)->nodeValue."</shipadd2><shipcity>".$node->getElementsByTagName('shipcity')->item(0)->nodeValue."</shipcity><shipst>".$node->getElementsByTagName('shipst')->item(0)->nodeValue."</shipst><shipzip>".$node->getElementsByTagName('shipzip')->item(0)->nodeValue."</shipzip><shipcountry>".$node->getElementsByTagName('shipcountry')->item(0)->nodeValue."</shipcountry><cust_po>".$node->getElementsByTagName('cust_po')->item(0)->nodeValue."</cust_po><total_tax>".$node->getElementsByTagName('total_tax')->item(0)->nodeValue."</total_tax><amount>".$node->getElementsByTagName('totalamount')->item(0)->nodeValue."</amount><shipping_charge>".$node->getElementsByTagName('shipping_charge')->item(0)->nodeValue."</shipping_charge><handling_charge>".$node->getElementsByTagName('handling_charge')->item(0)->nodeValue."</handling_charge><ship_charge>".$node->getElementsByTagName('ship_charge')->item(0)->nodeValue."</ship_charge><order_stat>".$node->getElementsByTagName('order_stat')->item(0)->nodeValue."</order_stat><error>".$node->getElementsByTagName('Error')->item(0)->nodeValue."</error><pay_type>".$node->getElementsByTagName('pay_type')->item(0)->nodeValue."</pay_type><tracker_no>".$node->getElementsByTagName('tracker_no')->item(0)->nodeValue."</tracker_no>";
 											   }
 												
 											   }
@@ -713,7 +705,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					if($email == 1)
 					{
 
-						$urlArray = array(array('name' => 'api', 'url' =>'http://216.234.105.194:8089/Alpha.svc/E21GetOpenOrders/'.$cust_code.'/'.$email1.'/3/PermLevel/25/1/ / / / /8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D/order_number/asc'),
+						$urlArray = array(array('name' => 'api', 'url' =>WEBSERVICEURL.'/E21GetOpenOrders/'.$cust_code.'/'.$email1.'/3/PermLevel/25/1/ / / / /'.KEY1.'/'.KEY2.'/order_number/asc'),
 						                                                  
 										  );
 					
@@ -769,7 +761,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					$email1=$this->session->userdata('email');
 					$csv_data = "";					
 					//$csv_data = "Order Number###Order Date###Customer PO###Estimated Ship Date###Shipping City/State";  
-					$urlArray = array(array('name' => 'api', 'url' =>'http://216.234.105.194:8089/Alpha.svc/E21GetOpenOrders/'.$cust_code.'/'.$email1.'/3/PermLevel/25/1/ / / / /8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D/order_number/asc'),
+					$urlArray = array(array('name' => 'api', 'url' =>WEBSERVICEURL.'/E21GetOpenOrders/'.$cust_code.'/'.$email1.'/3/PermLevel/25/1/ / / / /'.KEY1.'/'.KEY2.'/order_number/asc'),
 						                                                  
 										  );
 
@@ -886,7 +878,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					{
 				
 					
-					$urlArray = array(array('name' => 'api', 'url' =>'http://216.234.105.194:8089/Alpha.svc/E21GetOpenOrders/'.$cust_code.'/'.$email1.'/3/PermLevel/25/1/'.$order_id.'/'.$from.'/'.$to.'/'.$custmerpo.'/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D/order_number/asc'),
+					$urlArray = array(array('name' => 'api', 'url' =>WEBSERVICEURL.'/E21GetOpenOrders/'.$cust_code.'/'.$email1.'/3/PermLevel/25/1/'.$order_id.'/'.$from.'/'.$to.'/'.$custmerpo.'/'.KEY1.'/'.KEY2.'/order_number/asc'),
 										  );
 					
 					}else{
@@ -1219,7 +1211,7 @@ Thank you for registering with Lowrysmartportal.</p>
 					//exit;
 					
 					  $rss = new DOMDocument(); 
-                      @$rss->load("http://216.234.105.194:8089/Alpha.svc/ListAllLocations/".$useremail."/".$usercuscode."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+                      @$rss->load(WEBSERVICEURL."/ListAllLocations/".$useremail."/".$usercuscode."/".KEY1."/".KEY2);
 			                $i=1;
 							$alllocationdata = array();
 					        foreach ($rss->getElementsByTagName('ListAllLocations') as $node)
@@ -1673,10 +1665,10 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							     }
 					        $rss = new DOMDocument(); 
 							
-							//echo "http://216.234.105.194:8089/Alpha.svc/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D";
+							//echo WEBSERVICEURL."/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/".KEY1."/".KEY2;
 							//exit;
 							
-			                @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+			                @$rss->load(WEBSERVICEURL."/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/".KEY1."/".KEY2);
 			                            $pendingorders = "";	
 										 $opencases = "";	
 										 $openorders = "";	
@@ -1722,7 +1714,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							$email1=$this->session->userdata('email');
 							
 							//echo  'http://216.234.105.194:8088/Alpha.svc/CheckServiceTicket_Email/'.$email1.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/CheckServiceTicket_Email/'.$email1.'/'.$cust_code.'/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'));							  
+							$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/CheckServiceTicket_Email/'.$email1.'/'.$cust_code.'/3/PermLevel/'.KEY1.'/'.KEY2));							  
 							  foreach ($urlArray as $url) 
 							  {
 										   @$rss->load($url['url']);
@@ -2148,6 +2140,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdataInvoices("OpenInvoices");
@@ -2196,6 +2194,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				   redirect(base_url()."index.php/welcome/index");
 				
 				}else{
+				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
 				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("PastdueInvoices");
@@ -2259,7 +2263,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							}
 			  
 					}
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetInvoiceList/'.$cust_code.'/ / / / / /'.$email1.'/3/PermLevel/'.LIMIT.'/1/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D/invoice_numb/desc'),
+			$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetInvoiceList/'.$cust_code.'/ / / / / /'.$email1.'/3/PermLevel/'.LIMIT.'/1/'.KEY1.'/'.KEY2.'/invoice_numb/desc'),
 								  );
 								  
 						  foreach ($urlArray as $url) 
@@ -2302,7 +2306,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
                     }
 					
 					
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21PastDueInvoices/'.$cust_code.'/ / / / / /'.$email1.'/'.LIMIT.'/1/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+			$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21PastDueInvoices/'.$cust_code.'/ / / / / /'.$email1.'/'.LIMIT.'/1/3/PermLevel/'.KEY1.'/'.KEY2),
 			
 								  );
 								  
@@ -2381,7 +2385,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							}
                     }
 					
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21PastDueInvoices/'.$cust_code.'/'.$ordernumber.'/'.$invoicenumber.'/'.$custpo.'/'.$from.'/'.$to.'/'.$email1.'/'.LIMIT.'/1/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+			$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21PastDueInvoices/'.$cust_code.'/'.$ordernumber.'/'.$invoicenumber.'/'.$custpo.'/'.$from.'/'.$to.'/'.$email1.'/'.LIMIT.'/1/3/PermLevel/'.KEY1.'/'.KEY2),
 			
 								  );
 								  
@@ -2411,7 +2415,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			$rss = new DOMDocument(); 
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetInvoiceList/'.$cust_code.'/ / / / / /'.$email1.'/3/PermLevel/5000/1/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D/invoice_numb/desc'),
+			$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetInvoiceList/'.$cust_code.'/ / / / / /'.$email1.'/3/PermLevel/5000/1/'.KEY1.'/'.KEY2.'/invoice_numb/desc'),
 								  );
 							$csv_data = "Invoice Number,Invoice Date,Amount,Due Date,Tracking Number,Customer PO";	  
 						  foreach ($urlArray as $url) 
@@ -2456,7 +2460,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			$rss = new DOMDocument(); 
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21PastDueInvoices/'.$cust_code.'/ / / / / /'.$email1.'/5000/1/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+			$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21PastDueInvoices/'.$cust_code.'/ / / / / /'.$email1.'/'.LIMIT.'/1/3/PermLevel/'.KEY1.'/'.KEY2),
 			
 								  );
 							$csv_data = "Invoice Number,Invoice Date,Amount,Due Date,Customer PO";	  
@@ -2557,7 +2561,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					
 					}
 			
-		$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetInvoiceList/'.$cust_code.'/'.$ordenumber.'/'.$invoice_number.'/'.$custpo.'/'.$from.'/'.$to.'/'.$email1.'/3/PermLevel/5000/1/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D/invoice_numb/desc'),
+		$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetInvoiceList/'.$cust_code.'/'.$ordenumber.'/'.$invoice_number.'/'.$custpo.'/'.$from.'/'.$to.'/'.$email1.'/3/PermLevel/5000/1/'.KEY1.'/'.KEY2.'/invoice_numb/desc'),
 								  );
 								  
 						  foreach ($urlArray as $url) 
@@ -2589,6 +2593,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					   redirect(base_url()."index.php/welcome/index");
 					
 					 }else{
+					 
+					 if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
 					 
 							$this->load->model('Mysmartportal_model');
 							$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -2637,7 +2647,9 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					}else{
 							$ship_to_code = $ship_to_code."|".$locationsdata->ship_to_code;
 					}
-                                        }
+                           
+						   
+									   }
 				
 				//echo "http://216.234.105.194:8088/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$ship_to_code."/ /".$order_id."/".$email1."/UserType/PermLevel/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213";
 				
@@ -2647,24 +2659,30 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				
 				
-					    @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/".$order_id."/ /".$email1."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+					    @$rss->load(WEBSERVICEURL."/E21GetOrderInvoiceHeader/".$cust_code."/".$order_id."/ /".$email1."/3/PermLevel/".KEY1."/".KEY2);
 				
 				}else{
 				
-			    @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetOrderInvoiceHeader/".$cust_code."/ /".$order_id."/".$email1."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+			    @$rss->load(WEBSERVICEURL."/E21GetOrderInvoiceHeader/".$cust_code."/ /".$order_id."/".$email1."/3/PermLevel/".KEY1."/".KEY2);
 					}
 					
 			    	$ordernumber = "";
 			    	$invoicenumber = "";
+			    	$total = "";
+					
+					
+					
 									   foreach (@$rss->getElementsByTagName('InvoiceHeader') as $node)
 										   {								   
                                            $data['invoice_numb'] = $node->getElementsByTagName('invoice_numb')->item(0)->nodeValue;
+                                           $data['order_stat'] = $node->getElementsByTagName('order_stat')->item(0)->nodeValue;
                                            $data['order_numb'] = $node->getElementsByTagName('order_numb')->item(0)->nodeValue;
 										   $data['rel_numb'] = $node->getElementsByTagName('rel_numb')->item(0)->nodeValue;
 										   $ordernumber  = trim($data['order_numb']," ")."-".trim($data['rel_numb']," ");
 										   $invoicenumber = $node->getElementsByTagName('invoice_numb')->item(0)->nodeValue;
 										   
 										   $data['order_date'] = $node->getElementsByTagName('order_date')->item(0)->nodeValue;
+										   $data['order_status'] = $node->getElementsByTagName('order_status')->item(0)->nodeValue;
 										   
 										   
 										   $data['costcenter'] = $node->getElementsByTagName('CostCenter')->item(0)->nodeValue;
@@ -2699,7 +2717,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $data['shipcountry'] = $node->getElementsByTagName('shipcountry')->item(0)->nodeValue;
 										   $data['cust_po'] = $node->getElementsByTagName('cust_po')->item(0)->nodeValue;
 										   $data['totaltax'] = $node->getElementsByTagName('total_tax')->item(0)->nodeValue;
-										   $data['totalamount'] = $node->getElementsByTagName('totalamount')->item(0)->nodeValue;
+										   $total = (float)$total+(float)$node->getElementsByTagName('totalamount')->item(0)->nodeValue;
 										   $data['shipping_charge'] = $node->getElementsByTagName('shipping_charge')->item(0)->nodeValue;
 										   $data['ship_charge'] = $node->getElementsByTagName('ship_charge')->item(0)->nodeValue;
 										   $data['handling_charge'] = $node->getElementsByTagName('handling_charge')->item(0)->nodeValue;
@@ -2710,6 +2728,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   $data['terms_code'] = $node->getElementsByTagName('terms_code')->item(0)->nodeValue;
 											 
 										   }
+										   $data['totalamount'] = $total;
 										   //Getting Locations 
 										   $this->load->model('Mysmartportal_model');
 											$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
@@ -2727,9 +2746,19 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 										   
 										    $rss1 = new DOMDocument(); 
 											
+											if($type == 2 or $type == 4)
+											{
+											 	@$rss1->load(WEBSERVICEURL."/E21GetOrderDetails/".$cust_code."/".$ordernumber."/".$email1."/3/PermLevel/".KEY1."/".KEY2);
+				                            
+											}else
+											{
+											 	@$rss1->load(WEBSERVICEURL."/E21GetOrderDetails_ByInvoiceNo/".$cust_code."/".$order_id."/".$email1."/3/PermLevel/".KEY1."/".KEY2);
+				                            
 											
-										   	@$rss1->load("http://216.234.105.194:8089/Alpha.svc/E21GetOrderDetails/".$cust_code."/".$ordernumber."/".$email1."/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
-				                            $params = array();
+											}
+				
+				
+										  $params = array();
 								            $i=0;
 								           foreach (@$rss1->getElementsByTagName('OrderDetails') as $node)
 										   {
@@ -2861,7 +2890,7 @@ $ship_to_code = " ";
                    
 				   
 				   
-						$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/ / / / /'.$email1.'/'.LIMIT.'/1/3/Perm/'.$ship_to_code.'/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'));
+						$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21ActiveServiceContracts/'.$cust_code.'/ / / / /'.$email1.'/'.LIMIT.'/1/3/Perm/'.$ship_to_code.'/'.KEY1.'/'.KEY2));
 						
 						}else if($userstatus=="Expired")
 						{
@@ -2869,14 +2898,14 @@ $ship_to_code = " ";
 						
 						
 						$ServiceContractList_node = "E21GetExpiredContracts";
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetExpiredContracts/'.$cust_code.'/ / / / /'.$email1.'/'.LIMIT.'/1/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+							$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetExpiredContracts/'.$cust_code.'/2015-08-30/2027-08-30/ / /'.$email1.'/'.LIMIT.'/1/3/Perm/'.KEY1.'/'.KEY2),
 											  );
 						
 						}else if($userstatus=="Cancelled")
 						{
 						$ServiceContractList_node = "ServiceContractList";
 						
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/ / / / /'.$email1.'/'.LIMIT.'/1/3/Perm/4/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+							$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/ServiceContractDueToRenew/'.$cust_code.'/ / / / /'.$email1.'/'.LIMIT.'/1/3/Perm/6/'.KEY1.'/'.KEY2),
 											  );
 						
 						}else
@@ -2982,16 +3011,13 @@ $ship_to_code = " ";
                    
 				   
 				   
-						$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/'.$from.'/'.$to.'/'.$SerialNumber.'/'.$contractnumber.'/'.$email1.'/'.LIMIT.'/1/3/Perm/'.$ship_to_code.'/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'));
+						$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21ActiveServiceContracts/'.$cust_code.'/'.$from.'/'.$to.'/'.$SerialNumber.'/'.$contractnumber.'/'.$email1.'/'.LIMIT.'/1/3/Perm/'.$ship_to_code.'/'.KEY1.'/'.KEY2));
 						
 						}else if($userstatus=="Expired")
 						{
-						//echo 'http://216.234.105.194:8088/Alpha.svc/E21GetExpiredContracts/'.$cust_code.'/'.$ship_to_code.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
-						//exit;
-						
-						
+
 						$ServiceContractList_node = "E21GetExpiredContracts";
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetExpiredContracts/'.$cust_code.'/'.$from.'/'.$to.'/'.$SerialNumber.'/'.$contractnumber.'/'.$email1.'/'.LIMIT.'/1/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+							$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetExpiredContracts/'.$cust_code.'/'.$from.'/'.$to.'/'.$SerialNumber.'/'.$contractnumber.'/'.$email1.'/'.LIMIT.'/1/3/Perm/'.KEY1.'/'.KEY2),
 											  );
 						
 						}else if($userstatus=="Cancelled")
@@ -3001,7 +3027,7 @@ $ship_to_code = " ";
 						
 						//echo 'http://216.234.105.194:8088/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$ship_to_code.'/50/1/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213';
 						//exit;
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/'.$from.'/'.$to.'/'.$SerialNumber.'/'.$contractnumber.'/'.$email1.'/'.LIMIT.'/1/3/Perm/24/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+							$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/ServiceContractDueToRenew/'.$cust_code.'/'.$from.'/'.$to.'/'.$SerialNumber.'/'.$contractnumber.'/'.$email1.'/'.LIMIT.'/1/3/Perm/24/'.KEY1.'/'.KEY2),
 											  );
 						
 						}else
@@ -3086,7 +3112,7 @@ $ship_to_code = " ";
 							//exit;
 							
 							
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/ /8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'));
+							$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21ActiveServiceContracts/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/ /'.KEY1.'/'.KEY2));
 								 foreach ($urlArray as $url) 
 										  {
 												echo"<diffgr:diffgram xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><DocumentElement xmlns=''>";
@@ -3133,7 +3159,7 @@ $ship_to_code = " ";
   			$rss = new DOMDocument(); 
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
-		$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/ /8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'));
+		$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21ActiveServiceContracts/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/ /'.KEY1.'/'.KEY2));
 						
 							$csv_data = "Cotract Number###Start Date###End Date###Description###Service Level###Location###Status";	  
 						  foreach ($urlArray as $url) 
@@ -3177,7 +3203,7 @@ $ship_to_code = " ";
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
 
-							$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetExpiredContracts/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+							$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetExpiredContracts/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/'.KEY1.'/'.KEY2),
 											  );				
 							$csv_data = "Cotract Number###Start Date###End Date###Description###Service Level###Location###Status";	  
 						  foreach ($urlArray as $url) 
@@ -3221,7 +3247,7 @@ $ship_to_code = " ";
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
 
-								$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/ServiceContractDueToRenew/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/3/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+								$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/ServiceContractDueToRenew/'.$cust_code.'/ / / / /'.$email1.'/5000/1/3/Perm/3/'.KEY1.'/'.KEY2),
 											  );				
 							$csv_data = "Cotract Number###Start Date###End Date###Description###Service Level###Location###Status";	  
 						  foreach ($urlArray as $url) 
@@ -3499,6 +3525,12 @@ echo $salesdata;
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdataAllAssets("AllAssets");
@@ -3581,6 +3613,12 @@ echo $salesdata;
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("AssetsUnderContracts");
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -3636,6 +3674,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("AssetsNoContracts");
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -3689,6 +3733,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				   redirect(base_url()."index.php/welcome/index");
 				
 				}else{
+				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
 				
 					$this->load->model('Mysmartportal_model');
 						$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("AssetsUnderWarranty");
@@ -3746,6 +3796,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("AssetsEndOfLife");
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -3797,6 +3853,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("AssetsEndOfLife");
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -3846,11 +3908,9 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   			$rss = new DOMDocument(); 
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
-			//echo 'http://216.234.105.194:8089/Alpha.svc/AssetsPage/'.$cust_code.'/'.$email1.'/ / /11000/1/3/PermLevel/ /End_date/desc/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D';
-			//exit;
-            $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/AssetsPage/'.$cust_code.'/'.$email1.'/ / /11000/1/3/PermLevel/ /End_date/desc/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+            $urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/AssetsPage/'.$cust_code.'/'.$email1.'/ / /11000/1/3/PermLevel/ /End_date/desc/'.KEY1.'/'.KEY2),
 								  );
-							$csv_data = "Serial Number,Part Number,Part Description,Device Type,Contract Type,Contract Number,Start Date,End Date,Status";	  
+							$csv_data = "Serial Number###Part Number###Part Description###Device Type###Contract Type###Contract Number###Start Date###End Date###Status";	  
 						  $datanul = "";
 						  foreach ($urlArray as $url) 
 						  {
@@ -3862,21 +3922,21 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 														  
 									               if($csv_data=="")
 												   {
-												    $csv_data = $node->getElementsByTagName('SerialNumber')->item(0)->nodeValue.",".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue.",".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue.",".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue.",".$node->getElementsByTagName('Type')->item(0)->nodeValue.",".$node->getElementsByTagName('contract_number')->item(0)->nodeValue.",".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue.",".$node->getElementsByTagName('End_date')->item(0)->nodeValue.",".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue;
+												    $csv_data = $node->getElementsByTagName('SerialNumber')->item(0)->nodeValue."###".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue."###".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue."###".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."###".$node->getElementsByTagName('Type')->item(0)->nodeValue."###".$node->getElementsByTagName('contract_number')->item(0)->nodeValue."###".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue."###".$node->getElementsByTagName('End_date')->item(0)->nodeValue."###".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue;
 												   }else{
-												   $csv_data = $csv_data."_".$node->getElementsByTagName('SerialNumber')->item(0)->nodeValue.",".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue.",".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue.",".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue.",".$node->getElementsByTagName('Type')->item(0)->nodeValue.",".$node->getElementsByTagName('contract_number')->item(0)->nodeValue.",".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue.",".$node->getElementsByTagName('End_date')->item(0)->nodeValue.",".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue;
+												   $csv_data = $csv_data."#####".$node->getElementsByTagName('SerialNumber')->item(0)->nodeValue."###".$node->getElementsByTagName('Part_Number')->item(0)->nodeValue."###".$node->getElementsByTagName('Part_Description')->item(0)->nodeValue."###".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."###".$node->getElementsByTagName('Type')->item(0)->nodeValue."###".$node->getElementsByTagName('contract_number')->item(0)->nodeValue."###".$node->getElementsByTagName('Start_Date')->item(0)->nodeValue."###".$node->getElementsByTagName('End_date')->item(0)->nodeValue."###".$node->getElementsByTagName('Contract_Status')->item(0)->nodeValue;
                                                     }												 
 	                                	}						 
 							                 
 												
 							}
 							//echo $csv_data;
-							  $odersdata = explode("_",$csv_data);
+							  $odersdata = explode("#####",$csv_data);
 											   $file = fopen("allassets.csv","w");
 
 												foreach ($odersdata as $line)
 												  {
-												  fputcsv($file,explode(',',$line));
+												  fputcsv($file,explode('###',$line));
 												  }
 
 												fclose($file);
@@ -3902,7 +3962,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			$email1=$this->session->userdata('email');
 			
 			
-           $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+           $urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetAssetsUnderContract/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 							$csv_data = "Serial Number###Part Number###Part Description###Device Type###Contract Type###Contract Number###Start Date###End Date###Status";	  
 						  $datanul = "";
@@ -3960,7 +4020,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			$email1=$this->session->userdata('email');
 			
 			
-           $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21AssetsWithNoContract/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+           $urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21AssetsWithNoContract/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 							$csv_data = "Serial Number###Part Number###Part Description###Device Type###Contract Type###Contract Number###Start Date###End Date###Status";	  
 						  $datanul = "";
@@ -4017,10 +4077,11 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
 			
-			
-           $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21AssetsUnderWarranty/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+			//echo 'http://216.234.105.194:8089/Alpha.svc/E21AssetsUnderWarranty/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D';
+			//exit;
+           $urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21AssetsUnderWarranty/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
-							$csv_data = "Serial Number###Part Number###Part Description###Device Type###Contract Type###Contract Number###Start Date###End Date###Status";	  
+							$csv_data = "Serial NumberAAAPart NumberAAAPart DescriptionAAADevice TypeAAAStart DateAAAEnd DateAAAStatus";	  
 						  $datanul = "";
 						  foreach ($urlArray as $url) 
 						  {
@@ -4031,21 +4092,25 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 											  
 									               if($csv_data=="")
 												   {
-												     $csv_data = $node->getElementsByTagName('Serial')->item(0)->nodeValue."###".$node->getElementsByTagName('Product')->item(0)->nodeValue."###".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."###".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."###".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."###".$node->getElementsByTagName('Contract')->item(0)->nodeValue."###".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."###".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."###".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue;
+												     $csv_data = $node->getElementsByTagName('Serial')->item(0)->nodeValue."AAA".$node->getElementsByTagName('Product')->item(0)->nodeValue."AAA".trim(preg_replace('/\s+/',' ',$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue))."AAA".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."AAA".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."AAA".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."AAA".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue;
 												   }else{
-												     $csv_data = $csv_data."#####".$node->getElementsByTagName('Serial')->item(0)->nodeValue."###".$node->getElementsByTagName('Product')->item(0)->nodeValue."###".$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue."###".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."###".$node->getElementsByTagName('ProdType')->item(0)->nodeValue."###".$node->getElementsByTagName('Contract')->item(0)->nodeValue."###".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."###".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."###".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue;
+												     $csv_data = $csv_data."AAAAA".$node->getElementsByTagName('Serial')->item(0)->nodeValue."AAA".$node->getElementsByTagName('Product')->item(0)->nodeValue."AAA".trim(preg_replace('/\s+/',' ',$node->getElementsByTagName('ProductDesc')->item(0)->nodeValue))."AAA".$node->getElementsByTagName('Device_Type')->item(0)->nodeValue."AAA".$node->getElementsByTagName('ContractFrom')->item(0)->nodeValue."AAA".$node->getElementsByTagName('ContractTo')->item(0)->nodeValue."AAA".$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue;
                                                     }												 
 	                                	}						 
 							                 
 												
 							}
 						
-							  $odersdata = explode("#####",$csv_data);
+							  $odersdata = explode("AAAAA",$csv_data);
 											   $file = fopen("underwarranty.csv","w");
-
+                                            
 												foreach ($odersdata as $line)
 												  {
-												  fputcsv($file,explode('###',$line));
+												  
+												  	 $odersdata1 = explode('AAA',$line);
+												  
+												  
+												  fputcsv($file,explode('AAA',$line));
 												  }
 
 												fclose($file);
@@ -4076,7 +4141,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			$email1=$this->session->userdata('email');
 			
 			
-        $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetAssetsEndOfLife/'.$cust_code.'/ / /5000/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+        $urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetAssetsEndOfLife/'.$cust_code.'/ / /'.LIMIT.'/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 							$csv_data = "Serial Number###Part Number###Part Description###Device Type###Contract Type###Contract Number###Start Date###End Date###Status";	  
 						  $datanul = "";
@@ -4209,8 +4274,9 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 					
 					}else{
 					
-							
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/AssetsPage/'.$cust_code.'/'.$email1.'/'.$SerialNumber.'/'.$Contract_Number.'/'.$count1.'/1/3/PermLevel/'.$ship_to_code.'/End_date/desc/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+						//echo 'http://216.234.105.194:8089/Alpha.svc/AssetsPage/'.$cust_code.'/'.$email1.'/'.$SerialNumber.'/'.$Contract_Number.'/'.$count1.'/1/3/PermLevel/'.$ship_to_code.'/End_date/desc/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D';
+//exit;						
+			$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/AssetsPage/'.$cust_code.'/'.$email1.'/'.$SerialNumber.'/'.$Contract_Number.'/'.$count1.'/1/3/PermLevel/'.$ship_to_code.'/End_date/desc/'.KEY1.'/'.KEY2),
 								  );
 					}
 					
@@ -4345,7 +4411,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 					//echo "SE".$serealnumber."<br>".$type."<br>";
 					//echo 'http://216.234.105.194:8089/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$serealnumber.'/'.$Contract_Number.'/'.$count1.'/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D';
 					//exit;
-					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetAssetsUnderContract/'.$cust_code.'/'.$serealnumber.'/'.$Contract_Number.'/'.$count1.'/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+					$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetAssetsUnderContract/'.$cust_code.'/'.$serealnumber.'/'.$Contract_Number.'/'.$count1.'/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -4402,7 +4468,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 
 					
 
-					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21AssetsWithNoContract/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/100/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+					$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21AssetsWithNoContract/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/100/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -4455,7 +4521,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 					$Contract_Number = " ";
 					}
 
-					$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21AssetsUnderWarranty/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/5000/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+					$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21AssetsUnderWarranty/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/'.LIMIT.'/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -4514,7 +4580,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 				
 					$ship_to_code = "";
 
-				    $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetAssetsEndOfLife/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/5000/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+				    $urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetAssetsEndOfLife/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/'.LIMIT.'/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -4565,7 +4631,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 				
 					$ship_to_code = "";
 
-				    $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/E21GetEndofServiceAssets/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/'.$count1.'/1/'.$email1.'/3/Perm/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+				    $urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/E21GetEndofServiceAssets/'.$cust_code.'/'.$SerialNumber.'/'.$Contract_Number.'/'.$count1.'/1/'.$email1.'/3/Perm/'.KEY1.'/'.KEY2),
 										  );
 										  
 								  foreach ($urlArray as $url) 
@@ -4598,7 +4664,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 	  $rss = new DOMDocument(); 
 			$cust_code= $this->session->userdata('cust_code'); 
 			$email1=$this->session->userdata('email');
-			$urlArray = array(array('name' => 'api', 'url' =>'http://216.234.105.194:8088/Alpha.svc/AssetsPage_SerialNo/'.$serialnumber.'/5434548B-9C59-451E-9673-1D462C11953B/E2795374-87A2-45DE-AD46-194D042B6213'),
+			$urlArray = array(array('name' => 'api', 'url' =>WEBSERVICEURL.'/AssetsPage_SerialNo/'.$serialnumber.'/'.KEY1.'/'.KEY2),
 								  );
 								  
 						  foreach ($urlArray as $url) 
@@ -4679,7 +4745,7 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 			
 
 
-			$urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8089/Alpha.svc/CheckServiceTicket_Email/'.$email1.'/'.$cust_code.'/3/PermLevel/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D'),
+			$urlArray = array(array('name' => 'api', 'url' => WEBSERVICEURL.'/CheckServiceTicket_Email/'.$email1.'/'.$cust_code.'/3/PermLevel/'.KEY1.'/'.KEY2),
 								  );
 								  
 						  foreach ($urlArray as $url) 
@@ -4850,6 +4916,12 @@ $urlArray = array(array('name' => 'api', 'url' => 'http://216.234.105.194:8088/A
 				   redirect(base_url()."index.php/welcome/index");
 				
 				}else{
+				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
 				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("RenewServiceContracts");
@@ -5373,6 +5445,12 @@ public function active_service_contracts()
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("ActiveServiceContracts");
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -5452,6 +5530,12 @@ public function active_service_contracts()
 				   redirect(base_url()."index.php/welcome/index");
 				
 				}else{
+				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
 				
 					$this->load->model('Mysmartportal_model');
 						$data["feedback"] = $this->Mysmartportal_model->getfeedbackdata("ExpiredServiceContracts");
@@ -5585,7 +5669,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					 $notification = array();
 					 
 					 }
-					 
+					 $data['replaydata'] = $reply;
 					 $data["notificationdata"]=$notification;
 $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
@@ -5628,6 +5712,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 						$user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));
 					
 						$data['user_notifications'] = $user_notification;
+						
 					 
 					 $this->load->view('admin_header',$data);
                      $this->load->view('admin_messagecompose',$data);  
@@ -5846,6 +5931,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				
 				}else{
 				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				
 					$this->load->model('Mysmartportal_model');
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
 					$userallmenu=$this->Mysmartportal_model->getallusermenu();
@@ -5866,13 +5957,56 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					}
 					$data['menu']=$usermenu1;
 					$data['ids']=$usermenu[0]->menu_id;
+					//code start
+					
+	$cust_code= $this->session->userdata('cust_code'); 
+					$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+					$ship_to_code = "";
+					$state = "";
+					$city = "";
+					
+					$useremail = $this->session->userdata('email');
+					$usercuscode = $this->session->userdata('cust_code');
+
+				
+
+
+					$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+					$ship_to_code = "";
+					$state = "";
+					$city = "";
+					
+					
+					foreach($locations as $locationsdata)
+					{
+							if($ship_to_code == ""){
+									$ship_to_code = $locationsdata->ship_to_code;
+									$state = $locationsdata->state;
+									$city = $locationsdata->city;
+									
+							}else{
+									$ship_to_code = $ship_to_code.",".$locationsdata->ship_to_code;
+									$state = $state.",".$locationsdata->state;
+									$city = $city.",".$locationsdata->city;
+							}
+                    }
+					
+					$data['locations'] = explode(",",$ship_to_code);
+					$data['state'] = explode(",",$state);
+					$data['city'] = explode(",",$city);
+					
+					//code end
+					
+					
+					
+					
 						 if($orderpageaccess=="ok")
 						 {
 						 
 $user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
 						    $data['user_notifications'] = $user_notification;
 							 $this->load->view('header',$data);
-							 $this->load->view('labels_supplies');
+							 $this->load->view('labels_supplies',$data);
 							 $this->load->view('labels_supplies_footer');
 				         }else
 						 {
@@ -5882,6 +6016,109 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				 }
 				
 	}
+	
+	
+	
+		public function new_service_contracts_analytics()
+	{
+		if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+				{
+				   redirect(base_url()."index.php/welcome/index");
+				
+				}else{
+				
+				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
+				    $useremail = $this->session->userdata('email');
+				    $cust_code = $this->session->userdata('cust_code');
+					$this->load->model('Mysmartportal_model');
+					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+					$userallmenu=$this->Mysmartportal_model->getallusermenu();
+					$split = explode(",",@$usermenu[0]->menu_id);
+					$usermenu1 = array();
+					$orderpageaccess = "";
+					for($i=1;$i<13;$i++)
+					{
+					if($i==2)
+					{
+					$orderpageaccess = "ok";
+					
+					}
+					  $finalusermenu = array('id'=>$i,
+											 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+											 );
+					  $usermenu1[$i] = $finalusermenu;
+					}
+					$data['menu']=$usermenu1;
+					$data['ids']=$usermenu[0]->menu_id;
+					
+						  $rss = new DOMDocument(); 
+                      @$rss->load(WEBSERVICEURL."/ListAllLocations/".$useremail."/".$cust_code."/".KEY1."/".KEY2);
+			                $i=1;
+							$alllocationdata = array();
+					        foreach ($rss->getElementsByTagName('ListAllLocations') as $node)
+							{
+							$params = array('custcode'=>$node->getElementsByTagName('CustCode')->item(0)->nodeValue,
+							                'EmailId'=>$node->getElementsByTagName('EmailId')->item(0)->nodeValue,
+											'LocationId'=>$node->getElementsByTagName('LocationId')->item(0)->nodeValue);
+							$alllocationdata[$i] = $params;
+							$i++;
+							}
+					$data["latestlocations"] = $alllocationdata;
+					
+					
+					
+					
+					
+					
+	$cust_code= $this->session->userdata('cust_code'); 
+					$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+					$ship_to_code = "";
+					$state = "";
+					$city = "";
+					
+					
+					foreach($locations as $locationsdata)
+					{
+							if($ship_to_code == ""){
+									$ship_to_code = $locationsdata->ship_to_code;
+									$state = $locationsdata->state;
+									$city = $locationsdata->city;
+									
+							}else{
+									$ship_to_code = $ship_to_code.",".$locationsdata->ship_to_code;
+									$state = $state.",".$locationsdata->state;
+									$city = $city.",".$locationsdata->city;
+							}
+                    }
+					
+					$data['locations'] = explode(",",$ship_to_code);
+					$data['state'] = explode(",",$state);
+					$data['city'] = explode(",",$city);
+					
+					
+					
+						 if($orderpageaccess=="ok")
+						 {
+						 
+$user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+						    $data['user_notifications'] = $user_notification;
+							 $this->load->view('header',$data);
+							 $this->load->view('new_service_contracts_analytics',$data);
+							 $this->load->view('new_service_contracts_analytics_footer');
+				         }else
+						 {
+						     redirect(base_url()."index.php/welcome/technical_support");
+						 
+						 }
+				 }
+				
+	}
+	
 	
 	public function service_contracts_analytics()
 	{
@@ -5914,7 +6151,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					$data['ids']=$usermenu[0]->menu_id;
 					
 						  $rss = new DOMDocument(); 
-                      @$rss->load("http://216.234.105.194:8089/Alpha.svc/ListAllLocations/".$useremail."/".$cust_code."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+                      @$rss->load(WEBSERVICEURL."/ListAllLocations/".$useremail."/".$cust_code."/".KEY1."/".KEY2);
 			                $i=1;
 							$alllocationdata = array();
 					        foreach ($rss->getElementsByTagName('ListAllLocations') as $node)
@@ -5926,6 +6163,37 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 							$i++;
 							}
 					$data["latestlocations"] = $alllocationdata;
+					
+					
+					
+					
+					
+					
+	$cust_code= $this->session->userdata('cust_code'); 
+					$locations = $this->Mysmartportal_model->getalllocationsbycuscode($cust_code);
+					$ship_to_code = "";
+					$state = "";
+					$city = "";
+					
+					
+					foreach($locations as $locationsdata)
+					{
+							if($ship_to_code == ""){
+									$ship_to_code = $locationsdata->ship_to_code;
+									$state = $locationsdata->state;
+									$city = $locationsdata->city;
+									
+							}else{
+									$ship_to_code = $ship_to_code.",".$locationsdata->ship_to_code;
+									$state = $state.",".$locationsdata->state;
+									$city = $city.",".$locationsdata->city;
+							}
+                    }
+					
+					$data['locations'] = explode(",",$ship_to_code);
+					$data['state'] = explode(",",$state);
+					$data['city'] = explode(",",$city);
+					
 					
 					
 						 if($orderpageaccess=="ok")
@@ -6083,14 +6351,14 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 			  {
 			  if($k==0)
 			  {
-			    $urlArray = 'http://216.234.105.194:8089/Alpha.svc/ManageLocationDetails/'.$k.'/'.$email_id.'/'.$cust_code.'/'.$splitdata[$k].'/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D';
+			    $urlArray = WEBSERVICEURL.'/ManageLocationDetails/'.$k.'/'.$email_id.'/'.$cust_code.'/'.$splitdata[$k].'/'.KEY1.'/'.KEY2;
 			   $rss->load($urlArray);
 			  
 			  }else
 			  {
 			  
 			  $trimdata = substr($splitdata[$k], 1);;
-			  $urlArray = 'http://216.234.105.194:8089/Alpha.svc/ManageLocationDetails/'.$k.'/'.$email_id.'/'.$cust_code.'/'.$trimdata.'/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D';
+			  $urlArray = WEBSERVICEURL.'/ManageLocationDetails/'.$k.'/'.$email_id.'/'.$cust_code.'/'.$trimdata.'/'.KEY1.'/'.KEY2;
 			   $rss->load($urlArray);
 			  
 			  
@@ -6111,7 +6379,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   $id = $this->input->post("id");
   
       $rss = new DOMDocument(); 					
-     @$rss->load("http://216.234.105.194:8089/Alpha.svc/DeleteLocationDetails/".$emai."/".$cuscode."/".$id."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+     @$rss->load(WEBSERVICEURL."/DeleteLocationDetails/".$emai."/".$cuscode."/".$id."/".KEY1."/".KEY2);
 			                
  
 	  return 1;
@@ -6124,7 +6392,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   $id = $this->input->post("id");
   
       $rss = new DOMDocument(); 					
-     @$rss->load("http://216.234.105.194:8089/Alpha.svc/DeleteLocationDetails/".$emai."/".$cuscode."/".$id."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+     @$rss->load(WEBSERVICEURL."/DeleteLocationDetails/".$emai."/".$cuscode."/".$id."/".KEY1."/".KEY2);
 			                
  
 	  return 1;
@@ -6319,6 +6587,52 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 					 }
    			 
   }
+  
+  
+  public function terms()
+  {
+   if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+				{
+				   $this->load->model('Mysmartportal_model');
+				   $this->load->view("password_header");
+				   $this->load->view('terms');
+				   //$this->load->view("footer"); 
+				   
+				   //redirect(base_url()."index.php/welcome/index");
+				}else{
+  
+                    $this->load->model('Mysmartportal_model');
+					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+					$userallmenu=$this->Mysmartportal_model->getallusermenu();
+					$split = explode(",",@$usermenu[0]->menu_id);
+					$usermenu1 = array();
+					$orderpageaccess = "";
+					for($i=1;$i<13;$i++)
+					{
+					if($i==2)
+					{
+					$orderpageaccess = "ok";
+					
+					}
+					  $finalusermenu = array('id'=>$i,
+											 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+											 );
+					  $usermenu1[$i] = $finalusermenu;
+					}
+					
+					$data['menu']=$usermenu1;
+					$data['ids']=$usermenu[0]->menu_id;
+					
+					
+$user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+						    $data['user_notifications'] = $user_notification;
+					 $this->load->view('header',$data);
+                     $this->load->view('terms');  
+					 
+					 
+					 }
+   			 
+  }
 
 public function browse_documentation()
   {
@@ -6370,25 +6684,42 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
   public function btobportallogin()
   {
   $email = $this->session->userdata('email');
-		  if($this->session->userdata('email') == "Shari.Fann@cevalogistics.com")
+		  if($this->session->userdata('email') == "john.scramling@dart.biz")
+		  {
+		   $email = "john.scramling@dart.biz";
+		  
+		  }else if($this->session->userdata('email') == "Shari.Fann@cevalogistics.com")
+		  {
+		    $email = "brettg@lowrysolutions.com.cva";
+		  
+		  }else
 		  {
 		   $email = "christineb@lowrysolutions.com.usa";
 		  
 		  }
 		  
-		  if($this->session->userdata('email') == "Kathryn_Chapman@unifirst.com")
-		  {
-		   $email = "christineb@lowrysolutions.com.usa";
-		  
-		  }
+		
   
   
   $uid = $this->session->userdata('userid');
   $this->load->model('Mysmartportal_model');
   $data  = $this->Mysmartportal_model->getpassword($uid);
-  $password = @$data[0]->password;
+ 
   
-  
+    if($this->session->userdata('email') == "john.scramling@dart.biz")
+		  {
+		   $password = @$data[0]->password;
+		  
+		  }else if($this->session->userdata('email') == "Shari.Fann@cevalogistics.com")
+		  {
+		  
+		  $password = "Lowry123";
+		  
+		  }else
+		  {
+		   $password = "16Lowry*";
+		  
+		  }
 
 
   $xmldata ='<?xml version = "1.0" encoding = "UTF-8"?>
@@ -6427,9 +6758,9 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 
       <Credential domain="NetworkID">
 
-        <Identity>christineb@lowrysolutions.com.usa</Identity>
+        <Identity>'.$email.'</Identity>
 
-        <SharedSecret>16Lowry*</SharedSecret>
+        <SharedSecret>'.$password.'</SharedSecret>
 
       </Credential>
 
@@ -6573,7 +6904,7 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 								 
 					        $rss = new DOMDocument(); 
 							
-			                @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");
+			                @$rss->load(WEBSERVICEURL."/E21DashBoardData/".$cust_code."/".$email1."/3/Perm/1-1-2010/1-1-2017/".KEY1."/".KEY2);
 			                          $pendingorders = 0;	
 										 $opencases = 0;	
 										 $openorders = 0;	
@@ -6731,6 +7062,12 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 				   $this->load->view("footer");*/
 				   redirect(base_url()."index.php/welcome/index");
 				}else{
+				
+				if($this->session->userdata('terms_status') == 0)
+				{
+				    redirect(base_url()."index.php/welcome/technical_support");
+				
+				}
   
                     $this->load->model('Mysmartportal_model');
 					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
@@ -6800,18 +7137,237 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 	  
   }
   
-  public function contractschartdata($location="")
+  
+  
+    public function new_contractschartdata($location1="",$status="")
   {
   
-  if($location=="")
-  {
-  $location = "%20";
-  
-  }
+  $location = @$this->input->post("location");
+			  if($location=="")
+			  {
+			  $location = " ";
+			  
+			  }
+			  
+			  $finalstatus = "Active Service Contracts";
+			  
+			  if($status == "expired")
+			  {
+			  $finalstatus = "Expired Service Contracts";
+			  
+			  
+			  }else if($status == "active")
+			  {
+			  $finalstatus = "Active Service Contracts";
+			  
+			  
+			  }else
+			  {
+			   $finalstatus = "";
+			  
+			  }
+			  
+
            $cust_code= $this->session->userdata('cust_code'); 
 		   $email1=$this->session->userdata('email');
-           $rss = new DOMDocument(); 				
-		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContracts_Graph/".$cust_code."/1-1-2000/1-1-2017/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           $rss = new DOMDocument(); 
+
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContractsAdd_Graph/".$cust_code."/1-1-2010/12-31-2022/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+
+		   $chartdata = array();
+		   $chartdataexpired = array();
+		   $chartdatacancel = array();
+		   $i=0;
+		   $j=0;
+		   $k=0;
+				   foreach ($rss->getElementsByTagName('ServiceContracts') as $node)
+					{
+					
+							
+							$params1 = array("date"=>date('Y-m-d',strtotime("1-".$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue."-".$node->getElementsByTagName('InvoiceYear01')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"status"=>$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue);  
+							$chartdataexpired[$i] = $params1;
+							$i++;
+											  
+					
+					}
+					
+					
+					
+					
+					
+					 $rss = new DOMDocument(); 
+
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContractsUpcoming_Graph/".$cust_code."/1-1-2011/12-31-2020/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+      	   
+		
+		 
+				   foreach ($rss->getElementsByTagName('ServiceContracts') as $node)
+					{
+					
+							
+							$params2 = array("date"=>date('Y-m-d',strtotime("1-".$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue."-".$node->getElementsByTagName('InvoiceYear01')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"status"=>$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue);  
+							$chartdataexpired[$i] = $params2;
+							$i++;
+											  
+					
+					}
+					
+					
+					
+					
+
+			$sortedData = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet = $element['date'];
+					  
+					  if ( ! isSet($sortedData[$datet]) ) 
+						{ 
+							$sortedData[$datet] = array($chartdataexpired[$index]);
+						} else { 
+							$sortedData[$datet][] = $chartdataexpired[$index];
+						}
+					
+					
+					}
+					
+					
+						$sortedData1 = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet1 = explode(",",$element['date']);
+					 
+					  $datet = $datet1[0];
+					
+							  if ( ! isSet($sortedData1[$datet]) ) 
+								{ 
+									$sortedData1[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData1[$datet][] = $chartdataexpired[$index];
+								}
+
+					}
+
+			$finalservicedata = array();
+			$finalactiveservicedata = array();
+			$l = 0;
+			foreach($sortedData as $index1 => $element1)
+			{
+			
+			$l++;
+			  $activecount = 0;
+			  $expiredcount = 0;
+			  $reniewcount = 0;
+			  $date = 0;
+			  
+			  
+			    $innerdata = $sortedData[$index1];
+				for($j=0;$j<sizeOf($innerdata);$j++)
+				{
+				   if($innerdata[$j]['status'] == "Expired Service Contracts")
+				   {
+				   $expiredcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }else if($innerdata[$j]['status'] == "Active Service Contracts")
+				   {
+				   $activecount = (int)$activecount+(int)$innerdata[$j]['value'];
+				   }else if($innerdata[$j]['status'] == "Upcoming for renewal")
+				   {
+				   $reniewcount = (int)$reniewcount+(int)$innerdata[$j]['value'];
+				   }else
+				   {
+				   //$activecount = (int)$activecount+(int)$innerdata[$j]['value'];
+				   
+				   }
+				$date = $innerdata[$j]['date'];
+				
+				}
+				
+				
+				$prm1 = array("date"=>$date,"ay"=>$activecount,"aValue"=>$activecount);
+				$prmactive = array("date"=>$date,"by"=>$expiredcount,"bValue"=>$expiredcount);
+				$prmupcomming = array("date"=>$date,"cy"=>$reniewcount,"cValue"=>$reniewcount);
+				
+				
+				
+				
+				
+				if((int)$activecount!=0)
+				{
+				 array_push($finalservicedata,$prm1);
+				}
+			   
+				if((int)$expiredcount!=0)
+				{
+				   array_push($finalservicedata,$prmactive);
+				}
+				
+				if((int)$reniewcount!=0)
+				{
+				array_push($finalservicedata,$prmupcomming);
+				}
+			 
+			    
+			}
+			
+			
+			
+			
+			/*UpComingRenewal code start*/
+			
+
+
+
+			
+			
+			/*end code for upcomingcontractschartdata*/
+			
+
+			$servicechartdata = array("dotcharts"=>$finalservicedata,"activeservice"=>$finalactiveservicedata);
+			
+			$finaldata1 =  json_encode($servicechartdata);
+			print_r($finaldata1);
+			
+  }
+  
+  
+  
+  
+  
+  
+  public function contractschartdata($location1="",$status="")
+  {
+  
+  $location = @$this->input->post("location");
+			  if($location=="")
+			  {
+			  $location = " ";
+			  
+			  }
+			  
+			  $finalstatus = "Active Service Contracts";
+			  
+			  if($status == "expired")
+			  {
+			  $finalstatus = "Expired Service Contracts";
+			  
+			  
+			  }else if($status == "active")
+			  {
+			  $finalstatus = "Active Service Contracts";
+			  
+			  
+			  }else
+			  {
+			   $finalstatus = "";
+			  
+			  }
+			  
+
+           $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+           $rss = new DOMDocument(); 
+
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContractsAdd_Graph/".$cust_code."/1-1-2010/12-31-2022/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
       	   
 		   $chartdata = array();
 		   $chartdataexpired = array();
@@ -6819,41 +7375,2294 @@ $user_notification = $this->Mysmartportal_model->get_all_user_notifications($thi
 		   $i=0;
 		   $j=0;
 		   $k=0;
-		   foreach ($rss->getElementsByTagName('ActiveServiceContracts') as $node)
+				   foreach ($rss->getElementsByTagName('ServiceContracts') as $node)
+					{
+					
+							if($node->getElementsByTagName('ContractStatus')->item(0)->nodeValue == $finalstatus)
+							{
+							$params1 = array("date"=>date('Y-m-d',strtotime("1-".$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue."-".$node->getElementsByTagName('InvoiceYear01')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"status"=>$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue);  
+							$chartdataexpired[$i] = $params1;
+							$i++;
+							}				  
+					
+					}
+
+			$sortedData = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet = $element['date'];
+					  
+					  if ( ! isSet($sortedData[$datet]) ) 
+						{ 
+							$sortedData[$datet] = array($chartdataexpired[$index]);
+						} else { 
+							$sortedData[$datet][] = $chartdataexpired[$index];
+						}
+					
+					
+					}
+					
+					
+						$sortedData1 = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet1 = explode(",",$element['date']);
+					 
+					  $datet = $datet1[0];
+					
+							  if ( ! isSet($sortedData1[$datet]) ) 
+								{ 
+									$sortedData1[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData1[$datet][] = $chartdataexpired[$index];
+								}
+
+					}
+
+			$finalservicedata = array();
+			$l = 0;
+			foreach($sortedData as $index1 => $element1)
 			{
-			if($node->getElementsByTagName('ContractStatus')->item(0)->nodeValue == "Expired Service Contracts")
+			
+			$l++;
+			  $activecount = 0;
+			  $expiredcount = 0;
+			  $reniewcount = 0;
+			  $date = 0;
+			  
+			  
+			    $innerdata = $sortedData[$index1];
+				for($j=0;$j<sizeOf($innerdata);$j++)
+				{
+				   if($innerdata[$j]['status'] == "Expired Service Contracts")
+				   {
+				   $expiredcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }else if($innerdata[$j]['status'] == "Active Service Contracts")
+				   {
+				   $activecount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }else
+				   {
+				   $activecount = (int)$activecount+(int)$innerdata[$j]['value'];
+				   
+				   }
+				$date = $innerdata[$j]['date'];
+				
+				}
+				
+				if($finalstatus == "Expired Service Contracts")
+				{
+					if((int)$expiredcount !=0)
+					{
+					    $prm1 = array("date"=>$date,"ay"=>$expiredcount,"aValue"=>$expiredcount);
+					}
+				
+				}else{
+				 if((int)$activecount !=0)
+					{
+				$prm1 = array("date"=>$date,"ay"=>$activecount,"aValue"=>$activecount);
+				
+				    }
+				}
+				
+				
+				
+				
+				
+			    array_push($finalservicedata,$prm1);
+			}
+			
+
+			$servicechartdata = array("dotcharts"=>$finalservicedata);
+			
+			$finaldata1 =  json_encode($servicechartdata);
+			print_r($finaldata1);
+			
+  }
+  
+  
+  
+  
+  
+  
+  
+   public function upcomingcontractschartdata($location1="",$status="")
+  {
+  
+  $location = @$this->input->post("location");
+			  if($location=="")
+			  {
+			  $location = " ";
+			  
+			  }
+			  
+			
+			  
+
+           $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+           $rss = new DOMDocument(); 
+
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContractsUpcoming_Graph/".$cust_code."/1-1-2016/12-31-2020/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+      	   
+		   $chartdata = array();
+		   $chartdataexpired = array();
+		   $chartdatacancel = array();
+		   $i=0;
+		   $j=0;
+		   $k=0;
+				   foreach ($rss->getElementsByTagName('ServiceContracts') as $node)
+					{
+					
+							
+							$params1 = array("date"=>date('Y-m-d',strtotime("1-".$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue."-".$node->getElementsByTagName('InvoiceYear01')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"status"=>$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue);  
+							$chartdataexpired[$i] = $params1;
+							$i++;
+											  
+					
+					}
+
+			$sortedData = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet = $element['date'];
+					  
+					  if ( ! isSet($sortedData[$datet]) ) 
+						{ 
+							$sortedData[$datet] = array($chartdataexpired[$index]);
+						} else { 
+							$sortedData[$datet][] = $chartdataexpired[$index];
+						}
+					
+					
+					}
+					
+					
+						$sortedData1 = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet1 = explode(",",$element['date']);
+					 
+					  $datet = $datet1[0];
+					
+							  if ( ! isSet($sortedData1[$datet]) ) 
+								{ 
+									$sortedData1[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData1[$datet][] = $chartdataexpired[$index];
+								}
+
+					}
+
+			$finalservicedata = array();
+			$l = 0;
+			foreach($sortedData as $index1 => $element1)
 			{
-			$params1 = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
+			
+			$l++;
+			  $activecount = 0;
+			  $expiredcount = 0;
+			  $reniewcount = 0;
+			  $date = 0;
+			  
+			  
+			    $innerdata = $sortedData[$index1];
+				for($j=0;$j<sizeOf($innerdata);$j++)
+				{
+				
+				$date = $innerdata[$j]['date'];
+			
+			
+				
+				
+				   if($innerdata[$j]['status'] == "Expired Service Contracts")
+				   {
+				   $expiredcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }else if($innerdata[$j]['status'] == "")
+				   {
+				   $reniewcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }else if($innerdata[$j]['status'] == "Upcoming for renewal")
+				   {
+				   $reniewcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }
+			
+				
+				
+				
+				}
+				
+				
+					$current = explode("-",$date);
+				if($current[0] == "2016")
+				{
+				if((int)$reniewcount!=0){
+					$prm1 = array("date"=>$date,"ay"=>(int)$reniewcount,"aValue"=>$reniewcount);
+			    array_push($finalservicedata,$prm1);
+				}
+				
+			
+				}
+			}
+			
+
+			$servicechartdata = array("dotcharts"=>$finalservicedata);
+			
+			$finaldata1 =  json_encode($servicechartdata);
+			print_r($finaldata1);
+			
+  }
+
+  
+  
+  
+  
+  
+  
+   public function upcomingcontractschartdatatest($location1="",$status="")
+  {
+  
+  $location = @$this->input->post("location");
+			  if($location=="")
+			  {
+			  $location = " ";
+			  
+			  }
+			  
+			
+			  
+
+           $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+           $rss = new DOMDocument(); 
+
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContractsUpcoming_Graph/".$cust_code."/1-1-2016/12-31-2020/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+      	   
+		   $chartdata = array();
+		   $chartdataexpired = array();
+		   $chartdatacancel = array();
+		   $i=0;
+		   $j=0;
+		   $k=0;
+				   foreach ($rss->getElementsByTagName('ServiceContracts') as $node)
+					{
+					
+							
+							$params1 = array("date"=>date('Y-m-d',strtotime("1-".$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue."-".$node->getElementsByTagName('InvoiceYear01')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"status"=>$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue);  
+							$chartdataexpired[$i] = $params1;
+							$i++;
+											  
+					
+					}
+
+			$sortedData = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet = $element['date'];
+					  
+					  if ( ! isSet($sortedData[$datet]) ) 
+						{ 
+							$sortedData[$datet] = array($chartdataexpired[$index]);
+						} else { 
+							$sortedData[$datet][] = $chartdataexpired[$index];
+						}
+					
+					
+					}
+					
+					
+						$sortedData1 = array();
+					foreach ($chartdataexpired as $index => $element) 
+					{
+					  $datet1 = explode(",",$element['date']);
+					 
+					  $datet = $datet1[0];
+					
+							  if ( ! isSet($sortedData1[$datet]) ) 
+								{ 
+									$sortedData1[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData1[$datet][] = $chartdataexpired[$index];
+								}
+
+					}
+
+			$finalservicedata = array();
+			$l = 0;
+			foreach($sortedData as $index1 => $element1)
+			{
+			
+			$l++;
+			  $activecount = 0;
+			  $expiredcount = 0;
+			  $reniewcount = 0;
+			  $date = 0;
+			  
+			  
+			    $innerdata = $sortedData[$index1];
+				for($j=0;$j<sizeOf($innerdata);$j++)
+				{
+				
+				$date = $innerdata[$j]['date'];
+			
+			
+				
+				
+				   if($innerdata[$j]['status'] == "Expired Service Contracts")
+				   {
+				   $expiredcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }else if($innerdata[$j]['status'] == "")
+				   {
+				   $reniewcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }else if($innerdata[$j]['status'] == "Upcoming for renewal")
+				   {
+				   $reniewcount = (int)$expiredcount+(int)$innerdata[$j]['value'];
+				   }
+			
+				
+				
+				
+				}
+				
+				
+					$current = explode("-",$date);
+				if($current[0] == "2016")
+				{
+				$prm1 = array("date"=>$date,"ay"=>(int)$reniewcount,"aValue"=>$reniewcount,"image"=>"http://lowrysmartportal.com/assets/expired.png");
+			    array_push($finalservicedata,$prm1);
+				}
+			}
+			
+
+			$servicechartdata = array("dotcharts"=>$finalservicedata);
+			
+			$finaldata1 =  json_encode($servicechartdata);
+			print_r($finaldata1);
+			
+  }
+  
+  
+  
+  
+  
+  
+   public function contracts_barchart_data()
+  {
+  
+           $chartdataexpired = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+		   
+		   
+		   $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }
+            $i=0;
+           $rss = new DOMDocument(); 
+
+		   
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContractsAdd_Graph/".$cust_code."/1-1-2010/12-31-2022/".$email1."/3/Perm/%20/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('ServiceContracts') as $node)
+			{
+			
+			if($node->getElementsByTagName('InvoiceYear01')->item(0)->nodeValue == "2016"){
+			
+			//echo "<pre>"; print_r($node->getElementsByTagName('part_code')->item(0)->nodeValue); echo "</pre>";
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue);  
 			$chartdataexpired[$i] = $params1;
 			$i++;
-			}else if($node->getElementsByTagName('ContractStatus')->item(0)->nodeValue == "Active Service Contracts")
+			}
+			
+			}
+			
+			
+			
+			
+			 $rss = new DOMDocument(); 
+
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21ActiveServiceContractsUpcoming_Graph/".$cust_code."/1-1-2016/12-31-2020/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+      	   
+		  foreach ($rss->getElementsByTagName('ServiceContracts') as $node)
+					{
+					
+							if($node->getElementsByTagName('InvoiceYear01')->item(0)->nodeValue == "2016")
+							{
+							$params2 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('ContractStatus')->item(0)->nodeValue);  
+							$chartdataexpired[$i] = $params2;
+							
+						$i++;	
+                            }						
+					
+					}
+			
+			
+			
+			
+							$sortedData = array();
+							foreach ($chartdataexpired as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							  	  
+							  if ( ! isSet($sortedData[$datet]) ) 
+								{ 
+									$sortedData[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData[$datet][] = $chartdataexpired[$index];
+								}
+							  }
+						
+							
+							
+							}
+		
+
+			$chtdata = array();
+			$chtmnthdata  = array();
+$p = 0;
+			foreach ($sortedData as $index => $element) 
 			{
-		    $params = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
-			$chartdata[$j] = $params;
-			 $j++;
-			}else
+														
+															$datavalues = array(); 
+															$totalmontsexit = array();
+															$data = $sortedData[$index];																											
+															for($k=0;$k<sizeOf($data);$k++)
+															{
+																array_push($totalmontsexit,$data[$k]['month']);														
+															}
+																											
+														    for($m= 1;$m <= 12; $m++)
+														    {
+																if(in_array($m,$totalmontsexit))
+																{
+
+																   
+																}else
+																{
+
+																	 $dataArray = array("month"=>$m,"total"=>0,"part_desc"=>"");
+																	 array_splice($data,$m-1,0,array($dataArray));
+
+																}
+														    }
+														
+														
+															for($t=0;$t<sizeOf($data);$t++)
+															{
+																     array_push($datavalues,(int)$data[$t]['total']);
+															}
+														
+
+														
+														$cloecode = "";
+														
+														
+														if($index == "Active Service Contracts")
+														{
+														$cloecode = "#299a0b";
+														
+														}else if($index == "Upcoming for renewal")
+														{
+														$cloecode = "#febf04";
+														
+														} else if($index == "Expired Service Contracts")
+														{
+														$cloecode = "#cf0404";
+														
+														}
+														
+														
+														
+														
+														
+													
+														
+														
+														$chartdatafinal2 = array("type"=>"column","name"=>$index,"color"=>$cloecode,"data"=>$datavalues); 
+														array_push($chtdata,$chartdatafinal2);
+														$p++;
+		
+			}
+			
+
+
+			
+			$finaldata1 =  json_encode($chtdata);
+			print_r($finaldata1);
+
+   }
+  
+  
+  
+  
+  
+  public function labelsdata($location1 = "",$productid = "")
+  {
+  
+  $location = @$this->input->post('locations');
+  
+  if($location == "")
+  {
+  $location = " ";
+  }
+  
+  if($location == "%20")
+  {
+  $location = " ";
+  }
+  
+  if($productid == "")
+  {
+  $productid = " ";
+  }
+     
+           $chartdataexpired = array();
+           $chartdataexpired1 = array();
+           $chartproductdata = array();
+		   
+           $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+           $rss = new DOMDocument(); 
+
+		
+		   @$rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetInvoicedLabelsList/".$cust_code."/1-1-2010/1-1-2020/".$email1."/3/Perm/".$location."/".$productid."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+			//echo "http://216.234.105.194:8089/Alpha.svc/E21GetInvoicedLabelsList/".$cust_code."/1-1-2010/1-1-2020/".$email1."/3/Perm/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D";
+			//exit;
+			
+			
+			/*[ {
+      "title": "Quantity Shipped",
+      "fieldMappings": [ {
+        "fromField": "value",
+        "toField": "value"
+      }, {
+        "fromField": "volume",
+        "toField": "volume"
+      } ],
+      "dataProvider": chartData1,
+      "categoryField": "date"
+    }
+  ]*/
+			
+
+			$i=0;
+			 $numb = "1";
+		   foreach ($rss->getElementsByTagName('LabelsList') as $node)
 			{
-			  $params2 = array("date"=>date('Y, m, d',strtotime($node->getElementsByTagName('DateD')->item(0)->nodeValue)),"value"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('ContractC')->item(0)->nodeValue);  
-			  $chartdatacancel[$k] = $params2;
-			 $k++;
+			$params1 = array("date"=>date('Y, m, d',strtotime((int)$node->getElementsByTagName('InvoiceYear')->item(0)->nodeValue."-".(int)$node->getElementsByTagName('CalendarMth')->item(0)->nodeValue."-".(int)$numb)),"value"=>$node->getElementsByTagName('xxQty')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('xxQty')->item(0)->nodeValue);  
+			$params3 = array("productdescription"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue,"date"=>date('Y, m, d',strtotime((int)$node->getElementsByTagName('InvoiceYear')->item(0)->nodeValue."-".(int)$node->getElementsByTagName('CalendarMth')->item(0)->nodeValue."-".(int)$numb)),"value"=>$node->getElementsByTagName('xxQty')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('xxQty')->item(0)->nodeValue);  
+			$params2 = array("part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$chartdataexpired1[$i] = $params3;
+			$chartproductdata[$i] = $params2;
+			$i++;
+			}
 			
-			}					  
 			
 			
 			
+			
+			$sortedData = array();
+			foreach ($chartdataexpired1 as $index => $element) 
+			{
+			  $datet = trim($element['productdescription']," ");
+			  
+			  if ( ! isSet($sortedData[$datet]) ) 
+				{ 
+					$sortedData[$datet] = array($chartdataexpired[$index]);
+				} else { 
+					$sortedData[$datet][] = $chartdataexpired[$index];
+				}
 			
 			
 			}
 			
-			$finaldata = array("activeservice"=>$chartdata,
-			"expiredservice"=>$chartdataexpired,
-			"cancelservice"=>$chartdatacancel);
 			
-			$finaldata1 =  json_encode($finaldata);
+			$labelchart = array();
+			$j=0;
+			foreach($sortedData as $index => $sortedDatafinal)
+			{
+			//echo key($sortedData);
+			
+			$labelchart[$j] = array("title"=>$index,"fieldMappings"=>array(array("fromField"=>"value","toField"=>"value"),array("fromField"=>"volume","toField"=>"volume")),"dataProvider"=>$sortedDatafinal,"categoryField"=>"date");
+			$j++;
+			}
+			
+			//echo "<pre>"; print_r($labelchart); echo "</pre>";
+			//exit;
+			
+			$fibaldata = array("chartdata"=>$labelchart,"productdata"=>$chartproductdata);
+			$finaldata1 =  json_encode($fibaldata);
 			print_r($finaldata1);
   
   
+  
   }
+  
+  
+  public function serviceticketsdashboarddata()
+  {
+  
+           $chartdataexpired = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+		      $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }
+$i=0;
+           $rss = new DOMDocument(); 
+$currentyear = (date("Y"));
+
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/CheckServiceTicket_Total_Graph/".$email1."/".$cust_code."/3/PermLevel/ / /1-1-".$currentyear."/12-31-".$currentyear."/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('CheckServiceTicket') as $node)
+			{
+			$mnth = "";
+			if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 5)
+			{
+			$mnth = "May";
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 6)
+			{
+			$mnth = "June";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 7)
+			{
+			$mnth = "July";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 4)
+			{
+			$mnth = "Apr";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 3)
+			{
+			$mnth = "Mar";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 2)
+			{
+			$mnth = "Feb";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 1)
+			{
+			$mnth = "Jan";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 8)
+			{
+			$mnth = "Aug";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 9)
+			{
+			$mnth = "Sept";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 10)
+			{
+			$mnth = "Oct";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 11)
+			{
+			$mnth = "Nov";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 12)
+			{
+			$mnth = "Dec";
+			
+			
+			}else
+			{
+			
+			$mnth = "Jan";
+			}
+			
+	$params1 = array("year"=>$mnth,"total"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue,"otickets"=>$node->getElementsByTagName('OpenCount')->item(0)->nodeValue,"closedtickets"=>$node->getElementsByTagName('CLOSEDCount')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$i++;
+			
+			
+			}
+			
+			
+			
+			
+			$monthdata = array();
+			$ticketopendata = array();
+			$ticketcloseddata = array();
+			for($k=0;$k<sizeOf($chartdataexpired);$k++)
+			{
+			array_push($monthdata,$chartdataexpired[$k]['year']." 2016");
+			array_push($ticketopendata,(int)$chartdataexpired[$k]['otickets']);
+			array_push($ticketcloseddata,(int)$chartdataexpired[$k]['closedtickets']);
+			
+			}
+			$ticdata = array(array("name"=>"Open","color"=>"#ff670f","data"=>$ticketopendata),array("name"=>"Closed","color"=>"#4096ee","data"=>$ticketcloseddata));
+			
+		
+			
+			$tdata= array("months"=>$monthdata,"opentickets"=>$ticdata);
+				//echo "<pre>"; print_r($tdata); echo "</pre>";
+				$finaldata1 =  json_encode($tdata);
+			print_r($finaldata1);
+
+   }
+   
+   
+     public function serviceticketsdashboarddatalastyear()
+  {
+  
+           $chartdataexpired = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+		   $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }
+$i=0;
+           $rss = new DOMDocument(); 
+
+$lastyear = (date("Y")-1);
+		  
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/CheckServiceTicket_Total_Graph/".$email1."/".$cust_code."/3/PermLevel/ / /1-1-".$lastyear."/12-31-".$lastyear."/".$location."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('CheckServiceTicket') as $node)
+			{
+			$mnth = "";
+			if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 5)
+			{
+			$mnth = "May";
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 6)
+			{
+			$mnth = "June";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 7)
+			{
+			$mnth = "July";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 4)
+			{
+			$mnth = "Apr";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 3)
+			{
+			$mnth = "Mar";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 2)
+			{
+			$mnth = "Feb";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 1)
+			{
+			$mnth = "Jan";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 8)
+			{
+			$mnth = "Aug";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 9)
+			{
+			$mnth = "Sept";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 10)
+			{
+			$mnth = "Oct";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 11)
+			{
+			$mnth = "Nov";
+			
+			
+			}else if($node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue == 12)
+			{
+			$mnth = "Dec";
+			
+			
+			}else
+			{
+			
+			$mnth = "Jan";
+			}
+			
+	$params1 = array("year"=>$mnth,"total"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue,"otickets"=>$node->getElementsByTagName('OpenCount')->item(0)->nodeValue,"closedtickets"=>$node->getElementsByTagName('CLOSEDCount')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$i++;
+			
+			
+			}
+			
+			
+			
+			
+			$monthdata = array();
+			$ticketopendata = array();
+			$ticketcloseddata = array();
+			for($k=0;$k<sizeOf($chartdataexpired);$k++)
+			{
+		
+				array_push($monthdata,$chartdataexpired[$k]['year']." 2015");
+				array_push($ticketopendata,(int)$chartdataexpired[$k]['otickets']);
+				array_push($ticketcloseddata,(int)$chartdataexpired[$k]['closedtickets']);
+			
+			
+			}
+			$ticdata = array(array("name"=>"Open","color"=>"#ff670f","data"=>$ticketopendata),array("name"=>"Closed","color"=>"#4096ee","data"=>$ticketcloseddata));
+			
+		
+			
+			$tdata= array("months"=>$monthdata,"opentickets"=>$ticdata);
+				//echo "<pre>"; print_r($tdata); echo "</pre>";
+				$finaldata1 =  json_encode($tdata);
+			print_r($finaldata1);
+
+   }
+   
+   
+   
+   public function openticketsdashboarddata()
+  {
+  
+           $chartdataexpired = array();
+           $chartdataexpired1 = array();
+		   		    $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+$i=0;
+
+           $rss = new DOMDocument(); 				
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/CheckServiceTicket_Graph/".$email1."/".$cust_code."/3/PermLevel/%20/%20/%20/%20/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('CheckServiceTicket') as $node)
+			{
+			
+	$params1 = array("month"=>$node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue,"Status"=>$node->getElementsByTagName('CurrentStatus')->item(0)->nodeValue,"ticketscount"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue);  
+	$params2 = array("sector"=>$node->getElementsByTagName('CurrentStatus')->item(0)->nodeValue,"size"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$chartdataexpired1[$i] = $params2;
+			$i++;
+			
+			
+			}
+			$sortedData = array();
+			foreach ($chartdataexpired as $index => $element) 
+			{
+			  $datet = $element['month'];
+			  
+			  if ( ! isSet($sortedData[$datet]) ) 
+				{ 
+					$sortedData[$datet] = array($chartdataexpired1[$index]);
+				} else { 
+					$sortedData[$datet][] = $chartdataexpired1[$index];
+				}
+			
+			
+			}
+			
+				$finaldata1 =  json_encode($sortedData);
+			print_r($finaldata1);
+   }
+   
+   
+   public function chartdatabytype()
+   {
+            $location = @$this->input->post("location");
+			if($location == "")
+			{
+			$location = " ";
+			
+			}
+			
+            $chartdataexpired = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		    $email1=$this->session->userdata('email');
+			$i=0;
+			$handheld = 0;
+			$printers = 0;
+            $rss = new DOMDocument(); 	
+			
+		    $rss->load("http://216.234.105.194:8089/Alpha.svc/CheckServiceTicket_Status_Graph/".$email1."/".$cust_code."/3/PermLevel/".$location."/1-1-2014/1-1-2020/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+          foreach ($rss->getElementsByTagName('CheckServiceTicket') as $node)
+			{
+			
+			//echo trim($node->getElementsByTagName('ProdType')->item(0)->nodeValue," ");
+			
+				if(trim($node->getElementsByTagName('ProdType')->item(0)->nodeValue, " ") == "Depot Standard")
+				{
+				
+				
+				$handheld = (int)$handheld+(int)$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue;
+				} 
+				
+				if(trim($node->getElementsByTagName('ProdType')->item(0)->nodeValue, " ") == "Depot Standard w/ Comprehensive Coverage")
+				{
+				$handheld = (int)$handheld+(int)$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue;
+				}
+				
+				if(trim($node->getElementsByTagName('ProdType')->item(0)->nodeValue) == "On Site Standard 5x8")
+				{
+				$printers = (int)$printers+(int)$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue;
+				}
+			
+			$i++;
+			
+			}
+			
+			
+			$data = array(array("country"=>"Handheld","litres"=>$handheld),array("country"=>"Printers","litres"=>$printers));
+			$finaldata1 =  json_encode($data);
+			print_r($finaldata1);
+   
+   
+
+   
+   }
+   
+   public function chartbydevicetype()
+   {
+   
+   $location = @$this->input->post("location");
+   if($location == "")
+   {
+   $location = " ";
+   
+   }
+   
+            $chartdatadevice = array();
+            $chartdatadevice1 = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		    $email1=$this->session->userdata('email');
+			$j=0;
+			$handheld = 0;
+			$printers = 0;
+			$numb =1;
+            $rss = new DOMDocument(); 				
+		    $rss->load("http://216.234.105.194:8089/Alpha.svc/CheckServiceTicket_Device_Graph/".$email1."/".$cust_code."/3/PermLevel/".$location."/1-1-2014/1-1-2020/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+            foreach ($rss->getElementsByTagName('CheckServiceTicket') as $node)
+			{
+			$params1 = array("date"=>date('Y, m, d',strtotime((int)$node->getElementsByTagName('OpenedYear')->item(0)->nodeValue."-".(int)$node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue."-".(int)$numb)),"value"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue);  
+			$params2 = array("date"=>date('Y, m, d',strtotime((int)$node->getElementsByTagName('OpenedYear')->item(0)->nodeValue."-".(int)$node->getElementsByTagName('OpenedMonth')->item(0)->nodeValue."-".(int)$numb)),"value"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue,"volume"=>$node->getElementsByTagName('TotalTickets')->item(0)->nodeValue,"devicetype"=>$node->getElementsByTagName('Device_Type')->item(0)->nodeValue);  
+			$chartdatadevice[$j] = $params1;
+			$chartdatadevice1[$j] = $params2;
+			$j++;
+			}
+			
+			$sortedData = array();
+			foreach ($chartdatadevice1 as $index => $element) 
+			{
+			
+			if(trim($element['devicetype']," ") == "")
+			{
+			$datet = "no data";
+			}else{
+			  $datet = trim($element['devicetype']," ");
+			  }
+			  
+			  if ( ! isSet($sortedData[$datet]) ) 
+				{ 
+					$sortedData[$datet] = array($chartdatadevice[$index]);
+				} else { 
+					$sortedData[$datet][] = $chartdatadevice[$index];
+				}
+			
+			
+			}
+			
+			
+			$labelchart = array();
+			$k=0;
+			foreach($sortedData as $index => $sortedDatafinal)
+			{
+			//echo key($sortedData);
+			
+			$labelchart[$k] = array("title"=>$index,"fieldMappings"=>array(array("fromField"=>"value","toField"=>"value"),array("fromField"=>"volume","toField"=>"volume")),"dataProvider"=>$sortedDatafinal,"categoryField"=>"date");
+			$k++;
+			}
+			
+			//echo "<pre>";print_r($labelchart); echo "</pre>";
+   $finaldata1 =  json_encode($labelchart);
+			print_r($finaldata1);
+   
+   
+   
+   }
+   
+   
+   public function faq()
+  {
+   if($this->session->userdata('is_logged_in') == '' && $this->session->userdata('is_logged_in') == 0)
+				{
+				  /* $this->load->model('Mysmartportal_model');
+				   $this->load->view("password_header");
+				   $this->load->view('lowryhelp');
+				   $this->load->view("footer"); 
+				   */
+				   redirect(base_url()."index.php/welcome/index");
+				}else{
+  
+                    $this->load->model('Mysmartportal_model');
+					$usermenu=$this->Mysmartportal_model->getmenu($this->session->userdata('userid'));
+					$userallmenu=$this->Mysmartportal_model->getallusermenu();
+					$split = explode(",",@$usermenu[0]->menu_id);
+					$usermenu1 = array();
+					$orderpageaccess = "";
+					for($i=1;$i<13;$i++)
+					{
+					if($i==2)
+					{
+					$orderpageaccess = "ok";
+					
+					}
+					  $finalusermenu = array('id'=>$i,
+											 'menuname'=>$this->Mysmartportal_model->getmenuname($i)
+											 );
+					  $usermenu1[$i] = $finalusermenu;
+					}
+					
+					$data['menu']=$usermenu1;
+					$data['ids']=$usermenu[0]->menu_id;
+					
+					
+$user_notification = $this->Mysmartportal_model->get_all_user_notifications($this->session->userdata('userid'));				
+					 $data['user_notifications'] = $user_notification;
+					 $this->load->view('header',$data);
+                     $this->load->view('faq');  
+					 
+					 
+					 }
+   			 
+  }
+  
+  
+  public function ribbuns()
+  {
+  
+           $chartdataexpired = array();
+           $ribbanslastdata = array();
+           $datalastcount = array();
+		   
+		   
+		    $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+		   $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }
+		   
+		   /*code start here*/
+		   
+		            $lastcount=0;
+           $rss = new DOMDocument(); 
+
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetRibbonTonerData_Graph/".$cust_code."/1-1-2015/12-31-2015/".$email1."/3/Perm/".$location."/ /8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('RibbonToner') as $node)
+			{
+			
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('BXQty')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$ribbanslastdata[$lastcount] = $params1;
+			$lastcount++;
+			
+			
+			}
+			
+			
+							$sortedDatalastdata = array();
+							foreach ($ribbanslastdata as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							    if ( ! isSet($sortedDatalastdata[$datet]) ) 
+								{ 
+									$sortedDatalastdata[$datet] = array($ribbanslastdata[$index]);
+								} else { 
+									$sortedDatalastdata[$datet][] = $ribbanslastdata[$index];
+								}
+							  }
+							  
+							
+							
+							
+							}
+							
+							
+							
+								$u = 0;
+							$cloecode = "";
+							     foreach ($sortedDatalastdata as $index => $element) 
+			                     {
+								 
+								
+																		if($u == 0)
+														{
+														$cloecode = "#2989D8";
+														
+														}else if($u == 1)
+														{
+														$cloecode = "#fb9d23";
+														
+														} else if($u == 2)
+														{
+														$cloecode = "#828c95";
+														
+														}else if($u == 3)
+														{
+														$cloecode = "#a4b357";
+														
+														}else if($u == 4)
+														{
+														$cloecode = "#f1da36";
+														
+														}else if($u == 5)
+														{
+														$cloecode = "#29b8e5";
+														
+														}else
+														{
+														
+														$cloecode = "#828c95";
+														
+														}
+								  $datalastcount[$index]=$cloecode;
+								 
+								 $u++;
+								 }
+		   
+		   /*code end here*/
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+            $i=0;
+           $rss = new DOMDocument(); 
+
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetRibbonTonerData_Graph/".$cust_code."/1-1-2016/12-31-2016/".$email1."/3/Perm/".$location."/ /8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('RibbonToner') as $node)
+			{
+			
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('BXQty')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$i++;
+			
+			
+			}
+			
+			
+							$sortedData = array();
+							foreach ($chartdataexpired as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							    if ( ! isSet($sortedData[$datet]) ) 
+								{ 
+									$sortedData[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData[$datet][] = $chartdataexpired[$index];
+								}
+							  }
+							  
+							
+							
+							
+							}
+		
+
+			$chtdata = array();
+			$chtmnthdata  = array();
+
+			
+			$p = 0;
+			foreach ($sortedData as $index => $element) 
+			{
+														
+															$datavalues = array(); 
+															$totalmontsexit = array();
+															$data = $sortedData[$index];																											
+															for($k=0;$k<sizeOf($data);$k++)
+															{
+																array_push($totalmontsexit,$data[$k]['month']);														
+															}
+																											
+														    for($m= 1;$m <= 12; $m++)
+														    {
+																if(in_array($m,$totalmontsexit))
+																{
+
+																   
+																}else
+																{
+
+																	 $dataArray = array("month"=>$m,"total"=>0,"part_desc"=>"","part_code"=>"");
+																	 array_splice($data,$m-1,0,array($dataArray));
+
+																}
+														    }
+														
+														
+															for($t=0;$t<sizeOf($data);$t++)
+															{
+																     array_push($datavalues,(int)$data[$t]['total']);
+															}
+														
+
+														
+														$cloecodefinal = "";	
+														if(array_key_exists($index,$datalastcount))
+														{
+														
+														$cloecodefinal = $datalastcount[$index];
+														
+														}else
+														{
+														
+														if($p == 0)
+														{
+														$cloecodefinal = "#877F19";
+														
+														}else if($p == 1)
+														{
+														$cloecodefinal = "#3D510F";
+														
+														} else if($p == 2)
+														{
+														$cloecodefinal = "#771618";
+														
+														}else if($p == 3)
+														{
+														$cloecodefinal = "#BA23A3";
+														
+														}else if($p == 4)
+														{
+														$cloecodefinal = "#f1da36";
+														
+														}else if($p == 5)
+														{
+														$cloecodefinal = "#29b8e5";
+														
+														}else
+														{
+														
+														$cloecodefinal = "#828c95";
+														
+														}
+														
+														
+														}
+														
+														
+														
+														$chartdatafinal2 = array("type"=>"column","name"=>$index,"color"=>$cloecodefinal,"data"=>$datavalues); 
+														array_push($chtdata,$chartdatafinal2);
+														$p++;
+		
+			}
+			
 
 
+			
+			$finaldata1 =  json_encode($chtdata);
+			print_r($finaldata1);
+
+   }
+   
+   
+   
+   
+    public function ribbunslastyear()
+  {
+  
+           $chartdataexpired = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+		   
+		   $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }
+            $i=0;
+				
+				$lastyear = (date("Y")-1);
+           $rss = new DOMDocument(); 
+
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetRibbonTonerData_Graph/".$cust_code."/1-1-".$lastyear."/12-31-".$lastyear."/".$email1."/3/Perm/".$location."/ /8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('RibbonToner') as $node)
+			{
+			
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('BXQty')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$i++;
+			
+			
+			}
+			
+			
+							$sortedData = array();
+							foreach ($chartdataexpired as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							    if ( ! isSet($sortedData[$datet]) ) 
+								{ 
+									$sortedData[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData[$datet][] = $chartdataexpired[$index];
+								}
+							  }
+							  
+							
+							
+							
+							}
+		
+
+			$chtdata = array();
+			$chtmnthdata  = array();
+$p = 0;
+			foreach ($sortedData as $index => $element) 
+			{
+														
+															$datavalues = array(); 
+															$totalmontsexit = array();
+															$data = $sortedData[$index];																											
+															for($k=0;$k<sizeOf($data);$k++)
+															{
+																array_push($totalmontsexit,$data[$k]['month']);														
+															}
+																											
+														    for($m= 1;$m <= 12; $m++)
+														    {
+																if(in_array($m,$totalmontsexit))
+																{
+
+																   
+																}else
+																{
+
+																	 $dataArray = array("month"=>$m,"total"=>0,"part_desc"=>"","part_code"=>"");
+																	 array_splice($data,$m-1,0,array($dataArray));
+
+																}
+														    }
+														
+														
+															for($t=0;$t<sizeOf($data);$t++)
+															{
+																     array_push($datavalues,(int)$data[$t]['total']);
+															}
+														
+
+														
+														$cloecode = "";
+														if($p == 0)
+														{
+														$cloecode = "#2989D8";
+														
+														}else if($p == 1)
+														{
+														$cloecode = "#fb9d23";
+														
+														} else if($p == 2)
+														{
+														$cloecode = "#828c95";
+														
+														}else if($p == 3)
+														{
+														$cloecode = "#a4b357";
+														
+														}else if($p == 4)
+														{
+														$cloecode = "#f1da36";
+														
+														}else if($p == 5)
+														{
+														$cloecode = "#29b8e5";
+														
+														}else
+														{
+														
+														$cloecode = "#828c95";
+														
+														}
+														$chartdatafinal2 = array("type"=>"column","name"=>$index,"color"=>$cloecode,"data"=>$datavalues); 
+														array_push($chtdata,$chartdatafinal2);
+														$p++;
+		
+			}
+			
+
+
+			
+			$finaldata1 =  json_encode($chtdata);
+			print_r($finaldata1);
+
+   }
+   
+   
+   
+   
+  public function lablesdatacurrentyear()
+  {
+  
+ 
+  
+            $chartdataexpired = array();
+            $chartlastcount = array();
+			$datalastcount = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		    $email1=$this->session->userdata('email');
+		   
+		   
+		   $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }	
+
+
+		   $product_code = @$this->input->post("product_code");
+		   if($product_code == "")
+		   {
+		   $product_code = " ";
+		   
+		   }
+		   
+		   /*code start here*/
+		    
+            $lastcount=0;
+           $rss = new DOMDocument(); 
+
+		 $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetLabelsDataCalend_Graph/".$cust_code."/1-1-2015/12-31-2015/".$email1."/3/Perm/".$location."/".$product_code."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('LabelData') as $node)
+			{
+		 $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('XQty')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$chartlastcount[$lastcount] = $params1;
+			$lastcount++;
+			
+			
+			}
+			
+			
+			
+			
+							$sortedDatalastcount = array();
+							foreach ($chartlastcount as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "0")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							  	  if ( ! isSet($sortedDatalastcount[$datet]) ) 
+								{ 
+									$sortedDatalastcount[$datet] = array($chartlastcount[$index]);
+								} else { 
+									$sortedDatalastcount[$datet][] = $chartlastcount[$index];
+								}
+							  }
+							  
+						
+							
+							
+							}
+							$u = 0;
+							$cloecode = "";
+							     foreach ($sortedDatalastcount as $index => $element) 
+			                     {
+							
+								 
+								 
+								 
+							
+								 
+								 
+								 
+								 
+								 	                 if($u == 0)
+														{
+														$cloecode = "#2989D8";
+														
+														}else if($u == 1)
+														{
+														$cloecode = "#fb9d23";
+														
+														} else if($u == 2)
+														{
+														$cloecode = "#828c95";
+														
+														}else if($u == 3)
+														{
+														$cloecode = "#a4b357";
+														
+														}else if($u == 4)
+														{
+														$cloecode = "#f1da36";
+														
+														}else if($u == 5)
+														{
+														$cloecode = "#29b8e5";
+														
+														}else
+														{
+														
+														$cloecode = "#828c95";
+														
+														}
+														
+														
+								 $datalastcount[$index]=$cloecode;
+								 
+								 	 $u++;
+								 
+								 }
+								 
+							
+								 
+		   
+		   /*code end here*/
+		   
+		   
+            $i=0;
+           $rss = new DOMDocument(); 
+
+		 $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetLabelsDataCalend_Graph/".$cust_code."/1-1-2016/12-31-2016/".$email1."/3/Perm/".$location."/".$product_code."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('LabelData') as $node)
+			{
+			//echo "<pre>"; print_r($node->getElementsByTagName('part_code')->item(0)->nodeValue); echo "</pre>";
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('XQty')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$i++;
+			
+			
+			}
+			
+			
+			
+			
+							$sortedData = array();
+							foreach ($chartdataexpired as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "0")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							  	  if ( ! isSet($sortedData[$datet]) ) 
+								{ 
+									$sortedData[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData[$datet][] = $chartdataexpired[$index];
+								}
+							  }
+							  
+						
+							
+							
+							}
+		
+
+			$chtdata = array();
+			$chtmnthdata  = array();
+			$filterproductdata  = array();
+$p = 0;
+			foreach ($sortedData as $index => $element) 
+			{
+														
+															$datavalues = array(); 
+															$totalmontsexit = array();
+															$data = $sortedData[$index];
+															$partcode = "";
+															
+															
+															for($k=0;$k<sizeOf($data);$k++)
+															{
+																array_push($totalmontsexit,$data[$k]['month']);	
+																$partcode = $data[$k]['part_code'];
+															}
+															
+															$descriptiondropdowndata = array("description"=>$index,"partcode"=>$partcode);
+															
+															array_push($filterproductdata,$descriptiondropdowndata);
+																											
+														    for($m= 1;$m <= 12; $m++)
+														    {
+																if(in_array($m,$totalmontsexit))
+																{
+
+																   
+																}else
+																{
+
+																	 $dataArray = array("month"=>$m,"total"=>0,"part_desc"=>"","part_code"=>"");
+																	 array_splice($data,$m-1,0,array($dataArray));
+
+																}
+														    }
+														
+														
+															for($t=0;$t<sizeOf($data);$t++)
+															{
+																     array_push($datavalues,(int)$data[$t]['total']);
+															}
+														
+                                                  /*
+														echo $index;
+														print_r($datalastcount);
+														echo $datalastcount[$index];
+														
+														echo "--------------------------------------------------------------<br>";
+														
+														*/
+														
+															$cloecodefinal = "";
+														if(array_key_exists($index,$datalastcount) == 1)
+														{
+														
+														$cloecodefinal = $datalastcount[$index];
+														
+													
+														
+														}else
+														{
+														
+														
+														
+																			if($p == 0)
+																			{
+																			$cloecode = "#43719E";
+																			
+																			}else if($p == 1)
+																			{
+																			$cloecode = "#C69B25";
+																			
+																			} else if($p == 2)
+																			{
+																			$cloecode = "#22B78F";
+																			
+																			}else if($p == 3)
+																			{
+																			$cloecode = "#531E9E";
+																			
+																			}else if($p == 4)
+																			{
+																			$cloecode = "#681313";
+																			
+																			}else if($p == 5)
+																			{
+																			$cloecode = "#FC2F2F";
+																			
+																			}else
+																			{
+																			
+																			$cloecode = "#681313";
+																			
+																			}
+														
+														
+														}
+														
+														
+														
+														
+														
+														
+														
+														
+														
+													
+
+														$chartdatafinal2 = array("type"=>"column","name"=>$index,"color"=>$cloecodefinal,"data"=>$datavalues); 
+														array_push($chtdata,$chartdatafinal2);
+														$p++;
+		
+			}
+			
+
+			
+		
+	
+
+			$labelcurrentyesrdata = array("data"=>$chtdata,"dropdown"=>$filterproductdata);
+			$finaldata1 =  json_encode($labelcurrentyesrdata);
+			print_r($finaldata1);
+
+   }
+   
+      public function lablesdatalast_and_currentyear()
+  {
+  
+ 
+  
+           $chartdataexpired = array();
+           $productdescriptions = array();
+		   
+		   $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+		   
+		   
+		   $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }	
+
+
+		   $product_code = @$this->input->post("product_code");
+		   if($product_code == "")
+		   {
+		   $product_code = " ";
+		   
+		   }
+		   
+		   
+		   
+		   
+            $i=0;
+            $d=0;
+		
+			$productcode = "";
+			$productname = "";
+			$current = date("Y");
+				$lastyear = (date("Y")-1);
+           $rss = new DOMDocument(); 
+
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetLabelsDataCalend_Graph/".$cust_code."/1-1-".$lastyear."/12-31-".$current."/".$email1."/3/Perm/".$location."/".$product_code."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('LabelData') as $node)
+			{
+			
+			//echo trim($node->getElementsByTagName('part_desc')->item(0)->nodeValue," ");
+			
+			array_push($productdescriptions,array("description"=>trim($node->getElementsByTagName('part_desc')->item(0)->nodeValue," "),"partcode"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue));
+			if(trim($node->getElementsByTagName('part_desc')->item(0)->nodeValue," ")!="0"){
+			if($d<1){
+			$productcode = $node->getElementsByTagName('part_code')->item(0)->nodeValue;
+			$productname = $node->getElementsByTagName('part_desc')->item(0)->nodeValue;
+			}
+			$d++;
+			}
+		
+		
+			
+			
+			}
+			
+			
+			
+			
+		
+		
+			
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetLabelsDataCalend_Graph/".$cust_code."/1-1-".$lastyear."/12-31-".$lastyear."/".$email1."/3/Perm/".$location."/".$productcode."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('LabelData') as $node)
+			{
+				array_push($productdescriptions,array("description"=>trim($node->getElementsByTagName('part_desc')->item(0)->nodeValue," "),"partcode"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue));
+			$pertdesc = trim($node->getElementsByTagName('part_desc')->item(0)->nodeValue," ");
+			if($pertdesc!=0)
+			{
+			$pertdesc = $pertdesc."  -  2015";
+			
+			}
+			//echo "<pre>"; print_r($node->getElementsByTagName('part_code')->item(0)->nodeValue); echo "</pre>";
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('XQty')->item(0)->nodeValue,"part_desc"=>$pertdesc,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$i++;
+			
+			
+			}
+			
+		
+					 $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetLabelsDataCalend_Graph/".$cust_code."/1-1-".$current."/12-31-".$current."/".$email1."/3/Perm/".$location."/".$productcode."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('LabelData') as $node)
+			{
+		
+			
+			$pertdesc = trim($node->getElementsByTagName('part_desc')->item(0)->nodeValue," ");
+			if($pertdesc!=0)
+			{
+			$pertdesc = $pertdesc."  -  2016";
+			
+			
+			
+			//echo "<pre>"; print_r($node->getElementsByTagName('part_code')->item(0)->nodeValue); echo "</pre>";
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('XQty')->item(0)->nodeValue,"part_desc"=>$pertdesc,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			
+			}
+			
+			$i++;
+			
+			
+			}
+			
+							$sortedData = array();
+							foreach ($chartdataexpired as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "0")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							  	  if ( ! isSet($sortedData[$datet]) ) 
+								{ 
+									$sortedData[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData[$datet][] = $chartdataexpired[$index];
+								}
+							  }
+							  
+						
+							
+							
+							}
+							
+							
+							
+							
+								$sortedData3 = array();
+							foreach ($productdescriptions as $index => $element) 
+							{
+							
+							if(trim($element['description']," ") == "0")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['description']," ");
+							  	  if ( ! isSet($sortedData[$datet]) ) 
+								{ 
+									$sortedData3[$datet] = array($productdescriptions[$index]);
+								} else { 
+									$sortedData3[$datet][] = $productdescriptions[$index];
+								}
+							  }
+							  
+						
+							
+							
+							}
+							
+							
+	
+
+			$chtdata = array();
+			$chtmnthdata  = array();
+			$filterproductdata  = array();
+$p = 0;
+$oneyeardata = 0;
+			foreach ($sortedData as $index => $element) 
+			{
+			
+			
+			
+			
+			
+			
+														
+															$datavalues = array(); 
+															$totalmontsexit = array();
+															$data = $sortedData[$index];
+															$partcode = "";
+															
+															
+															for($k=0;$k<sizeOf($data);$k++)
+															{
+																array_push($totalmontsexit,$data[$k]['month']);	
+																$partcode = $data[$k]['part_code'];
+															}
+															
+															$descriptiondropdowndata = array("description"=>$index,"partcode"=>$partcode);
+															
+															array_push($filterproductdata,$descriptiondropdowndata);
+																											
+														    for($m= 1;$m <= 12; $m++)
+														    {
+																if(in_array($m,$totalmontsexit))
+																{
+
+																   
+																}else
+																{
+
+																	 $dataArray = array("month"=>$m,"total"=>0,"part_desc"=>"","part_code"=>"");
+																	 array_splice($data,$m-1,0,array($dataArray));
+
+																}
+														    }
+														
+														
+														
+														
+														$treemonthsdata = 0;
+														$sixmonthsdata = 0;
+														
+															for($t=0;$t<sizeOf($data);$t++)
+															{
+															
+															if($p==0)
+															{
+																	
+																	if($t==7 || $t==6 || $t==5 || $t==4 || $t==3 || $t==2 || $t==1)
+																	{
+																	$oneyeardata = $oneyeardata+(float)$data[$t]['total'];
+																	
+																	}	
+																	
+															}else
+															{
+																
+																	
+																	if($t==7 || $t==8 || $t==9 || $t==10 || $t==11)
+																	{
+																	$oneyeardata = $oneyeardata+(float)$data[$t]['total'];
+																	
+																	}
+															
+															}
+															
+															if($t==7 || $t==6 || $t==5)
+															{
+															$treemonthsdata = $treemonthsdata+(float)$data[$t]['total'];
+															
+															}
+															
+															if($t==7 || $t==6 || $t==5 || $t==4 || $t==3 || $t==2)
+															{
+															$sixmonthsdata = $sixmonthsdata+(float)$data[$t]['total'];
+															
+															}
+																     array_push($datavalues,(int)$data[$t]['total']);
+															}
+														
+														
+													
+														
+														$cloecode = "";
+														if($p == 0)
+														{
+														$cloecode = "#2989D8";
+														
+														}else if($p == 1)
+														{
+														$cloecode = "#fb9d23";
+														
+														} else if($p == 2)
+														{
+														$cloecode = "#828c95";
+														
+														}else if($p == 3)
+														{
+														$cloecode = "#a4b357";
+														
+														}else if($p == 4)
+														{
+														$cloecode = "#f1da36";
+														
+														}else if($p == 5)
+														{
+														$cloecode = "#29b8e5";
+														
+														}else
+														{
+														
+														$cloecode = "#828c95";
+														
+														}
+														$chartdatafinal2 = array("type"=>"column","name"=>$index,"color"=>$cloecode,"data"=>$datavalues); 
+														array_push($chtdata,$chartdatafinal2);
+														$p++;
+														
+							
+		
+			}
+			
+			
+			$sortarray4 = array();
+			
+			foreach($sortedData3 as $index => $dropdata)
+			{
+			
+			$arraydata = $sortedData3[$index];
+			
+			foreach($arraydata as $arraydata1)
+			{
+			array_push($sortarray4,array("description"=>$arraydata1['description'],"partcode"=>$arraydata1['partcode']));
+			
+			}
+			
+			 
+			
+			}
+
+			
+
+			$labelcurrentyesrdata = array("data"=>$chtdata,"dropdown"=>$sortarray4,"treemonthscount"=>$treemonthsdata,"sixmonthscount"=>$sixmonthsdata,"oneyeardata"=>$oneyeardata);
+			$finaldata1 =  json_encode($labelcurrentyesrdata);
+			print_r($finaldata1);
+
+   }
+   
+   
+   
+   public function lablesdatalastyear()
+  {
+  
+           $chartdataexpired = array();
+		    $cust_code= $this->session->userdata('cust_code'); 
+		   $email1=$this->session->userdata('email');
+		   
+		   
+		   $location = @$this->input->post("location");
+		   if($location == "")
+		   {
+		   $location = " ";
+		   
+		   }
+		   
+		    $product_code = @$this->input->post("product_code");
+		   if($product_code == "")
+		   {
+		   $product_code = " ";
+		   
+		   }
+		   
+            $i=0;
+           $rss = new DOMDocument(); 
+$lastyear = (date("Y")-1);
+		 
+		   $rss->load("http://216.234.105.194:8089/Alpha.svc/E21GetLabelsDataCalend_Graph/".$cust_code."/1-1-".$lastyear."/12-31-".$lastyear."/".$email1."/3/Perm/".$location."/".$product_code."/8534B244-1DEE-4723-8D5A-EA1113ECDE03/A34AE36F-D516-42A2-8CA1-58B80A94E43D");		
+           foreach ($rss->getElementsByTagName('LabelData') as $node)
+			{
+			//echo "<pre>"; print_r($node->getElementsByTagName('part_code')->item(0)->nodeValue); echo "</pre>";
+	        $params1 = array("month"=>$node->getElementsByTagName('InvoiceMonth01')->item(0)->nodeValue,"total"=>$node->getElementsByTagName('XQty')->item(0)->nodeValue,"part_desc"=>$node->getElementsByTagName('part_desc')->item(0)->nodeValue,"part_code"=>$node->getElementsByTagName('part_code')->item(0)->nodeValue);  
+			$chartdataexpired[$i] = $params1;
+			$i++;
+			
+			
+			}
+			
+			
+			
+			
+							$sortedData = array();
+							foreach ($chartdataexpired as $index => $element) 
+							{
+							
+							if(trim($element['part_desc']," ") == "0")
+							{
+							$datet = "";
+							}else{
+							  $datet = trim($element['part_desc']," ");
+							   if ( ! isSet($sortedData[$datet]) ) 
+								{ 
+									$sortedData[$datet] = array($chartdataexpired[$index]);
+								} else { 
+									$sortedData[$datet][] = $chartdataexpired[$index];
+								}
+							  }
+							  
+							 
+							
+							
+							}
+		
+
+			$chtdata = array();
+			$chtmnthdata  = array();
+$p = 0;
+			foreach ($sortedData as $index => $element) 
+			{
+														
+															$datavalues = array(); 
+															$totalmontsexit = array();
+															$data = $sortedData[$index];																											
+															for($k=0;$k<sizeOf($data);$k++)
+															{
+																array_push($totalmontsexit,$data[$k]['month']);														
+															}
+																											
+														    for($m= 1;$m <= 12; $m++)
+														    {
+															
+															$month = "Jan";
+															
+															if($m == 1)
+															{
+															$month = "Jan";
+															
+															}else if($m == 2)
+															{
+															$month = "Feb";
+															
+															}else if($m == 3)
+															{
+															$month = "Mar";
+															
+															}else if($m == 4)
+															{
+															$month = "Apr";
+															
+															}else if($m == 5)
+															{
+															$month = "May";
+															
+															}else if($m == 6)
+															{
+															$month = "Jun";
+															
+															}else if($m == 7)
+															{
+															$month = "Jul";
+															
+															}else if($m == 8)
+															{
+															$month = "Aug";
+															
+															}else if($m == 9)
+															{
+															$month = "Sept";
+															
+															}else if($m == 10)
+															{
+															$month = "Oct";
+															
+															}else if($m == 11)
+															{
+															$month = "Nov";
+															
+															}else if($m == 12)
+															{
+															$month = "Dec";
+															
+															}else
+															{
+															$month = "Dec";
+															
+															}
+															
+															
+															
+															
+															
+															
+															
+																if(in_array($m,$totalmontsexit))
+																{
+
+																   
+																}else
+																{
+
+																	 $dataArray = array("month"=>$month,"total"=>0,"part_desc"=>"","part_code"=>"");
+																	 array_splice($data,$m-1,0,array($dataArray));
+
+																}
+														    }
+														
+														
+															for($t=0;$t<sizeOf($data);$t++)
+															{
+																     array_push($datavalues,(int)$data[$t]['total']);
+															}
+														
+
+														
+														$cloecode = "";
+														if($p == 0)
+														{
+														$cloecode = "#2989D8";
+														
+														}else if($p == 1)
+														{
+														$cloecode = "#fb9d23";
+														
+														} else if($p == 2)
+														{
+														$cloecode = "#828c95";
+														
+														}else if($p == 3)
+														{
+														$cloecode = "#a4b357";
+														
+														}else if($p == 4)
+														{
+														$cloecode = "#f1da36";
+														
+														}else if($p == 5)
+														{
+														$cloecode = "#29b8e5";
+														
+														}else
+														{
+														
+														$cloecode = "#828c95";
+														
+														}
+														$chartdatafinal2 = array("type"=>"column","name"=>$index,"color"=>$cloecode,"data"=>$datavalues); 
+														array_push($chtdata,$chartdatafinal2);
+														$p++;
+		
+			}
+			
+
+
+			
+			$finaldata1 =  json_encode($chtdata);
+			print_r($finaldata1);
+
+   }
+   
+   public function updateterms()
+   {
+   
+   $val = array('terms_status'=>1);
+$this->session->set_userdata($val);
+   $uid = $this->session->userdata('userid');
+    $this->load->model('Mysmartportal_model');
+	$this->Mysmartportal_model->updateterms($uid);
+   
+   
+   }
+   
 }

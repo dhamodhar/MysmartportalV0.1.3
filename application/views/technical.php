@@ -1152,9 +1152,45 @@ if($count1>0){
                 </div>
             </div>
         </div>
+        
+  
 		
 		<?php 
 		}}} ?>
+        
+        
+	<?php if($this->session->userdata('terms_status')==0){
+		
+		?>	
+		 <!----modal starts here--->
+<div id="modal" class="modal welcome-msg fade" role='dialog' data-backdrop="static" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                <h2 class="modal-title" style="text-align:left;">Hello <?php echo $this->session->userdata('firstname')." ".$this->session->userdata('lastname')?>,</h2>
+            </div>
+            <div class="modal-body">
+                <h3 style="color:#338cc2; text-align:center;">Welocme to the Lowry Smart Portal!</h3>
+<h4 style="color:#949596; text-align:center;">Thank you for choosing Lowry Solutions</h4>
+<h5 id="error" style="color:red; text-align:center; display:none;">To continue, please accept the Terms & Conditions</h5>
+<div style="text-align:center;margin-top:30px;"> <label class="checkbox checkbox-custom-alt checkbox-custom-sm"> <input type="checkbox" name="terms" id="terms"><i></i> I accept the <a class="terms-c" href="http://lowrysmartportal.com/index.php/welcome/terms">Terms & Conditions</a> </label> </div>
+<div  style="text-align:center;">Let's get started!</div>           
+                
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" onclick="terms_status()">Ok</button>
+				
+				<input type="hidden" id="succ" class="btn btn-primary" data-dismiss="modal"/>
+               
+            </div>
+        </div>
+      </div>
+  </div>
+<!--Modal ends here--->
+            
+<?php } ?>
+
         <!--/ Application Content -->
 
 

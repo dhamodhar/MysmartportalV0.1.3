@@ -48,6 +48,9 @@
         <!--/ vendor javascripts -->
 
 
+<script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url()?>demo/assets/buttons.print.min.js"></script>
+
 
 
         <!-- ============================================
@@ -164,22 +167,25 @@ speed: 3000
 		  
 		   });
 		   
-		    var table4 = $('#orders-list').DataTable({
-            "language": {"emptyTable": "No Data Found."},
-                    "order": [[1, "desc"]],	
-                      "bFilter": false,
-					   buttons: {
-									copyTitle: 'Ajouté au presse-papiers',
-									copyKeys: 'Appuyez sur <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> pour copier les données du tableau à votre presse-papiers. <br><br>Pour annuler, cliquez sur ce message ou appuyez sur Echap.',
-									copySuccess: {
-										_: 'Copiés %d rangs',
-										1: 'Copié 1 rang'
-									}
-								},					  
-                    "aoColumnDefs": [
-                      { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-                    ]
-                });
+		    var table4 = $('#orders-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
                 var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -213,6 +219,8 @@ speed: 3000
                 $(tt.fnContainer()).insertAfter('#tableTools');
 $('#orders-list_info').prepend("Total entries: "+i+"<br>");
 $("#ToolTables_orders-list_2").hide();
+$( ".buttons-print" ).hide();
+$("#orders-list_filter").hide();
 //$("#ToolTables_orders-list_1").hide();
             },
             error: function() {
@@ -318,6 +326,7 @@ function searchbydates()
             dataType: "text",
             success: function(xml){
 			//alert(xml);
+			var i = "";
 			$('#orders-list tbody').html("");
                 $(xml).find('order').each(function(){
 				
@@ -332,7 +341,7 @@ function searchbydates()
 				var tracker_no = $(this).find('tracker_no').text();
 				var act_ship_date = $(this).find('act_ship_date').text();
 				  var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
-				
+				 i = $(this).find('RecCount').text();
 				var encodedString = Base64.encode(orderNumber);
 				var finalordernumber = encodeURIComponent(String(encodedString));
 				  if(orderNumber!="")
@@ -345,13 +354,25 @@ function searchbydates()
 
 		   
 							   
-									var table4 = $('#orders-list').DataTable({
-									"language": {"emptyTable": "No Data Found."},	
-									 "bFilter": false,
-										"aoColumnDefs": [
-										  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-										]
-									});
+									var table4 = $('#orders-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 									var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -382,8 +403,12 @@ function searchbydates()
 									});
 
 									$(tt.fnContainer()).insertAfter('#tableTools');
-									
+									$('#orders-list_info').prepend("Total entries: "+i+"<br>");
+                                    //$("#ToolTables_orders-list_2").hide();
 									$("#save").hide();
+									
+									$( ".buttons-print" ).hide();
+									$("#orders-list_filter").hide();
                                     //$("#ToolTables_orders-list_1").hide();
 				
 				
@@ -431,8 +456,7 @@ document.getElementById("count").value = total_count;
             url: "<?php echo base_url()?>index.php/welcome/all_orders/1/"+total_count,
             dataType: "text",
             success: function(xml){
-			//alert(xml);
-			//$('#orders-list tbody').append(xml);
+	var i ="";
                 $(xml).find('order').each(function(){
 				
                 var orderNumber= $(this).find('order_number').text();
@@ -445,7 +469,7 @@ document.getElementById("count").value = total_count;
 				var order_status= $(this).find('order_status').text();
 				var tracker_no = $(this).find('tracker_no').text();
 				var error = $(this).find('error').text();
-				
+				i = $(this).find('RecCount').text();
                 //var sPublisher = $(this).find('Publisher').text();
                //alert(sTitle);
 			   if(error!="Error"){
@@ -462,13 +486,25 @@ document.getElementById("count").value = total_count;
 }}				 
 		   });
 		   
-		    var table4 = $('#orders-list').DataTable({
-                "language": {"emptyTable": "No Data Found."},
- "bFilter": false,				
-                    "aoColumnDefs": [
-                      { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-                    ]
-                });
+		    var table4 = $('#orders-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
                 var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -499,8 +535,10 @@ document.getElementById("count").value = total_count;
                 });
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
+				$('#orders-list_info').prepend("Total entries: "+i+"<br>");
                                     $("#save").hide();
-                                   // $("#ToolTables_orders-list_1").hide();
+                                  $( ".buttons-print" ).hide();
+$("#orders-list_filter").hide();
 				
             },
             error: function() {

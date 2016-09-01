@@ -4,14 +4,14 @@
         ============== Vendor JavaScripts ===============
         ============================================= -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo base_url()?>assets/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')</script>
+         <script>window.jQuery || document.write('<script src="<?php echo base_url()?>assets/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')</script>
 
-        <script src="<?php echo base_url()?>assets/js/vendor/bootstrap/bootstrap.min.js"></script>
+         <script src="<?php echo base_url()?>assets/js/vendor/bootstrap/bootstrap.min.js"></script>
          <script src="<?php echo base_url()?>assets/js/vendor/owl-carousel/owl.carousel.min.js"></script>
 
-        <script src="<?php echo base_url()?>assets/js/vendor/jRespond/jRespond.min.js"></script>
+         <script src="<?php echo base_url()?>assets/js/vendor/jRespond/jRespond.min.js"></script>
 
-        <script src="<?php echo base_url()?>assets/js/vendor/sparkline/jquery.sparkline.min.js"></script>
+         <script src="<?php echo base_url()?>assets/js/vendor/sparkline/jquery.sparkline.min.js"></script>
 
         <script src="<?php echo base_url()?>assets/js/vendor/slimscroll/jquery.slimscroll.min.js"></script>
 
@@ -43,7 +43,12 @@
 
 
 
-
+ <link href="<?php echo base_url()?>assets/bootstrap.min.css"
+        rel="stylesheet" type="text/css" />
+  <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />
+    <script src="<?php echo base_url()?>assets/bootstrap-multiselect.js"
+        type="text/javascript"></script>
 
         <!-- ============================================
         ============== Custom JavaScripts ===============
@@ -56,11 +61,6 @@
 
 
       
-	<!-- ============================================
-        ============== Custom JavaScripts ===============
-        ============================================= -->
-        <script src="<?php echo base_url()?>assets/js/main.js"></script>
-        <!--/ custom javascripts -->
 
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
@@ -81,19 +81,1173 @@
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<script src="<?php echo base_url()?>assets/amcharts/amstock.js" type="text/javascript"></script>
-
-
-<script type="text/javascript">
-window.onload = function () {
-//opentickets();
-opentickets1();
-//alltickets();
-//onsite_deport();
-$( ".amcharts-start-date-input" ).datepicker();
-$( ".amcharts-end-date-input" ).datepicker();
+		<script src="<?php echo base_url()?>assets/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+   <script type="text/javascript">
+        $(function () {
+            $('#location').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) 
+			{
+			
+                
+            },onDropdownShow: function(event) {
+      var menu = $(event.currentTarget).find(".dropdown-menu");
+      menu.css("width", 500);   
+    }
+			
+            });
+			  
+            
+        });
+    </script>
+	
+	
+	
+	<script>
+function searchbydates()
+{
+var loccount = $("#loccount").val();
+var selected11 = $("#location option:selected");
+               var k = 0;
+                selected11.each(function () {
+				
+                    k++;
+                });
+				
+				
+				if(loccount == k)
+				{
+				location.reload();
+				
+				}
+			
+			if(k<8)
+			{
+			barchartservicetickets_locationlastyear();
+			barchartservicetickets1_bylocation();
+				document.getElementById("locationerror").style.display ='none';
+			
+			}else
+			{
+			
+			document.getElementById("locationerror").style.display ='block';
+			
+			
+			}	
+		
 }
 
 </script>
+
+
+<script>
+function searchbydates1()
+{
+var loccount = $("#loccount").val();
+var selected11 = $("#location1 option:selected");
+               var k = 0;
+                selected11.each(function () {
+				
+                    k++;
+                });
+				
+				if(loccount == k)
+				{
+				location.reload();
+				
+				}
+			
+			if(k<8)
+			{
+	ribbanschart2_bylocation();
+			ribbanschart1_bylocation();
+				document.getElementById("locationerror1").style.display ='none';
+			
+			}else
+			{
+			
+			document.getElementById("locationerror1").style.display ='block';
+			
+			
+			}	
+		
+}
+
+</script>
+	
+	   <script type="text/javascript">
+        $(function () {
+            $('#location1').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) 
+			{
+		
+			//searchbylocation(1);
+                
+            },onDropdownShow: function(event) {
+      var menu = $(event.currentTarget).find(".dropdown-menu");
+      menu.css("width", 500);   
+    }
+			
+            });
+			  
+            
+        });
+    </script>	   <script type="text/javascript">
+        $(function () {
+            $('#locationtwoyears').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) 
+			{
+		
+			//searchbylocation(1);
+                
+            },onDropdownShow: function(event) {
+      var menu = $(event.currentTarget).find(".dropdown-menu");
+      menu.css("width", 500);   
+    }
+			
+            });
+			  
+            
+        });
+    </script>
+<script type="text/javascript">
+window.onload = function () {
+$("#labelslastyear_error").hide();
+$("#labelscurrentyear_error").hide();
+$("#ribbanscurrentyear_error").hide();
+$("#ribbanscurrentyear_error1").hide();
+labelslastandcurrentyear();
+barchartservicetickets();
+barchartservicetickets1();
+ribbanschart1();
+ribbanschart2();
+
+}
+
+</script>
+
+<script>
+	function labelslastandcurrentyear()
+	{
+	
+	
+	var data1 = "";
+	var data = "";
+	var treemnthsdata = "";
+	var sixmnthsdata = "";
+	var oneyear = "";
+	
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatalast_and_currentyear",
+            success: function(xml)
+			{
+            var optiondata = "";
+		    var obj = JSON.parse(xml);
+                data = obj.data;
+				dropdowndata = obj.dropdown;
+				treemnthsdata = obj.treemonthscount;
+				sixmnthsdata = obj.sixmonthscount;
+				oneyear = obj.oneyeardata;
+				for(var i=0; i<dropdowndata.length;i++)
+				{
+				     optiondata = optiondata+"<option value='"+dropdowndata[i]['partcode'].trim()+"'>"+dropdowndata[i]['description']+"</option>";			
+				}
+				
+				if(data == "")
+				{
+				$("#labelscurrentyear_error").show();
+				$("#filterdata").hide();
+				
+				}else
+				{
+				  	$("#product").html("<option value='All'>ALL</option>"+optiondata);
+				  	$("#treemonthacount").html(Math.round(treemnthsdata/3));
+				  	$("#sixmonthacount").html(Math.round(sixmnthsdata/6));
+						$("#oneyear").html(Math.round(oneyear/12));
+						$("#product_lables").html(optiondata);
+				
+				labelsatglance();
+				}
+
+			}
+			
+			});
+			
+			function labelsatglance(){
+
+    $('#lableslastandcurrentyear').highcharts({
+        title: {
+            text: 'Labels Usage 2015 & 2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sept','Oct','Nov','Dec']
+        },
+      legend: {
+              showInLegend: false, 
+
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	
+	
+	<script>
+	function labelslastandcurrentyearbyproductcode(id)
+	{
+	
+	
+	lastandcurrent_byproductcode(id);
+	//barchartservicetickets1_byproductcodelastyear(id);
+	}
+	
+	</script>
+	
+	<script>
+	function lastandcurrent_byproductcode(id)
+	{
+	
+	var selected1 = $("#locationtwoyears option:selected");
+                var message1 = "";
+                selected1.each(function () {
+					if(message1=="")
+					{
+					message1 = $(this).val();
+					}else
+					{
+					message1 = message1+"|"+$(this).val();
+					}
+                    
+                });
+				
+	var data1 = "";
+	var data = "";
+		var treemnthsdata = "";
+	var sixmnthsdata = "";
+	var oneyear = "";
+	
+	if(id!="0")
+	{
+	
+	if(id == "All")
+	{
+	 location.reload();
+	
+	}
+	$('#lableslastandcurrentyear').html("");
+	
+	
+	       $.ajax({
+            type: "post",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatalast_and_currentyear",
+			data: "location="+message1+"&product_code="+id,
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj.data;
+					treemnthsdata = obj.treemonthscount;
+				sixmnthsdata = obj.sixmonthscount;
+				oneyear = obj.oneyeardata;
+				$("#treemonthacount").html(Math.round(treemnthsdata/3));
+				  	$("#sixmonthacount").html(Math.round(sixmnthsdata/6));
+						$("#oneyear").html(Math.round(oneyear/12));
+				labelslastteoyears();
+					
+				//barchartservicetickets1_byproductcodelastyear(id);
+
+			}
+			
+			});
+			
+	}
+			
+			function labelslastteoyears(){
+
+    $('#lableslastandcurrentyear').highcharts({
+        title: {
+            text: 'Labels Usage 2015 & 2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+      legend: {
+              showInLegend: false, 
+
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	
+	<script>
+	function lastandcurrent_bylocation()
+	{
+	
+	var selected1 = $("#locationtwoyears option:selected");
+                var message1 = "";
+                selected1.each(function () {
+					if(message1=="")
+					{
+					message1 = $(this).val();
+					}else
+					{
+					message1 = message1+"|"+$(this).val();
+					}
+                    
+                });
+				
+	var data1 = "";
+	var data = "";
+	var treemnthsdata = "";
+	var sixmnthsdata = "";
+	var oneyear = "";
+	
+
+	$('#lableslastandcurrentyear').html("");
+	
+	
+	       $.ajax({
+            type: "post",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatalast_and_currentyear",
+			data: "location="+message1,
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj.data;
+					treemnthsdata = obj.treemonthscount;
+				sixmnthsdata = obj.sixmonthscount;
+				oneyear = obj.oneyeardata;
+					$("#treemonthacount").html(Math.round(treemnthsdata/3));
+				  	$("#sixmonthacount").html(Math.round(sixmnthsdata/6));
+						$("#oneyear").html(Math.round(oneyear/12));
+				labelslastteoyears();
+				//barchartservicetickets1_byproductcodelastyear(id);
+
+			}
+			
+			});
+			
+	
+			
+			function labelslastteoyears(){
+
+    $('#lableslastandcurrentyear').highcharts({
+        title: {
+            text: 'Labels Usage 2015 & 2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+      legend: {
+              showInLegend: false, 
+
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+
+<script>
+	function barchartservicetickets()
+	{
+	
+	
+	var data1 = "";
+	var data = "";
+	
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatalastyear",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj;
+				//alert(data);
+				
+				if(data == "")
+				{
+				$("#labelslastyear_error").show();
+				
+				}else
+				{
+				   barchart();
+				}
+
+			}
+			
+			});
+			
+			function barchart(){
+
+    $('#container').highcharts({
+        title: {
+            text: 'Labels Usage 2015'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sept','Oct','Nov','Dec']
+        },
+      legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	
+	<script>
+	function barchartservicetickets_locationlastyear()
+	{
+	
+	
+	var data1 = "";
+	var data = "";
+	
+		var selected = $("#location option:selected");
+                var message = "";
+				var k =0;
+                selected.each(function () {
+				k++;
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					} 
+                });
+				
+				
+	
+	
+	if(message!=""){
+	$('#container').html("");
+					$.ajax({
+					type: "post",
+					url: "<?php echo base_url()?>index.php/welcome/lablesdatalastyear",
+					data:"location="+message,
+					success: function(xml)
+					{
+
+						var obj = JSON.parse(xml);
+						data = obj;
+						if(data == "")
+						{
+						$("#labelslastyear_error").show();
+						
+						}else
+						{
+						   barchart();
+						}
+
+
+					}
+					
+					});
+			
+			}
+			function barchart(){
+
+    $('#container').highcharts({
+        title: {
+            text: 'Labels Usage 2015'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sept','Oct','Nov','Dec']
+        },
+      legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	
+	
+	<script>
+	function barchartservicetickets1()
+	{
+	
+	
+	var data1 = "";
+	var data = "";
+	var dropdowndata = "";
+	var optiondata = "";
+	       $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatacurrentyear",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj.data;
+				dropdowndata = obj.dropdown;
+				for(var i=0; i<dropdowndata.length;i++)
+				{
+				optiondata = optiondata+"<option value='"+dropdowndata[i]['partcode'].trim()+"'>"+dropdowndata[i]['description']+"</option>"
+				
+				//alert(dropdowndata[i]['description']);
+				
+				}
+				
+				if(data == "")
+				{
+				$("#labelscurrentyear_error").show();
+				$("#filterdata").hide();
+				
+				}else
+				{
+				  	$("#product").html("<option value='All'>ALL</option>"+optiondata);
+				  	
+				
+				barchart();
+				}
+
+			
+
+			}
+			
+			});
+			
+			function barchart(){
+
+    $('#container1').highcharts({
+        title: {
+            text: 'Labels Usage 2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+       legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	
+	
+	
+		<script>
+	function barchartservicetickets1_bylocation()
+	{
+	
+	var selected1 = $("#location option:selected");
+                var message1 = "";
+				var t=0;
+                selected1.each(function () {
+				t++;
+					if(message1=="")
+					{
+					message1 = $(this).val();
+					}else
+					{
+					message1 = message1+"|"+$(this).val();
+					}
+                    
+                });
+				
+	var data1 = "";
+	var data = "";
+	
+	
+	if(message1!="")
+	{
+	$('#container1').html("");
+	
+	
+	       $.ajax({
+            type: "post",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatacurrentyear",
+			data: "location="+message1,
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj.data;
+				
+				
+				if(data == "")
+				{
+				$("#labelscurrentyear_error").show();
+				$("#filterdata").hide();
+				
+				}else
+				{
+				  	//$("#product").html("<option value='All'>ALL</option>"+optiondata);
+				
+				barchart_bylocation();
+				}
+				
+
+			}
+			
+			});
+			
+	}
+			
+			function barchart_bylocation(){
+
+    $('#container1').highcharts({
+        title: {
+            text: 'Labels Usage 2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+      legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	<script>
+	function labelsbyproductcode(id)
+	{
+	
+	
+	barchartservicetickets1_byproductcode(id);
+	//barchartservicetickets1_byproductcodelastyear(id);
+	}
+	
+	</script>
+	
+	<script>
+	function barchartservicetickets1_byproductcode(id)
+	{
+	
+	var selected1 = $("#location option:selected");
+                var message1 = "";
+                selected1.each(function () {
+					if(message1=="")
+					{
+					message1 = $(this).val();
+					}else
+					{
+					message1 = message1+"|"+$(this).val();
+					}
+                    
+                });
+				
+	var data1 = "";
+	var data = "";
+	
+	
+	if(id!="0")
+	{
+	
+	if(id == "All")
+	{
+	 location.reload();
+	
+	}
+	$('#container1').html("");
+	
+	
+	       $.ajax({
+            type: "post",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatacurrentyear",
+			data: "location="+message1+"&product_code="+id,
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj.data;
+				barchart_bylocation();
+				barchartservicetickets1_byproductcodelastyear(id);
+
+			}
+			
+			});
+			
+	}
+			
+			function barchart_bylocation(){
+
+    $('#container1').highcharts({
+        title: {
+            text: 'Labels Usage 2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+      legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+		<script>
+	function barchartservicetickets1_byproductcodelastyear(id)
+	{
+	
+	var selected1 = $("#location option:selected");
+                var message1 = "";
+                selected1.each(function () {
+					if(message1=="")
+					{
+					message1 = $(this).val();
+					}else
+					{
+					message1 = message1+"|"+$(this).val();
+					}
+                    
+                });
+				
+	var data1 = "";
+	var data2 = "";
+	
+	
+	if(id!="0")
+	{
+	
+	if(id == "All")
+	{
+	 location.reload();
+	
+	}
+	$('#container').html("");
+	
+var databyproductcode = "";
+	       $.ajax({
+            type: "post",
+            url: "<?php echo base_url()?>index.php/welcome/lablesdatalastyear",
+			data: "location="+message1+"&product_code="+id,
+            success: function(xml)
+			{
+			    var obj = JSON.parse(xml);
+                databyproductcode = obj;	
+				barchart_bylocation1();
+
+			}
+			
+			});
+			
+	}
+			
+			function barchart_bylocation1(){
+
+    $('#container').highcharts({
+        title: {
+            text: 'Labels Usage 2015'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+      legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: databyproductcode
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	
+	
+	<script>
+	function ribbanschart1()
+	{
+	
+	
+	var data1 = "";
+	var data2 = "";
+	   $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/ribbunslastyear",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj;
+				//alert();
+				if(data == "")
+						{
+						$("#ribbanscurrentyear_error").show();
+						
+						}else
+						{
+						  barchartforribbans();
+						}
+
+				
+				
+
+			}
+			
+			});
+	      	//barchartforribbans();
+			
+			function barchartforribbans(){
+
+    $('#container2').highcharts({
+        title: {
+            text: '2015'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+      legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	
+	<script>
+	function ribbanschart1_bylocation()
+	{
+	
+	
+	var data1 = "";
+	var data2 = "";
+	
+	
+	var selected1 = $("#location1 option:selected");
+                var message1 = "";
+                selected1.each(function () {
+					if(message1=="")
+					{
+					message1 = $(this).val();
+					}else
+					{
+					message1 = message1+"|"+$(this).val();
+					}
+                    
+                });
+				
+				if(message1!="")
+				{
+	$('#container2').html("");
+							   $.ajax({
+									type: "post",
+									url: "<?php echo base_url()?>index.php/welcome/ribbunslastyear",
+									data:"location="+message1,
+									success: function(xml)
+									{
+
+										var obj = JSON.parse(xml);
+										data = obj;
+										
+						if(data == "")
+						{
+						$("#ribbanscurrentyear_error").show();
+						
+						}else
+						{
+						 barchartforribbans_bylocation();
+						}
+										
+										
+
+									}
+									
+									});
+			
+			
+			    }
+	      	//barchartforribbans();
+			
+			function barchartforribbans_bylocation(){
+
+    $('#container2').highcharts({
+        title: {
+            text: '2015'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+    legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+	
+	<script>
+	function ribbanschart2()
+	{
+	
+	
+		var data1 = "";
+	var data = "";
+	
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/ribbuns",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj;
+					if(data == "")
+						{
+						$("#ribbanscurrentyear_error1").show();
+						
+						}else
+						{
+							barchartforribbans1();
+						}
+			
+
+			}
+			
+			});
+	      	barchartforribbans1();
+			
+			function barchartforribbans1(){
+
+    $('#container3').highcharts({
+        title: {
+            text: '2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+   legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+<script>
+	function ribbanschart2_bylocation()
+	{
+	
+	
+		var data1 = "";
+	var data = "";
+	var selected = $("#location1 option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+				
+				if(message!="")
+				{
+				
+				$('#container3').html("");
+								$.ajax({
+								type: "post",
+								url: "<?php echo base_url()?>index.php/welcome/ribbuns",
+								data:"location="+message,
+								success: function(xml)
+								{
+
+									var obj = JSON.parse(xml);
+									data = obj;
+						if(data == "")
+						{
+						$("#ribbanscurrentyear_error1").show();
+						
+						}else
+						{
+						barchartforribbans1_bylocation();
+						}
+									
+
+								}
+								
+								});
+			
+			    }
+	      	//barchartforribbans1();
+			
+			function barchartforribbans1_bylocation(){
+
+    $('#container3').highcharts({
+        title: {
+            text: '2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+    legend: {
+            layout: 'top',
+            
+          
+            borderWidth: 0
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+<!--
 
 <script>
 function opentickets()
@@ -261,51 +1415,212 @@ function opentickets1()
 var chartData1 = [];
 var chartData2 = [];
 var chartData3 = [];
+var productdata = [];
+var products = "";
+
+			$.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/labelsdata",
+            success: function(xml)
+			{
+				//alert(xml);
+			var obj = JSON.parse(xml);
+		
+			
+			chartData1 = obj.chartdata;
+			productdata = obj.productdata;
+			//alert(obj.productdata);
+
+			$.each( productdata, function( key, value ) 
+			{
+			   products = products+"<option value='"+value.part_code+"'>"+value.part_desc+"</option>";
+			   
+ // alert(value.part_code);
+            });
+			//$("#product").html("<option>Select Product</option>"+products);
+			generateChartDatafirsttime();
+			displaychartfirsttime();
+
+			}
+			
+			});
+			
+			
+//generateChartData();
+
+function generateChartDatafirsttime() {
+                 
+								 
+}
 
 
-generateChartData();
+function displaychartfirsttime()
+{
+
+
+
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "stock",
+  "theme": "light",
+
+  "dataSets": chartData1,
+
+  "panels": [ {
+    "showCategoryAxis": false,
+    "title": "Value",
+    "percentHeight": 70,
+    "stockGraphs": [ {
+      "id": "g1",
+      "valueField": "value",
+      "comparable": true,
+      "compareField": "value",
+      "balloonText": "[[title]]:<b>[[value]]</b>",
+      "compareGraphBalloonText": "[[title]]:<b>[[value]]</b>"
+    } ],
+    "stockLegend": {
+      "periodValueTextComparing": "[[percents.value.close]]%",
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  }, {
+    "title": "Volume",
+    "percentHeight": 30,
+    "stockGraphs": [ {
+      "valueField": "volume",
+      "type": "column",
+      "showBalloon": false,
+      "fillAlphas": 1
+    } ],
+    "stockLegend": {
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  } ],
+
+  "chartScrollbarSettings": {
+    "graph": "g1"
+  },
+
+  "chartCursorSettings": {
+    "valueBalloonsEnabled": true,
+    "fullWidth": true,
+    "cursorAlpha": 0.1,
+    "valueLineBalloonEnabled": true,
+    "valueLineEnabled": true,
+    "valueLineAlpha": 0.5
+  },
+
+  "periodSelector": {
+    "position": "left",
+	"percentWidth": 40,
+    "periods": [ {
+      "period": "MM",
+      "selected": true,
+      "count": 1,
+      "label": "1 month"
+    }, {
+      "period": "YYYY",
+      "count": 1,
+      "label": "1 year"
+    }, {
+      "period": "YTD",
+      "label": "YTD"
+    }, {
+      "period": "MAX",
+      "label": "MAX"
+    } ]
+  },
+
+  "dataSetSelector": {
+    "position": "left",
+	"percentWidth": 40
+  },
+
+  "export": {
+    "enabled": true
+  }
+} );
+
+}
+
+}
+</script>
+
+
+
+<script>
+function searchbylocation(id)
+{
+
+var selected = $("#location option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+				
+				
+
+
+
+
+
+var chartData1 = [];
+var chartData2 = [];
+var chartData3 = [];
+var productdata = [];
+var products = "";
+
+
+if(message != ""){
+$("#chartdiv").html("");
+						$.ajax({
+						type: "post",
+						url: "<?php echo base_url()?>index.php/welcome/labelsdata",
+						data:"locations="+message,
+						success: function(xml)
+						{
+							//alert(xml);
+						var obj = JSON.parse(xml);
+					
+						
+						chartData1 = obj.chartdata;
+						productdata = obj.productdata;
+						//alert(obj.productdata);
+
+						$.each( productdata, function( key, value ) 
+						{
+						   products = products+"<option value='"+value.part_code+"'>"+value.part_desc+"</option>";
+						   
+			 // alert(value.part_code);
+						});
+						//$("#product").html("<option>Select Product</option>"+products);
+						generateChartData();
+						displaychart();
+
+						}
+						
+						});
+			
+			}
+			
+			
+//generateChartData();
 
 function generateChartData() {
-                     chartData1 = [{date:new Date(2015, 0, 1),
-								  value:140,
-								  volume:100},{date:new Date(2015, 2, 10),
-								  value:160,
-								  volume:260},{date:new Date(2015, 4, 15),
-								  value:300,
-								  volume:430},{date:new Date(2015, 6, 20),
-								  value:40,
-								  volume:340},{date:new Date(2015, 8, 25),
-								  value:510,
-								  volume:510}
-								  
-								  ];
-								      chartData2 = [{date:new Date(2015, 0, 1),
-								  value:100,
-								  volume:100},{date:new Date(2015, 2, 10),
-								  value:60,
-								  volume:60},{date:new Date(2015, 5, 15),
-								  value:30,
-								  volume:30},{date:new Date(2015, 8, 20),
-								  value:140,
-								  volume:140},{date:new Date(2015, 11, 25),
-								  value:210,
-								  volume:210}
-								  
-								  ];
-								       chartData3 = [{date:new Date(2015, 0, 1),
-								  value:10,
-								  volume:10},{date:new Date(2015, 4, 10),
-								  value:70,
-								  volume:70},{date:new Date(2015, 7, 15),
-								  value:40,
-								  volume:40},{date:new Date(2015, 9, 20),
-								  value:340,
-								  volume:340},{date:new Date(2015, 11, 25),
-								  value:610,
-								  volume:610}
-								  
-								  ];
+                   
+								 
 }
+
+
+function displaychart()
+{
+
+
 
 var chart = AmCharts.makeChart( "chartdiv", {
   "type": "stock",
@@ -321,28 +1636,6 @@ var chart = AmCharts.makeChart( "chartdiv", {
         "toField": "volume"
       } ],
       "dataProvider": chartData1,
-      "categoryField": "date"
-    }, {
-      "title": "scanners",
-      "fieldMappings": [ {
-        "fromField": "value",
-        "toField": "value"
-      }, {
-        "fromField": "volume",
-        "toField": "volume"
-      } ],
-      "dataProvider": chartData2,
-      "categoryField": "date"
-    }, {
-      "title": "printers",
-      "fieldMappings": [ {
-        "fromField": "value",
-        "toField": "value"
-      }, {
-        "fromField": "volume",
-        "toField": "volume"
-      } ],
-      "dataProvider": chartData3,
       "categoryField": "date"
     }
   ],
@@ -418,6 +1711,157 @@ var chart = AmCharts.makeChart( "chartdiv", {
     "enabled": true
   }
 } );
+
+}
+
+}
+</script>
+<script>
+function searchbyproduct(id)
+{
+
+
+
+//alert(id.trim());
+
+var chartData1 = [];
+var chartData2 = [];
+var chartData3 = [];
+var productdata = [];
+var products = "";
+//alert("<?php echo base_url()?>index.php/welcome/labelsdata/%20/"+id.trim());
+			$.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/labelsdata/%20/"+id.trim(),
+            success: function(xml)
+			{
+				//alert(xml);
+			var obj = JSON.parse(xml);
+		
+			
+			chartData1 = obj.chartdata;
+			productdata = obj.productdata;
+			//alert(obj.productdata);
+
+			$.each( productdata, function( key, value ) 
+			{
+			   products = products+"<option value='"+value.part_code+"'>"+value.part_desc+"</option>";
+			   
+ // alert(value.part_code);
+            });
+			//$("#product").html("<option>Select Product</option>"+products);
+			generateChartDatabyproduct();
+			displaychartbyproduct();
+
+			}
+			
+			});
+			
+			
+//generateChartData();
+
+function generateChartDatabyproduct() {
+                  
+								 
+}
+
+
+function displaychartbyproduct()
+{
+
+
+
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "stock",
+  "theme": "light",
+
+  "dataSets": [ {
+      "title": "Quantity Shipped",
+      "fieldMappings": [ {
+        "fromField": "value",
+        "toField": "value"
+      }, {
+        "fromField": "volume",
+        "toField": "volume"
+      } ],
+      "dataProvider": chartData1,
+      "categoryField": "date"
+    }
+  ],
+
+  "panels": [ {
+    "showCategoryAxis": false,
+    "title": "Value",
+    "percentHeight": 70,
+    "stockGraphs": [ {
+      "id": "g1",
+      "valueField": "value",
+      "comparable": true,
+      "compareField": "value",
+      "balloonText": "[[title]]:<b>[[value]]</b>",
+      "compareGraphBalloonText": "[[title]]:<b>[[value]]</b>"
+    } ],
+    "stockLegend": {
+      "periodValueTextComparing": "[[percents.value.close]]%",
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  }, {
+    "title": "Volume",
+    "percentHeight": 30,
+    "stockGraphs": [ {
+      "valueField": "volume",
+      "type": "column",
+      "showBalloon": false,
+      "fillAlphas": 1
+    } ],
+    "stockLegend": {
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  } ],
+
+  "chartScrollbarSettings": {
+    "graph": "g1"
+  },
+
+  "chartCursorSettings": {
+    "valueBalloonsEnabled": true,
+    "fullWidth": true,
+    "cursorAlpha": 0.1,
+    "valueLineBalloonEnabled": true,
+    "valueLineEnabled": true,
+    "valueLineAlpha": 0.5
+  },
+
+  "periodSelector": {
+    "position": "left",
+    "periods": [ {
+      "period": "MM",
+      "selected": true,
+      "count": 1,
+      "label": "1 month"
+    }, {
+      "period": "YYYY",
+      "count": 1,
+      "label": "1 year"
+    }, {
+      "period": "YTD",
+      "label": "YTD"
+    }, {
+      "period": "MAX",
+      "label": "MAX"
+    } ]
+  },
+
+  "dataSetSelector": {
+    "position": "left"
+  },
+
+  "export": {
+    "enabled": true
+  }
+} );
+
+}
 
 }
 </script>
@@ -611,7 +2055,7 @@ function handleRollOver(e){
 </script>
 
 
-
+-->
 
         <!-- ===============================================
         ============== Page Specific Scripts ===============

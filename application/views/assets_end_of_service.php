@@ -29,17 +29,17 @@
 <div class='hiddenRow'>
  <div class='level3 accordian-body collapse' id='demo1'>
                      <ul>
-<li><strong>End of Life Assests</strong></li>
+<li><strong>End of Sevice Life Cycle</strong></li>
 <li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
 <li>Once logged in, on the left hand side menu user can find Asset Inventory tab as the sixth option</li>
 <li>Click on ‘Asset Inventory’ to expand</li>
-<li>Click on ‘End of Life Assets’ to open the corresponding page</li>
-<li>The list of all End of LIfe Assets will be displayed in a table</li>
-<li><img src='http://lowrysmartportal.com/assets/images/end-of-life-img.jpg'/></li>
+<li>Click on ‘End of Sevice Life Cycle’ to open the corresponding page</li>
+<li>The list of all End of Sevice Life Cycle records will be displayed in a table</li>
+<li><img src='http://lowrysmartportal.com/assets/images/end-of-life-service-img.jpg'/></li>
 <li class='blue-bold'>Functionality</li>
-<li>Users can perform various functionalities provided in the End of Life Assets page for ease of use and access,  They are: </li>
-<li class='blue-bold'>  End of Life Assets Search</li>
-<li>User can search End of Life Assets records by using the functionality </li>
+<li>Users can perform various functionalities provided in the End of Sevice Life Cycle page for ease of use and access,  They are: </li>
+<li class='blue-bold'>  End of Sevice Life Cycle Search</li>
+<li>User can search End of Sevice Life Cycle records by using the functionality </li>
 
 <li>User can use any one option below for search
 <ul class='sub-he'>
@@ -82,13 +82,13 @@
                             </ul>
                             
                         </div>
-<div class="col-md-6 cps ">
+<div class="col-md-6 cps " id="allbtns">
 
 <input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
 <div id="tableTools"></div>
 
 <div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
-<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please don't close until it is completed.</div>
 
  
  </div>
@@ -207,7 +207,7 @@
 											
 											
                                         </div>
-<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<button class="btn btn-primary btn-xs load-buts" id="ldmr" onclick="loadmore()" value="Load More">Load More</button>
 
                                     </div> </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"><br><span style="color: #418bca;

@@ -84,7 +84,7 @@ User can use any option below to search the invoices
 <input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
 <div id="tableTools"></div>
 <div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
-<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please don't close until it is completed.</div>
 
 </div>
 
@@ -112,7 +112,8 @@ User can use any option below to search the invoices
 											<option>Order Number</option>
 											<option>Invoice Number</option>
 											<option>Custmer PO</option>
-											<option>Order Date</option>											
+											<option>Order Date</option>	
+											
 											</select>
                                            <!-- <input type="text" name="invoice_number" id="invoice_number" class="form-control" id="exampleInputEmail2" placeholder="Search by Invoice Number">   
 -->
@@ -189,6 +190,7 @@ User can use any option below to search the invoices
 													<th style="width:100px;text-align:right;padding-right:20px;">Carrier</th> 
 													<th style="width:100px;text-align:right;padding-right:20px;">Carrier Status</th> 
                                                                                                         <th style="width:100px;text-align:right;padding-right:20px;">Customer PO</th>
+																										<th style="width:100px;"> Ask a Question </th>
 													 
 												
 													

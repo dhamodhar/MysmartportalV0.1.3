@@ -82,7 +82,7 @@ User can use any option below to search the Past Due Invoices.
 <input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
 <div id="tableTools"></div>
 <div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
-<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please don't close until it is completed.</div>
 
 
                     </div>
@@ -193,6 +193,7 @@ User can use any option below to search the Past Due Invoices.
 													<th style="width:100px;text-align:center;">Due Date</th> 
                                                     <th style="width:100px;text-align:center;">Customer PO</th>
 													<th style="width:100px;text-align:center;">Order Number</th>
+													<th style="width:100px;text-align:center;">Ask a Question</th>
 												
 													
 													

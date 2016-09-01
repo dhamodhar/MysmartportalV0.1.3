@@ -33,10 +33,10 @@ $c_number == " ";
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/dataTables.bootstrap.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/Pagination/input.js"></script>
 	<script src="<?php echo base_url()?>assets/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.min.js"></script>
+     
 	<script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
-	 <script src="<?php echo base_url()?>assets/vendor/flot/jquery.flot.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.pie.min.js"></script>
+
+
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>	
   <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/moment.min.js"></script>
@@ -48,6 +48,9 @@ $c_number == " ";
 
 
 <script src="<?php echo base_url()?>assets/jquery.simple-text-rotator.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url()?>demo/assets/buttons.print.min.js"></script>
 
         <!-- ============================================
         ============== Custom JavaScripts ===============
@@ -81,30 +84,42 @@ speed: 3000
         ================================================ -->
          <script>
 
- $(document).ready(function(){
-	  var test1 = "";
-	   $(document).ajaxStart(function(){
-    $("#wait").css("display", "block");
-     });
-	 
-	 $(document).ajaxComplete(function(){
-    $("#wait").css("display", "none");
-     });
-	      var progress = $(".loading-progress").progressTimer({
-        timeLimit: 20,
-        onFinish: function () {
-		document.getElementById("progress").style.display = 'none';
-            
-        }
-    });
-	 var totalrecars = "";
+ $(document).ready(function()
+ {
+		   var test1 = "";
+		   $(document).ajaxStart(function()
+		   {
+			$("#wait").css("display", "block");
+					$("#allbtns").hide();
+	    $("#ldmr").hide();
+		   });
+		 
+		   $(document).ajaxComplete(function()
+		   {
+			$("#wait").css("display", "none");
+					$("#allbtns").show();
+	    $("#ldmr").show();
+		   });
+	       var progress = $(".loading-progress").progressTimer(
+		   {
+			   timeLimit: 20,
+			   onFinish: function () 
+			   {
+						document.getElementById("progress").style.display = 'none';
+				
+			   }
+           });
+		   
+		   
+	    var totalrecars = "";
         $.ajax({
             type: "GET",
             url: "<?php echo base_url()?>index.php/welcome/all_assets_under_warranty_api/<?php echo $c_number;?>",
             dataType: "text",
             success: function(xml){
 
-                          $(xml).find('assetspage').each(function(){
+                          $(xml).find('assetspage').each(function()
+						  {
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
 								var Part_Number= $(this).find('Part_Number').text();
@@ -117,33 +132,48 @@ speed: 3000
                                 var Options= $(this).find('Options').text();
                                 var Device_Type= $(this).find('Device_Type').text();
                                 var error =  $(this).find('error').text(); 
- var totreccount =  $(this).find('totreccount').text();   
-									totalrecars	= totreccount;									
-					if(SerialNumber!="")
-					{
-if(SerialNumber!="No Data")
-					{					
-			   $('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+Device_Type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
-}
-                     }				 
+								var totreccount =  $(this).find('totreccount').text();   
+								    totalrecars	= totreccount;									
+								if(SerialNumber!="")
+								{
+									if(SerialNumber!="No Data")
+									{					
+										$('#assets-list tbody').append("<tr><td style='width:100px; text-align:center;'><a href='<?php echo base_url()?>index.php/welcome/servicerequest/"+SerialNumber+"'  title='New Service Request'><img src='http://lowrysmartportal.com/assets/newservice.png' style='width:33%'></a></td><td style='width:100px;'>"+SerialNumber+"</td><td style='width:100px;'>"+Part_Number+"</td><td style='width:100px;'>"+Part_Description+"</td><td style='width:100px;'>"+Device_Type+"</td><td style='width:100px;'>"+Type+"</td><td style='width:100px;'>"+contract_number+"</td><td style='width:100px;'>"+Start_Date+"</td><td style='width:100px;'>"+End_date+"</td><td style='width:100px;'>"+Contract_Status+"</td></tr>");
+									}
+								 }				 
 		   });
-				 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
+		   
+				 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) )
+				 {
 
 
-			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},
- "bFilter": false,										
-"aoColumnDefs": [
-									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-									]
-								});
+						    var table4 = $('#assets-list').DataTable( {
+																		dom: 'Bfrtip',
+																		buttons: [
+																			{
+																				extend: 'print',
+																				customize: function ( win ) {
+																					$(win.document.body)
+																						.css( 'font-size', '10pt' )
+																						.prepend(
+																							'<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+																						);
+																 
+																					$(win.document.body).find( 'table' )
+																						.addClass( 'compact' )
+																						.css( 'font-size', 'inherit' );
+																				}
+																			}
+																		]
+																	} );
 
-								var colvis = new $.fn.dataTable.ColVis(table4);
+							var colvis = new $.fn.dataTable.ColVis(table4);
 
-								$(colvis.button()).insertAfter('#colVis');
-								$(colvis.button()).find('button').addClass('btn btn-default').removeClass('ColVis_Button');
+							$(colvis.button()).insertAfter('#colVis');
+							$(colvis.button()).find('button').addClass('btn btn-default').removeClass('ColVis_Button');
 
-								var tt = new $.fn.dataTable.TableTools(table4, {
+								var tt = new $.fn.dataTable.TableTools(table4, 
+								{
 									sRowSelect: 'single',
 									"aButtons": [
 										'copy',
@@ -151,42 +181,45 @@ if(SerialNumber!="No Data")
 											'sExtends': 'collection',
 											'sButtonText': 'Save',
 											'aButtons': [{
-                'sExtends': 'csv',
-                'sTitle': 'Asset Inventory'
-            },
-									{
-                'sExtends': 'xls',
-                'sTitle': 'Asset Inventory'
-            }, {
-                'sExtends': 'pdf',
-                'sTitle': 'Asset Inventory'
-            }]
-										}
-									],
+											'sExtends': 'csv',
+											'sTitle': 'Asset Inventory'
+										    },
+											{
+											'sExtends': 'xls',
+											'sTitle': 'Asset Inventory'
+										    }, 
+											{
+											'sExtends': 'pdf',
+											'sTitle': 'Asset Inventory'
+										    }]
+											}],
 									"sSwfPath": "<?php echo base_url()?>assets/js/vendor/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
 								});
 
 								$(tt.fnContainer()).insertAfter('#tableTools');
 								
 					}	
-						 $('#assets-list_info').prepend("Total entries: "+totalrecars+"<br>");
+						  $('#assets-list_info').prepend("Total entries: "+totalrecars+"<br>");
 						  $("#ToolTables_assets-list_2").hide();
+						  $( ".buttons-print" ).hide();
+                          $("#assets-list_filter").hide();
             },
-            error: function() {
-            $('#assets-list').DataTable({
-"language": {"emptyTable": "No Response - Cannot process the data."},	});
+            error: function() 
+			{
+            $('#assets-list').DataTable(
+			{
+			     "language": {"emptyTable": "No Response - Cannot process the data."},	});
             }
-        }).done(function(){
+            }).done(function()
+		    {
 		
-		if($('#progress').css('display') == "block")
-		{
-		   progress.progressTimer('complete');
-		}
-		
-		
-        
-    });
-    });    
+				if($('#progress').css('display') == "block")
+				{
+				   progress.progressTimer('complete');
+				}
+  
+			});
+			});    
 
            
         </script>
@@ -328,12 +361,25 @@ $.fn.dataTable.ext.errMode = 'none';
 		   	 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-	 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},								
-"aoColumnDefs": [
-							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-							]
-						});
+	 var table4 = $('#assets-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 						var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -364,6 +410,8 @@ $.fn.dataTable.ext.errMode = 'none';
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$( ".buttons-print" ).hide();
+                                 $("#assets-list_filter").hide();
 						
 			}	
             },
@@ -407,11 +455,11 @@ var test1 = "";
 	            $(xml).find('assetspage').each(function(){
 				
                                 var SerialNumber= $(this).find('SerialNumber').text();
-				var Part_Number= $(this).find('Part_Number').text();
-				var Part_Description= $(this).find('Part_Description').text();
-				var Type= $(this).find('Type').text();
-				var contract_number= $(this).find('contract_number').text();
-				var Start_Date= $(this).find('Start_Date').text();
+								var Part_Number= $(this).find('Part_Number').text();
+								var Part_Description= $(this).find('Part_Description').text();
+								var Type= $(this).find('Type').text();
+								var contract_number= $(this).find('contract_number').text();
+								var Start_Date= $(this).find('Start_Date').text();
                                 var End_date= $(this).find('End_date').text();
                                 var Contract_Status= $(this).find('Contract_Status').text(); 
                                 var Options= $(this).find('Options').text();
@@ -430,12 +478,25 @@ if(SerialNumber!="No Data")
 				 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},										
-"aoColumnDefs": [
-									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-									]
-								});
+			 var table4 = $('#assets-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 								var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -470,6 +531,9 @@ if(SerialNumber!="No Data")
 					}	
 						 $('#assets-list_info').append("   Total entries: "+totalrecars);
 						 $("#ToolTables_assets-list_2").hide();
+						 $( ".buttons-print" ).hide();
+                         $("#assets-list_filter").hide();
+                        
             },
             error: function() {
            $('#assets-list').DataTable({
@@ -483,58 +547,7 @@ if(SerialNumber!="No Data")
 
 </script>
 
-<script>
-            $(window).load(function(){
 
-
-                // Initialize Pie Chart
-                var data6 = [
-                    { label: 'Handheld Printer', data: 16.6 },
-                    { label: 'RFID', data: 16.6 },
-                    { label: 'Services', data: 16.6 },
-                    { label: 'Wireless', data: 16.6 },
-                    { label: 'Labels', data: 16.6},
-                    { label: 'Software', data: 16.6}
-                ];
-
-                var options6 = {
-                    series: {
-                        pie: {
-                            show: true,
-                            innerRadius: 0,
-                            stroke: {
-                                width: 0
-                            },
-                            label: {
-                                show: true,
-                                threshold: 0.15
-                            }
-                        }
-                    },
-
-                    colors: ['#428bca','#5cb85c','#f0ad4e','#d9534f','#5bc0de','#616f77'],
-                    grid: {
-                        hoverable: true,
-                        clickable: true,
-                        borderWidth: 0,
-                        color: '#ccc'
-                    },
-                    tooltip: false,
-                    tooltipOpts: { content: '%s: %p.0%' }
-                };
-
-                var plot6 = $.plot($("#pie-chart"), data6, options6);
-
-                $(window).resize(function() {
-                    // redraw the graph in the correctly sized div
-                    plot6.resize();
-                    plot6.setupGrid();
-                    plot6.draw();
-                });
-                // * Initialize Pie Chart
-             
-            });
-        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

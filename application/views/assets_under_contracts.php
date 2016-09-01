@@ -83,12 +83,12 @@
                             </ul>
                             
                         </div>
-<div class="col-md-6 cps "> 
+<div class="col-md-6 cps " id="allbtns"> 
 <input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
 
 <div id="tableTools"></div>
 <div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
-<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please don't close until it is completed.</div>
 
                     </div>
 
@@ -167,7 +167,7 @@
 										</div>
 
 
-<div class="col-md-2  float-right">  
+<div class="col-md-2  float-right" id="mapdata">  
 
 <div style="cursor: pointer; position: absolute; right: 170px; top: 61px;"><div class="shadow"></div>
 <div class="pulse"></div>
@@ -221,7 +221,7 @@ View Assets in Map</a>
 											
 											
                                         </div>
-<button class="btn btn-primary btn-xs load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<button class="btn btn-primary btn-xs load-buts" id="ldmr" onclick="loadmore()" value="Load More">Load More</button>
 
                                     </div> </div>
 									 <div id="wait"><img src="<?php echo base_url()?>assets/ajax-loader.gif"><br><span style="color: #418bca;

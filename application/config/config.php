@@ -517,10 +517,10 @@ $config['proxy_ips'] = '';
 
 //application constants
 
-defined('WEBSERVICEURL') OR define('WEBSERVICEURL', 'http://216.234.105.194:8088/Alpha.svc');
+defined('WEBSERVICEURL') OR define('WEBSERVICEURL', 'http://216.234.105.194:8089/Alpha.svc');
 defined('ITEMLISTINSINGLEORDER') OR define('ITEMLISTINSINGLEORDER', 'E21GetOrderDetails');
-defined('KEY1') OR define('KEY1', '5434548B-9C59-451E-9673-1D462C11953B');
-defined('KEY2') OR define('KEY2', 'E2795374-87A2-45DE-AD46-194D042B6213');
+defined('KEY1') OR define('KEY1', '8534B244-1DEE-4723-8D5A-EA1113ECDE03');
+defined('KEY2') OR define('KEY2', 'A34AE36F-D516-42A2-8CA1-58B80A94E43D');
 defined('INDEX') OR define('INDEX', 'index.php/welcome/index');
 defined('LIMIT') OR define('LIMIT', '1000');
 

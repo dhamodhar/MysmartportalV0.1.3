@@ -38,7 +38,7 @@ $c_number == " ";
 	<script src="<?php echo base_url()?>assets/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.min.js"></script>
 	<script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
-	 <script src="<?php echo base_url()?>assets/vendor/flot/jquery.flot.min.js"></script>
+
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.pie.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>	
@@ -51,6 +51,9 @@ $c_number == " ";
 
 
 <script src="<?php echo base_url()?>assets/jquery.simple-text-rotator.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url()?>demo/assets/buttons.print.min.js"></script>
 
         <!-- ============================================
         ============== Custom JavaScripts ===============
@@ -95,10 +98,16 @@ speed: 3000
 	  var test1 = "";
 	   $(document).ajaxStart(function(){
     $("#wait").css("display", "block");
+	$("#allbtns").hide();
+	    $("#ldmr").hide();
+	    $("#mapdata").hide();
      });
 	 
 	 $(document).ajaxComplete(function(){
     $("#wait").css("display", "none");
+	$("#allbtns").show();
+	    $("#ldmr").show();
+	    $("#mapdata").show();
      });
 	  var progress = $(".loading-progress").progressTimer({
         timeLimit: 20,
@@ -147,13 +156,25 @@ if(SerialNumber!="No Data")
 				 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},	
- "bFilter": false,									
-"aoColumnDefs": [
-									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-									]
-								});
+			 var table4 = $('#assets-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 								var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -188,6 +209,8 @@ if(SerialNumber!="No Data")
 					}	
 					 $('#assets-list_info').prepend("Total entries: "+totalrecars+"<br>");
 					 $("#ToolTables_assets-list_2").hide();
+					 								 $( ".buttons-print" ).hide();
+                                 $("#assets-list_filter").hide();
             },
             error: function() {
             $('#assets-list').DataTable({
@@ -267,13 +290,25 @@ if(SerialNumber!="No Data")
             if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},	
- "bFilter": false,									
-"aoColumnDefs": [
-									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-									]
-								});
+			 var table4 = $('#assets-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 								var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -307,6 +342,8 @@ if(SerialNumber!="No Data")
 								
 					}	
 					 $('#assets-list_info').append("   Total entries: "+totalrecars);
+					 					 								 $( ".buttons-print" ).hide();
+                                 $("#assets-list_filter").hide();
             },
             Error: function() {
             $('#assets-list').DataTable({
@@ -389,12 +426,25 @@ $.fn.dataTable.ext.errMode = 'none';
 		   	 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-	 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},								
-"aoColumnDefs": [
-							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-							]
-						});
+	 var table4 = $('#assets-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 						var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -425,6 +475,8 @@ $.fn.dataTable.ext.errMode = 'none';
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+								$( ".buttons-print" ).hide();
+                                 $("#assets-list_filter").hide();
 						
 			}	
             },
@@ -490,12 +542,25 @@ if(SerialNumber!="No Data")
 				 if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-			 var table4 = $('#assets-list').DataTable({
-"language": {"emptyTable": "No Data Found."},										
-"aoColumnDefs": [
-									  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-									]
-								});
+			 var table4 = $('#assets-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 								var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -528,7 +593,9 @@ if(SerialNumber!="No Data")
 								$(tt.fnContainer()).insertAfter('#tableTools');
 								
 					}	
-					 $('#assets-list_info').append("   Total entries: "+totalrecars);
+					$('#assets-list_info').prepend("Total entries: "+totalrecars+"<br>");
+													$( ".buttons-print" ).hide();
+                                 $("#assets-list_filter").hide();
             },
             error: function() {
            $('#assets-list').DataTable({
@@ -542,58 +609,6 @@ if(SerialNumber!="No Data")
 
 </script>
 
-<script>
-            $(window).load(function(){
-
-
-                // Initialize Pie Chart
-                var data6 = [
-                    { label: 'Handheld Printer', data: 16.6 },
-                    { label: 'RFID', data: 16.6 },
-                    { label: 'Services', data: 16.6 },
-                    { label: 'Wireless', data: 16.6 },
-                    { label: 'Labels', data: 16.6},
-                    { label: 'Software', data: 16.6}
-                ];
-
-                var options6 = {
-                    series: {
-                        pie: {
-                            show: true,
-                            innerRadius: 0,
-                            stroke: {
-                                width: 0
-                            },
-                            label: {
-                                show: true,
-                                threshold: 0.15
-                            }
-                        }
-                    },
-
-                    colors: ['#428bca','#5cb85c','#f0ad4e','#d9534f','#5bc0de','#616f77'],
-                    grid: {
-                        hoverable: true,
-                        clickable: true,
-                        borderWidth: 0,
-                        color: '#ccc'
-                    },
-                    tooltip: false,
-                    tooltipOpts: { content: '%s: %p.0%' }
-                };
-
-                var plot6 = $.plot($("#pie-chart"), data6, options6);
-
-                $(window).resize(function() {
-                    // redraw the graph in the correctly sized div
-                    plot6.resize();
-                    plot6.setupGrid();
-                    plot6.draw();
-                });
-                // * Initialize Pie Chart
-             
-            });
-        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

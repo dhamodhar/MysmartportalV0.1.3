@@ -95,12 +95,12 @@
                             </ul>
                             
                         </div>
-<div class="col-md-6 cps"> 
+<div class="col-md-6 cps" id="allbtns"> 
 <input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
 <div id="tableTools"></div>
 
 <div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
-<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please don't close until it is completed.</div>
 
 
 </div>
@@ -183,11 +183,11 @@ View Assets in Map</a>
                                         </div>
 <div class="table-responsive active-page">
 
-<div class="row"> <div class="col-md-12" style="line-height:25px;background:#d6e8f3;"> This page displays assets that are under contract and under warranty.</div> </div>
+<div class="row"> <div class="col-md-12" style="line-height:25px;background:#d6e8f3; margin-top:5px;"> This page displays assets that are under contract and under warranty.</div> </div>
 
 
 <div class="col-md-2 pull-right active-page-location">
-<div class="form-group pull-right">
+<div class="form-group pull-right" id="status_location">
                                             <label class="sr-only" for="exampleInputEmail2">Search</label>
  <select class="form-control" name="user_status" id="user_status" onchange="getdetails_by_location(this.value)">
  <option value="All">Select Location</option>
@@ -227,7 +227,7 @@ View Assets in Map</a>
 											
 											
                                         </div>
-<button class="btn btn-primary btn-xs  load-buts" onclick="loadmore()" value="Load More">Load More</button>
+<button class="btn btn-primary btn-xs  load-buts" id="ldmr" onclick="loadmore()" value="Load More">Load More</button>
 </div>
 
                                     </div>  </div>

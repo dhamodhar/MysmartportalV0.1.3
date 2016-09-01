@@ -380,5 +380,13 @@ OR company_name IS NULL , 1, 0 ) , company_name ASC");
 	
 	}
 	
+	public function updateterms($id)
+	{
+	
+	$query = $this->db->query("update mysmar_portal_users set terms_read_status=1 where id='".$id."'");
+	
+	
+	}
+	
 	
 }

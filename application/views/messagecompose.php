@@ -30,6 +30,14 @@
                                     <div class="btn-group mr-10">
                                        <!--<label class="checkbox checkbox-custom-alt m-0 mt-5"><input type="checkbox" id="select-all"><i></i> Select All</label>-->
                                     </div>
+									<?php 
+									
+									if(@$replaydata == 5){
+									?>
+									
+										<div style="text-align:center"><a href="<?php echo base_url();?>index.php/welcome/open_invoices" class="btn btn-primary mb-10" >Back to Invoices</a></div>              
+
+									<?php }else{ ?>
 									<?php
 									if($msg == "askq"){ ?>
 									<div style="text-align:center"><a href="<?php echo base_url();?>index.php/welcome/open_orders" class="btn btn-primary mb-10" >Back to Open Orders</a></div>              
@@ -41,6 +49,8 @@
  
 
                 <?php } ?>
+				
+				<?php } ?>
                                 </div>
 
                             </div>
@@ -93,14 +103,14 @@ if($ccount < 1){
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Subject:</label>
                                         <div class="col-lg-8">
-                                            <input type="text" name="subject" id="subject" <?php if($msg == "askq"){ ?> readonly   value = "RE: ORDER NUMBER :  <?php echo $order_id;?>" readonly <?php }else{ ?>  value="<?php foreach(@$notificationdata as $notificationdata_data){ echo $notificationdata_data->msg_subject ?>  <?php } ?>"  <?php } ?> class="form-control">
+                                            <input type="text" name="subject" id="subject" <?php if($msg == "askq"){ ?> readonly   value = "<?php if(@$replaydata == 5){ ?> RE: INVOICE NUMBER : <?php }else{ ?>RE: ORDER NUMBER : <?php } ?> <?php echo $order_id;?>" readonly <?php }else{ ?>  value="<?php foreach(@$notificationdata as $notificationdata_data){ echo $notificationdata_data->msg_subject ?>  <?php } ?>"  <?php } ?> class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Message:</label>
                                         <div class="col-lg-8 note-editor">
-                                            <textarea name="comments" id="comments" class="form-control"  style="height: 150px; width:650px" placeholder="Enter your message..."><?php if($msg == "askq"){ ?> <br><br><br><br><br><br>Order Id : <?php echo $order_id ?> , PO NUMBER : <?php echo $ponumber?>, ORDER STATUS: <?php echo $orderstatus?> <?php } ?></textarea>
+                                            <textarea name="comments" id="comments" class="form-control"  style="height: 150px; width:650px" placeholder="Enter your message..."><?php if($msg == "askq"){ ?> <br><br><br><br><br><br><?php if(@$replaydata == 5){ ?> Invoice Number : <?php }else{ ?>Order Id : <?php } ?><?php echo $order_id ?> , PO NUMBER : <?php echo $ponumber?>, ORDER STATUS: <?php echo $orderstatus?> <?php } ?></textarea>
                                         </div>
                                     </div>
 									  <div class="form-group">

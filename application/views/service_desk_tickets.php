@@ -78,21 +78,49 @@
 
                                 <!-- tile widget -->
                                 <div class="tile-widget ">
+								 <div style="line-height:25px;background:#d6e8f3; margin-top:2px;" class="col-md-12 no-padding"> <strong>Note:&nbsp;&nbsp;</strong>
+  Compare all locations or up to seven locations at a time. Simply click on the location of choice in the dropdown menu and press “enter”.</div>
+									<span style="font-size:18px;margin-top:1%">Select Location: <select name="locations" id="locations"  multiple="multiple">
+	
+						 <?php 
+						 $k= 0;
+						 for($i=0;$i<sizeOf($locations);$i++){
+$k++;
+						 ?>
+ <option value="<?php echo $locations[$i]?>"><?php echo $city[$i].", ".$state[$i]." (".$locations[$i].")";?></option>
+<?php } ?>
+	
+	</select> <button class="btn btn-blue " onclick="searchbydates()" style="margin-left:2%"><i class="fa fa-search"></i></button>
+	
+	</span>	<span id="locationerror" style="display:none;color:red">Compare up to seven locations at a time</span>
 								 <div class="row">
 
-                                        
+                	<input type="hidden" name="loccount" id="loccount" value="<?php echo $k;?>"/>                        
                                         <div class="col-md-12">
-										 <div class="col-md-7">
+										<span style="font-size: 25px;
+    margin-left: 43%;
+    color: #337ab7;">Open Service Tickets Activity</span>
+										 <div class="col-md-6" style="margin-top:4%;border: solid 1px #808080;">
 										
 									
-                                                             <div id="chartdiv" style="margin-left: 33%;"></div>
+                                                             <div id="container" ></div>
+															 
+															     <div id="serviceticketslastyear_error" style="width: 100%;
+    height: 225px;
+    display: block;
+    font-size: 24px;
+    margin-top: 16%;
+    margin-left: 36%;">No Service Tickets Data Available</div>
+															 
 								
 								         </div>
-										  <div class="col-md-5">
+										 		 <div class="col-md-6" style="margin-top:4%;border: solid 1px #808080;">
 										
-                                                             <div id="chartdiv1"></div>
+									
+                                                             <div id="container1" ></div>
 								
 								         </div>
+										
 										 </div>
 										 </div></div>
 							
@@ -103,69 +131,7 @@
                                
 
                             </section>
-							   <section class="tile">
-
-                                <!-- tile header -->
-                                <div class="tile-header dvd dvd-btm">
-                                    <h1 class="custom-font"><strong> Service Tickets for 2016</strong></h1>
-                                    
-
-                                        
-                                </div>
-                                <!-- /tile header -->
-
-                                <!-- tile body -->
-                                <div class="tile-body">
-
-                                    <div class="row">
-
-                                        
-                                        <div class="col-md-12">
-<div id="chartdiv2"></div>
-                                          
-                                      </div>
-									  
-									  <div class="col-md-12" style="margin-top:10%">
-	
-	<span style="font-size:18px">Select Location: <select><option>Select Location</option><option>DALLAS-FORT WORTH AIRPORT/TX</option></select></span>
-
-	
-	<div id="chartdiv3"></div>
-	 <div class="tile-header dvd dvd-btm">
-                                    <h1 class="custom-font"><strong> Service Tickets by Device Type</strong></h1>
-                                    
-
-                                        
-                                </div>
-										  <div class="col-md-12" style="margin-top:10%">
-	
-	<span style="font-size:18px">Select Location: <select><option>Select Location</option><option>DALLAS-FORT WORTH AIRPORT/TX</option></select></span>
-
-	
-	<div id="chartdiv4"></div>
-                                          
-                                      </div>
-
-                                       
-
-                                    </div>
-
-                                </div>
-                                <!-- /tile body -->
-
-                            </section>
-							
-							
-							
-
-                            <!-- /tile -->
-
-                            <!-- /tile -->
-
-                        </div>
-                        <!-- /col -->
-
-
+					
 
                         
 

@@ -1,0 +1,290 @@
+[16-Apr-2015 11:44:47 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::updateUserPassword() in /home/autocube/public_html/application/controllers/autocube.php on line 543
+[16-Apr-2015 11:53:23 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::updateUserPassword() in /home/autocube/public_html/application/controllers/autocube.php on line 543
+[16-Apr-2015 11:53:51 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::updateUserPassword() in /home/autocube/public_html/application/controllers/autocube.php on line 543
+[16-Apr-2015 11:59:30 America/Chicago] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/autocube/public_html/application/models/autocubemodel.php on line 263
+[28-Apr-2015 10:43:02 America/Chicago] PHP Parse error:  syntax error, unexpected ',' in /home/autocube/public_html/application/controllers/autocube.php on line 983
+[13-May-2015 01:22:45 America/Chicago] PHP Parse error:  syntax error, unexpected ''is_logged_in' (T_ENCAPSED_AND_WHITESPACE), expecting ')' in /home/autocube/public_html/application/controllers/autocube.php on line 114
+[13-May-2015 06:33:20 America/Chicago] PHP Parse error:  syntax error, unexpected '"resources/uploads/profiles/"' (T_CONSTANT_ENCAPSED_STRING) in /home/autocube/public_html/application/views/users/home.php on line 31
+[14-May-2015 01:38:08 America/Chicago] PHP Parse error:  syntax error, unexpected 'read_more' (T_STRING), expecting ',' or ';' in /home/autocube/public_html/application/controllers/autocube.php on line 1189
+[14-May-2015 02:18:55 America/Chicago] PHP Warning:  Unterminated comment starting line 285 in /home/autocube/public_html/application/controllers/autocube.php on line 285
+[14-May-2015 02:18:55 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocube/public_html/application/controllers/autocube.php on line 290
+[15-May-2015 01:29:14 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1209
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1209): SimpleXMLElement->__construct('')
+#1 /home/autocube/public_html/application/controllers/autocube.php(240): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->home()
+#3 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#5 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1209
+[17-May-2015 12:45:39 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1219
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1219): SimpleXMLElement->__construct('')
+#1 /home/autocube/public_html/application/controllers/autocube.php(1142): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#5 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1219
+[25-May-2015 22:22:35 America/Chicago] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home/autocube/public_html/application/controllers/autocube.php on line 525
+[25-May-2015 22:23:52 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocube/public_html/application/controllers/autocube.php on line 114
+[25-May-2015 22:23:52 America/Chicago] PHP Warning:  Unterminated comment starting line 305 in /home/autocube/public_html/application/controllers/autocube.php on line 305
+[25-May-2015 22:23:52 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocube/public_html/application/controllers/autocube.php on line 309
+[25-May-2015 22:23:52 America/Chicago] PHP Warning:  Unterminated comment starting line 648 in /home/autocube/public_html/application/controllers/autocube.php on line 648
+[25-May-2015 22:23:52 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocube/public_html/application/controllers/autocube.php on line 650
+[25-May-2015 22:56:50 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1207
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1207): SimpleXMLElement->__construct('')
+#1 [internal function]: Autocube->getFeed('aHR0cDovL3d3dy5...')
+#2 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#3 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#4 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1207
+[26-May-2015 02:39:17 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1247
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1247): SimpleXMLElement->__construct('')
+#1 /home/autocube/public_html/application/controllers/autocube.php(240): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->home()
+#3 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#5 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1247
+[26-May-2015 04:26:12 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1247
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1247): SimpleXMLElement->__construct('')
+#1 /home/autocube/public_html/application/controllers/autocube.php(240): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->home()
+#3 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#5 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1247
+[26-May-2015 05:52:30 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1247
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1247): SimpleXMLElement->__construct('')
+#1 /home/autocube/public_html/application/controllers/autocube.php(240): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->home()
+#3 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#5 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1247
+[28-May-2015 21:39:13 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1205
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1205): SimpleXMLElement->__construct('<!doctype html>...')
+#1 [internal function]: Autocube->getFeed('aHR0cDovL3d3dy5...')
+#2 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#3 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#4 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1205
+[28-May-2015 21:39:16 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1205
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1205): SimpleXMLElement->__construct('<!DOCTYPE HTML ...')
+#1 [internal function]: Autocube->getFeed('aHR0cDovL25ld3M...')
+#2 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#3 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#4 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1205
+[28-May-2015 21:40:04 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1205
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1205): SimpleXMLElement->__construct('<!DOCTYPE HTML ...')
+#1 [internal function]: Autocube->getFeed('aHR0cDovL25ld3M...')
+#2 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#3 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#4 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1205
+[29-May-2015 05:13:56 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1247
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1247): SimpleXMLElement->__construct('')
+#1 /home/autocube/public_html/application/controllers/autocube.php(240): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->home()
+#3 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#5 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1247
+[31-May-2015 14:42:40 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1205
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1205): SimpleXMLElement->__construct('')
+#1 [internal function]: Autocube->getFeed('aHR0cDovL3d3dy5...')
+#2 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#3 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#4 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1205
+[01-Jun-2015 00:26:16 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1247
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1247): SimpleXMLElement->__construct('')
+#1 /home/autocube/public_html/application/controllers/autocube.php(1163): Autocube->userNewsFeeds('aHR0cDovL2ZlZWR...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#5 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1247
+[01-Jun-2015 02:19:47 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1205
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1205): SimpleXMLElement->__construct('')
+#1 [internal function]: Autocube->getFeed('aHR0cDovL3d3dy5...')
+#2 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#3 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#4 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1205
+[01-Jun-2015 04:23:34 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocube/public_html/application/controllers/autocube.php:1205
+Stack trace:
+#0 /home/autocube/public_html/application/controllers/autocube.php(1205): SimpleXMLElement->__construct('')
+#1 [internal function]: Autocube->getFeed('aHR0cDovL2ZlZWR...')
+#2 /home/autocube/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#3 /home/autocube/public_html/index.php(202): require_once('/home/autocube/...')
+#4 {main}
+  thrown in /home/autocube/public_html/application/controllers/autocube.php on line 1205
+[21-Jun-2015 02:04:38 America/Chicago] PHP Parse error:  syntax error, unexpected ''usertype'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 101
+[21-Jun-2015 02:04:52 America/Chicago] CSRF state token does not match one provided.
+[21-Jun-2015 02:05:17 America/Chicago] CSRF state token does not match one provided.
+[21-Jun-2015 02:05:55 America/Chicago] CSRF state token does not match one provided.
+[24-Jun-2015 06:06:27 America/Chicago] PHP Parse error:  syntax error, unexpected '@' in /home/autocu/public_html/application/controllers/autocube.php on line 696
+[24-Jun-2015 06:06:33 America/Chicago] PHP Parse error:  syntax error, unexpected '@' in /home/autocu/public_html/application/controllers/autocube.php on line 696
+[30-Jun-2015 00:12:11 America/Chicago] CSRF state token does not match one provided.
+[30-Jun-2015 00:19:48 America/Chicago] CSRF state token does not match one provided.
+[30-Jun-2015 00:22:54 America/Chicago] CSRF state token does not match one provided.
+[30-Jun-2015 00:31:50 America/Chicago] CSRF state token does not match one provided.
+[30-Jun-2015 00:33:18 America/Chicago] CSRF state token does not match one provided.
+[30-Jun-2015 01:05:43 America/Chicago] CSRF state token does not match one provided.
+[30-Jun-2015 01:27:38 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::query() in /home/autocu/public_html/application/models/autocubemodel.php on line 612
+[30-Jun-2015 01:28:34 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::query() in /home/autocu/public_html/application/models/autocubemodel.php on line 612
+[30-Jun-2015 01:28:39 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::query() in /home/autocu/public_html/application/models/autocubemodel.php on line 612
+[30-Jun-2015 01:29:11 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::query() in /home/autocu/public_html/application/models/autocubemodel.php on line 612
+[30-Jun-2015 01:29:22 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::query() in /home/autocu/public_html/application/models/autocubemodel.php on line 612
+[30-Jun-2015 01:29:28 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::query() in /home/autocu/public_html/application/models/autocubemodel.php on line 612
+[30-Jun-2015 01:30:16 America/Chicago] PHP Fatal error:  Call to undefined method Autocubemodel::query() in /home/autocu/public_html/application/models/autocubemodel.php on line 612
+[30-Jun-2015 01:31:55 America/Chicago] CSRF state token does not match one provided.
+[30-Jun-2015 01:41:09 America/Chicago] CSRF state token does not match one provided.
+[07-Jul-2015 05:17:21 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Required option not passed: access_token
+' in /home/autocu/public_html/application/libraries/oauth2/Token/Access.php:44
+Stack trace:
+#0 /home/autocu/public_html/application/libraries/oauth2/Token.php(30): OAuth2_Token_Access->__construct(NULL)
+#1 /home/autocu/public_html/application/libraries/oauth2/Provider.php(223): OAuth2_Token::factory('access', NULL)
+#2 /home/autocu/public_html/application/libraries/oauth2/Provider/Google.php(61): OAuth2_Provider->access('4/HFhnHD3BvVlWP...', Array)
+#3 /home/autocu/public_html/application/controllers/auth_oa2.php(32): OAuth2_Provider_Google->access('4/HFhnHD3BvVlWP...')
+#4 [internal function]: Auth_oa2->session('google')
+#5 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#6 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#7 {main}
+  thrown in /home/autocu/public_html/application/libraries/oauth2/Token/Access.php on line 44
+[13-Jul-2015 00:47:50 America/Chicago] CSRF state token does not match one provided.
+[13-Jul-2015 05:29:42 America/Chicago] PHP Fatal error:  Call to a member function logged_in() on a non-object in /home/autocu/public_html/application/controllers/tweet_test.php on line 23
+[14-Jul-2015 00:12:16 America/Chicago] PHP Parse error:  syntax error, unexpected 'session' (T_STRING), expecting '(' in /home/autocu/public_html/application/libraries/tweet.php on line 421
+[14-Jul-2015 00:14:23 America/Chicago] PHP Parse error:  syntax error, unexpected 'session' (T_STRING) in /home/autocu/public_html/application/libraries/tweet.php on line 423
+[14-Jul-2015 00:16:16 America/Chicago] PHP Fatal error:  Call to undefined function has_key() in /home/autocu/public_html/application/libraries/tweet.php on line 420
+[14-Jul-2015 01:23:24 America/Chicago] PHP Parse error:  syntax error, unexpected end of file, expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 84
+[14-Jul-2015 01:31:39 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 603
+[14-Jul-2015 05:11:05 America/Chicago] PHP Parse error:  syntax error, unexpected '"<br> Thank you, You are succe' (T_CONSTANT_ENCAPSED_STRING) in /home/autocu/public_html/application/controllers/autocube.php on line 235
+[14-Jul-2015 05:11:25 America/Chicago] PHP Parse error:  syntax error, unexpected '"<br> Thank you, You are succe' (T_CONSTANT_ENCAPSED_STRING) in /home/autocu/public_html/application/controllers/autocube.php on line 235
+[14-Jul-2015 07:37:50 America/Chicago] CSRF state token does not match one provided.
+[14-Jul-2015 07:38:50 America/Chicago] CSRF state token does not match one provided.
+[14-Jul-2015 07:40:50 America/Chicago] CSRF state token does not match one provided.
+[14-Jul-2015 07:41:54 America/Chicago] PHP Fatal error:  Class 'OAuth2_Provider_Google&state=66ddaf74263d5aca3cd5850f9479396d&code=4' not found in /home/autocu/public_html/application/libraries/oauth2/OAuth2.php on line 32
+[14-Jul-2015 07:42:13 America/Chicago] CSRF state token does not match one provided.
+[14-Jul-2015 08:05:43 America/Chicago] CSRF state token does not match one provided.
+[15-Jul-2015 00:41:50 America/Chicago] PHP Parse error:  syntax error, unexpected ''se' (T_ENCAPSED_AND_WHITESPACE), expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 594
+[15-Jul-2015 01:14:21 America/Chicago] PHP Fatal error:  Call to undefined function replace() in /home/autocu/public_html/application/controllers/autocube.php on line 760
+[15-Jul-2015 02:00:04 America/Chicago] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) in /home/autocu/public_html/application/controllers/autocube.php on line 265
+[15-Jul-2015 02:00:04 America/Chicago] PHP Parse error:  syntax error, unexpected ''users/pr' (T_ENCAPSED_AND_WHITESPACE), expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 1243
+[15-Jul-2015 02:51:14 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1703
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1703): SimpleXMLElement->__construct('<?xml version='...')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1495): Autocube->userNewsFeeds('aHR0cDovL3Jzcy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1703
+[15-Jul-2015 02:51:32 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1703
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1703): SimpleXMLElement->__construct('<?xml version='...')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1495): Autocube->userNewsFeeds('aHR0cDovL3Jzcy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1703
+[15-Jul-2015 02:57:25 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1703
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1703): SimpleXMLElement->__construct('')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1495): Autocube->userNewsFeeds('aHR0cDovL3Jzcy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1703
+[15-Jul-2015 03:20:07 America/Chicago] CSRF state token does not match one provided.
+[15-Jul-2015 04:10:12 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 1833
+[15-Jul-2015 05:15:00 America/Chicago] PHP Parse error:  syntax error, unexpected ''se' (T_ENCAPSED_AND_WHITESPACE), expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 594
+[16-Jul-2015 01:23:58 America/Chicago] PHP Fatal error:  Call to a member function get_accountVerify_credentials() on a non-object in /home/autocu/public_html/application/controllers/twitter.php on line 98
+[16-Jul-2015 01:53:35 America/Chicago] PHP Fatal error:  Call to a member function get_accountVerify_credentials() on a non-object in /home/autocu/public_html/application/controllers/twitter.php on line 98
+[27-Jul-2015 01:59:40 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1721
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1721): SimpleXMLElement->__construct('\n\n\n\n<!doctype h...')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1513): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1721
+[27-Jul-2015 02:15:44 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1721
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1721): SimpleXMLElement->__construct('\n\n\n\n<!doctype h...')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1513): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1721
+[30-Jul-2015 07:14:12 America/Chicago] PHP Parse error:  syntax error, unexpected 'my_news_txt' (T_STRING), expecting ',' or ';' in /home/autocu/public_html/application/controllers/autocube.php on line 1653
+[12-Aug-2015 01:41:20 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 647
+[12-Aug-2015 01:41:40 America/Chicago] PHP Parse error:  syntax error, unexpected end of file, expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 84
+[12-Aug-2015 01:42:40 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 1248
+[12-Aug-2015 01:44:06 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 1248
+[12-Aug-2015 01:44:28 America/Chicago] PHP Parse error:  syntax error, unexpected ''car_manufac' (T_ENCAPSED_AND_WHITESPACE), expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 688
+[01-Oct-2015 07:29:50 America/Chicago] CSRF state token does not match one provided.
+[08-Oct-2015 00:02:50 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1248
+[08-Oct-2015 00:11:11 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1250
+[08-Oct-2015 00:12:01 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1250
+[08-Oct-2015 00:56:49 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 1334
+[08-Oct-2015 03:02:32 America/Chicago] PHP Parse error:  syntax error, unexpected end of file, expecting ')' in /home/autocu/public_html/application/controllers/autocube.php on line 645
+[08-Oct-2015 03:14:07 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1246
+[08-Oct-2015 03:32:14 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1245
+[08-Oct-2015 03:51:54 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 90
+[08-Oct-2015 06:28:32 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 90
+[15-Oct-2015 00:14:57 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1257
+[15-Oct-2015 00:15:44 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1257
+[15-Oct-2015 00:28:25 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home/autocu/public_html/application/controllers/autocube.php on line 1257
+[28-Oct-2015 05:48:49 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/autocu/public_html/application/controllers/autocube.php on line 90
+[15-Nov-2015 23:41:57 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1882
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1882): SimpleXMLElement->__construct('')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1670): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1882
+[15-Nov-2015 23:52:58 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1882
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1882): SimpleXMLElement->__construct('')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1670): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1882
+[23-Nov-2015 04:03:03 America/Chicago] PHP Fatal error:  Call to a member function loadXML() on a non-object in /home/autocu/public_html/application/controllers/autocube.php on line 1901
+[23-Nov-2015 04:04:11 America/Chicago] PHP Fatal error:  Call to a member function query() on a non-object in /home/autocu/public_html/application/controllers/autocube.php on line 1902
+[23-Nov-2015 04:05:56 America/Chicago] PHP Fatal error:  Call to a member function getElementsByTagName() on a non-object in /home/autocu/public_html/application/controllers/autocube.php on line 1901
+[23-Nov-2015 04:07:40 America/Chicago] PHP Fatal error:  Call to a member function getElementsByTagName() on a non-object in /home/autocu/public_html/application/controllers/autocube.php on line 1903
+[23-Nov-2015 04:49:36 America/Chicago] PHP Parse error:  syntax error, unexpected 'preg_match_all' (T_STRING) in /home/autocu/public_html/application/controllers/autocube.php on line 1899
+[23-Nov-2015 04:49:59 America/Chicago] PHP Parse error:  syntax error, unexpected '=', expecting variable (T_VARIABLE) or '$' in /home/autocu/public_html/application/controllers/autocube.php on line 1906
+[23-Nov-2015 04:50:41 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/autocu/public_html/application/controllers/autocube.php:1907
+Stack trace:
+#0 /home/autocu/public_html/application/controllers/autocube.php(1907): SimpleXMLElement->__construct('<!DOCTYPE html>...')
+#1 /home/autocu/public_html/application/controllers/autocube.php(1670): Autocube->userNewsFeeds('aHR0cDovL3d3dy5...')
+#2 [internal function]: Autocube->showMyNews('mynews')
+#3 /home/autocu/public_html/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#4 /home/autocu/public_html/index.php(202): require_once('/home/autocu/pu...')
+#5 {main}
+  thrown in /home/autocu/public_html/application/controllers/autocube.php on line 1907

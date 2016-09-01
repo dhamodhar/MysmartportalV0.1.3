@@ -40,7 +40,8 @@
         <!--/ vendor javascripts -->
 
 
-
+<script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url()?>demo/assets/buttons.print.min.js"></script>
 
         <!-- ============================================
         ============== Custom JavaScripts ===============
@@ -128,7 +129,7 @@ speed: 3000
 			   {
 			   if(invoice_numb!="No Data")
 			   {
-			     $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
+			     $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td><td style='widtd:200px;text-align: left;'><a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+invoice_numb.trim()+"/"+cust_po.trim()+"/"+status+"'><img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </a></td></tr>");
                }
 			   
 			   }
@@ -137,15 +138,25 @@ speed: 3000
 		                     });
 		   
 		   
-		     var table4 = $('#orders-list').DataTable({
-                "language": {"emptyTable": "No Data Found."},
-				"bFilter": false,
-						
-				"order": [[1, "desc"]],
-                    "aoColumnDefs": [
-                      { 'bSortable': false, 'aTargets': [2,"desc" ] }
-                    ]
-                });
+		     var table4 = $('#orders-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 				
 				
 				
@@ -181,6 +192,8 @@ speed: 3000
                 $(tt.fnContainer()).insertAfter('#tableTools');
 				$('#orders-list_info').prepend("Total entries: "+i+"<br>");
 					$("#ToolTables_orders-list_2").hide();
+					$( ".buttons-print" ).hide();
+					$("#orders-list_filter").hide();
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -274,7 +287,7 @@ var custpo = "";
             url: "<?php echo base_url()?>index.php/welcome/all_past_invoices_search/"+from+"/"+to+"/"+invoicenumber+"/"+columntype,
             dataType: "text",
                success: function(xml){
-			  
+			  var i ="";
                 $(xml).find('Invoice').each(function(){
 				
                 var invoice_numb= $(this).find('invoice_numb').text();
@@ -286,7 +299,7 @@ var custpo = "";
 				var amount= $(this).find('open_amount').text();
 				var order_numb= $(this).find('order_numb').text();
                           var cust_po= $(this).find('cust_po').text();
-                                //var tracker_no= $(this).find('tracker_no').text();
+                             i =  $(this).find('RecCount').text();
 				var error =  $(this).find('error').text();
                 var traking_link = "";
 			   if(error!="Error"){
@@ -299,21 +312,31 @@ var custpo = "";
 			   {
 			   if(invoice_numb!="No Data")
 			   {
-			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td></tr>");
+			   $('#orders-list tbody').append("<tr><td style='widtd:180px;text-align:center;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='width:150px;text-align:center;'>"+inv_date+"</td><td style='width:100px;text-align:right;' align='right'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='width:200px;text-align:center;'>"+due_date+"</td><td style='width:200px;text-align:center;'>"+cust_po+"</td><td style='width:200px;text-align:center;'>"+order_numb+"</td><td style='widtd:200px;text-align: left;'><a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+invoice_numb.trim()+"/"+cust_po.trim()+"/"+status+"'><img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </a></td></tr>");
 }}                                
 								}				 
 		                     });
 		   
 		   
-		     var table4 = $('#orders-list').DataTable({
-                "language": {"emptyTable": "No Data Found."},
-				"bFilter": false,
-					"bInfo": false,	
-				"order": [[1, "desc"]],
-                    "aoColumnDefs": [
-                      { 'bSortable': false, 'aTargets': [2,"desc" ] }
-                    ]
-                });
+		     var table4 = $('#orders-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 				
 				
 				
@@ -347,7 +370,10 @@ var custpo = "";
                 });
 
                 $(tt.fnContainer()).insertAfter('#tableTools');
+				$('#orders-list_info').prepend("Total entries: "+i+"<br>");
 				$("#save").hide();
+				$( ".buttons-print" ).hide();
+				$("#orders-list_filter").hide();
             },
             error: function() {
             $('#orders-list').DataTable({
@@ -401,6 +427,7 @@ document.getElementById("count").value = total_count;
 					dataType: "text",
 					success: function(xml){
 					$('#orders-list tbody').html("");
+					var i = "";
 						$(xml).find('Invoice').each(function(){
 						
 										var invoice_numb= $(this).find('invoice_numb').text();
@@ -414,7 +441,7 @@ document.getElementById("count").value = total_count;
 										var cust_po= $(this).find('cust_po').text();
 										var tracker_no= $(this).find('tracker_no').text();
 										var error =  $(this).find('error').text();
-
+                                        i =  $(this).find('RecCount').text();
 											 if(error!="Error")
 											 {	
 												var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}				
@@ -424,18 +451,31 @@ document.getElementById("count").value = total_count;
 			   {
 			   if(invoice_numb!="No Data")
 			   {
-												  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td></tr>");
+												  $('#orders-list tbody').append("<tr><td style='widtd:180px;'><a href=<?php echo base_url()?>index.php/welcome/invoice_view/"+finalordernumber+" style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numb+"</a></td><td style='widtd:150px;'>"+inv_date+"</td><td style='widtd:150px;'>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='widtd:200px;'>"+due_date+"</td><td style='widtd:200px;'>"+tracker_no+"</td><td style='widtd:200px;'>"+cust_po+"</td><td style='widtd:200px;text-align: left;'><a href='<?php echo base_url()?>index.php/welcome/composemessage/askq/"+invoice_numb.trim()+"/"+cust_po.trim()+"/"+status+"'><img src='http://lowrysmartportal.com/staging/assets/questionmark.png'> </a></td></tr>");
 											}}
 											}				 
 									 });
 				   
 				   
-					 var table4 = $('#orders-list').DataTable({
-"language": {"emptyTable": "No Data Found."},							
-"aoColumnDefs": [
-							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-							]
-						});
+					 var table4 = $('#orders-list').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 						var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -466,6 +506,9 @@ document.getElementById("count").value = total_count;
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$('#orders-list_info').prepend("Total entries: "+i+"<br>");
+						$( ".buttons-print" ).hide();
+						$("#orders-list_filter").hide();
 						$("#save").hide();
 					},
 					error: function() {

@@ -24,7 +24,7 @@
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/dataTables.bootstrap.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/Pagination/input.js"></script>
 
-	<script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
+	    <script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
 	 
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.pie.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
@@ -42,6 +42,10 @@
 
 
 
+  <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />
+  <script src="<?php echo base_url()?>assets/bootstrap-multiselect.js"
+        type="text/javascript"></script>
         <!-- ============================================
         ============== Custom JavaScripts ===============
         ============================================= -->
@@ -61,15 +65,1017 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/scripts/jquery.canvasjs.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/amcharts/style.css"	type="text/css">
 
+
 		<script src="<?php echo base_url()?>assets/amcharts/amcharts.js" type="text/javascript"></script>
 		<script src="<?php echo base_url()?>assets/amcharts/serial.js" type="text/javascript"></script>
 		<script src="<?php echo base_url()?>assets/amcharts/amstock.js" type="text/javascript"></script>
+<script src="https://www.amcharts.com/lib/3/xy.js"></script>
 
-
-        <!-- ===============================================
+<script src="<?php echo base_url()?>assets/amcharts/export.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url()?>assets/amcharts/export.css"	type="text/css">
+  <!-- ===============================================
         ============== Page Specific Scripts ===============
         ================================================ -->
-				<script>
+		<script src="<?php echo base_url()?>assets/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+<script>
+function searchbydates()
+{
+var loccount = $("#loccount").val();
+var selected11 = $("#locations option:selected");
+               var k = 0;
+                selected11.each(function () {
+				
+                    k++;
+                });
+					if(loccount == k)
+				{
+				location.reload();
+				
+				}
+				
+			if(k<8)
+			{
+			servicecontratcsbylocation();
+			expiredservicecontratcsbylocation();
+			upcomingservicecontratcs_bylocation();
+				document.getElementById("locationerror").style.display ='none';
+			
+			}else
+			{
+			
+			document.getElementById("locationerror").style.display ='block';
+			
+			
+			}	
+		
+}
+
+</script>
+		  <script type="text/javascript">
+        $(function () {
+		
+		$("#from").datepicker({
+		format: 'dd-mm-yyyy',
+    onSelect: function(dateText, inst) {
+        var date = $(this).val();
+	   $(".amChartsPeriodSelector").show();
+       $( ".amcharts-start-date-input" ).val(date);
+	   $( ".amcharts-start-date-input" ).focus();
+	   $(".amcharts-start-date-input").change();
+	   $(".amChartsPeriodSelector").hide();
+      
+       
+
+    }
+});
+
+$("#to").datepicker({
+    onSelect: function(dateText, inst) {
+       servicecontratcsbydates();
+       
+
+    }
+});
+		
+            $('#locations').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) 
+			{
+
+                
+            },onDropdownShow: function(event) {
+      var menu = $(event.currentTarget).find(".dropdown-menu");
+      menu.css("width", 500);   
+    }
+			
+            });
+			  
+            
+        });
+    </script>
+	<script>
+	AmCharts.ready(function () {
+	$("#Expiredcontracts_error").hide();
+servicecontratcs();
+barchartservicetickets();
+expiredservicecontratcs();
+upcomingservicecontratcs();
+//upcomingservicecontratcstest();
+			});
+	</script>
+	
+	<script>
+	function servicecontratcs()
+	{
+	
+
+	
+	var data = "";
+	
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/contractschartdata/ /active",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj.dotcharts;
+				servicedashboard();
+
+			}
+			
+			});
+	
+	
+						function servicedashboard()
+						{
+
+						
+											var chart = AmCharts.makeChart("chartdiv", {
+											"type": "xy",
+											"theme": "light",
+											"marginRight": 80,
+											"dataDateFormat": "YYYY-MM-DD",
+											"startDuration": 1.5,
+											"trendLines": [],
+											"balloon": {
+												"adjustBorderColor": false,
+												"shadowAlpha": 0,
+												"fixedPosition":true
+											},
+											"graphs": [{
+												"balloonText": "<a href='<?php echo base_url()?>index.php/welcome/active_service_contracts'><div style='margin:5px;'><b>[[x]]</b><br> Active Service Contracts: [[value]]</b></div></a>",
+												"bullet": "diamond",
+												"id": "AmGraph-1",
+												"lineAlpha": 0,
+												"lineColor": "#299a0b",
+												"valueField": "aValue",
+												"minBulletSize": 12,
+                                                 "maxBulletSize": 12,
+												"xField": "date",
+												"yField": "ay"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-2",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"valueField": "bValue",
+												"xField": "date",
+												"yField": "by"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-3",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "cValue",
+												"xField": "date",
+												"yField": "cy"
+											}],
+											"valueAxes": [{
+												"id": "ValueAxis-2",
+												"axisAlpha": 0,
+												"position": "bottom",
+												"type": "date",
+												"minimumDate": new Date(2011, 11, 31),
+												"maximumDate": new Date(2022, 0, 13)
+											}],
+											"allLabels": [],
+											"titles": [],
+											"dataProvider": data,
+
+											"export": {
+												"enabled": true
+											},
+
+											"chartScrollbar": {
+												"offset": 15,
+												"scrollbarHeight": 5
+											},
+											
+											"chartCursor":{
+											   "pan":true,
+											   "cursorAlpha":0,
+											   "valueLineAlpha":0
+											},
+											"listeners": [{
+    "event": "clickGraphItem",
+    "method": function(event) {
+      window.location.href = '<?php echo base_url()?>index.php/welcome/active_service_contracts';
+    }
+  }]
+										});
+											
+							
+						}
+	}
+	
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<script>
+	function expiredservicecontratcs()
+	{
+	
+
+	
+	var data1 = "";
+	var chart1 = "";
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/contractschartdata/ /expired",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data1 = obj.dotcharts;
+				
+				if(data1 == "")
+				{
+				$("#Expiredcontracts").hide();
+				$("#Expiredcontracts_error").show();
+				
+				}
+				//alert(data1);
+				servicedashboardexpired();
+
+			}
+			
+			});
+	
+	
+						function servicedashboardexpired()
+						{
+
+
+						
+											chart1 = AmCharts.makeChart("Expiredcontracts", {
+											"type": "xy",
+											"theme": "light",
+											"marginRight": 80,
+											"dataDateFormat": "YYYY-MM-DD",
+											"startDuration": 1.5,
+											"trendLines": [],
+											"balloon": {
+												"adjustBorderColor": false,
+												"shadowAlpha": 0,
+												"fixedPosition":true
+											},
+											"graphs": [{
+												"balloonText": "<a href='<?php echo base_url()?>index.php/welcome/expired_service_contracts'><div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div></a>",
+												"bullet": "diamond",
+												"id": "AmGraph-1",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"minBulletSize": 12,
+                                                 "maxBulletSize": 12,
+												"valueField": "aValue",
+												"xField": "date",
+												"yField": "ay"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-2",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"valueField": "bValue",
+												"xField": "date",
+												"yField": "by"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-3",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "cValue",
+												"xField": "date",
+												"yField": "cy"
+											}],
+											"valueAxes": [{
+												"id": "ValueAxis-2",
+												"axisAlpha": 0,
+												"position": "bottom",
+												"type": "date",
+												"minimumDate": new Date(2015, 08, 31),
+												"maximumDate": new Date(2017, 0, 13)
+											}],
+											"allLabels": [],
+											"titles": [],
+											"dataProvider": data1,
+
+											"export": {
+												"enabled": true
+											},
+
+											"chartScrollbar": {
+												"offset": 15,
+												"scrollbarHeight": 5
+											},
+											
+											"chartCursor":{
+											   "pan":true,
+											   "cursorAlpha":0,
+											   "valueLineAlpha":0
+											},
+											"listeners": [{
+    "event": "clickGraphItem",
+    "method": function(event) {
+      window.location.href = '<?php echo base_url()?>index.php/welcome/expired_service_contracts';
+    }
+  }]
+										});
+
+
+
+										
+		
+
+										
+										
+											
+							
+						}
+	}
+	
+	</script>
+	
+	
+	
+	<script>
+	function expiredservicecontratcsbylocation()
+	{
+	
+
+	var selected = $("#locations option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+	
+	var data1 = "";
+	
+	
+	if(message!="")
+	{
+	$("#Expiredcontracts").html("");
+					$.ajax({
+					type: "post",
+					data: "location="+message,
+					url: "<?php echo base_url()?>index.php/welcome/contractschartdata/ /expired",
+					success: function(xml)
+					{
+
+						var obj = JSON.parse(xml);
+						data1 = obj.dotcharts;
+						servicedashboardexpiredbylocation();
+
+					}
+					
+					});
+	}
+	
+	
+						function servicedashboardexpiredbylocation()
+						{
+
+						
+											var chart = AmCharts.makeChart("Expiredcontracts", {
+											"type": "xy",
+											"theme": "light",
+											"marginRight": 80,
+											"dataDateFormat": "YYYY-MM-DD",
+											"startDuration": 1.5,
+											"trendLines": [],
+											"balloon": {
+												"adjustBorderColor": false,
+												"shadowAlpha": 0,
+												"fixedPosition":true
+											},
+											"graphs": [{
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "diamond",
+												"id": "AmGraph-1",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"minBulletSize": 12,
+                                                 "maxBulletSize": 12,
+												"valueField": "aValue",
+												"xField": "date",
+												"yField": "ay"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-2",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"valueField": "bValue",
+												"xField": "date",
+												"yField": "by"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-3",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "cValue",
+												"xField": "date",
+												"yField": "cy"
+											}],
+											"valueAxes": [{
+												"id": "ValueAxis-2",
+												"axisAlpha": 0,
+												"position": "bottom",
+												"type": "date",
+												"minimumDate": new Date(2015, 08, 31),
+												"maximumDate": new Date(2017, 0, 13)
+											}],
+											"allLabels": [],
+											"titles": [],
+											"dataProvider": data1,
+
+											"export": {
+												"enabled": true
+											},
+
+											"chartScrollbar": {
+												"offset": 15,
+												"scrollbarHeight": 5
+											},
+											
+											"chartCursor":{
+											   "pan":true,
+											   "cursorAlpha":0,
+											   "valueLineAlpha":0
+											},
+											"listeners": [{
+    "event": "clickGraphItem",
+    "method": function(event) {
+      window.location.href = '<?php echo base_url()?>index.php/welcome/expired_service_contracts';
+    }
+  }]
+										});
+											
+							
+						}
+	}
+	
+	</script>
+	
+	
+	
+	
+	<script>
+	function upcomingservicecontratcs()
+	{
+	
+
+	
+	var dataupcoming = "";
+	
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/upcomingcontractschartdata",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                dataupcoming = obj.dotcharts;
+				servicedashboardupcoming();
+
+			}
+			
+			});
+	
+	
+						function servicedashboardupcoming()
+						{
+
+						
+											var chart = AmCharts.makeChart("upcoming", {
+											"type": "xy",
+											"theme": "light",
+											"marginRight": 80,
+											"dataDateFormat": "YYYY-MM-DD",
+											"startDuration": 4.5,
+											"trendLines": [],
+											"balloon": {
+												"adjustBorderColor": false,
+												"shadowAlpha": 0,
+												"fixedPosition":true
+											},
+											"graphs": [{
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "diamond",
+												"id": "AmGraph-1",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "aValue",
+												"minBulletSize": 12,
+                                                 "maxBulletSize": 12,
+												"xField": "date",
+												"yField": "ay"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-2",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"valueField": "bValue",
+												"xField": "date",
+												"yField": "by"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-3",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "cValue",
+												"xField": "date",
+												"yField": "cy"
+											}],
+											"valueAxes": [{
+												"id": "ValueAxis-2",
+												"axisAlpha": 0,
+												"position": "bottom",
+												"type": "date",
+												"minimumDate": new Date(2016, 06, 31),
+												"maximumDate": new Date(2017, 01, 13)
+											}],
+											"allLabels": [],
+											"titles": [],
+											"dataProvider": dataupcoming,
+
+											"export": {
+												"enabled": true
+											},
+
+											"chartScrollbar": {
+												"offset": 15,
+												"scrollbarHeight": 5
+											},
+											
+											"chartCursor":{
+											   "pan":true,
+											   "cursorAlpha":0,
+											   "valueLineAlpha":0
+											},
+											"listeners": [{
+    "event": "clickGraphItem",
+    "method": function(event) {
+      window.location.href = '<?php echo base_url()?>index.php/welcome/renew_service_contracts';
+    }
+  }]
+										});
+											
+							
+						}
+	}
+	
+	</script>
+	
+	
+	
+	<script>
+	function upcomingservicecontratcs_bylocation()
+	{
+	
+	var selected = $("#locations option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+	
+	var dataupcoming = "";
+	
+	if(message!=""){
+	$("#upcoming").html("");
+	        $.ajax({
+            type: "post",
+			data: "location="+message,
+            url: "<?php echo base_url()?>index.php/welcome/upcomingcontractschartdata",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                dataupcoming = obj.dotcharts;
+				servicedashboardupcomingbylocation();
+
+			}
+			
+			});
+			
+		}
+	
+	
+						function servicedashboardupcomingbylocation()
+						{
+
+						
+											var chart = AmCharts.makeChart("upcoming", {
+											"type": "xy",
+											"theme": "light",
+											"marginRight": 80,
+											"dataDateFormat": "YYYY-MM-DD",
+											"startDuration": 4.5,
+											"trendLines": [],
+											"balloon": {
+												"adjustBorderColor": false,
+												"shadowAlpha": 0,
+												"fixedPosition":true
+											},
+											"graphs": [{
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "diamond",
+												"id": "AmGraph-1",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "aValue",
+												"minBulletSize": 12,
+                                                 "maxBulletSize": 12,
+												"xField": "date",
+												"yField": "ay"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-2",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"valueField": "bValue",
+												"xField": "date",
+												"yField": "by"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-3",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "cValue",
+												"xField": "date",
+												"yField": "cy"
+											}],
+											"valueAxes": [{
+												"id": "ValueAxis-2",
+												"axisAlpha": 0,
+												"position": "bottom",
+												"type": "date",
+												"minimumDate": new Date(2015, 11, 31),
+												"maximumDate": new Date(2017, 0, 13)
+											}],
+											"allLabels": [],
+											"titles": [],
+											"dataProvider": dataupcoming,
+
+											"export": {
+												"enabled": true
+											},
+
+											"chartScrollbar": {
+												"offset": 15,
+												"scrollbarHeight": 5
+											},
+											
+											"chartCursor":{
+											   "pan":true,
+											   "cursorAlpha":0,
+											   "valueLineAlpha":0
+											},
+											"listeners": [{
+    "event": "clickGraphItem",
+    "method": function(event) {
+      window.location.href = '<?php echo base_url()?>index.php/welcome/renew_service_contracts';
+    }
+  }]
+										});
+											
+							
+						}
+	}
+	
+	</script>
+	
+	<!-- test dashboard -->
+	
+	<script>
+	function upcomingservicecontratcstest()
+	{
+	
+
+	
+	var dataupcoming = "";
+	
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/upcomingcontractschartdatatest",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                dataupcoming = obj.dotcharts;
+				servicedashboardupcomingtest();
+
+			}
+			
+			});
+	
+	
+						function servicedashboardupcomingtest()
+						{
+
+						
+											var chart = AmCharts.makeChart("upcomingtest", {
+											"type": "xy",
+											"theme": "light",
+											"marginRight": 80,
+											"dataDateFormat": "YYYY-MM-DD",
+											"startDuration": 4.5,
+											"trendLines": [],
+											"balloon": {
+												"adjustBorderColor": false,
+												"shadowAlpha": 0,
+												"fixedPosition":true
+											},
+											"graphs": [{
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												 "bullet": "custom",
+                                                 "customBulletField": "image",
+												"id": "AmGraph-1",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "aValue",
+												"minBulletSize": 12,
+                                                 "maxBulletSize": 12,
+												"xField": "date",
+												"yField": "ay"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-2",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"valueField": "bValue",
+												"xField": "date",
+												"yField": "by"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-3",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "cValue",
+												"xField": "date",
+												"yField": "cy"
+											}],
+											"valueAxes": [{
+												"id": "ValueAxis-2",
+												"axisAlpha": 0,
+												"position": "bottom",
+												"type": "date",
+												"minimumDate": new Date(2015, 11, 31),
+												"maximumDate": new Date(2017, 0, 13)
+											}],
+											"allLabels": [],
+											"titles": [],
+											"dataProvider": dataupcoming,
+
+											"export": {
+												"enabled": true
+											},
+
+											"chartScrollbar": {
+												"offset": 15,
+												"scrollbarHeight": 5
+											},
+											
+											"chartCursor":{
+											   "pan":true,
+											   "cursorAlpha":0,
+											   "valueLineAlpha":0
+											}
+										});
+											
+							
+						}
+	}
+	
+	</script>
+	
+	<!-- end code-->
+	
+	
+	
+	<script>
+	function servicecontratcsbylocation()
+	{
+	
+	var selected = $("#locations option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+	
+	var data = "";
+	if(message!="")
+	{
+	
+	$("#chartdiv").html("");
+		        $.ajax({
+            type: "post",
+            url: "<?php echo base_url()?>index.php/welcome/contractschartdata/ /active",
+			data: "location="+message,
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj.dotcharts;
+				servicedashboardbylocation();
+
+			}
+			
+			});
+	
+	}
+
+	
+	
+						function servicedashboardbylocation()
+						{
+
+						
+											var chart = AmCharts.makeChart("chartdiv", {
+											"type": "xy",
+											"theme": "light",
+											"marginRight": 80,
+											"dataDateFormat": "YYYY-MM-DD",
+											"startDuration": 1.5,
+											"trendLines": [],
+											"balloon": {
+												"adjustBorderColor": false,
+												"shadowAlpha": 0,
+												"fixedPosition":true
+											},
+											"graphs": [{
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Active Service Contracts: [[value]]</b></div>",
+												"bullet": "diamond",
+												"id": "AmGraph-1",
+												"lineAlpha": 0,
+												"lineColor": "#299a0b",
+												"valueField": "aValue",
+												"minBulletSize": 12,
+                                                 "maxBulletSize": 12,
+												"xField": "date",
+												"yField": "ay"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Expired Service Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-2",
+												"lineAlpha": 0,
+												"lineColor": "#D61111",
+												"valueField": "bValue",
+												"xField": "date",
+												"yField": "by"
+											}, {
+												"balloonText": "<div style='margin:5px;'><b>[[x]]</b><br> Upcoming for Renewal Contracts: [[value]]</b></div>",
+												"bullet": "round",
+												"id": "AmGraph-3",
+												"lineAlpha": 0,
+												"lineColor": "#EFCE13",
+												"valueField": "cValue",
+												"xField": "date",
+												"yField": "cy"
+											}],
+											"valueAxes": [{
+												"id": "ValueAxis-2",
+												"axisAlpha": 0,
+												"position": "bottom",
+												"type": "date",
+												"minimumDate": new Date(2012, 11, 31),
+												"maximumDate": new Date(2017, 0, 13)
+											}],
+											"allLabels": [],
+											"titles": [],
+											"dataProvider": data,
+
+											"export": {
+												"enabled": true
+											},
+
+											"chartScrollbar": {
+												"offset": 15,
+												"scrollbarHeight": 5
+											},
+											
+											"chartCursor":{
+											   "pan":true,
+											   "cursorAlpha":0,
+											   "valueLineAlpha":0
+											},
+											"listeners": [{
+    "event": "clickGraphItem",
+    "method": function(event) {
+      window.location.href = '<?php echo base_url()?>index.php/welcome/active_service_contracts';
+    }
+  }]
+										});
+											
+							
+						}
+	}
+	
+	</script>
+	
+
+	<script>
+	function barchartservicetickets()
+	{
+	
+	
+	var data1 = "";
+	var data = "";
+	
+	        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/contracts_barchart_data",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                data = obj;
+				barchart();
+
+			}
+			
+			});
+			
+			function barchart(){
+
+    $('#container').highcharts({
+        title: {
+            text: 'Service Contracts At A Glance 2016'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        },
+        labels: {
+            items: [{
+                html: '',
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        },
+        series: data
+    });
+
+
+
+	
+	
+	}
+	
+	}
+	
+	
+	</script>
+		
+				<!--<script>
 			AmCharts.ready(function () {
 
 			});
@@ -83,7 +1089,7 @@
             url: "<?php echo base_url()?>index.php/welcome/contractschartdata",
             success: function(xml)
 			{
-				
+				//alert(xml);
 			var obj = JSON.parse(xml);
 		
 			
@@ -93,8 +1099,12 @@
 			
 			generateChartData();
 				createStockChart();
-				$( ".amcharts-start-date-input" ).datepicker();
-$( ".amcharts-end-date-input" ).datepicker();
+				//$(".amcharts-start-date-input").prop("type", "hidden");
+				 // $(".amcharts-end-date-input").prop("type", "hidden");
+				  $(".amChartsPeriodSelector").hide();
+				//$( ".amcharts-start-date-input" ).hide();
+//$( ".amcharts-end-date-input" ).hide();
+$( ".amcharts-period-input" ).hide();
 
 			}
 			
@@ -258,30 +1268,50 @@ $( ".amcharts-end-date-input" ).datepicker();
 		function getdatabylocations(val)
 		{
 		
-		
-					var chartData1 = [];
+		var selected = $("#locations option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+				
+	
+	
+			var chartData1 = [];
 			var chartData2 = [];
 			var chartData3 = [];
-			
-			$.ajax({
-            type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/contractschartdata/"+val,
-            success: function(xml)
+			if(message!="")
 			{
+				$("#chartdiv").html("");
+					$.ajax({
+					type: "post",
+					url: "<?php echo base_url()?>index.php/welcome/contractschartdata",
+					data: "location="+message,
+					success: function(xml)
+					{
+						
+					var obj = JSON.parse(xml);
 				
-			var obj = JSON.parse(xml);
-		
-			
-			chartData1 = obj.expiredservice;
-			chartData2 = obj.activeservice;
-			chartData3 = obj.cancelservice;
-			
-			generateChartData();
-				createStockChart();
+					
+					chartData1 = obj.expiredservice;
+					chartData2 = obj.activeservice;
+					chartData3 = obj.cancelservice;
+					
+					generateChartData();
+						createStockChart();
 
-			}
+					}
+					
+					});
 			
-			});
+			
+			}
 
 			function generateChartData() {
 				var firstDate = new Date();
@@ -440,6 +1470,9 @@ $( ".amcharts-end-date-input" ).datepicker();
 		
 		}
 		</script>
+		
+		
+		-->
 			
 
 

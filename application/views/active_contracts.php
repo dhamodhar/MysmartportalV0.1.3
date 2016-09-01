@@ -30,16 +30,9 @@
                      <ul>
 <li><strong>Service Contracts</strong></li>
 <li>The service contracts module provides a comprehensive list of details about all Your service contracts which are active, expired and about to expire.</li>
-<li class='blue-bold'>How to navigate</li>
-<li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
-<li>Once logged in, on the left hand side menu User can find Service Contracts tab as the fifth option.</li>
-<li>Click on Service contracts to view all the sub pages. The sub pages are,
-<ul class='sub-he'>
-<li>Active Contracts.</li>
-<li>Expired Contracts.</li>
-<li>Upcoming for renewal.</li>
-</ul>
-</li>
+
+
+
 <li class='blue-bold'>Active Contracts</li>
 <li>Please navigate to Lowry Smart Portal link and login with Your user credentials.</li>
 <li>Once logged in, on the left hand side menu User can find service contracts tab as the fifth option.</li>
@@ -104,7 +97,7 @@ User can use any option to search Active Contracts
 <input type="button" class="btn btn-primary" name="save" id="save" onclick="saveexcel()" value="Save All">
 <div id="tableTools"></div>
 <div style="color:green;display:none;" id="copymsg">Table data has been saved to clipboard.</div>
-<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please dont close until it is completed.</div>
+<div style="color:green;display:none;" id="savemsg">All entries are being saved. Please don't close until it is completed.</div>
 
 </div>
 
@@ -180,7 +173,7 @@ User can use any option to search Active Contracts
                                           <div class="col-md-1 form-group no-padding"> <button class="btn btn-blue " onclick="searchbydates()"><i class="fa fa-search" ></i></button></div>
 
 
-<div class="col-md-3 no-padding pull-right" id="vwmp">
+<div class="col-md-5 no-padding " id="vwmp">
 
 <div style="cursor: pointer; position: absolute; right: 200px; top: 61px;"><div class="shadow"></div>
 <div class="pulse"></div>
@@ -203,7 +196,7 @@ User can use any option to search Active Contracts
  
                                      <!-- <div class="row"> <div class="col-md-6"><div id="colVis"></div></div></div>-->
 
-                                        <div class="col-md-2 pull-right active-page-location"><div class="form-group pull-right" id="usts">
+                                        <div class="col-md-2 pull-right active-contract-page-location"><div class="form-group pull-right" id="usts">
                                             <label class="sr-only" for="exampleInputEmail2">Search</label>
  <select class="form-control" name="user_status" id="user_status" onchange="getdetails_by_location(this.value)">
   <option value="All">Select Location</option>

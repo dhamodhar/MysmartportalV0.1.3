@@ -9,7 +9,7 @@
 
                         
 
-                        <div class="page-bar col-md-7 col-xs-12 xs-mb-10">
+                        <div class="page-bar col-md-6 col-xs-12 xs-mb-10">
 
                             <ul class="page-breadcrumb">
                                 <li>
@@ -20,15 +20,15 @@
                             </ul>
                             
                         </div>
-<div class="col-md-5 ">
-<div class="float-left mr-10" id="export_to_pdf" ></div>
-<div class="float-left mr-10" id="pdf_id"></div>
-<div class="float-right">
+
+<div class="col-md-6 ">
+
 <div id="sendemail" style="display:none"> </div>
-</div>
-<div id="msg" style="display:none;color:green">
-Email Sent!
- </div> 
+
+<div id="msg" style="display:none;color:green; text-align:center;">Email Sent! </div> 
+
+<div class="pull-right" id="export_to_pdf" ></div>
+<div class="pull-right " id="pdf_id" style="padding-right:10px;"></div>
 </div>
 
                     </div>
@@ -74,7 +74,7 @@ Email Sent!
                                                             <!-- col -->
                                                             <div class="col-md-12 ">
                                                               
-                                                                <h3 class="mb-20" style="float:left; margin-right:30px;">Invoice : <strong id="order_number"></strong></h3>
+                                                                <h3 class="mb-20" style="float:left; margin-right:30px;">Invoice: <strong id="order_number"></strong></h3>
 
 
 
@@ -134,7 +134,7 @@ Email Sent!
 
 
                                                 <!-- tile -->
-                                                <section class="tile tile-simple">
+                                                <section class="tile tile-simple clear">
 
                                                     <!-- tile body -->
                                                     <div class="tile-body p-0">
@@ -145,11 +145,12 @@ Email Sent!
                                                                 <thead>
                                                                 <!--<h3 style="padding:8px;">Items On Invoice:<span id="count">1</span></h3>-->
                                                                 <tr>
-                                                                    <th>Line No</th>
+                                                                    <th>Item</th>
+																	  <th>Product Code</th>
 								    <th >Product Description</th>
-                                                                    <th>Product Code</th>
+                                                                  
                                                                     <th style="padding-left:7px;">Qty</th>
-                                                                    <th style="padding-left:7px;">Unit Size</th>
+                                                                    <th style="padding-left:7px;">UOM</th>
                                                                     <th style="text-align:right;padding-right:30px;">Unit Price</th>
                                                                     <th style="text-align:right;padding-right:30px;">Total Price</th>
                                                                     <th  style="text-align:right;padding-right:30px;">Ship Date</th>

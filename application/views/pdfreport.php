@@ -12,10 +12,24 @@ $ordertext = '<td width="72%" align="left" style="border:0.5px solid #f7f7f7; ba
 	 </td>';
 
 }else{
+
+if($order_status == "RMA")
+{
+$ordnumb = str_replace(' ', '', @$order_numb)."-RMA";
+
+}else
+{
+$ordnumb = @$order_numb;
+
+}
+
+
 $title1 = 'Order Copy';
-$order_title = '<td align="left">Order#:</td><td>'.$order_numb.'</td>';
+$order_title = '<td align="left">Order#:</td><td>'.$ordnumb.'</td>';
 $ordertext = '<td width="72%" align="left" style="border:0.5px solid #000; background-color:#f7f7f7;">
-	<p style="font-size:8px; align="justify"">All sales of goods by Lowry are subject exclusively to Lowry’s then-current Terms and Conditions of Sale, available at <span style="text-decoration:under-line; color:blue;">http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SalesTermsGoods.pdf</span><br/><br/> All equipment maintenance services are subject exclusively to Lowry’s then-current Equipment Maintenance Terms and Conditions, available at <span style="text-decoration:under-line; color:blue;">http://www.lowrycomputer.com/sites/lowrycomputer.com/files/EquipmentMaintenance.pdf</span> <br/><br/> All professional services other than equipment maintenance services and software maintenance or support are subject exclusively to Lowry’s then-current Professional Services Agreement Terms and Conditions available at <span style="text-decoration:under-line; color:blue;"> http://www.lowrycomputer.com/sites/lowrycomputer.com/files/ProfessionalServices.pdf</span> <br/> <br/>If Lowry software is provided and it is not otherwise subject to a particular Lowry license agreement, the Software License Agreement at <span style="text-decoration:under-line; color:blue;">http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareLicense.pdf </span>will apply to such software. <br/>Any software maintenance or support will be governed by Lowry’s then-current Software Maintenance and Support Agreement available at <span style="text-decoration:under-line; color:blue;"> http://www.lowrycomputer.com/sites/lowrycomputer.com/files/SoftwareMaintenance.pdf</span><br/> <br/>If any of the above terms are first tendered to the customer before the customer tenders a purchase order or similar document to Lowry, the above terms are in lieu of any terms later submitted by the customer and Lowry rejects all additional or different terms and conditions of the customer, whether confirmatory or otherwise. If Lowry tenders these terms after the tender by the customer of other terms, whether as part of a purchase order or otherwise, then Lowry’s acceptance of any offer by the customer associated with the customer’s terms is expressly conditioned upon customer’s acceptance of the above terms exclusively and to the exclusion of any proffered customer terms or conditions, regardless of whether the above terms contain any terms additional to, or different from, any terms proffered by the customer</p><br />
+	<p style="font-size:8px; align="justify"">NOTE: Label Order quantities may reflect a 10% overage /underage due to gains or losses in manufacturing.<br>
+
+* Freight and Taxes are calculated at time of invoicing based on freight terms and taxable status.</p><br />
     </td>  ';
 }
 
@@ -109,7 +123,8 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
       '.$consolidation.'</td>
     <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>Ship Via</strong> </span><br />
      '.$shipvia.'</td>
-    <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>PPD/COLL/PP&A</strong> </span><br /> '.$ppdcoll.'</td>
+	  <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>PPD/COLL </strong> </span><br />
+     '.$ppdcoll.'</td>
     <td align="left" valign="top" style="border-right:0.5px solid #000;"><span style="color:#000"><strong>PPS#</strong></span> <br />'.$pps.'</td>
   </tr>
 </table>
@@ -124,7 +139,7 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
 	    <td width="11%" align="center" style="border-right:0.5px solid #000;font-size:8px;"><strong>QTY SHIPPED</strong></td>
 	    <td width="9%" align="center" style="border-right:0.5px solid #000;font-size:8px;"><strong>UOM</strong></td>  
   <td width="13%" align="right" style="border-right:0.5px solid #000;font-size:8px;"><strong>UNIT PRICE</strong></td>
-    <td width="13%" align="right" style="border-right:0.5px solid #000;font-size:8px;"><strong>NET PRICE</strong></td>
+    <td width="14%" align="right" style="border-right:0.5px solid #000;font-size:8px;"><strong>NET PRICE</strong></td>
   </tr>';
  $m=1;
  $tcount = 0;
@@ -133,7 +148,7 @@ $content .='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
   
   $total_val = $paramsdata['item_price']*$paramsdata['qty'];
  $content .='<tr>
-    <td align="center" style="border-right:0.5px solid #000; border-top:0.5px solid #000;">'.$m.'</td>
+    <td align="center" style="border-right:0.5px solid #000; border-top:0.5px solid #000;">'.$paramsdata['item_no'].'</td>
     <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['part_desc'].','.$paramsdata['part_code'].'</td>
 
 <td align="center" style="border-right:0.5px solid #000;border-top:0.5px solid #000;">'.$paramsdata['qtyordered'].'</td>
@@ -157,7 +172,7 @@ $content .='</table>
 	<table border="0" align="right" cellpadding="3" cellspacing="3">
        <tr>
         <td align="right" width="30%"><strong>Sub Total:</strong></td>
-        <td width="25%" align="right">$ '.number_format($tcount, 2).'</td>
+        <td width="27%" align="right">$ '.number_format($tcount, 2).'</td>
       </tr>
    
       <tr>
@@ -174,7 +189,7 @@ $content .='</table>
       </tr>
     </table></td>
   </tr>
-<span style="font-weight:bold;"> FOR ORDER ISSUES, PLEASE CALL 800-733-0210.</span>
+
  </table>
 
 
@@ -189,7 +204,7 @@ $content .='</table>
 ob_end_clean();
 $obj_pdf->writeHTML($content);
 if($type == 2){
-$fileatt = $obj_pdf->Output('Order_'.$order_numb.'.pdf', 'D');
+$fileatt = $obj_pdf->Output('Order_'.@$order_numb.'.pdf', 'D');
 exit;
 }else if($type == 5)
 {
@@ -213,7 +228,14 @@ if($order_numb!="")
 {
 
 $to = $usemail;
-$subject = 'Lowry - Your Requested Email Copy';
+if($type == 3)
+{
+$subject = 'Invoice_'.$invoice_numb.' - Email Copy';
+}else
+{
+$subject = 'Order_'.$order_numb.' - Email Copy';
+
+}
 $repEmail = 'lowrysma@box547.bluehost.com';
 $attachment = chunk_split($fileatt);
 $eol = PHP_EOL;
@@ -230,15 +252,19 @@ $mail->Password = "Lowry123$";
 $mail->SMTPSecure = 'ssl';
 $mail->Port = 465;         
 $mail->From = "admin@lowrysmartportal.com";
-$mail->FromName = "Lowrysmartportal.com";			
+$mail->FromName = "Lowry Smart Portal";	
+$mail->CharSet = 'UTF-8';
+$mail->IsHTML(true);		
            
         $mail->Subject    = $subject;  
-        $mail->Body      = "Hello, you have requested an email copy. If you have received this email in error, please notify the sender. If you are not the named addressee you should not disseminate, distribute or copy this email. Please notify the sender immediately by email if you have received this email by mistake and delete this email from your system. If you are not the intended recipient you are notified that disclosing, copying, distributing or taking any action in reliance on the contents of this information is strictly prohibited.";
+        $mail->Body      = "Hello, <br><br> You have requested an email copy. If you have received this email in error, please notify the sender. If you are not the named addressee you should not disseminate, distribute or copy this email. Please notify the sender immediately by email if you have received this email by mistake and delete this email from your system. If you are not the intended recipient, you are notified that disclosing, copying, distributing, or taking any action in reliance on the contents of this information is strictly prohibited.<br><br>Thank you,<br>
+Admin<br>
+Lowry Smart Portal";
 		$mail->AddAttachment($download_file);
         
 		
         $destino = $usemail;
-        $mail->addAddress($destino, "test");
+        $mail->addAddress($destino);
           
          if(!$mail->Send()) {  
            

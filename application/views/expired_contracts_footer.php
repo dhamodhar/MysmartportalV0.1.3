@@ -41,7 +41,8 @@
         <!--/ vendor javascripts -->
 
 
-
+<script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url()?>demo/assets/buttons.print.min.js"></script>
         <!-- ============================================
         ============== Custom JavaScripts ===============
         ============================================= -->
@@ -143,14 +144,26 @@ speed: 3000
 			   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-	 var table4 = $('#contracts-list').DataTable({
-"language": {"emptyTable": "No Data Found."},	
- "bFilter": false,						
-"aoColumnDefs": [
-							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-							],
-aaSorting: [[1, 'desc']]
-						});
+	 var table4 = $('#contracts-list').DataTable( {
+        dom: 'Bfrtip',
+		"bFilter" : false,
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 						var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -183,6 +196,8 @@ aaSorting: [[1, 'desc']]
 						$(tt.fnContainer()).insertAfter('#tableTools');
 						$('#contracts-list_info').prepend("Total entries: "+i+"<br>");
 						$("#ToolTables_contracts-list_2").hide();
+						$( ".buttons-print" ).hide();
+                        $("#contracts-list_filter").hide();
 						
 			}	
             },
@@ -314,14 +329,26 @@ $('#contracts-list tbody').html(" ");
 						   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-	 var table4 = $('#contracts-list').DataTable({
-"language": {"emptyTable": "No Data Found."},	
- "bFilter": false,						
-"aoColumnDefs": [
-							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-							],
-aaSorting: [[1, 'desc']]
-						});
+	 var table4 = $('#contracts-list').DataTable( {
+        dom: 'Bfrtip',
+		"bFilter" : false,
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 						var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -352,6 +379,8 @@ aaSorting: [[1, 'desc']]
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$( ".buttons-print" ).hide();
+                        $("#contracts-list_filter").hide();
 						
 			}	
 							},
@@ -445,13 +474,26 @@ $('#contracts-list tbody').html(" ");
 		   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-	 var table4 = $('#contracts-list').DataTable({
-"language": {"emptyTable": "No Data Found."},							
-"aoColumnDefs": [
-							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-							],
-aaSorting: [[1, 'desc']]
-						});
+	 var table4 = $('#contracts-list').DataTable( {
+        dom: 'Bfrtip',
+		"bFilter" : false,
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 						var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -482,6 +524,8 @@ aaSorting: [[1, 'desc']]
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$( ".buttons-print" ).hide();
+                        $("#contracts-list_filter").hide();
 						
 			}			
 		     
@@ -563,13 +607,26 @@ if(contract_status == "Active")
 			   if ( ! $.fn.DataTable.isDataTable( '#contracts-list' ) ) {
 
 
-	 var table4 = $('#contracts-list').DataTable({
-"language": {"emptyTable": "No Data Found."},							
-"aoColumnDefs": [
-							  { 'bSortable': false, 'aTargets': [ "no-sort" ] }
-							],
-aaSorting: [[1, 'desc']]
-						});
+	 var table4 = $('#contracts-list').DataTable( {
+        dom: 'Bfrtip',
+		"bFilter" : false,
+        buttons: [
+            {
+                extend: 'print',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://lowrysmartportal.com/demo/assets/logo1.png" style="position:absolute; top:0; left:0;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ]
+    } );
 
 						var colvis = new $.fn.dataTable.ColVis(table4);
 
@@ -600,6 +657,8 @@ aaSorting: [[1, 'desc']]
 						});
 
 						$(tt.fnContainer()).insertAfter('#tableTools');
+						$( ".buttons-print" ).hide();
+                        $("#contracts-list_filter").hide();
 						
 			}	
             },

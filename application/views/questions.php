@@ -30,7 +30,7 @@
 <div class="col-md-6 mt-20" >
 <form action ="<?php echo base_url();?>index.php/welcome/savequestions" method="post">
 <div class="form-group">
-<label for="message"> What types of dashboards will you find most useful?</label>
+<label for="message"> What types of dashboards will you find of Value?</label>
 
 <textarea required="" placeholder="Type your message" id="message1" name="message1" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
 </div> </div>  
@@ -42,22 +42,13 @@
 
 <textarea required="" placeholder="Type your message" id="message2" name="message2" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
 </div> </div>  
-
 <div class="col-md-6 mt-20" >
 
-<label for="measure">What do you want to measure?</label>
+<div class="form-group">
+<label for="message"> What kind of pre-built data performance insights(reports) are you intrested in?</label>
 
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Agreements"><i></i> Service Agreements </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Requests"><i></i> Service Requests </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Order Delivery Time"><i></i> Order Delivery Time </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Agreements"><i></i> Asset Inventory </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Asset Inventory"><i></i> Supplies - Costs &amp; Usage </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Cost Savings"><i></i> Cost Savings </label>
-<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Other" onclick="showmsgbox(this.checked)"><i></i> Other </label>
-<textarea required="" style="display:none" placeholder="Type your message" id="message3" name="message3" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
-
-</div>
-
+<textarea required="" placeholder="Type your message" id="message6" name="message6" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
+</div> </div> 
 <div class="col-md-6 mt-20" >
 
 <label for="measure">What would be your desired key takeaways from your dashboards?</label>
@@ -69,10 +60,36 @@
 <label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="desired[]" id="desired[]" value="Other" onclick="showmsgbox1(this.checked)"><i></i> Other </label>
 <textarea required="" style="display:none" placeholder="Type your message" id="message4" name="message4" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
 
+</div> 
+<div class="col-md-6 mt-20" >
+
+<label for="measure">What do you want to measure?</label>
+
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Agreements"><i></i> Service Agreements </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Requests"><i></i> Service Requests </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Order Delivery Time"><i></i> Order Delivery Time </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Service Agreements"><i></i> Asset Inventory </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Asset Inventory"><i></i> Supplies Usage </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Cost Savings"><i></i> Cost Savings </label>
+<label class="checkbox checkbox-custom-alt">  <input type="checkbox" name="mesure[]" id="mesure[]" value="Other" onclick="showmsgbox(this.checked)"><i></i> Other </label>
+<textarea required="" style="display:none" placeholder="Type your message" id="message3" name="message3" rows="4" class="form-control" data-parsley-id="5150"> </textarea>
+
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="col-md-12 text-center">
-<button value="Load More" onclick="loadmore()" class="btn btn-primary  ">Submit</button>
+<button value="Load More" onclick="loadmore()" class="btn btn-primary  " style="margin-top:2%">Submit</button>
 
 
 </div>

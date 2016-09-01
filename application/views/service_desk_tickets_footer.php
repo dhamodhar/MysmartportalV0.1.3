@@ -1,6 +1,4 @@
-      
-
-	  <!-- ============================================
+ <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -25,17 +23,16 @@
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/dataTables.bootstrap.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/datatables/extensions/Pagination/input.js"></script>
-	<script src="<?php echo base_url()?>assets/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+	
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.min.js"></script>
 	<script src="<?php echo base_url()?>assets/js/jquery.scrolltabs.js"></script>	
-	 <script src="<?php echo base_url()?>assets/vendor/flot/jquery.flot.min.js"></script>
+	
         <script src="<?php echo base_url()?>assets/js/vendor/flot/jquery.flot.pie.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/morris/morris.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>	
        	
 		
-        <script src="<?php echo base_url()?>assets/js/vendor/daterangepicker/moment.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
         
         <script src="<?php echo base_url()?>assets/jquery.simple-text-rotator.js"></script>
         <script src="<?php echo base_url()?>assets/js/vendor/date-format/jquery-dateFormat.min.js"></script>
@@ -48,13 +45,18 @@
         <!-- ============================================
         ============== Custom JavaScripts ===============
         ============================================= -->
-        <script src="<?php echo base_url()?>assets/js/main.js"></script>
+ 
         <!--/ custom javascripts -->
         <script type="text/javascript" src="//cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
 	<script type="text/javascript" src="//cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js"></script>
 
 
-
+ <link href="<?php echo base_url()?>assets/bootstrap.min.css"
+        rel="stylesheet" type="text/css" />
+  <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />
+    <script src="<?php echo base_url()?>assets/bootstrap-multiselect.js"
+        type="text/javascript"></script>
       
 	<!-- ============================================
         ============== Custom JavaScripts ===============
@@ -82,7 +84,540 @@
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<script src="<?php echo base_url()?>assets/amcharts/amstock.js" type="text/javascript"></script>
 
+<script src="<?php echo base_url()?>assets/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
+
+<script>
+function searchbydates()
+{
+var loccount = $("#loccount").val();
+var selected11 = $("#locations option:selected");
+               var k = 0;
+                selected11.each(function () {
+				
+                    k++;
+                });
+					if(loccount == k)
+				{
+				location.reload();
+				
+				}
+			if(k<8)
+			{
+				tickets_bylocation();
+			tickets1_location();
+				document.getElementById("locationerror").style.display ='none';
+			
+			}else
+			{
+			
+			document.getElementById("locationerror").style.display ='block';
+			
+			
+			}	
+		
+}
+
+</script>
+<script type="text/javascript">
+window.onload = function () {
+tickets();
+tickets1();
+$("#serviceticketslastyear_error").hide();
+
+}
+
+</script>
+	
+	  <script type="text/javascript">
+        $(function () {
+            $('#location').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) 
+			{
+			onsite_deport_location();
+                
+            },onDropdownShow: function(event) {
+      var menu = $(event.currentTarget).find(".dropdown-menu");
+      menu.css("width", 500);   
+    }
+			
+            });
+			  
+            
+        });
+    </script>
+	
+	  <script type="text/javascript">
+        $(function () {
+            $('#locations').multiselect({
+                 enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+			onDropdownHide: function(event) 
+			{
+		
+                
+            },onDropdownShow: function(event) {
+      var menu = $(event.currentTarget).find(".dropdown-menu");
+      menu.css("width", 500);   
+    }
+			
+            });
+			  
+            
+        });
+    </script>
+	
+	
+	<script>
+	
+	function tickets()
+	{
+	var lasryearmonths = "";
+	var lasropentictsdata = "";
+	var datavalidation = "";
+
+ $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/serviceticketsdashboarddatalastyear",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                lasryearmonths = obj.months;
+                lasropentictsdata = obj.opentickets;
+             
+			 for(var i=0;i<lasropentictsdata.length;i++)
+			 {
+			 
+			 var monthsdata = lasropentictsdata[i]['data'];
+			 
+					 for(var k =0;k<monthsdata.length;k++)
+					 {
+					 
+					        if(monthsdata[k]!=0)
+							{
+							
+							datavalidation = true;
+							}
+					 
+					 }
+					 
+			 }
+			 
+			 
+					 if(datavalidation)
+					 {
+						lastyearchart();
+					 }else
+					 {
+					 $("#serviceticketslastyear_error").show();
+					 }
+
+			}
+			
+			});
+			
+			function lastyearchart()
+			{
+			
+						 $('#container').highcharts({
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: 'Service Tickets 2015'
+					},
+					xAxis: {
+						categories: lasryearmonths
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: ''
+						},
+						stackLabels: {
+							enabled: true,
+							style: {
+								fontWeight: 'bold',
+								color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+							}
+						}
+					},
+					legend: {
+						align: 'right',
+						x: -30,
+						verticalAlign: 'top',
+						y: 25,
+						floating: true,
+						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+						borderColor: '#CCC',
+						borderWidth: 1,
+						shadow: false
+					},
+					tooltip: {
+						headerFormat: '<b>{point.x}</b><br/>',
+						pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+					},
+					plotOptions: {
+						column: {
+							stacking: 'normal',
+							dataLabels: {
+								enabled: true,
+								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+								style: {
+									textShadow: '0 0 3px black'
+								}
+							}
+						}
+					},
+					series: lasropentictsdata
+				});
+
+				
+			
+			}
+	
+   
+	
+	
+	}
+	
+	</script>
+	
+	<script>
+	
+	function tickets1()
+	{
+
+	var mnths = [];
+	var opendata = [];
+	
+	  $.ajax({
+            type: "GET",
+            url: "<?php echo base_url()?>index.php/welcome/serviceticketsdashboarddata",
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                mnths = obj.months;
+                opendata = obj.opentickets;
+             
+				ticketschart();
+
+			}
+			
+			});
+	
+	function ticketschart()
+	{
+
+					$('#container1').highcharts({
+						chart: {
+							type: 'column'
+						},
+						title: {
+							text: 'Service Tickets 2016'
+						},
+						xAxis: {
+							categories: mnths
+						},
+						yAxis: {
+							min: 0,
+							title: {
+								text: ''
+							},
+							stackLabels: {
+								enabled: true,
+								style: {
+									fontWeight: 'bold',
+									color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+								}
+							}
+						},
+						legend: {
+							align: 'right',
+							x: -30,
+							verticalAlign: 'top',
+							y: 25,
+							floating: true,
+							backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+							borderColor: '#CCC',
+							borderWidth: 1,
+							shadow: false
+						},
+						tooltip: {
+							headerFormat: '<b>{point.x}</b><br/>',
+							pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+						},
+						plotOptions: {
+							column: {
+								stacking: 'normal',
+								dataLabels: {
+									enabled: true,
+									color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+									style: {
+										textShadow: '0 0 3px black'
+									}
+								}
+							}
+						},
+						series: opendata
+					});
+
+					
+					
+					}
+	}
+	
+	</script>
+	
+		<script>
+	function tickets_bylocation()
+	{
+	var lasryearmonths = "";
+	var lasropentictsdata = "";
+	var datavalidation = "";
+	var selected = $("#locations option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+				
+				if(message!=="")
+				{
+				
+				$("#container").html("");
+				}
+
+
+ $.ajax({
+            type: "POST",
+            url: "<?php echo base_url()?>index.php/welcome/serviceticketsdashboarddatalastyear",
+			data:"location="+message,
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                lasryearmonths = obj.months;
+                lasropentictsdata = obj.opentickets;
+              for(var i=0;i<lasropentictsdata.length;i++)
+			 {
+			 
+			 var monthsdata = lasropentictsdata[i]['data'];
+			 
+					 for(var k =0;k<monthsdata.length;k++)
+					 {
+					 
+					        if(monthsdata[k]!=0)
+							{
+							
+							datavalidation = true;
+							}
+					 
+					 }
+					 
+			 }
+			 
+			 
+					 if(datavalidation)
+					 {
+						lastyearchart();
+					 }else
+					 {
+					 $("#serviceticketslastyear_error").show();
+					 }
+				
+
+			}
+			
+			});
+			
+			function lastyearchart()
+			{
+			
+						 $('#container').highcharts({
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: 'Service Tickets 2015'
+					},
+					xAxis: {
+						categories: lasryearmonths
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: ''
+						},
+						stackLabels: {
+							enabled: true,
+							style: {
+								fontWeight: 'bold',
+								color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+							}
+						}
+					},
+					legend: {
+						align: 'right',
+						x: -30,
+						verticalAlign: 'top',
+						y: 25,
+						floating: true,
+						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+						borderColor: '#CCC',
+						borderWidth: 1,
+						shadow: false
+					},
+					tooltip: {
+						headerFormat: '<b>{point.x}</b><br/>',
+						pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+					},
+					plotOptions: {
+						column: {
+							stacking: 'normal',
+							dataLabels: {
+								enabled: true,
+								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+								style: {
+									textShadow: '0 0 3px black'
+								}
+							}
+						}
+					},
+					series: lasropentictsdata
+				});
+
+				
+			
+			}
+	
+   
+	
+	
+	}
+	
+	</script>
+		<script>
+	
+	function tickets1_location()
+	{
+
+	
+		var selected1 = $("#locations option:selected");
+                var message1 = "";
+                selected1.each(function () {
+					if(message1=="")
+					{
+					message1 = $(this).val();
+					}else
+					{
+					message1 = message1+"|"+$(this).val();
+					}
+                    
+                });
+	
+	var mnths = [];
+	var opendata = [];
+	
+	if(message1!=="")
+				{
+				
+				$("#container1").html("");
+				}
+	
+	  $.ajax({
+            type: "post",
+            url: "<?php echo base_url()?>index.php/welcome/serviceticketsdashboarddata",
+			data:"location="+message1,
+            success: function(xml)
+			{
+
+			    var obj = JSON.parse(xml);
+                mnths = obj.months;
+                opendata = obj.opentickets;
+             
+				ticketschart();
+
+			}
+			
+			});
+	
+	function ticketschart()
+	{
+
+					$('#container1').highcharts({
+						chart: {
+							type: 'column'
+						},
+						title: {
+							text: 'Service Tickets 2016'
+						},
+						xAxis: {
+							categories: mnths
+						},
+						yAxis: {
+							min: 0,
+							title: {
+								text: ''
+							},
+							stackLabels: {
+								enabled: true,
+								style: {
+									fontWeight: 'bold',
+									color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+								}
+							}
+						},
+						legend: {
+							align: 'right',
+							x: -30,
+							verticalAlign: 'top',
+							y: 25,
+							floating: true,
+							backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+							borderColor: '#CCC',
+							borderWidth: 1,
+							shadow: false
+						},
+						tooltip: {
+							headerFormat: '<b>{point.x}</b><br/>',
+							pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+						},
+						plotOptions: {
+							column: {
+								stacking: 'normal',
+								dataLabels: {
+									enabled: true,
+									color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+									style: {
+										textShadow: '0 0 3px black'
+									}
+								}
+							}
+						},
+						series: opendata
+					});
+
+					
+					
+					}
+	}
+	
+	</script>
+<!--	
 <script type="text/javascript">
 window.onload = function () {
 opentickets();
@@ -98,60 +633,29 @@ $( ".amcharts-end-date-input" ).datepicker();
 <script>
 function opentickets()
 {
-
+var data = "";
+ $.ajax({
+            type: "GET",
+            url: "<?php echo base_url();?>index.php/welcome/openticketsdashboarddata",
+            success: function(response1) {
+			var obj = JSON.parse(response1);
+			data = obj;
+			genaratechartopentickets();
+			}
+			
+			
+			});
+function genaratechartopentickets(){
 /**
  * Define data for each year
  */
-var chartData = {
-  "1": [ 
-   { "sector": "Request Created", "size": 12 }, 
-    { "sector": "Warranty Validation", "size": 7 }, 
-    { "sector": "Device in Transit", "size": 4 }, 
-    { "sector": "Repair in Progress", "size": 9 }, 
-    { "sector": "Request Complete", "size": 17} ],
-  "2": [ 
-   { "sector": "Request Created", "size": 31 }, 
-    { "sector": "Warranty Validation", "size": 8 }, 
-    { "sector": "Device in Transit", "size": 10 }, 
-    { "sector": "Repair in Progress", "size": 5 }, 
-    { "sector": "Request Complete", "size": 22 } ],
-  "3": [ 
-   { "sector": "Request Created", "size": 11 }, 
-    { "sector": "Warranty Validation", "size": 31 }, 
-    { "sector": "Device in Transit", "size": 44 }, 
-    { "sector": "Repair in Progress", "size": 1 }, 
-    { "sector": "Request Complete", "size": 60 } ],
-  "4": [ 
-   { "sector": "Request Created", "size": 6 }, 
-    { "sector": "Warranty Validation", "size": 10}, 
-    { "sector": "Device in Transit", "size": 23 }, 
-    { "sector": "Repair in Progress", "size": 2 }, 
-    { "sector": "Request Complete", "size": 4 } ],
-  "5": [ 
-   { "sector": "Request Created", "size": 60 }, 
-    { "sector": "Warranty Validation", "size": 53 }, 
-    { "sector": "Device in Transit", "size": 42 }, 
-    { "sector": "Repair in Progress", "size": 22 }, 
-    { "sector": "Request Complete", "size": 45 } ],
-  "6": [ 
-   { "sector": "Request Created", "size": 160 }, 
-    { "sector": "Warranty Validation", "size": 53 }, 
-    { "sector": "Device in Transit", "size": 142 }, 
-    { "sector": "Repair in Progress", "size": 22 }, 
-    { "sector": "Request Complete", "size": 85 } ],
-  "7": [ 
-   { "sector": "Request Created", "size": 60 }, 
-    { "sector": "Warranty Validation", "size": 53 }, 
-    { "sector": "Device in Transit", "size": 42 }, 
-    { "sector": "Repair in Progress", "size": 22 }, 
-    { "sector": "Request Complete", "size": 45 } ]
-};
+var chartData = data;
 
 
 /**
  * Create the chart
  */
-var currentYear = 1;
+var currentYear = 5;
 var chart = AmCharts.makeChart( "chartdiv", {
   "type": "pie",
   "theme": "light",
@@ -163,7 +667,7 @@ var chart = AmCharts.makeChart( "chartdiv", {
   "pullOutRadius": 20,
   "marginTop": 30,
   "titles": [{
-    "text": "Open Tickets"
+    "text": ""
   }],
   "allLabels": [{
     "y": "54%",
@@ -188,8 +692,8 @@ var chart = AmCharts.makeChart( "chartdiv", {
         var data = chartData[currentYear];
 		//alert(data);
         currentYear++;
-        if (currentYear > 6)
-          currentYear = 2;
+        if (currentYear > 7)
+          currentYear = 5;
         return data;
       }
       
@@ -216,12 +720,17 @@ var chart = AmCharts.makeChart( "chartdiv", {
 	  
 	  }else if(currentYear==5)
 	  {
-	  var textdata = "may,2016";
+	  var textdata = "May,2016";
 	  
 	  
 	  }else if(currentYear==6)
 	  {
-	  var textdata = "jun,2016";
+	  var textdata = "Jun,2016";
+	  
+	  
+	  }else if(currentYear==7)
+	  {
+	  var textdata = "Jul,2016";
 	  
 	  
 	  }else
@@ -233,9 +742,9 @@ var chart = AmCharts.makeChart( "chartdiv", {
         var data = getCurrentData();
 		
         chart.animateData( data, {
-          duration: 1000,
+          duration: 4000,
           complete: function() {
-            setTimeout( loop, 3000 );
+            setTimeout( loop, 5000 );
           }
         } );
       }
@@ -250,6 +759,7 @@ var chart = AmCharts.makeChart( "chartdiv", {
 
 
 
+}
 
 }
 
@@ -261,91 +771,37 @@ function opentickets1()
 var chartData1 = [];
 var chartData2 = [];
 var chartData3 = [];
+var chartData4 = [];
+var chartData5 = [];
+var data ="";
+$.ajax({
+            type: "GET",
+            url: "<?php echo base_url();?>index.php/welcome/chartbydevicetype",
+            success: function(response1) {
+			var obj = JSON.parse(response1);
+			data = obj;
+			genaratechartdevictype();
+			}
+			
+			
+			});
+			
+			
 
 
-generateChartData();
+function genaratechartdevictype() {
+                     
+							
+						
+						
+						
 
-function generateChartData() {
-                     chartData1 = [{date:new Date(2015, 0, 1),
-								  value:140,
-								  volume:100},{date:new Date(2015, 0, 10),
-								  value:160,
-								  volume:260},{date:new Date(2015, 0, 15),
-								  value:300,
-								  volume:430},{date:new Date(2015, 0, 20),
-								  value:40,
-								  volume:340},{date:new Date(2015, 0, 25),
-								  value:510,
-								  volume:510}
-								  
-								  ];
-								      chartData2 = [{date:new Date(2015, 0, 1),
-								  value:100,
-								  volume:100},{date:new Date(2015, 0, 10),
-								  value:60,
-								  volume:60},{date:new Date(2015, 0, 15),
-								  value:30,
-								  volume:30},{date:new Date(2015, 0, 20),
-								  value:140,
-								  volume:140},{date:new Date(2015, 0, 25),
-								  value:210,
-								  volume:210}
-								  
-								  ];
-								       chartData3 = [{date:new Date(2015, 0, 1),
-								  value:10,
-								  volume:10},{date:new Date(2015, 0, 10),
-								  value:70,
-								  volume:70},{date:new Date(2015, 0, 15),
-								  value:40,
-								  volume:40},{date:new Date(2015, 0, 20),
-								  value:340,
-								  volume:340},{date:new Date(2015, 0, 25),
-								  value:610,
-								  volume:610}
-								  
-								  ];
-}
 
 var chart = AmCharts.makeChart( "chartdiv4", {
   "type": "stock",
   "theme": "light",
 
-  "dataSets": [ {
-      "title": "handheld",
-      "fieldMappings": [ {
-        "fromField": "value",
-        "toField": "value"
-      }, {
-        "fromField": "volume",
-        "toField": "volume"
-      } ],
-      "dataProvider": chartData1,
-      "categoryField": "date"
-    }, {
-      "title": "scanners",
-      "fieldMappings": [ {
-        "fromField": "value",
-        "toField": "value"
-      }, {
-        "fromField": "volume",
-        "toField": "volume"
-      } ],
-      "dataProvider": chartData2,
-      "categoryField": "date"
-    }, {
-      "title": "printers",
-      "fieldMappings": [ {
-        "fromField": "value",
-        "toField": "value"
-      }, {
-        "fromField": "volume",
-        "toField": "volume"
-      } ],
-      "dataProvider": chartData3,
-      "categoryField": "date"
-    }
-  ],
+  "dataSets":data, 
 
   "panels": [ {
     "showCategoryAxis": false,
@@ -420,13 +876,160 @@ var chart = AmCharts.makeChart( "chartdiv4", {
 } );
 
 }
+}
+</script>
+
+<script>
+function opentickets1_by_location()
+{
+var chartData1 = [];
+var chartData2 = [];
+var chartData3 = [];
+var chartData4 = [];
+var chartData5 = [];
+var data ="";
+
+
+var selected = $("#locations option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+
+$.ajax({
+            type: "post",
+            url: "<?php echo base_url();?>index.php/welcome/chartbydevicetype",
+			data:"location="+message,
+            success: function(response1) {
+			var obj = JSON.parse(response1);
+			data = obj;
+			genaratechartdevictype();
+			}
+			
+			
+			});
+			
+			
+
+
+function genaratechartdevictype() {
+                     
+							
+						
+						
+						
+
+
+var chart = AmCharts.makeChart( "chartdiv4", {
+  "type": "stock",
+  "theme": "light",
+
+  "dataSets":data, 
+
+  "panels": [ {
+    "showCategoryAxis": false,
+    "title": "Value",
+    "percentHeight": 70,
+    "stockGraphs": [ {
+      "id": "g1",
+      "valueField": "value",
+      "comparable": true,
+      "compareField": "value",
+      "balloonText": "[[title]]:<b>[[value]]</b>",
+      "compareGraphBalloonText": "[[title]]:<b>[[value]]</b>"
+    } ],
+    "stockLegend": {
+      "periodValueTextComparing": "[[percents.value.close]]%",
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  }, {
+    "title": "Volume",
+    "percentHeight": 30,
+    "stockGraphs": [ {
+      "valueField": "volume",
+      "type": "column",
+      "showBalloon": false,
+      "fillAlphas": 1
+    } ],
+    "stockLegend": {
+      "periodValueTextRegular": "[[value.close]]"
+    }
+  } ],
+
+  "chartScrollbarSettings": {
+    "graph": "g1"
+  },
+
+  "chartCursorSettings": {
+    "valueBalloonsEnabled": true,
+    "fullWidth": true,
+    "cursorAlpha": 0.1,
+    "valueLineBalloonEnabled": true,
+    "valueLineEnabled": true,
+    "valueLineAlpha": 0.5
+  },
+
+  "periodSelector": {
+    "position": "left",
+    "periods": [ {
+      "period": "MM",
+      "selected": true,
+      "count": 1,
+      "label": "1 month"
+    }, {
+      "period": "YYYY",
+      "count": 1,
+      "label": "1 year"
+    }, {
+      "period": "YTD",
+      "label": "YTD"
+    }, {
+      "period": "MAX",
+      "label": "MAX"
+    } ]
+  },
+
+  "dataSetSelector": {
+    "position": "left"
+  },
+
+  "export": {
+    "enabled": true
+  }
+} );
+
+}
+}
 </script>
 
 <script>
 function alltickets()
 {
 
-var chart = AmCharts.makeChart( "chartdiv2", {
+var data = "";
+ $.ajax({
+            type: "GET",
+            url: "<?php echo base_url();?>index.php/welcome/serviceticketsdashboarddata",
+            success: function(response1) {
+			var obj = JSON.parse(response1);
+			data = obj;
+			genaratechart();
+			}
+			
+			
+			});
+			
+			function genaratechart()
+			{
+			//alert("test");
+			var chart = AmCharts.makeChart( "chartdiv2", {
   "type": "serial",
   "addClassNames": true,
   "theme": "light",
@@ -442,43 +1045,7 @@ var chart = AmCharts.makeChart( "chartdiv2", {
     "color": "#ffffff"
   },
 
-  "dataProvider": [ {
-    "year": "Jan",
-    "total": 23,
-    "otickets": 16,
-    "closedtickets": 7
-	
-  }, {
-    "year": "Feb",
-    "total": 26,
-    "otickets": 14,
-	 "closedtickets": 12
-  }, {
-    "year": "Mar",
-    "total": 30,
-    "otickets": 28,
-	 "closedtickets": 2
-  }, {
-    "year": "Apr",
-    "total": 40,
-    "otickets": 28,
-	 "closedtickets": 12
-  }, {
-    "year": "May",
-    "total": 20,
-    "otickets": 8,
-	 "closedtickets": 12
-  }, {
-    "year": "June",
-    "total": 50,
-    "otickets": 38,
-	 "closedtickets": 22
-  } , {
-    "year": "July",
-    "total": 60,
-    "otickets": 48,
-	 "closedtickets": 22
-  }  ],
+  "dataProvider": data,
   "valueAxes": [ {
     "axisAlpha": 0,
     "position": "left"
@@ -533,6 +1100,10 @@ var chart = AmCharts.makeChart( "chartdiv2", {
     "enabled": true
   }
 } );
+			
+			}
+
+
 }
 
 </script>
@@ -540,8 +1111,20 @@ var chart = AmCharts.makeChart( "chartdiv2", {
 <script>
 function onsite_deport()
 {
+var data = "";
 
-
+ $.ajax({
+            type: "GET",
+            url: "<?php echo base_url();?>index.php/welcome/chartdatabytype",
+            success: function(response1) {
+			var obj = JSON.parse(response1);
+			data = obj;
+			chartbytype();
+			}
+			
+			
+			});
+function chartbytype(){
 var chart = AmCharts.makeChart("chartdiv3", {
   "type": "pie",
   "startDuration": 0,
@@ -576,13 +1159,7 @@ var chart = AmCharts.makeChart("chartdiv3", {
       }
     }]
   },
-  "dataProvider": [{
-    "country": "Depot",
-    "litres": 501
-  }, {
-    "country": "On-site",
-    "litres": 301
-  }],
+  "dataProvider": data,
   "valueField": "litres",
   "titleField": "country",
   "export": {
@@ -608,10 +1185,108 @@ function handleRollOver(e){
 
 }
 
+}
+
 </script>
 
 
+<script>
+function onsite_deport_location()
+{
+var data = "";
 
+var selected = $("#location option:selected");
+                var message = "";
+                selected.each(function () {
+					if(message=="")
+					{
+					message = $(this).val();
+					}else
+					{
+					message = message+"|"+$(this).val();
+					}
+                    
+                });
+				
+				$("#chartdiv3").html("");
+
+ $.ajax({
+            type: "post",
+            url: "<?php echo base_url();?>index.php/welcome/chartdatabytype",
+			data: "location="+message,
+            success: function(response1) {
+			var obj = JSON.parse(response1);
+			data = obj;
+			chartbytype1();
+			}
+			
+			
+			});
+function chartbytype1(){
+var chart = AmCharts.makeChart("chartdiv3", {
+  "type": "pie",
+  "startDuration": 0,
+   "theme": "light",
+  "addClassNames": true,
+  "legend":{
+   	"position":"right",
+    "marginRight":100,
+    "autoMargins":false
+  },
+  "innerRadius": "30%",
+  "defs": {
+    "filter": [{
+      "id": "shadow",
+      "width": "200%",
+      "height": "200%",
+      "feOffset": {
+        "result": "offOut",
+        "in": "SourceAlpha",
+        "dx": 0,
+        "dy": 0
+      },
+      "feGaussianBlur": {
+        "result": "blurOut",
+        "in": "offOut",
+        "stdDeviation": 5
+      },
+      "feBlend": {
+        "in": "SourceGraphic",
+        "in2": "blurOut",
+        "mode": "normal"
+      }
+    }]
+  },
+  "dataProvider": data,
+  "valueField": "litres",
+  "titleField": "country",
+  "export": {
+    "enabled": true
+  }
+});
+
+chart.addListener("init", handleInit);
+
+chart.addListener("rollOverSlice", function(e) {
+  handleRollOver(e);
+});
+
+function handleInit(){
+  chart.legend.addListener("rollOverItem", handleRollOver);
+}
+
+function handleRollOver(e){
+  var wedge = e.dataItem.wedge.node;
+  wedge.parentNode.appendChild(wedge);  
+}
+
+
+}
+
+}
+
+</script>
+-->
 
         <!-- ===============================================
         ============== Page Specific Scripts ===============

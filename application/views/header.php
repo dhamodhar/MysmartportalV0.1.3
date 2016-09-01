@@ -10,7 +10,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>::Welcome to LowrySmartportal</title>
+        <title>::Welcome to Lowry Smart Portal</title>
         <link rel="icon" type="image/ico" href="<?php echo base_url()?>assets/images/favicon.ico" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,7 +143,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 
 
                     <!-- Search -->
-                    <h3 class="sub-title">LowrySmart Portal</h3>
+                    <h3 class="sub-title">Lowry Smart Portal</h3>
                     <!-- Search end -->
 					 <ul class="nav-left pull-left list-unstyled list-inline">
                         <li class="sidebar-collapse divided-right">
@@ -232,7 +232,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                                                 <img src="<?php echo base_url()?>assets/images/<?php echo $this->session->userdata('image'); ?>" width="80px" height="60px" alt="" class="img-circle">
                                            
 										   <?php }else{ ?> 
-                                                <img src="<?php echo base_url()?>assets/images/dart.png" alt="" class="img-circle">
+                                                <img src="<?php echo base_url()?>assets/images/logo.png" alt="" class="img-circle">
                                            
 											<?php } ?>
 
@@ -272,7 +272,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
                                                 <img src="<?php echo base_url()?>assets/images/<?php echo $this->session->userdata('image'); ?>" width="80px" height="60px" alt="" class="img-circle size-30x30">
                                            
 										   <?php }else{ ?> 
-                                               <img src="<?php echo base_url()?>assets/images/dart.png" alt="" class="img-circle size-30x30">
+                                               <img src="<?php echo base_url()?>assets/images/logo.png" alt="" class="img-circle size-30x30">
                                 
 											<?php } ?>
                                <span><?php echo ucfirst($this->session->userdata('firstname'))?> <?php echo ucfirst($this->session->userdata('lastname'))?> <i class="fa fa-angle-down"></i></span>
@@ -406,9 +406,9 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 													 
 <li> <a href="<?php echo $url2?>" <?php if($this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Service Contracts</a></li>
 													
-<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Labels</a></li>
+<li> <a href="<?php echo $url1?>" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Labels & Supplies</a></li>
 
-<li> <a href="<?php echo base_url()?>index.php/welcome/questionnaire" <?php if($this->uri->segment(2) == url_title('labels_supplies', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Questionnaire</a></li>
+<li> <a href="<?php echo base_url()?>index.php/welcome/questionnaire" <?php if($this->uri->segment(2) == url_title('questionnaire', TRUE)){?> class="orders-active" <?php } ?>><i class="fa fa-caret-right"></i> Questionnaire</a></li>
 													
 </ul>                                       
 										
@@ -579,7 +579,9 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 										  {
 										?>
 									   
-										
+										  <li><a href="<?php echo base_url()."index.php/welcome/help"?>" class="chat <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> chat-active<?php }?>"> <span>Help</span></a></li>
+                                           
+                                       
 									  <li><a href="javascript:$zopim.livechat.window.show()" class="chat <?php if($this->uri->segment(2) == url_title('dashboard', TRUE)){?> chat-active<?php }?>"> <span>Chat Now</span></a></li>
                                            
                                         
@@ -602,17 +604,16 @@ $this->uri->segment(2) == url_title('service_contracts_analytics', TRUE)){?> sty
 
                                     </div>
  <!-- tile -->
-                           <!-- <section class="products-cat">
-
-                                    <div id="pie-chart" style="height: 250px"></div>
-									</section>-->
+                          
 
                                 </div>
                             </div>
-                           
-                            
+<div style="position:absolute;bottom:0;">
+                            <div class="terms-txt" ><a href="http://lowrysmartportal.com/index.php/welcome/terms">Terms & Conditions</a></div>
+                           <div  style="color:#fff;font-size:11px;padding:5px;">© 2016 Lowry Solutions. All Rights Reserved.</div>   </div>                           
+
                             </div>
-                            
+
                         </div>
 
                     </div>

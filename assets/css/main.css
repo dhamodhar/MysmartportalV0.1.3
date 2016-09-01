@@ -11,6 +11,62 @@ overflow-x:hidden;
     float: right;
 }
 
+.terms-c{
+color:#338cc2;
+text-decoration:underline!important;
+}
+.terms-c:hover{
+text-decoration:none!important;
+}
+.terms p{
+padding-top:20px;
+line-height: 23px;
+}
+#labelslastyear_error{
+ left: 28%;
+    position: absolute;
+    top: 40%;
+}
+.terms strong{
+color:#338cc2;
+font-size:16px;
+}
+.terms-txt{
+width:100%;
+float:left;
+text-align:center;
+margin-bottom:10px;
+
+}
+.terms-txt-login{
+text-align:right;
+
+}
+.terms-txt-login a{
+    color: #fff;
+    font-size: 9px;
+    text-decoration: underline!important;
+}
+.terms-txt a{
+    color: #fff;
+    font-size: 11px;
+    text-decoration: underline!important;
+}
+.terms-txt a:hover{
+color:#fff;
+}
+.copy-right{
+background: #4f4e50 none repeat scroll 0 0;
+    bottom: 0;
+    color: #fff;
+    float: left;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+font-size:12px;
+text-align:right;
+}
+
 #print{
  float: right;
     margin-right: 5px;
@@ -38,6 +94,7 @@ border:none!important;
 
 .gray-box  .tooltip.bottom > .tooltip-inner {
   background-color: #77848f!important;
+
 
 }
 .gray-box  .tooltip.bottom > .tooltip-arrow {
@@ -93,9 +150,14 @@ width:120px!important;
 left:-119px;
 right:0;
 }
+.active-contract-page-location{
+ position: relative;
+    top: -65px;
+    z-index: 9;
+}
 .active-page-location {
     position: relative;
-    top: 31px;
+    top: -78px;
     z-index: 9;
 }
 .mt-7 {
@@ -188,7 +250,7 @@ top:0px!important;
 text-align-left!important;
 }
 .load-buts {
-   margin-top:15px;
+   margin-top:0px;
 }
 #assets-list th, #contracts-list th, #orders-list th{
 background:#338cc2;
@@ -902,6 +964,7 @@ line-height:33px;
     width: 96%;
     height:38px;
 line-height:33px;
+
 }
 
 .bg-greensea2 {
@@ -933,6 +996,7 @@ font-size:13px;
     font-size: 13px;
       padding: 6px 12px;
  border-radius: 5px;
+
 }
 
 .bg-sky2 {
@@ -15238,6 +15302,7 @@ input[type="text"].ui-grid-filter-input:focus:hover {
 .card-container {
   position: relative;
 /*margin-left:4.1%;*/
+z-index:9;
 
 }
 

@@ -51,6 +51,7 @@
    //initialize datatable
               
 	  var test1 = "";
+	  var invoice_numbdata = "";
 	  var order_tracking_number;
 	  var order_number_final="";
 	  var user_rel_number = "";
@@ -89,6 +90,7 @@
 						var total_tax= $(this).find('total_tax').text();
 						var shipping_charge= $(this).find('shipping_charge').text();
 						var invoice_numb= $(this).find('invoice_numb').text();
+						invoice_numbdata = invoice_numb;
 						var handling_charges= $(this).find('handling_charge').text();
 						var carrier= $(this).find('carr_code').text();
 					    var billcity= $(this).find('billcity').text();
@@ -102,15 +104,23 @@
 						var billto_code= $(this).find('billto_code').text();
 						var cust_po= $(this).find('cust_po').text();
 						var error = $(this).find('Error').text();
-                                                var pay_type = $(this).find('pay_type').text();
+                        var pay_type = $(this).find('pay_type').text();
+                        var tracker_no = $(this).find('tracker_no').text();
+						var trackdata = "";
 						
+						if(tracker_no == "NO TRACK")
+						{
+						
+						trackdata = "";
+						
+						}
 						if(error == "Error")
 						{
 						$("#shipping").html("No Response - Cannot process the data.");
 						}else{
 						$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipcity+"</li><li>"+shipst+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");
-						$("#order_details").html("<p class='text-uppercase text-strong mb-10 custom-font'>Invoice Number(s)</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Customer PO: </strong> "+cust_po.trim()+"</li><li><strong>Order Number: </strong>"+order_numb+"</li><li><strong>Invoice Number: </strong>"+invoice_numb+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Shipped Date: </strong> "+ship_date+"</li></ul>");
-						$("#order_details1").html("<p class='text-uppercase text-strong mb-10 custom-font'>Invoice Number(s)</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Post Date: </strong> "+post_date+"</li><li><strong>Tax Amount: </strong> $ "+Number(total_tax).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Shipping Charges: </strong>$"+Number(shipping_charge).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Total Invoice: </strong>$"+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Carrier: </strong> "+carrier+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li></ul>");
+						$("#order_details").html("<p class='text-uppercase text-strong mb-10 custom-font'>INVOICE SUMMARY</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Customer PO: </strong> "+cust_po.trim()+"</li><li><strong>Order Number: </strong>"+order_numb+"</li><li><strong>Invoice Number: </strong>"+invoice_numb+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Shipped Date: </strong> "+ship_date+"</li></ul>");
+						$("#order_details1").html("<p class='text-uppercase text-strong mb-10 custom-font'>TAX, SHIPPING & HANDLING</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Post Date: </strong> "+post_date+"</li><li><strong>Tax Amount: </strong> $ "+Number(total_tax).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Shipping Charges: </strong>$"+Number(shipping_charge).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Total Invoice: </strong>$"+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Carrier: </strong> "+carrier+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li></ul>");
 						
 						$("#billing").html("<p class='text-uppercase text-strong mb-10 custom-font'>BILLING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+billname+"</li><li>"+billadd1+"</li><li>"+billadd2+"</li><li>"+billadd3+"</li><li>"+billcity+"</li><li>"+billst+" - "+billzip+"</li><li>"+billcountry+"</li></ul>");
                         $("#order_number").html(invoice_numb);
@@ -124,7 +134,7 @@
 						});
 						var rel_number1 = $(this).find('rel_numb').text();
 					
-						displayorder_details(order_number_final,user_rel_number);
+						displayorder_details(order_number_final,user_rel_number,invoice_numbdata.trim());
 		
 			
 			}
@@ -134,7 +144,7 @@
         
     });    
 
-       function displayorder_details(order_number_final,rel_number)
+function displayorder_details(order_number_final,rel_number,invoice_numb)
 {
 var tt = order_number_final.trim()+"-"+rel_number;
  $(document).ajaxStart(function(){
@@ -146,7 +156,7 @@ var tt = order_number_final.trim()+"-"+rel_number;
      });
  $.ajax({
             type: "GET",
-            url: "<?php echo base_url()?>index.php/welcome/orderview_data/"+tt,
+            url: "<?php echo base_url()?>index.php/welcome/orderview_data/"+invoice_numb+"/invoice",
             dataType: "text",
             success: function(xml){
 
@@ -170,7 +180,7 @@ var tt = order_number_final.trim()+"-"+rel_number;
 			  //alert(extended_price);
 			  if(orderNumber!="")
 			  {
-			    $('#orders-list tbody').append("<tr><td>"+item_no+"</td><td>"+part_desc+"</td><td>"+part_code+"</td><td>"+qty+"</td><td >"+uom+"</td><td style='text-align:right;'>$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='text-align:right;'>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='text-align:right;'>"+act_ship_date+"</td></tr>");
+			    $('#orders-list tbody').append("<tr><td>"+item_no+"</td><td>"+part_code+"</td><td>"+part_desc+"</td><td>"+qty+"</td><td >"+uom+"</td><td style='text-align:right;'>$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='text-align:right;'>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='text-align:right;'>"+act_ship_date+"</td></tr>");
      
 			  
 			  }
@@ -222,7 +232,7 @@ function send_email_pdf(ordersnumber,relnumber)
 {
     document.getElementById("sendemail").style.display = 'block';
 
-$("#sendemail").html("<div class='col-md-4 no-padding'> <input type='email' placeholder='Email' name ='email' id='email' class='form-control'> </div><div class='col-md-3 no-padding'><button class='btn btn-primary  mb-10' onclick='sendfinalemail("+ordersnumber+","+relnumber+")' type='button'>Send</button> </div>");
+$("#sendemail").html("<div class='col-md-6 mt-10 mb-10'> <input type='email' placeholder='Email' name ='email' id='email' class='form-control'> </div><div class='float-left no-padding mt-10 mb-10'><button class='btn btn-primary  mb-10' onclick='sendfinalemail("+ordersnumber+","+relnumber+")' type='button'>Send</button> </div>");
 						
 //alert(ordersnumber);
 //alert(relnumber);

@@ -10,7 +10,7 @@
 
                         
 
-                        <div class="page-bar col-md-7 col-xs-12 xs-mb-10">
+                        <div class="page-bar col-md-6 col-xs-12 xs-mb-10">
 
                             <ul class="page-breadcrumb">
                                 <li>
@@ -32,19 +32,19 @@
                         <div class="add-nav">
                        
 
-<div class="col-md-5">
-<div>
-<div class="float-left mr-10" id="export_to_pdf"></div>
-<div class="float-left mr-10" id="pdf_id"></div>
+<div class="col-md-6">
 
-<div class="float-right">
+<div class="pull-right" id="export_to_pdf"></div>
+<div class="pull-right" id="pdf_id" style="padding-right:10px;"></div>
+
+
 <div id="sendemail" style="display:none">
 
 
 
  </div>
 
-<div id="msg" style="display:none;color:green">
+<div id="msg" style="display:none;color:green;text-align:center;">
 Email Sent!
  </div> 
  </div>
@@ -118,14 +118,14 @@ Email Sent!
 			                                            <div class="col-md-12 no-padding clear">
                                                             <!-- col -->
                                                             <div class="col-md-3 b-r" id="order_details">
-                                                                <p class="text-uppercase text-strong mb-10 custom-font">Details</p>
+                                                                <p class="text-uppercase text-strong mb-10 custom-font">Order Summary</p>
 																
                                                                 <ul class="list-unstyled text-default lt mb-20">
 
                                                                 </ul>
                                                             </div>
 															    <div class="col-md-3 b-r" id="order_details1">
-                                                                <p class="text-uppercase text-strong mb-10 custom-font">Details</p>
+                                                                <p class="text-uppercase text-strong mb-10 custom-font">Tax, Shipping & Handling</p>
 																
                                                                 <ul class="list-unstyled text-default lt mb-20">
 
@@ -171,7 +171,7 @@ Email Sent!
                                                                 <thead>
                                                                 <!--<h3 style="padding:8px;">Items On Order:<span id="count">1</span></h3>-->
                                                                 <tr>
-                                                                    <!--<th>Item No</th>-->
+                                                                    <th>Item</th>
                                                                     <th>Product Code</th>
                                                                     <th class="pro-desc">Product Description</th>
                                                                     <th style="padding-left:7px;">Quantity Ordered</th>

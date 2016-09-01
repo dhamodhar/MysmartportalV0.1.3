@@ -88,8 +88,6 @@ var specialElementHandlers = {
             url: "<?php echo base_url()?>index.php/welcome/orderview_data/<?php echo $order_id; ?>",
             dataType: "text",
             success: function(xml){
-			//alert(xml);
-			//$('#orders-list tbody').append(xml);
                 $(xml).find('OrderDetails').each(function(){
 				
 			
@@ -108,7 +106,7 @@ var specialElementHandlers = {
 				var error = $(this).find('error').text();
               if(orderNumber!="")
 			  {
-			  $('#orders-list tbody').append("<tr><td>"+part_code+"</td><td>"+part_desc+"</td><td>"+qty+"</td><td>"+totshipqty+"</td><td >"+uom+"</td><td style='text-align:right;' >$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='text-align:right;'>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td></tr>");
+			  $('#orders-list tbody').append("<tr><td>"+item_no+"</td><td>"+part_code+"</td><td>"+part_desc+"</td><td>"+qty+"</td><td>"+totshipqty+"</td><td >"+uom+"</td><td style='text-align:right;' >$ "+Number(item_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td><td style='text-align:right;'>$ "+Number(extended_price).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</td></tr>");
                 
 			  
 			  }
@@ -192,12 +190,39 @@ $.ajax({
 						var error = $(this).find('error').text();
                         var pay_type = $(this).find('pay_type').text();
 						var tracking_number = $(this).find('tracker_no').text();
+						var order_status = $(this).find('order_status').text();
 						var order_invoic_diff = "";
 					        var inv_order_open_diff = "";
+							
+							var invoice_numbs = invoice_numb.split(",");
+							var invoicedata = "";
+								   var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+				
+
+							for(var i=0;i<invoice_numbs.length;i++)
+							{
+											// Encode the String
+				var encodedString = Base64.encode(invoice_numbs[i].trim());
+				var finalinvnumber = encodeURIComponent(String(encodedString));
+							invoicedata = invoicedata+" &nbsp;&nbsp;<a href='<?php echo base_url();?>index.php/welcome/invoice_view/"+finalinvnumber+"' style='color:#0D7BDE;text-decoration: underline !important;'>"+invoice_numbs[i].trim()+"</a>";
+							}
+							var ordrma = "";
+							if(order_status.trim() == "RMA")
+							{
+							ordrma = order_numb.trim()+'-RMA';
+							
+							}else
+							{
+							ordrma = order_numb.trim();
+							
+							
+							}
+							
+							
 						if(invoice_numb!="")
 						{
-						order_invoic_diff = "<p class='text-uppercase text-strong mb-10 custom-font'>Details</p>";
-						inv_order_open_diff ="<li><strong>Invoice Number: </strong>"+invoice_numb+"</li>";
+						order_invoic_diff = "<p class='text-uppercase text-strong mb-10 custom-font'>Order Summary</p>";
+						inv_order_open_diff ="<li><strong>Invoice Number: </strong>"+invoicedata+"</li>";
 						
 						if(error == "Error")
 						{
@@ -205,11 +230,13 @@ $.ajax({
 			
 						
 						}else{
-		                $("#order_details").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mt-10'> "+inv_order_open_diff+"<li><strong>Order Number: </strong>"+order_numb+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Estimated Ship Date: </strong> "+ship_date+"</li><li><strong>Post Date: </strong>"+post_date+"</li><ul class='list-unstyled text-default lt mb-20'></ul></ul>");
-                        $("#order_details1").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mb-20'><li><strong>Tax Amount: </strong> $ "+Number(total_tax).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Shipping Charges: </strong>$ "+Number(shipping_charge).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Handling Charges: </strong>$ "+Number(handling_charges).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Total Amount: </strong> $"+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li><li><strong>Carrier: </strong> <a href='https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+tracking_number.trim()+"&cntry_code=us' style='color:#0D7BDE;text-decoration: underline !important;' target='_blank'>"+carrier+"</a></li></ul></ul>");
-						$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipst+"</li><li>"+shipcity+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");						
+		                $("#order_details").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mt-10'> "+inv_order_open_diff+"<li><strong>Order Number: </strong>"+ordrma+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Estimated Ship Date: </strong> "+ship_date+"</li><li><strong>Post Date: </strong>"+post_date+"</li><li><strong>Estimated Total Amount: </strong>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><ul class='list-unstyled text-default lt mb-20'></ul></ul>");
+                        $("#order_details1").html("<p class='text-uppercase text-strong mb-10 custom-font'>Tax, Shipping & Handling</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Tax Amount: </strong> $ "+Number(total_tax).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Shipping Charges: </strong>$ "+Number(shipping_charge).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Handling Charges: </strong>$ "+Number(handling_charges).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li><li><strong>Carrier: </strong> "+carrier+"</li></ul></ul>");
+						$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipcity+"</li><li>"+shipst+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");						
 						$("#billing").html("<p class='text-uppercase text-strong mb-10 custom-font'>BILLING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+billname+"</li><li>"+billadd1+"</li><li>"+billadd2+"</li><li>"+billadd3+"</li><li>"+billcity+"</li><li>"+billst+" - "+billzip+"</li><li>"+billcountry+"</li></ul>");
-						$("#order_number").html(order_numb.trim());
+						
+						$("#order_number").html(ordrma);
+						
 						var full_order_number = order_numb.trim()+"-"+rel_number.trim();
 						var download = 2;
 						$("#pdf_id").html("<a href='javascript:void(0)' onclick='send_email_pdf("+order_numb.trim()+","+rel_number+",1)'   class='btn btn-primary  mb-10'>Email PDF</a>");
@@ -221,20 +248,20 @@ $.ajax({
 						}else
 						{
 						  inv_order_open_diff = "";
-						  order_invoic_diff = "<p class='text-uppercase text-strong mb-10 custom-font'>Details</p>";
+						  order_invoic_diff = "<p class='text-uppercase text-strong mb-10 custom-font'>Order Summary</p>";
 						if(error == "Error")
 						{
 						       $("#order_details").html("No Response - Cannot process the data.");
 						}else{
-								$("#order_details").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mb-20'>"+inv_order_open_diff+"<li><strong>Order Number: </strong>"+order_numb+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Estimated Ship Date: </strong> "+ship_date+"</li><li><strong>Post Date: </strong> "+post_date+"</li><li><strong>Carrier: </strong>"+carrier+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li><li><strong>Estimated Total Amount: </strong>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li></ul>");
-								$("#order_details1").css("display","none");
-								$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipst+"</li><li>"+shipcity+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");
+								$("#order_details").html(order_invoic_diff+"<ul class='list-unstyled text-default lt mb-20'>"+inv_order_open_diff+"<li><strong>Order Number: </strong>"+ordrma+"</li><li><strong>Order Date: </strong> "+order_date+"</li><li><strong>Estimated Ship Date: </strong> "+ship_date+"</li><li><strong>Post Date: </strong> "+post_date+"</li><li><strong>Estimated Total Amount: </strong>$ "+Number(amount).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li></ul>");
+								 $("#order_details1").html("<p class='text-uppercase text-strong mb-10 custom-font'>Tax, Shipping & Handling</p><ul class='list-unstyled text-default lt mb-20'><li><strong>Tax Amount: </strong> $ "+Number(total_tax).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Shipping Charges: </strong>$ "+Number(shipping_charge).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Handling Charges: </strong>$ "+Number(handling_charges).toLocaleString(undefined,{minimumFractionDigits: 2,maximumFractionDigits: 2})+"</li><li><strong>Payment Type: </strong>"+pay_type+"</li><li><strong>Carrier: </strong>"+carrier+"</li></ul></ul>");
+						$("#shipping").html("<p class='text-uppercase text-strong mb-10 custom-font'>SHIPPING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+shipname+"</li><li>"+ship_add1+"</li><li>"+ship_add2+"</li><li>"+shipcity+"</li><li>"+shipst+" - "+ship_zip+"</li><li>"+ship_country+"</li></ul>");
 								$("#billing").html("<p class='text-uppercase text-strong mb-10 custom-font'>BILLING Address</p><ul class='list-unstyled text-default lt mb-20'><li>"+billname+"</li><li>"+billadd1+"</li><li>"+billadd2+"</li><li>"+billadd3+"</li><li>"+billcity+"</li><li>"+billst+" - "+billzip+"</li><li>"+billcountry+"</li></ul>");
-								$("#order_number").html(order_numb.trim());
+								$("#order_number").html(ordrma);
 								var full_order_number = order_numb.trim()+"-"+rel_number.trim();
 								var download = 2;
-								$("#pdf_id").html("<a href='javascript:void(0)' onclick='send_email_pdf("+order_numb.trim()+","+rel_number+",1)'   class='btn btn-primary btn-sm mb-10'>Email PDF</a>");
-								$("#export_to_pdf").html("<a href='<?php echo base_url()?>index.php/welcome/pdf/"+full_order_number+"/"+rel_number+"/"+download+"'  class='btn btn-primary btn-sm mb-10'>Export to PDF</a>");
+								$("#pdf_id").html("<a href='javascript:void(0)' onclick='send_email_pdf("+order_numb.trim()+","+rel_number+",1)'   class='btn btn-primary mb-10'>Email PDF</a>");
+								$("#export_to_pdf").html("<a href='<?php echo base_url()?>index.php/welcome/pdf/"+full_order_number+"/"+rel_number+"/"+download+"'  class='btn btn-primary  mb-10'>Export to PDF</a>");
 								
 						}
 						
@@ -272,7 +299,7 @@ function send_email_pdf(ordersnumber,relnumber)
 
 document.getElementById("sendemail").style.display = 'block';
 
-$("#sendemail").html("<div class='col-md-8 no-padding'> <input type='email' placeholder='Email' name ='email' id='email' class='form-control'> </div><div class='col-md-3 no-padding ml-10'><button class='btn btn-primary btn-sm  mb-10' onclick='sendfinalemail("+ordersnumber+","+relnumber+")' type='button'>Send</button> </div>");
+$("#sendemail").html("<div class='col-md-6'> <input type='email' placeholder='Email' name ='email' id='email' class='form-control'> </div><div class='float-left no-padding '><button class='btn btn-primary mb-10' onclick='sendfinalemail("+ordersnumber+","+relnumber+")' type='button'>Send</button> </div>");
 						
 //alert(ordersnumber);
 //alert(relnumber);
